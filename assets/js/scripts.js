@@ -19,8 +19,7 @@ jQuery(document).ready(($) => {
     });
   });
 
-  // Filters toepassen op specifieke velden
-  $('#apply-filters').on('click', () => {
+   $('#apply-filters').on('click', () => {
     const titleFilter = $('#filter-title').val().toLowerCase();
     const captionFilter = $('#filter-caption').val().toLowerCase();
     const altFilter = $('#filter-alt').val().toLowerCase();
@@ -104,12 +103,13 @@ jQuery(document).ready(($) => {
     });
   });
 
-  // Verwijderen van media
+  // Verwijderen van media zonder paginareload
   $('.delete-media').off('click').on('click', function () {
     if (!confirm('Weet u zeker dat u deze media wilt verwijderen?')) {
       return;
     }
     const $button = $(this);
+    const $row = $button.closest('tr');
     const attachmentId = $button.data('attachment-id');
 
     if (typeof modernImageManagerAjax === 'undefined' || !modernImageManagerAjax.ajax_url) {
@@ -128,8 +128,11 @@ jQuery(document).ready(($) => {
       },
       success: (response) => {
         if (response.success) {
-          // Bij succesvol verwijderen herlaadt de pagina
-          location.reload();
+          // Verwijder de rij dynamisch en update de paginering
+          $row.fadeOut(500, function () {
+            $(this).remove();
+            updatePagination();
+          });
         } else {
           alert(
             response.data && response.data.message
