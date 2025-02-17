@@ -19,7 +19,8 @@ jQuery(document).ready(($) => {
     });
   });
 
-   $('#apply-filters').on('click', () => {
+  // Filters toepassen op specifieke velden
+  $('#apply-filters').on('click', () => {
     const titleFilter = $('#filter-title').val().toLowerCase();
     const captionFilter = $('#filter-caption').val().toLowerCase();
     const altFilter = $('#filter-alt').val().toLowerCase();
@@ -150,7 +151,6 @@ jQuery(document).ready(($) => {
     });
   });
 
-  // Paginering
   let currentPage = 1;
   const $rows = $('.unique-tbody tr');
 
