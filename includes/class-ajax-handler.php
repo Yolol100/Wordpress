@@ -1,7 +1,5 @@
 <?php
-
 declare(strict_types=1);
-
 defined('ABSPATH') || exit;
 
 /**
@@ -80,6 +78,35 @@ class ModernImageManagerAjaxHandler
 
         wp_send_json_success(['message' => 'Media info succesvol bijgewerkt.']);
         error_log('updateMediaMetaCallback succesvol afgerond');
+    }
+
+    /**
+     * Callback voor het verwijderen van een media-item.
+     *
+     * Verwijdert de bijlage uit de database en de server.
+     *
+     * @return void
+     */
+    public static function deleteMediaCallback(): void
+    {
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(['message' => 'Geen toestemming.']);
+            return;
+        }
+
+        $attachmentId = self::sanitizeInt($_POST['attachment_id'] ?? null);
+        if (empty($attachmentId)) {
+            wp_send_json_error(['message' => 'Ongeldig bijlage-ID.']);
+            return;
+        }
+
+        // Probeer de bijlage definitief te verwijderen (verwijdert ook het bestand van de server)
+        $deleted = wp_delete_attachment($attachmentId, true);
+        if ($deleted) {
+            wp_send_json_success(['message' => 'Media succesvol verwijderd.']);
+        } else {
+            wp_send_json_error(['message' => 'Fout bij het verwijderen van de media.']);
+        }
     }
 
     /**
@@ -163,32 +190,6 @@ class ModernImageManagerAjaxHandler
     private static function sanitizeInt($value): ?int
     {
         return filter_var($value, FILTER_VALIDATE_INT, ['options' => ['default' => null]]);
-    }
-
-    /**
-     * Nieuwe callback voor het verwijderen van een media-item.
-     *
-     * @return void
-     */
-    public static function deleteMediaCallback(): void
-    {
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error(['message' => 'Geen toestemming.']);
-            return;
-        }
-
-        $attachmentId = self::sanitizeInt($_POST['attachment_id'] ?? null);
-        if (empty($attachmentId)) {
-            wp_send_json_error(['message' => 'Ongeldig bijlage-ID.']);
-            return;
-        }
-
-        $deleted = wp_delete_attachment($attachmentId, true);
-        if ($deleted) {
-            wp_send_json_success(['message' => 'Media succesvol verwijderd.']);
-        } else {
-            wp_send_json_error(['message' => 'Fout bij het verwijderen van de media.']);
-        }
     }
 }
 
