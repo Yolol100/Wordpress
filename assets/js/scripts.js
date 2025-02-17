@@ -1,7 +1,17 @@
 jQuery(document).ready(($) => {
-  // Filter toepassen
+  // Filter toepassen voor de bovenste balk
   $('#applyFilter').on('click', () => {
     const selectedFilter = $('#pageFilter').val();
+    $('.unique-tbody tr').each(function () {
+      const $row = $(this);
+      const status = $row.data('status');
+      $row.toggle(selectedFilter === 'all' || selectedFilter === status);
+    });
+  });
+
+  // Filter toepassen voor de onderste balk
+  $('#applyFilterBottom').on('click', () => {
+    const selectedFilter = $('#pageFilterBottom').val();
     $('.unique-tbody tr').each(function () {
       const $row = $(this);
       const status = $row.data('status');
@@ -30,9 +40,9 @@ jQuery(document).ready(($) => {
     });
   });
 
-  // Filters wissen
+  // Filters wissen voor beide balken
   $('#clearFilter, #clear-filters').on('click', () => {
-    $('#pageFilter').val('all');
+    $('#pageFilter, #pageFilterBottom').val('all');
     $('#filter-title, #filter-caption, #filter-alt').val('');
     $('.unique-tbody tr').show();
   });
@@ -100,7 +110,6 @@ jQuery(document).ready(($) => {
       return;
     }
     const $button = $(this);
-    const $row = $button.closest('tr');
     const attachmentId = $button.data('attachment-id');
 
     if (typeof modernImageManagerAjax === 'undefined' || !modernImageManagerAjax.ajax_url) {
@@ -119,17 +128,16 @@ jQuery(document).ready(($) => {
       },
       success: (response) => {
         if (response.success) {
-          $row.fadeOut(500, function () {
-            $(this).remove();
-          });
+          // Bij succesvol verwijderen herlaadt de pagina
+          location.reload();
         } else {
           alert(
             response.data && response.data.message
               ? `Fout: ${response.data.message}`
               : 'Er is een onbekende fout opgetreden bij het verwijderen.'
           );
+          $button.prop('disabled', false);
         }
-        $button.prop('disabled', false);
       },
       error: (xhr, status, error) => {
         console.error('AJAX Error:', status, error);
@@ -142,40 +150,52 @@ jQuery(document).ready(($) => {
   // Paginering
   let currentPage = 1;
   const $rows = $('.unique-tbody tr');
-  const $rowsPerPage = $('#rowsPerPage');
-  const $currentPageDisplay = $('#currentPage');
-  const $totalPagesDisplay = $('#totalPages');
 
   const updatePagination = () => {
-    const rowsPerPage = parseInt($rowsPerPage.val(), 10);
+    const rowsPerPage = parseInt($('#rowsPerPage').val(), 10);
     const totalRows = $rows.length;
     const totalPages = Math.ceil(totalRows / rowsPerPage);
 
-    $totalPagesDisplay.text(totalPages);
+    // Werk zowel de bovenste als de onderste pagineringsinformatie bij
+    $('#totalPages, #totalPagesBottom').text(totalPages);
 
     $rows.hide();
     const startIndex = (currentPage - 1) * rowsPerPage;
     const endIndex = startIndex + rowsPerPage;
-
     $rows.slice(startIndex, endIndex).show();
 
-    $currentPageDisplay.text(currentPage);
+    $('#currentPage, #currentPageBottom').text(currentPage);
 
     $('#prevPage').prop('disabled', currentPage === 1);
     $('#nextPage').prop('disabled', currentPage === totalPages);
+    $('#prevPageBottom').prop('disabled', currentPage === 1);
+    $('#nextPageBottom').prop('disabled', currentPage === totalPages);
   };
 
-  $rowsPerPage.on('change', () => {
+  // Event listeners voor bovenste paginering
+  $('#rowsPerPage').on('change', () => {
     currentPage = 1;
     updatePagination();
   });
-
   $('#nextPage').on('click', () => {
     currentPage++;
     updatePagination();
   });
-
   $('#prevPage').on('click', () => {
+    currentPage--;
+    updatePagination();
+  });
+
+  // Event listeners voor onderste paginering
+  $('#rowsPerPageBottom').on('change', () => {
+    currentPage = 1;
+    updatePagination();
+  });
+  $('#nextPageBottom').on('click', () => {
+    currentPage++;
+    updatePagination();
+  });
+  $('#prevPageBottom').on('click', () => {
     currentPage--;
     updatePagination();
   });
