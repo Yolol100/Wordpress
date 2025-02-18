@@ -3,6 +3,7 @@ jQuery(document).ready(($) => {
 
   // Functie om de paginering bij te werken op basis van de gefilterde rijen.
   const updatePagination = () => {
+    // Gebruik de waarde van de header (deze is nu gesynchroniseerd met de footer)
     const rowsPerPage = parseInt($('#rowsPerPage').val(), 10);
     const $filteredRows = $('.unique-tbody tr.filtered-match');
     const totalRows = $filteredRows.length;
@@ -78,6 +79,15 @@ jQuery(document).ready(($) => {
     $('#pageFilter, #pageFilterBottom').val('all');
     $('#filter-title, #filter-caption, #filter-alt').val('');
     $('.unique-tbody tr').addClass('filtered-match').show();
+    currentPage = 1;
+    updatePagination();
+  });
+
+  // Synchroniseer de "Rijen per pagina" select in header en footer.
+  $('#rowsPerPage, #rowsPerPageBottom').on('change', function () {
+    const rowsPerPage = $(this).val();
+    // Zorg dat beide selects dezelfde waarde hebben.
+    $('#rowsPerPage, #rowsPerPageBottom').val(rowsPerPage);
     currentPage = 1;
     updatePagination();
   });
@@ -185,11 +195,7 @@ jQuery(document).ready(($) => {
     });
   });
 
-  // Evenementen voor paginering (bovenste en onderste balk)
-  $('#rowsPerPage').on('change', () => {
-    currentPage = 1;
-    updatePagination();
-  });
+  // Evenementen voor paginering (bovenste balk)
   $('#nextPage').on('click', () => {
     currentPage++;
     updatePagination();
@@ -198,10 +204,8 @@ jQuery(document).ready(($) => {
     currentPage--;
     updatePagination();
   });
-  $('#rowsPerPageBottom').on('change', () => {
-    currentPage = 1;
-    updatePagination();
-  });
+
+  // Evenementen voor paginering (onderste balk)
   $('#nextPageBottom').on('click', () => {
     currentPage++;
     updatePagination();
