@@ -3,13 +3,13 @@ declare(strict_types=1);
 defined('ABSPATH') || exit;
 
 /**
- * Haalt de titel op van de post waaraan de bijlage is gekoppeld, via:
+ * Haalt de titel op van de post waaraan de bijlage is gekoppeld via:
  * 1. WordPress: Als de afbeelding als uitgelichte afbeelding is ingesteld (post_parent > 0).
  * 2. ACF: Als er een koppeling via ACF-meta-velden is gevonden (meta_key beginnend met "field_").
  * 3. Anders: 'Niet gekoppeld'.
  *
  * @param int $attachment_id De ID van de bijlage.
- * @return string De titel van de gekoppelde post met aanduiding of deze via WordPress of ACF is gekoppeld.
+ * @return string De titel van de gekoppelde post, of 'Niet gekoppeld' als er geen koppeling is.
  */
 function modern_image_manager_get_attached_post_title(int $attachment_id): string {
     global $wpdb;
@@ -23,7 +23,7 @@ function modern_image_manager_get_attached_post_title(int $attachment_id): strin
     // 1. Controleer of de afbeelding als uitgelichte afbeelding is ingesteld (WordPress).
     if ($attachment->post_parent > 0) {
         $parent = get_post($attachment->post_parent);
-        return $parent ? 'Gekoppeld via WordPress: ' . $parent->post_title : 'Niet gekoppeld';
+        return $parent ? $parent->post_title : 'Niet gekoppeld';
     }
 
     // 2. Zoek naar een koppeling via ACF-meta-velden (meta_key beginnend met "field_").
@@ -35,7 +35,7 @@ function modern_image_manager_get_attached_post_title(int $attachment_id): strin
     );
     if ($acf_data && !empty($acf_data->post_id)) {
         $parent = get_post((int) $acf_data->post_id);
-        return $parent ? 'Pagina (via ACF): ' . $parent->post_title : 'Niet gekoppeld';
+        return $parent ? $parent->post_title : 'Niet gekoppeld';
     }
 
     // Geen koppeling gevonden.
@@ -113,8 +113,7 @@ $media_items = new WP_Query($args);
                 $filename  = pathinfo($path, PATHINFO_FILENAME);
                 $extension = pathinfo($path, PATHINFO_EXTENSION);
 
-                // Bepaal de status voor filtering:
-                // Als er "Niet gekoppeld" in de titel staat, dan 'unlinked', anders 'linked'.
+                // Bepaal de status voor filtering: als er "Niet gekoppeld" in staat, is het unlinked
                 $status = (strpos($page_title, 'Niet gekoppeld') !== false) ? 'unlinked' : 'linked';
                 ?>
                 <tr class="unique-tr-item unique-tr-<?php echo esc_attr($attachment_id); ?>" data-status="<?php echo esc_attr($status); ?>">
