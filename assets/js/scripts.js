@@ -1,9 +1,7 @@
 jQuery(document).ready(($) => {
-  let currentPage = 1;
-
-  // Functie om de paginering bij te werken op basis van de gefilterde rijen.
-  const updatePagination = () => {
-    // Gebruik de waarde van de header (deze is nu gesynchroniseerd met de footer)
+  // Maak de huidige pagina en updatePagination globaal beschikbaar.
+  window.currentPage = 1;
+  window.updatePagination = function() {
     const rowsPerPage = parseInt($('#rowsPerPage').val(), 10);
     const $filteredRows = $('.unique-tbody tr.filtered-match');
     const totalRows = $filteredRows.length;
@@ -11,18 +9,70 @@ jQuery(document).ready(($) => {
 
     $('#totalPages, #totalPagesBottom').text(totalPages);
 
-    // Verberg alle rijen en toon alleen de gefilterde rijen in de huidige paginering.
+    // Verberg alle rijen en toon alleen de gefilterde rijen voor de huidige pagina.
     $('.unique-tbody tr').hide();
-    const startIndex = (currentPage - 1) * rowsPerPage;
+    const startIndex = (window.currentPage - 1) * rowsPerPage;
     $filteredRows.slice(startIndex, startIndex + rowsPerPage).show();
 
-    $('#currentPage, #currentPageBottom').text(currentPage);
+    $('#currentPage, #currentPageBottom').text(window.currentPage);
 
-    $('#prevPage, #prevPageBottom').prop('disabled', currentPage === 1);
-    $('#nextPage, #nextPageBottom').prop('disabled', currentPage === totalPages);
+    $('#prevPage, #prevPageBottom').prop('disabled', window.currentPage === 1);
+    $('#nextPage, #nextPageBottom').prop('disabled', window.currentPage === totalPages);
   };
 
-  // Functie die de rijen markeert die aan de filter voldoen.
+  // Aangepaste zoekfunctie: als er geen invoer is, voeg 'filtered-match' toe aan alle rijen.
+  window.filterTable = function() {
+    const inputHeader = document.getElementById("search-input") ? document.getElementById("search-input").value : "";
+    const inputFooter = document.getElementById("search-input-bottom") ? document.getElementById("search-input-bottom").value : "";
+    const input = (inputHeader || inputFooter).trim().toLowerCase();
+    const rows = document.querySelectorAll(".unique-tbody tr");
+    let resultsFound = false; // Variabele om te controleren of er resultaten zijn
+
+    // Filteren op basis van de huidige selectie van de filter
+    const selectedFilter = $('#pageFilter').val() || $('#pageFilterBottom').val();
+    const $filteredRows = $('.unique-tbody tr').filter(function() {
+      const status = $(this).data('status');
+      return selectedFilter === 'all' || selectedFilter === status;
+    });
+
+    if (input === "") {
+      // Als de zoekbalk leeg is, markeer alle rijen als match.
+      $filteredRows.each(function() {
+        $(this).addClass("filtered-match");
+      });
+      document.getElementById("noResults").style.display = "none"; // Verberg de geen resultaten melding
+    } else {
+      $filteredRows.each(function() {
+        const bestandsnaam = $(this).find('.filename-input').val() || '';
+        const nieuweBestandsnaam = $(this).find('.new-filename-input').val() || '';
+        const pagina = $(this).find('.unique-td-pagina').text() || '';
+        const titel = $(this).find('.title-input').val() || '';
+        const caption = $(this).find('.caption-input').val() || '';
+        const description = $(this).find('.description-input').val() || '';
+        const alt = $(this).find('.alt-input').val() || '';
+        
+        const rowText = (bestandsnaam + " " + nieuweBestandsnaam + " " + pagina + " " + titel + " " + caption + " " + description + " " + alt).toLowerCase();
+        
+        if (rowText.indexOf(input) > -1) {
+          $(this).addClass("filtered-match");
+          resultsFound = true; // Er is minstens één match
+        } else {
+          $(this).removeClass("filtered-match");
+        }
+      });
+
+      // Toon of verberg de "Geen resultaten"-melding
+      if (resultsFound) {
+        document.getElementById("noResults").style.display = "none";
+      } else {
+        document.getElementById("noResults").style.display = "block";
+      }
+    }
+    window.currentPage = 1;
+    window.updatePagination();
+  };
+
+  // Functie die de rijen markeert op basis van de dropdown-filter(s).
   const applyFilterFunction = (filterSelector) => {
     const selectedFilter = $(filterSelector).val();
     $('.unique-tbody tr').each(function () {
@@ -34,8 +84,13 @@ jQuery(document).ready(($) => {
         $row.removeClass('filtered-match');
       }
     });
-    currentPage = 1;
-    updatePagination();
+    
+    // Reset de zoekbalken bij filterwisseling
+    $('#search-input').val('');
+    $('#search-input-bottom').val('');
+    document.getElementById("noResults").style.display = "none"; // Verberg de "Geen resultaten" melding
+    window.currentPage = 1;
+    window.updatePagination();
   };
 
   // Filteren op de bovenste filterbalk.
@@ -70,26 +125,27 @@ jQuery(document).ready(($) => {
         $row.removeClass('filtered-match');
       }
     });
-    currentPage = 1;
-    updatePagination();
+    window.currentPage = 1;
+    window.updatePagination();
   });
 
   // Filters wissen
   $('#clearFilter, #clear-filters').on('click', () => {
     $('#pageFilter, #pageFilterBottom').val('all');
     $('#filter-title, #filter-caption, #filter-alt').val('');
+    $('#search-input').val('');
+    $('#search-input-bottom').val('');
     $('.unique-tbody tr').addClass('filtered-match').show();
-    currentPage = 1;
-    updatePagination();
+    window.currentPage = 1;
+    window.updatePagination();
   });
 
   // Synchroniseer de "Rijen per pagina" select in header en footer.
   $('#rowsPerPage, #rowsPerPageBottom').on('change', function () {
     const rowsPerPage = $(this).val();
-    // Zorg dat beide selects dezelfde waarde hebben.
     $('#rowsPerPage, #rowsPerPageBottom').val(rowsPerPage);
-    currentPage = 1;
-    updatePagination();
+    window.currentPage = 1;
+    window.updatePagination();
   });
 
   // AJAX voor opslaan van metadata (ongewijzigd)
@@ -176,7 +232,7 @@ jQuery(document).ready(($) => {
         if (response.success) {
           $row.fadeOut(500, function () {
             $(this).remove();
-            updatePagination();
+            window.updatePagination();
           });
         } else {
           alert(
@@ -197,25 +253,25 @@ jQuery(document).ready(($) => {
 
   // Evenementen voor paginering (bovenste balk)
   $('#nextPage').on('click', () => {
-    currentPage++;
-    updatePagination();
+    window.currentPage++;
+    window.updatePagination();
   });
   $('#prevPage').on('click', () => {
-    currentPage--;
-    updatePagination();
+    window.currentPage--;
+    window.updatePagination();
   });
 
   // Evenementen voor paginering (onderste balk)
   $('#nextPageBottom').on('click', () => {
-    currentPage++;
-    updatePagination();
+    window.currentPage++;
+    window.updatePagination();
   });
   $('#prevPageBottom').on('click', () => {
-    currentPage--;
-    updatePagination();
+    window.currentPage--;
+    window.updatePagination();
   });
 
   // Begin met alle rijen als match (geen filter) en initialiseer de paginering.
   $('.unique-tbody tr').addClass('filtered-match');
-  updatePagination();
+  window.updatePagination();
 });

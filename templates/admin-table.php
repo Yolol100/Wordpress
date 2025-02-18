@@ -7,27 +7,34 @@ $media_items = modern_image_manager_get_media_items();
 
 <!-- Filter balk bovenaan -->
 <div class="wrap unique-wrap">
-    <div class="filter-controls">
-        <select id="pageFilter" class="page-filter-select">
-            <option value="all">Alle pagina's</option>
-            <option value="linked">Gekoppelde pagina's</option>
-            <option value="unlinked">Niet gekoppelde pagina's</option>
-        </select>
-        <button id="applyFilter" class="page-button">Filter toepassen</button>
-        <div class="pagination-navigation">
-            <button id="prevPage" class="page-button">Vorige</button>
-            <span id="currentPage">1</span> / <span id="totalPages">50</span>
-            <button id="nextPage" class="page-button">Volgende</button>
-        </div>
-        <div class="rows-per-page-container">
-            <label for="rowsPerPage">Rijen per pagina:</label>
-            <select id="rowsPerPage" class="rows-per-page-select">
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="30" selected>30</option>
-                <option value="40">40</option>
-                <option value="50">50</option>
+    <div class="filter-header">
+        <div class="nav-controls">
+            <select id="pageFilter" class="page-filter-select">
+                <option value="all">Alle pagina's</option>
+                <option value="linked">Gekoppelde pagina's</option>
+                <option value="unlinked">Niet gekoppelde pagina's</option>
             </select>
+            <button id="applyFilter" class="page-button">Filter toepassen</button>
+            <div class="pagination-navigation">
+                <button id="prevPage" class="page-button">Vorige</button>
+                <span id="currentPage">1</span> / <span id="totalPages">50</span>
+                <button id="nextPage" class="page-button">Volgende</button>
+            </div>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" class="search-box" placeholder="Zoeken..." onkeyup="filterTable()">
+        </div>
+        <div class="rows-controls">
+            <div class="rows-per-page-container">
+                <label for="rowsPerPage">Rijen per pagina:</label>
+                <select id="rowsPerPage" class="rows-per-page-select">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30" selected>30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
         </div>
     </div>
 </div>
@@ -63,10 +70,9 @@ $media_items = modern_image_manager_get_media_items();
                 $title       = $attachment->post_title;
                 $page_title  = modern_image_manager_get_attached_post_title($attachment_id);
 
-                // Bestandsnaam en extensie bepalen
-                $path      = get_attached_file($attachment_id);
-                $filename  = pathinfo($path, PATHINFO_FILENAME);
-                $extension = pathinfo($path, PATHINFO_EXTENSION);
+                // Bestandsnaam bepalen (extensie wordt niet meer getoond)
+                $path     = get_attached_file($attachment_id);
+                $filename = pathinfo($path, PATHINFO_FILENAME);
 
                 // Status voor filtering
                 $status = (strpos($page_title, 'Niet gekoppeld') !== false) ? 'unlinked' : 'linked';
@@ -77,7 +83,7 @@ $media_items = modern_image_manager_get_media_items();
                                class="filename-input"
                                data-attachment-id="<?php echo esc_attr($attachment_id); ?>"
                                value="<?php echo esc_attr($filename); ?>"
-                               placeholder="Voer bestandsnaam in" />.<?php echo esc_html($extension); ?>
+                               placeholder="Voer bestandsnaam in" />
                     </td>
                     <td class="unique-td-nieuwe-bestandsnaam">
                         <input type="text"
@@ -128,29 +134,41 @@ $media_items = modern_image_manager_get_media_items();
     </tbody>
 </table>
 
+<!-- Geen resultaten container -->
+<div id="noResults" class="filter-footer no-results" style="display: none;">
+    <p>Geen resultaten gevonden.</p>
+</div>
+
 <!-- Filter balk onderaan -->
 <div class="unique-wrap">
-    <div class="filter-controls">
-        <select id="pageFilterBottom" class="page-filter-select">
-            <option value="all">Alle pagina's</option>
-            <option value="linked">Gekoppelde pagina's</option>
-            <option value="unlinked">Niet gekoppelde pagina's</option>
-        </select>
-        <button id="applyFilterBottom" class="page-button">Filter toepassen</button>
-        <div class="pagination-navigation">
-            <button id="prevPageBottom" class="page-button">Vorige</button>
-            <span id="currentPageBottom">1</span> / <span id="totalPagesBottom">50</span>
-            <button id="nextPageBottom" class="page-button">Volgende</button>
-        </div>
-        <div class="rows-per-page-container">
-            <label for="rowsPerPageBottom">Rijen per pagina:</label>
-            <select id="rows-per-pageBottom" class="rows-per-page-select">
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="30" selected>30</option>
-                <option value="40">40</option>
-                <option value="50">50</option>
+    <div class="filter-footer">
+        <div class="nav-controls">
+            <select id="pageFilterBottom" class="page-filter-select">
+                <option value="all">Alle pagina's</option>
+                <option value="linked">Gekoppelde pagina's</option>
+                <option value="unlinked">Niet gekoppelde pagina's</option>
             </select>
+            <button id="applyFilterBottom" class="page-button">Filter toepassen</button>
+            <div class="pagination-navigation">
+                <button id="prevPageBottom" class="page-button">Vorige</button>
+                <span id="currentPageBottom">1</span> / <span id="totalPagesBottom">50</span>
+                <button id="nextPageBottom" class="page-button">Volgende</button>
+            </div>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input-bottom" class="search-box" placeholder="Zoeken..." onkeyup="filterTable()">
+        </div>
+        <div class="rows-controls">
+            <div class="rows-per-page-container">
+                <label for="rowsPerPageBottom">Rijen per pagina:</label>
+                <select id="rows-per-pageBottom" class="rows-per-page-select">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30" selected>30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
         </div>
     </div>
 </div>

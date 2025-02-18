@@ -26,22 +26,84 @@
   --transition-ease: ease;
 }
 
+/* Zoekbalk styling */
+.search-container {
+  text-align: right;
+  padding-right: 1rem;
+}
+
+.search-box {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background: var(--table-background);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+#pageFilter, #pageFilterBottom {
+  width: 220px;
+  max-width: 100%;
+}
+
+.search-box:focus {
+  border-color: var(--primary-color);
+  box-shadow: var(--box-shadow-light);
+  outline: none;
+}
+
+/* Layout voor header en footer */
+.filter-header,
+.filter-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem; /* 10px */
+  flex: 1;
+}
+
+.middle-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Algemene styling voor de tabelcontainer */
 .unique-wrap {
-  margin: 1.25rem auto; /* 20px */
-  padding: 1.25rem 1.25rem 0 1.25rem; /* 20px 20px 0 20px */
+  margin: 1rem 1rem 1rem 0rem;
+  padding: 1rem;
   background-color: var(--background-color);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow-light);
   font-family: var(--font-family-main);
   font-size: var(--font-size-base);
+
+  & .filter-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & .filter-footer {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 /* Tabel styling */
 .unique-table,
 .table-container {
-  width: 100%;
+  table-layout: unset !important;
+  width: 99%;
   border-collapse: collapse;
   background: var(--table-background);
   box-shadow: var(--box-shadow-medium);
@@ -254,6 +316,27 @@
   display: flex;
   align-items: center;
   gap: 0.625rem; /* 10px */
+}
+
+.no-results {
+  margin: 1rem 1rem 1rem 0rem;
+  padding: 1rem;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-light);
+  font-family: var(--font-family-main);
+  font-size: var(--font-size-base);
+}
+
+/* Styling voor de Geen Resultaten Melding */
+#noResults p {
+  text-align: center; /* Zorgt dat de tekst in het midden komt */
+  font-size: 1.5rem; /* Verhoogt de fontgrootte */
+  font-weight: 600; /* Zet de tekst dikgedrukt */
+  padding: 2rem 0; /* Voeg boven- en onderruimte toe */
+  margin: 0; /* Zorgt ervoor dat de marge van de p-tag niet interfereert */
+  color: var(--text-color); /* Zet de tekstkleur */
 }
 
 /* Styling voor disabled knoppen */

@@ -15,7 +15,6 @@ class ModernImageManagerAjaxHandler
     public static function init(): void
     {
         add_action('wp_ajax_update_media_meta', [self::class, 'updateMediaMetaCallback']);
-        // Nieuwe actie voor verwijderen toevoegen
         add_action('wp_ajax_delete_media', [self::class, 'deleteMediaCallback']);
     }
 
@@ -43,6 +42,13 @@ class ModernImageManagerAjaxHandler
             return;
         }
 
+        // Verwijder bestandsextensie uit titel, caption, description en alt-tag
+        $newTitle = self::removeFileExtension($newTitle);
+        $newCaption = self::removeFileExtension($newCaption);
+        $newDescription = self::removeFileExtension($newDescription);
+        $newAlt = self::removeFileExtension($newAlt);
+
+        // Update post gegevens
         $attachmentPost = [
             'ID'           => $attachmentId,
             'post_title'   => $newTitle,
@@ -54,13 +60,13 @@ class ModernImageManagerAjaxHandler
 
         if (is_wp_error($updateResult)) {
             error_log('Fout bij wp_update_post: ' . $updateResult->get_error_message());
-            wp_send_json_error([
-                'message' => 'Fout bij het bijwerken van de media gegevens: ' . $updateResult->get_error_message(),
-            ]);
+            wp_send_json_error(['message' => 'Fout bij het bijwerken van de media gegevens: ' . $updateResult->get_error_message()]);
             return;
         }
 
+        // Update alt tekst als opgegeven
         if (!empty($newAlt)) {
+            error_log('Nieuwe alt-tekst: ' . $newAlt); // Log de nieuwe alt-tekst
             $altResult = update_post_meta($attachmentId, '_wp_attachment_image_alt', $newAlt);
             if ($altResult === false) {
                 error_log('Fout bij update_post_meta (alt tekst)');
@@ -69,15 +75,28 @@ class ModernImageManagerAjaxHandler
             }
         }
 
+        // Update bestandnaam als opgegeven
         if (!empty($newFilename)) {
             if (!self::updateFileName($attachmentId, $newFilename)) {
-                // updateFileName handelt de foutmelding al af
+                wp_send_json_error(['message' => 'Fout bij het hernoemen van het bestand.']);
                 return;
             }
         }
 
+        // Als alles goed is gegaan, succesbericht versturen
         wp_send_json_success(['message' => 'Media info succesvol bijgewerkt.']);
         error_log('updateMediaMetaCallback succesvol afgerond');
+    }
+
+    /**
+     * Verwijdert de bestandsextensie (zoals .png) van de bestandsnaam.
+     *
+     * @param string $string
+     * @return string
+     */
+    private static function removeFileExtension(string $string): string
+    {
+        return preg_replace('/\.[^.\s]{3,4}$/', '', $string);  // Verwijdert de bestandsextensie zoals .jpg, .png, etc.
     }
 
     /**
@@ -135,6 +154,7 @@ class ModernImageManagerAjaxHandler
             return false;
         }
 
+        // Haal het pad en de extensie van het originele bestand
         $dir     = pathinfo($file, PATHINFO_DIRNAME);
         $ext     = pathinfo($file, PATHINFO_EXTENSION);
         $newFile = $dir . '/' . $newFilename . '.' . $ext;
@@ -145,12 +165,14 @@ class ModernImageManagerAjaxHandler
             return false;
         }
 
+        // Controleer of het bestand met de nieuwe naam al bestaat
         if (file_exists($newFile)) {
             error_log('De nieuwe bestandsnaam bestaat al: ' . $newFile);
             wp_send_json_error(['message' => 'De nieuwe bestandsnaam bestaat al.']);
             return false;
         }
 
+        // Probeer het bestand te hernoemen
         if (!rename($file, $newFile)) {
             $errorMessage = error_get_last()['message'] ?? 'Onbekende fout';
             error_log(
@@ -167,11 +189,27 @@ class ModernImageManagerAjaxHandler
 
         update_attached_file($attachmentId, $newFile);
 
+        // Log het nieuwe bestandspad
+        error_log('Nieuw bestandspad: ' . $newFile);
+
+        // Genereer de metadata opnieuw
         require_once ABSPATH . 'wp-admin/includes/image.php';
         $metadata = wp_generate_attachment_metadata($attachmentId, $newFile);
 
-        if (!wp_update_attachment_metadata($attachmentId, $metadata)) {
-            error_log('Fout bij wp_update_attachment_metadata.');
+        // Log de metadata
+        error_log('Gegenereerde metadata: ' . print_r($metadata, true));
+
+        if (!$metadata) {
+            error_log('Fout bij het genereren van metadata voor bestand: ' . $newFile);
+            wp_send_json_error(['message' => 'Fout bij het genereren van metadata.']);
+            return false;
+        }
+
+        // Update de metadata
+        $metadataUpdated = wp_update_attachment_metadata($attachmentId, $metadata);
+
+        if (!$metadataUpdated) {
+            error_log('Fout bij wp_update_attachment_metadata voor bestand: ' . $newFile);
             wp_send_json_error(['message' => 'Fout bij het bijwerken van de metadata.']);
             return false;
         }
