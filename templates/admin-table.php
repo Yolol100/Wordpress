@@ -3,45 +3,61 @@ declare(strict_types=1);
 defined('ABSPATH') || exit;
 
 /**
- * Haalt de titel op van de post waaraan de bijlage is gekoppeld, inclusief ACF-velden.
+ * Haalt de titel op van de post waaraan de bijlage is gekoppeld, inclusief koppelingen via ACF en Elementor.
  *
- * Eerst wordt gecontroleerd of de bijlage is ingesteld als uitgelichte afbeelding via _thumbnail_id.
- * Als dat niet zo is, wordt er in de database gezocht naar een ACF-koppeling, waarbij gecontroleerd wordt
- * of ergens in de postmeta de attachment ID als meta_value voorkomt.
+ * 1. Als de afbeelding als uitgelichte afbeelding is ingesteld (post_parent > 0), wordt dit als "Pagina: ..." getoond.
+ * 2. Als er een koppeling via ACF is gevonden, wordt dit getoond als "Pagina (via ACF): ...".
+ * 3. Als er een koppeling via Elementor-meta is gevonden, wordt dit getoond als "Elementor Widget in: ...".
+ * 4. Als geen van bovenstaande, dan wordt 'Niet gekoppeld' geretourneerd.
  *
  * @param int $attachment_id De ID van de bijlage.
- * @return string De titel van de gekoppelde post, of 'Niet gekoppeld' als er geen koppeling is.
+ * @return string De titel van de gekoppelde post of Elementor-element, of 'Niet gekoppeld' als er geen koppeling is.
  */
 function modern_image_manager_get_attached_post_title(int $attachment_id): string {
     global $wpdb;
 
-    // Controleer eerst of de bijlage als uitgelichte afbeelding is ingesteld.
-    $attached_posts = get_posts([
-        'post_type'  => 'any',
-        'meta_query' => [
-            [
-                'key'     => '_thumbnail_id',
-                'value'   => $attachment_id,
-                'compare' => '=',
-            ],
-        ],
-    ]);
-
-    if (!empty($attached_posts)) {
-        return (string) $attached_posts[0]->post_title;
+    // Haal de bijlage op
+    $attachment = get_post($attachment_id);
+    if (!$attachment) {
+        return 'Niet gekoppeld';
     }
 
-    // Als er geen koppeling via _thumbnail_id is, zoek dan in alle ACF-velden.
-    $post_id = $wpdb->get_var(
+    // 1. Controleer of de afbeelding als uitgelichte afbeelding is ingesteld.
+    if ($attachment->post_parent > 0) {
+        $parent = get_post($attachment->post_parent);
+        return $parent ? 'Pagina: ' . $parent->post_title : 'Niet gekoppeld';
+    }
+
+    // 2. Zoek naar een koppeling via ACF/meta-velden.
+    $acf_data = $wpdb->get_row(
         $wpdb->prepare(
-            "SELECT post_id FROM $wpdb->postmeta WHERE meta_value = %d LIMIT 1",
+            "SELECT post_id, meta_key FROM $wpdb->postmeta WHERE meta_value = %d LIMIT 1",
             $attachment_id
         )
     );
+    if ($acf_data && !empty($acf_data->post_id)) {
+        $post_title = get_the_title((int) $acf_data->post_id);
+        // Als de functie acf_get_field() beschikbaar is, en het veld is een ACF-veld, voeg dan een indicatie toe.
+        if (function_exists('acf_get_field') && acf_get_field($acf_data->meta_key)) {
+            return 'Pagina (via ACF): ' . ($post_title ?: 'Niet gekoppeld');
+        }
+        // Als de meta_key niet met een underscore begint, beschouw dit dan als ACF.
+        if (strpos($acf_data->meta_key, '_') !== 0) {
+            return 'Pagina (via ACF): ' . ($post_title ?: 'Niet gekoppeld');
+        }
+        return 'Pagina: ' . ($post_title ?: 'Niet gekoppeld');
+    }
 
-    if ($post_id) {
-        $post_title = get_the_title($post_id);
-        return $post_title ? $post_title : 'Niet gekoppeld';
+    // 3. Zoek naar een koppeling via Elementor-meta-velden.
+    $elementor_usage = $wpdb->get_var(
+        $wpdb->prepare(
+            "SELECT post_id FROM $wpdb->postmeta WHERE meta_key LIKE '_elementor%%' AND meta_value LIKE %s LIMIT 1",
+            '%' . $wpdb->esc_like((string) $attachment_id) . '%'
+        )
+    );
+    if ($elementor_usage) {
+        $post_title = get_the_title((int) $elementor_usage);
+        return 'Elementor Widget in: ' . ($post_title ?: 'Niet gekoppeld');
     }
 
     return 'Niet gekoppeld';

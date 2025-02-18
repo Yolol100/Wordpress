@@ -1,15 +1,16 @@
 jQuery(document).ready(($) => {
-  // Filter toepassen voor de bovenste balk
+  // Dynamische filtering op de bovenste balk
   $('#applyFilter').on('click', () => {
     const selectedFilter = $('#pageFilter').val();
     $('.unique-tbody tr').each(function () {
       const $row = $(this);
       const status = $row.data('status');
+      // Als 'all' of als de status overeenkomt, tonen; anders verbergen.
       $row.toggle(selectedFilter === 'all' || selectedFilter === status);
     });
   });
 
-  // Filter toepassen voor de onderste balk
+  // Dynamische filtering op de onderste balk
   $('#applyFilterBottom').on('click', () => {
     const selectedFilter = $('#pageFilterBottom').val();
     $('.unique-tbody tr').each(function () {
@@ -19,7 +20,7 @@ jQuery(document).ready(($) => {
     });
   });
 
-  // Filters toepassen op specifieke velden
+  // Filtering op specifieke tekstvelden (titel, caption, alt)
   $('#apply-filters').on('click', () => {
     const titleFilter = $('#filter-title').val().toLowerCase();
     const captionFilter = $('#filter-caption').val().toLowerCase();
@@ -47,7 +48,7 @@ jQuery(document).ready(($) => {
     $('.unique-tbody tr').show();
   });
 
-  // Opslaan van metadata
+  // Opslaan van metadata via AJAX
   $('.save-meta').off('click').on('click', function () {
     const $button = $(this);
     const $row = $button.closest('tr');
@@ -104,7 +105,7 @@ jQuery(document).ready(($) => {
     });
   });
 
-  // Verwijderen van media zonder paginareload
+  // Verwijderen van media via AJAX zonder paginareload
   $('.delete-media').off('click').on('click', function () {
     if (!confirm('Weet u zeker dat u deze media wilt verwijderen?')) {
       return;
@@ -129,7 +130,6 @@ jQuery(document).ready(($) => {
       },
       success: (response) => {
         if (response.success) {
-          // Verwijder de rij dynamisch en update de paginering
           $row.fadeOut(500, function () {
             $(this).remove();
             updatePagination();
@@ -151,6 +151,7 @@ jQuery(document).ready(($) => {
     });
   });
 
+  // Paginering
   let currentPage = 1;
   const $rows = $('.unique-tbody tr');
 
@@ -159,7 +160,6 @@ jQuery(document).ready(($) => {
     const totalRows = $rows.length;
     const totalPages = Math.ceil(totalRows / rowsPerPage);
 
-    // Werk zowel de bovenste als de onderste pagineringsinformatie bij
     $('#totalPages, #totalPagesBottom').text(totalPages);
 
     $rows.hide();
@@ -169,13 +169,11 @@ jQuery(document).ready(($) => {
 
     $('#currentPage, #currentPageBottom').text(currentPage);
 
-    $('#prevPage').prop('disabled', currentPage === 1);
-    $('#nextPage').prop('disabled', currentPage === totalPages);
-    $('#prevPageBottom').prop('disabled', currentPage === 1);
-    $('#nextPageBottom').prop('disabled', currentPage === totalPages);
+    $('#prevPage, #prevPageBottom').prop('disabled', currentPage === 1);
+    $('#nextPage, #nextPageBottom').prop('disabled', currentPage === totalPages);
   };
 
-  // Event listeners voor bovenste paginering
+  // Evenementen voor paginering (bovenste balk)
   $('#rowsPerPage').on('change', () => {
     currentPage = 1;
     updatePagination();
@@ -189,7 +187,7 @@ jQuery(document).ready(($) => {
     updatePagination();
   });
 
-  // Event listeners voor onderste paginering
+  // Evenementen voor paginering (onderste balk)
   $('#rowsPerPageBottom').on('change', () => {
     currentPage = 1;
     updatePagination();
