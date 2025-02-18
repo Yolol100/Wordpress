@@ -265,7 +265,7 @@
 
 /* Algemene uniforme hover-effect voor alle knoppen */
 button:hover {
-  background-color: var(--button-hover-bg-color);
+  background-color: var(--button-hover-bg-color) !important;
   transform: translateY(-0.125rem); /* -2px */
   transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
 }
