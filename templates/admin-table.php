@@ -87,7 +87,7 @@ $media_items = new WP_Query($args);
             <th>Caption</th>
             <th>Description</th>
             <th>Alt-tag</th>
-            <th>Acties</th>
+            <th>Opslaan</th>
             <th>Verwijderen</th>
         </tr>
     </thead>
