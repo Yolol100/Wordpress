@@ -109,6 +109,35 @@
   outline: none;
 }
 
+/* Stijl voor de dropdown */
+.custom-dropdown {
+  width: 100% !important;
+  padding: 4px 12px 4px 12px !important;
+  font-size: 16px !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  background: var(--table-background) !important;
+  color: var(--text-color) !important;
+  cursor: pointer !important;
+  transition: all var(--transition-speed) var(--transition-ease) !important;
+  appearance: none !important; /* Verbergt standaard dropdown-pijl in sommige browsers */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='%23007cba' d='M7 10l5 5 5-5z'/></svg>") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 16px !important;
+  vertical-align: unset !important;
+}
+
+.custom-dropdown:hover {
+  border-color: var(--primary-color-dark) !important;
+}
+
+.custom-dropdown:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: var(--box-shadow-light) !important;
+  outline: none !important;
+}
+
 /* Knoppen - basis styling */
 .unique-td-acties button.save-meta,
 .page-button,

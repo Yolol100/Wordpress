@@ -17,7 +17,8 @@ class Modern_Image_Manager_Export {
      */
     public static function render_export_page(): void {
         if (isset($_POST['export_csv'])) {
-            self::generate_csv();
+            $export_option = $_POST['export_option'] ?? 'all';
+            self::generate_csv($export_option);
             exit;
         }
         // Laad de HTML-template
@@ -27,9 +28,10 @@ class Modern_Image_Manager_Export {
     /**
      * Genereert en verstuurt een CSV-bestand met media-informatie.
      *
+     * @param string $export_option Export-optie (all, linked, unlinked)
      * @return void
      */
-    public static function generate_csv(): void {
+    public static function generate_csv(string $export_option = 'all'): void {
         if (ob_get_length()) {
             ob_end_clean();
         }
@@ -85,6 +87,13 @@ class Modern_Image_Manager_Export {
                     if ($parent_post) {
                         $pagina = get_the_title($parent_post);
                     }
+                }
+
+                // Filteren op basis van de gekozen export-optie
+                if ($export_option === 'linked' && $pagina === 'Geen') {
+                    continue;
+                } elseif ($export_option === 'unlinked' && $pagina !== 'Geen') {
+                    continue;
                 }
 
                 fputcsv($output, [
