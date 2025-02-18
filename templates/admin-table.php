@@ -3,67 +3,46 @@ declare(strict_types=1);
 defined('ABSPATH') || exit;
 
 /**
- * Haalt de titel op van de post waaraan de bijlage is gekoppeld, inclusief koppelingen via ACF en Elementor.
- *
- * 1. Als de afbeelding als uitgelichte afbeelding is ingesteld (post_parent > 0), wordt dit als "Pagina: ..." getoond.
- * 2. Als er een koppeling via ACF is gevonden, wordt dit getoond als "Pagina (via ACF): ...".
- * 3. Als er een koppeling via Elementor-meta is gevonden, wordt dit getoond als "Elementor Widget in: ...".
- * 4. Als geen van bovenstaande, dan wordt 'Niet gekoppeld' geretourneerd.
+ * Haalt de titel op van de post waaraan de bijlage is gekoppeld, via:
+ * 1. WordPress: Als de afbeelding als uitgelichte afbeelding is ingesteld (post_parent > 0).
+ * 2. ACF: Als er een koppeling via ACF-meta-velden is gevonden (meta_key beginnend met "field_").
+ * 3. Anders: 'Niet gekoppeld'.
  *
  * @param int $attachment_id De ID van de bijlage.
- * @return string De titel van de gekoppelde post of Elementor-element, of 'Niet gekoppeld' als er geen koppeling is.
+ * @return string De titel van de gekoppelde post met aanduiding of deze via WordPress of ACF is gekoppeld.
  */
 function modern_image_manager_get_attached_post_title(int $attachment_id): string {
     global $wpdb;
 
-    // Haal de bijlage op
+    // Haal de bijlage op.
     $attachment = get_post($attachment_id);
     if (!$attachment) {
         return 'Niet gekoppeld';
     }
 
-    // 1. Controleer of de afbeelding als uitgelichte afbeelding is ingesteld.
+    // 1. Controleer of de afbeelding als uitgelichte afbeelding is ingesteld (WordPress).
     if ($attachment->post_parent > 0) {
         $parent = get_post($attachment->post_parent);
-        return $parent ? 'Pagina: ' . $parent->post_title : 'Niet gekoppeld';
+        return $parent ? 'Gekoppeld via WordPress: ' . $parent->post_title : 'Niet gekoppeld';
     }
 
-    // 2. Zoek naar een koppeling via ACF/meta-velden.
+    // 2. Zoek naar een koppeling via ACF-meta-velden (meta_key beginnend met "field_").
     $acf_data = $wpdb->get_row(
         $wpdb->prepare(
-            "SELECT post_id, meta_key FROM $wpdb->postmeta WHERE meta_value = %d LIMIT 1",
+            "SELECT post_id FROM $wpdb->postmeta WHERE meta_value = %d AND meta_key LIKE 'field_%%' LIMIT 1",
             $attachment_id
         )
     );
     if ($acf_data && !empty($acf_data->post_id)) {
-        $post_title = get_the_title((int) $acf_data->post_id);
-        // Als de functie acf_get_field() beschikbaar is, en het veld is een ACF-veld, voeg dan een indicatie toe.
-        if (function_exists('acf_get_field') && acf_get_field($acf_data->meta_key)) {
-            return 'Pagina (via ACF): ' . ($post_title ?: 'Niet gekoppeld');
-        }
-        // Als de meta_key niet met een underscore begint, beschouw dit dan als ACF.
-        if (strpos($acf_data->meta_key, '_') !== 0) {
-            return 'Pagina (via ACF): ' . ($post_title ?: 'Niet gekoppeld');
-        }
-        return 'Pagina: ' . ($post_title ?: 'Niet gekoppeld');
+        $parent = get_post((int) $acf_data->post_id);
+        return $parent ? 'Pagina (via ACF): ' . $parent->post_title : 'Niet gekoppeld';
     }
 
-    // 3. Zoek naar een koppeling via Elementor-meta-velden.
-    $elementor_usage = $wpdb->get_var(
-        $wpdb->prepare(
-            "SELECT post_id FROM $wpdb->postmeta WHERE meta_key LIKE '_elementor%%' AND meta_value LIKE %s LIMIT 1",
-            '%' . $wpdb->esc_like((string) $attachment_id) . '%'
-        )
-    );
-    if ($elementor_usage) {
-        $post_title = get_the_title((int) $elementor_usage);
-        return 'Elementor Widget in: ' . ($post_title ?: 'Niet gekoppeld');
-    }
-
+    // Geen koppeling gevonden.
     return 'Niet gekoppeld';
 }
 
-// Query voor het ophalen van mediabestanden
+// Query voor het ophalen van alle mediabestanden.
 $args = [
     'post_type'      => 'attachment',
     'post_status'    => 'inherit',
@@ -78,7 +57,7 @@ $media_items = new WP_Query($args);
         <select id="pageFilter" class="page-filter-select">
             <option value="all">Alle pagina's</option>
             <option value="linked">Gekoppelde pagina's</option>
-            <option value="unlinked">Niet-gekoppelde pagina's</option>
+            <option value="unlinked">Niet gekoppelde pagina's</option>
         </select>
         <button id="applyFilter">Filter toepassen</button>
         <div class="pagination-navigation">
@@ -134,8 +113,9 @@ $media_items = new WP_Query($args);
                 $filename  = pathinfo($path, PATHINFO_FILENAME);
                 $extension = pathinfo($path, PATHINFO_EXTENSION);
 
-                // Bepaal de status voor filtering
-                $status = ($page_title === 'Niet gekoppeld') ? 'unlinked' : 'linked';
+                // Bepaal de status voor filtering:
+                // Als er "Niet gekoppeld" in de titel staat, dan 'unlinked', anders 'linked'.
+                $status = (strpos($page_title, 'Niet gekoppeld') !== false) ? 'unlinked' : 'linked';
                 ?>
                 <tr class="unique-tr-item unique-tr-<?php echo esc_attr($attachment_id); ?>" data-status="<?php echo esc_attr($status); ?>">
                     <td class="unique-td-bestandsnaam">
@@ -201,7 +181,7 @@ $media_items = new WP_Query($args);
         <select id="pageFilterBottom" class="page-filter-select">
             <option value="all">Alle pagina's</option>
             <option value="linked">Gekoppelde pagina's</option>
-            <option value="unlinked">Niet-gekoppelde pagina's</option>
+            <option value="unlinked">Niet gekoppelde pagina's</option>
         </select>
         <button id="applyFilterBottom">Filter toepassen</button>
         <div class="pagination-navigation">
