@@ -83,7 +83,8 @@ $media_items = modern_image_manager_get_media_items();
                                class="filename-input"
                                data-attachment-id="<?php echo esc_attr($attachment_id); ?>"
                                value="<?php echo esc_attr($filename); ?>"
-                               placeholder="Voer bestandsnaam in" />
+                               placeholder="Voer bestandsnaam in"
+                               readonly />
                     </td>
                     <td class="unique-td-nieuwe-bestandsnaam">
                         <input type="text"

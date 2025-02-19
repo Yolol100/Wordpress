@@ -148,7 +148,7 @@ jQuery(document).ready(($) => {
     window.updatePagination();
   });
 
-  // AJAX voor opslaan van metadata (ongewijzigd)
+  // AJAX voor opslaan van metadata met aangepaste succesmelding
   $('.save-meta').off('click').on('click', function () {
     const $button = $(this);
     const $row = $button.closest('tr');
@@ -185,6 +185,12 @@ jQuery(document).ready(($) => {
         if (response.success) {
           $row.addClass('success');
           setTimeout(() => $row.removeClass('success'), 2000);
+          // Update de bestandsnaam in de UI als er een nieuwe is opgegeven.
+          if (newFilename) {
+            $row.find('.filename-input').val(newFilename);
+          }
+          const successMessage = response.data && response.data.message ? response.data.message : "Actie succesvol uitgevoerd.";
+          alert("Succes: " + successMessage);
         } else {
           $row.addClass('error');
           setTimeout(() => $row.removeClass('error'), 2000);

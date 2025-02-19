@@ -51,7 +51,7 @@ class Modern_Image_Manager_Import {
                 continue;
             }
 
-            $newFilenameInput = isset($data['Nieuwe bestands naam']) ? trim($data['Nieuwe bestands naam']) : '';
+            $newFilenameInput = isset($data['Nieuwe bestandsnaam']) ? trim($data['Nieuwe bestandsnaam']) : '';
             if (!empty($newFilenameInput)) {
                 $newFilenameInput = pathinfo($newFilenameInput, PATHINFO_FILENAME);
             }
@@ -62,21 +62,7 @@ class Modern_Image_Manager_Import {
                 $attachmentId = (int) $existingAttachment->ID;
 
                 if (!empty($newFilenameInput)) {
-                    $currentFile = get_attached_file($attachmentId);
-                    $pathInfo = pathinfo($currentFile);
-                    $extension = $pathInfo['extension'] ?? '';
-                    $newFile = $pathInfo['dirname'] . '/' . $newFilenameInput . '.' . $extension;
-
-                    if (file_exists($currentFile) && rename($currentFile, $newFile)) {
-                        update_attached_file($attachmentId, $newFile);
-
-                        $uploadDir = wp_upload_dir();
-                        $newUrl = $uploadDir['baseurl'] . '/' . $newFilenameInput . '.' . $extension;
-                        wp_update_post([
-                            'ID'   => $attachmentId,
-                            'guid' => $newUrl,
-                        ]);
-                    }
+                    self::rename_media_file($attachmentId, $newFilenameInput);
                 }
 
                 self::update_attachment_data($attachmentId, $data);
@@ -89,7 +75,50 @@ class Modern_Image_Manager_Import {
     }
 
     /**
-     * Werkt de gegevens van een bestaande bijlage bij.
+     * Hernoemt een mediabestand op de server en update WordPress metadata.
+     *
+     * @param int $attachmentId
+     * @param string $newFilename
+     *
+     * @return void
+     */
+    private static function rename_media_file(int $attachmentId, string $newFilename): void {
+        $file_path = get_attached_file($attachmentId);
+        $upload_dir = wp_upload_dir();
+
+        if (!$file_path || !file_exists($file_path)) {
+            return;
+        }
+
+        $file_ext = pathinfo($file_path, PATHINFO_EXTENSION);
+        $new_filename_clean = sanitize_file_name($newFilename) . '.' . $file_ext;
+        $new_file_path = $upload_dir['path'] . '/' . $new_filename_clean;
+
+        if (file_exists($new_file_path)) {
+            return; // Vermijd dubbele bestandsnamen
+        }
+
+        if (!rename($file_path, $new_file_path)) {
+            return;
+        }
+
+        update_attached_file($attachmentId, $new_file_path);
+
+        $metadata = wp_get_attachment_metadata($attachmentId);
+        $metadata['file'] = str_replace($upload_dir['basedir'] . '/', '', $new_file_path);
+        wp_update_attachment_metadata($attachmentId, $metadata);
+
+        $new_url = $upload_dir['baseurl'] . '/' . $new_filename_clean;
+        wp_update_post([
+            'ID'   => $attachmentId,
+            'guid' => $new_url,
+            'post_name' => sanitize_title($new_filename_clean),
+            'post_title' => sanitize_text_field($newFilename),
+        ]);
+    }
+
+    /**
+     * Werkt de gegevens van een bestaande bijlage bij (Titel, Caption, Beschrijving, Alt-tag).
      *
      * @param int   $attachmentId
      * @param array $data
@@ -97,18 +126,49 @@ class Modern_Image_Manager_Import {
      * @return void
      */
     private static function update_attachment_data(int $attachmentId, array $data): void {
-        if (isset($data['Titel'])) {
-            wp_update_post(['ID' => $attachmentId, 'post_title' => sanitize_text_field($data['Titel'])]);
+        $update_fields = [];
+
+        if (!empty($data['Titel'])) {
+            $update_fields['post_title'] = sanitize_text_field($data['Titel']);
         }
-        if (isset($data['Caption'])) {
-            wp_update_post(['ID' => $attachmentId, 'post_excerpt' => sanitize_text_field($data['Caption'])]);
+        if (!empty($data['Caption'])) {
+            $update_fields['post_excerpt'] = sanitize_text_field($data['Caption']);
         }
-        if (isset($data['Description'])) {
-            wp_update_post(['ID' => $attachmentId, 'post_content' => wp_kses_post($data['Description'])]);
+        if (!empty($data['Description'])) {
+            $update_fields['post_content'] = wp_kses_post($data['Description']);
         }
-        if (isset($data['Alt-tag'])) {
+
+        if (!empty($update_fields)) {
+            $update_fields['ID'] = $attachmentId;
+            wp_update_post($update_fields);
+        }
+
+        if (!empty($data['Alt-tag'])) {
             update_post_meta($attachmentId, '_wp_attachment_image_alt', sanitize_text_field($data['Alt-tag']));
         }
+    }
+
+    /**
+     * Haalt een bestaande bijlage op basis van de bestandsnaam op.
+     *
+     * @param string $filename
+     *
+     * @return WP_Post|null
+     */
+    private static function get_attachment_by_filename(string $filename): ?WP_Post {
+        global $wpdb;
+        $like = '%' . $wpdb->esc_like($filename);
+        $attachment = $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT ID FROM $wpdb->posts 
+                 WHERE post_type = 'attachment' 
+                 AND guid LIKE %s 
+                 LIMIT 1",
+                $like
+            )
+        );
+
+        return $attachment ? get_post($attachment->ID) : null;
     }
 
     /**
@@ -151,47 +211,5 @@ class Modern_Image_Manager_Import {
                 update_post_meta($newAttachmentId, '_wp_attachment_image_alt', sanitize_text_field($data['Alt-tag']));
             }
         }
-    }
-
-    /**
-     * Haalt een bestaande bijlage op basis van de bestandsnaam op.
-     *
-     * @param string $filename
-     *
-     * @return WP_Post|null
-     */
-    private static function get_attachment_by_filename(string $filename): ?WP_Post {
-        global $wpdb;
-        $like = '%' . $wpdb->esc_like($filename);
-        $attachment = $wpdb->get_row(
-            $wpdb->prepare(
-                "SELECT ID FROM $wpdb->posts 
-                 WHERE post_type = 'attachment' 
-                 AND guid LIKE %s 
-                 LIMIT 1",
-                $like
-            )
-        );
-
-        return $attachment ? get_post($attachment->ID) : null;
-    }
-
-    /**
-     * Bepaalt de MIME-type op basis van de bestandsextensie.
-     *
-     * @param string $filename
-     *
-     * @return string|null
-     */
-    private static function get_mime_type(string $filename): ?string {
-        $extension = pathinfo($filename, PATHINFO_EXTENSION);
-        $mimeTypes = [
-            'jpg'  => 'image/jpeg',
-            'jpeg' => 'image/jpeg',
-            'png'  => 'image/png',
-            'webp' => 'image/webp',
-        ];
-
-        return $mimeTypes[strtolower($extension)] ?? null;
     }
 }
