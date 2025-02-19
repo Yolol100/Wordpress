@@ -50,32 +50,69 @@ function mim_init(): void {
 add_action( 'plugins_loaded', 'mim_init' );
 
 /**
- * Laadt globale CSS- en JavaScript-assets.
+ * Laadt CSS- en JavaScript-assets, maar alleen op de admin-pagina's van de plugin.
  */
-function mim_enqueue_global_assets(): void {
-    wp_enqueue_style(
-        'modern-image-manager-styles',
-        MODERN_IMAGE_MANAGER_URL . 'assets/css/styles.css',
-        [],
-        '1.0.0',
-        'all'
-    );
+function mim_enqueue_admin_assets( $hook ) {
+    // Verkrijg het huidige scherm
+    $screen = get_current_screen();
 
-    wp_enqueue_script(
-        'modern-image-manager-scripts',
-        MODERN_IMAGE_MANAGER_URL . 'assets/js/scripts.js',
-        [ 'jquery' ],
-        '1.0.0',
-        true
-    );
+    // Definieer de toegestane scherm-ID's voor de plugin:
+    $allowed_screens = [
+        'toplevel_page_modern-image-manager',
+        'modern-image_page_import-media',
+        'modern-image_page_export-media'
+    ];
 
-    // Voeg AJAX-URL toe aan het script
-    wp_localize_script( 'modern-image-manager-scripts', 'modernImageManagerAjax', [
-        'ajax_url' => admin_url( 'admin-ajax.php' ),
-    ] );
+    if ( isset( $screen->id ) && in_array( $screen->id, $allowed_screens, true ) ) {
+        wp_enqueue_style(
+            'modern-image-manager-styles',
+            MODERN_IMAGE_MANAGER_URL . 'assets/css/styles.css',
+            [],
+            '1.0.0',
+            'all'
+        );
+
+        wp_enqueue_script(
+            'modern-image-manager-scripts',
+            MODERN_IMAGE_MANAGER_URL . 'assets/js/scripts.js',
+            [ 'jquery' ],
+            '1.0.0',
+            true
+        );
+
+        // Voeg AJAX-URL toe aan het script
+        wp_localize_script( 'modern-image-manager-scripts', 'modernImageManagerAjax', [
+            'ajax_url' => admin_url( 'admin-ajax.php' ),
+        ] );
+    }
 }
-add_action( 'wp_enqueue_scripts', 'mim_enqueue_global_assets' );
-add_action( 'admin_enqueue_scripts', 'mim_enqueue_global_assets' );
+add_action( 'admin_enqueue_scripts', 'mim_enqueue_admin_assets' );
+
+/**
+ * (Optioneel) Laadt frontend assets als dat nodig is.
+ * Pas de voorwaarde aan, bijvoorbeeld voor een specifiek custom post type.
+ */
+function mim_enqueue_frontend_assets() {
+    // Als je frontend-functionaliteit hebt, laad dan de assets op de juiste voorwaarde.
+    // Voorbeeld:
+    // if ( is_singular('modern_media') ) {
+    //     wp_enqueue_style(
+    //         'modern-image-manager-frontend-styles',
+    //         MODERN_IMAGE_MANAGER_URL . 'assets/css/frontend.css',
+    //         [],
+    //         '1.0.0',
+    //         'all'
+    //     );
+    //     wp_enqueue_script(
+    //         'modern-image-manager-frontend-scripts',
+    //         MODERN_IMAGE_MANAGER_URL . 'assets/js/frontend.js',
+    //         [ 'jquery' ],
+    //         '1.0.0',
+    //         true
+    //     );
+    // }
+}
+add_action( 'wp_enqueue_scripts', 'mim_enqueue_frontend_assets' );
 
 /**
  * Callback voor het renderen van de admin-tabelpagina.
