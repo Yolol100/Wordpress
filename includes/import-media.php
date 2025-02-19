@@ -30,19 +30,19 @@ class Modern_Image_Manager_Import {
      */
     public static function handle_import(): void {
         if (empty($_FILES['import_file']['tmp_name'])) {
-            wp_die('Geen bestand geüpload.');
+            wp_die(__('Geen bestand geüpload.', 'modern-image-manager'));
         }
 
         $file = $_FILES['import_file']['tmp_name'];
         $csvData = array_map('str_getcsv', file($file));
 
         if (empty($csvData) || !is_array($csvData)) {
-            wp_die('Ongeldig CSV-bestand.');
+            wp_die(__('Ongeldig CSV-bestand.', 'modern-image-manager'));
         }
 
         $headers = array_shift($csvData);
         if (!is_array($headers)) {
-            wp_die('Ongeldige CSV headers.');
+            wp_die(__('Ongeldige CSV headers.', 'modern-image-manager'));
         }
 
         foreach ($csvData as $row) {
@@ -71,7 +71,7 @@ class Modern_Image_Manager_Import {
             }
         }
 
-        echo '<div class="notice notice-success"><p>Import voltooid en alle waarden overschreven!</p></div>';
+        echo '<div class="notice notice-success"><p>' . __('Import voltooid en alle waarden overschreven!', 'modern-image-manager') . '</p></div>';
     }
 
     /**

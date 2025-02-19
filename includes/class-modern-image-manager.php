@@ -14,13 +14,13 @@ class Modern_Image_Manager {
     public static function add_admin_menu(): void {
         // Voeg het top-level menu toe.
         add_menu_page(
-            'Modern Image Manager',             // Paginatitel
-            'Modern Image',                     // Menutitel
-            'manage_options',                   // Bevoegdheden
-            'modern-image-manager',             // Menu slug
-            'mim_render_admin_table_page',      // Callback (extern gedefinieerd in de hoofdplugin)
-            'dashicons-media-document',         // Icon
-            20                                  // Positie
+            __('Modern Image Manager', 'modern-image-manager'),    // Paginatitel
+            __('Modern Image', 'modern-image-manager'),            // Menutitel
+            'manage_options',                                     // Bevoegdheden
+            'modern-image-manager',                               // Menu slug
+            'mim_render_admin_table_page',                        // Callback (extern gedefinieerd in de hoofdplugin)
+            'dashicons-media-document',                           // Icon
+            20                                                    // Positie
         );
 
         // Verwijder het automatisch gegenereerde duplicaatsubmenu-item.
@@ -28,21 +28,21 @@ class Modern_Image_Manager {
 
         // Voeg submenus toe.
         add_submenu_page(
-            'modern-image-manager',                       // Hoofdmenu slug
-            'Exporteer Media',                            // Paginatitel
-            'Exporteren',                                 // Submenu naam
-            'manage_options',                             // Bevoegdheden
-            'export-media',                               // Submenu slug
-            [ 'Modern_Image_Manager_Export', 'render_export_page' ] // Callback
+            'modern-image-manager',                                                // Hoofdmenu slug
+            __('Exporteer Media', 'modern-image-manager'),                          // Paginatitel
+            __('Exporteren', 'modern-image-manager'),                               // Submenu naam
+            'manage_options',                                                      // Bevoegdheden
+            'export-media',                                                        // Submenu slug
+            [ 'Modern_Image_Manager_Export', 'render_export_page' ]                // Callback
         );
 
         add_submenu_page(
-            'modern-image-manager',                       // Hoofdmenu slug
-            'Importeer Media',                            // Paginatitel
-            'Importeren',                                 // Submenu naam
-            'manage_options',                             // Bevoegdheden
-            'import-media',                               // Submenu slug
-            [ 'Modern_Image_Manager_Import', 'render_import_page' ] // Callback
+            'modern-image-manager',                                                // Hoofdmenu slug
+            __('Importeer Media', 'modern-image-manager'),                         // Paginatitel
+            __('Importeren', 'modern-image-manager'),                              // Submenu naam
+            'manage_options',                                                      // Bevoegdheden
+            'import-media',                                                        // Submenu slug
+            [ 'Modern_Image_Manager_Import', 'render_import_page' ]                // Callback
         );
     }
 

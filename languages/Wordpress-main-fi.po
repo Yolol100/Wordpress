@@ -1,0 +1,84 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Modern Image Manager\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-19 10:51+0000\n"
+"PO-Revision-Date: 2025-02-19 11:28+0000\n"
+"Last-Translator: \n"
+"Language-Team: Finnish\n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.7.1; wp-6.7.2\n"
+"X-Domain: Wordpress-main"
+
+#. Description of the plugin
+msgid "Beheer en bewerk media-informatie direct vanuit WordPress."
+msgstr "Hallitse ja muokkaa mediasisältöä suoraan WordPressistä."
+
+msgid "Bestandsnaam"
+msgstr "Tiedostonimi"
+
+msgid "Caption"
+msgstr "Kuvateksti"
+
+msgid "Exporteer Media"
+msgstr "Vie Mediaa"
+
+msgid "Exporteren"
+msgstr "Viedä"
+
+msgid "Geen bestand geüpload."
+msgstr "Ei tiedostoa ladattu."
+
+#. Author URI of the plugin
+msgid "https://example.com"
+msgstr "https://example.com"
+
+#. URI of the plugin
+msgid "https://example.com/plugins/modern-image-manager/"
+msgstr "https://example.com/plugins/modern-image-manager/"
+
+msgid "Import voltooid en alle waarden overschreven!"
+msgstr "Tuo valmis ja kaikki arvot ylikirjoitettu!"
+
+msgid "Importeer Media"
+msgstr "Tuo Mediaa"
+
+msgid "Importeren"
+msgstr "Tuonti"
+
+msgid "Kon output stream niet openen."
+msgstr "Ei voitu avata lähtövirtaa."
+
+msgid "Modern Image"
+msgstr "Moderni Kuva"
+
+msgid "Modern Image Manager"
+msgstr "Moderni Kuvahallinta"
+
+#. Feature strings
+msgid "Niet gekoppeld"
+msgstr "Ei liitetty"
+
+msgid "Nieuwe bestandsnaam"
+msgstr "Uusi tiedostonimi"
+
+msgid "Ongeldig CSV-bestand."
+msgstr "Virheellinen CSV-tiedosto."
+
+msgid "Ongeldige CSV headers."
+msgstr "Virheelliset CSV-otsikot."
+
+msgid "Pagina"
+msgstr "Sivu"
+
+msgid "Titel"
+msgstr "Otsikko"
+
+#. Author of the plugin
+msgid "Webactueel"
+msgstr "Webactueel"

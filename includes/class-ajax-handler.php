@@ -27,7 +27,7 @@ class ModernImageManagerAjaxHandler
         error_log('DEBUG: updateMediaMetaCallback aangeroepen');
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error(['message' => 'Geen toestemming.']);
+            wp_send_json_error(['message' => __('Geen toestemming.', 'modern-image-manager')]);
             return;
         }
 
@@ -39,7 +39,7 @@ class ModernImageManagerAjaxHandler
         $newFilename    = sanitize_file_name($_POST['new_filename'] ?? '');
 
         if (empty($attachmentId)) {
-            wp_send_json_error(['message' => 'Ongeldig bijlage-ID.']);
+            wp_send_json_error(['message' => __('Ongeldig bijlage-ID.', 'modern-image-manager')]);
             return;
         }
 
@@ -47,7 +47,7 @@ class ModernImageManagerAjaxHandler
         $attachment = get_post($attachmentId);
         if (!$attachment) {
             error_log('DEBUG: Bijlage niet gevonden of nog niet volledig opgeslagen (raceconditie)');
-            wp_send_json_error(['message' => 'Bijlage niet gevonden of nog niet volledig opgeslagen.']);
+            wp_send_json_error(['message' => __('Bijlage niet gevonden of nog niet volledig opgeslagen.', 'modern-image-manager')]);
             return;
         }
 
@@ -68,7 +68,7 @@ class ModernImageManagerAjaxHandler
         $updateResult = wp_update_post($attachmentPost, true);
         if (is_wp_error($updateResult)) {
             error_log('DEBUG: Fout bij wp_update_post: ' . $updateResult->get_error_message());
-            wp_send_json_error(['message' => 'Fout bij het bijwerken van de media gegevens: ' . $updateResult->get_error_message()]);
+            wp_send_json_error(['message' => __('Fout bij het bijwerken van de media gegevens: ', 'modern-image-manager') . $updateResult->get_error_message()]);
             return;
         }
 
@@ -81,12 +81,12 @@ class ModernImageManagerAjaxHandler
         // Bestandsnaam ALLEEN updaten als er een nieuwe bestandsnaam is opgegeven
         if (!empty($newFilename)) {
             if (!self::updateFileName($attachmentId, $newFilename)) {
-                wp_send_json_error(['message' => 'Fout bij het hernoemen van het bestand.']);
+                wp_send_json_error(['message' => __('Fout bij het hernoemen van het bestand.', 'modern-image-manager')]);
                 return;
             }
         }
 
-        wp_send_json_success(['message' => 'Media info succesvol bijgewerkt.']);
+        wp_send_json_success(['message' => __('Media info succesvol bijgewerkt.', 'modern-image-manager')]);
         error_log('DEBUG: updateMediaMetaCallback succesvol afgerond');
     }
 
@@ -111,21 +111,21 @@ class ModernImageManagerAjaxHandler
     public static function deleteMediaCallback(): void
     {
         if (!current_user_can('manage_options')) {
-            wp_send_json_error(['message' => 'Geen toestemming.']);
+            wp_send_json_error(['message' => __('Geen toestemming.', 'modern-image-manager')]);
             return;
         }
 
         $attachmentId = self::sanitizeInt($_POST['attachment_id'] ?? null);
         if (empty($attachmentId)) {
-            wp_send_json_error(['message' => 'Ongeldig bijlage-ID.']);
+            wp_send_json_error(['message' => __('Ongeldig bijlage-ID.', 'modern-image-manager')]);
             return;
         }
 
         $deleted = wp_delete_attachment($attachmentId, true);
         if ($deleted) {
-            wp_send_json_success(['message' => 'Media succesvol verwijderd.']);
+            wp_send_json_success(['message' => __('Media succesvol verwijderd.', 'modern-image-manager')]);
         } else {
-            wp_send_json_error(['message' => 'Fout bij het verwijderen van de media.']);
+            wp_send_json_error(['message' => __('Fout bij het verwijderen van de media.', 'modern-image-manager')]);
         }
     }
 
@@ -144,7 +144,7 @@ class ModernImageManagerAjaxHandler
         $file = get_attached_file($attachmentId);
         if (!$file || !file_exists($file)) {
             error_log('DEBUG: Bestand niet gevonden voor bijlage ID: ' . $attachmentId);
-            wp_send_json_error(['message' => 'Bestand niet gevonden voor bijlage ID.']);
+            wp_send_json_error(['message' => __('Bestand niet gevonden voor bijlage ID.', 'modern-image-manager')]);
             return false;
         }
 
@@ -160,14 +160,14 @@ class ModernImageManagerAjaxHandler
 
         if (file_exists($newFile)) {
             error_log('DEBUG: De nieuwe bestandsnaam bestaat al: ' . $newFile);
-            wp_send_json_error(['message' => 'De nieuwe bestandsnaam bestaat al.']);
+            wp_send_json_error(['message' => __('De nieuwe bestandsnaam bestaat al.', 'modern-image-manager')]);
             return false;
         }
 
         if (!rename($file, $newFile)) {
             $errorMessage = error_get_last()['message'] ?? 'Onbekende fout';
             error_log(sprintf('DEBUG: Fout bij rename: %s (Oude bestand: %s, Nieuw bestand: %s)', $errorMessage, $file, $newFile));
-            wp_send_json_error(['message' => 'Fout bij het hernoemen van het bestand.']);
+            wp_send_json_error(['message' => __('Fout bij het hernoemen van het bestand.', 'modern-image-manager')]);
             return false;
         }
 
@@ -183,7 +183,7 @@ class ModernImageManagerAjaxHandler
 
         if (!$metadata) {
             error_log('DEBUG: Metadata niet correct gegenereerd voor attachment ID ' . $attachmentId);
-            wp_send_json_error(['message' => 'Fout bij het genereren van metadata.']);
+            wp_send_json_error(['message' => __('Fout bij het genereren van metadata.', 'modern-image-manager')]);
             return false;
         }
 
@@ -192,7 +192,7 @@ class ModernImageManagerAjaxHandler
         $metadataUpdated = wp_update_attachment_metadata($attachmentId, $metadata);
         if (is_wp_error($metadataUpdated) || $metadataUpdated === false) {
             error_log('DEBUG: Fout bij wp_update_attachment_metadata voor bestand: ' . $newFile);
-            wp_send_json_error(['message' => 'Fout bij het bijwerken van de metadata.']);
+            wp_send_json_error(['message' => __('Fout bij het bijwerken van de metadata.', 'modern-image-manager')]);
             return false;
         }
 

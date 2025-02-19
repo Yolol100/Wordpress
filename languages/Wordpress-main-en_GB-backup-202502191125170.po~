@@ -1,0 +1,89 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Modern Image Manager\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-19 10:51+0000\n"
+"PO-Revision-Date: 2025-02-19 11:15+0000\n"
+"Last-Translator: \n"
+"Language-Team: English (UK)\n"
+"Language: en_GB\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.7.1; wp-6.7.2\n"
+"X-Domain: Wordpress-main"
+
+#. Description of the plugin
+msgid "Beheer en bewerk media-informatie direct vanuit WordPress."
+msgstr "Manage and edit media information directly from WordPress."
+
+#. Author URI of the plugin
+msgid "https://example.com"
+msgstr "https://example.com"
+
+#. URI of the plugin
+msgid "https://example.com/plugins/modern-image-manager/"
+msgstr "https://example.com/plugins/modern-image-manager/"
+
+#. Name of the plugin
+msgid "Modern Image Manager"
+msgstr "Modern Image Manager"
+
+#. Author of the plugin
+msgid "Webactueel"
+msgstr "Webactueel"
+
+#. Feature strings
+msgid "Niet gekoppeld"
+msgstr "Not linked"
+
+msgid "Modern Image Manager"
+msgstr "Modern Image Manager"
+
+msgid "Modern Image"
+msgstr "Modern Image"
+
+msgid "Exporteer Media"
+msgstr "Export Media"
+
+msgid "Exporteren"
+msgstr "Export"
+
+msgid "Importeer Media"
+msgstr "Import Media"
+
+msgid "Importeren"
+msgstr "Import"
+
+msgid "Geen bestand geüpload."
+msgstr "No file uploaded."
+
+msgid "Ongeldig CSV-bestand."
+msgstr "Invalid CSV file."
+
+msgid "Ongeldige CSV headers."
+msgstr "Invalid CSV headers."
+
+msgid "Import voltooid en alle waarden overschreven!"
+msgstr "Import completed and all values overwritten!"
+
+msgid "Kon output stream niet openen."
+msgstr "Could not open output stream."
+
+msgid "Bestandsnaam"
+msgstr "Filename"
+
+msgid "Nieuwe bestandsnaam"
+msgstr "New filename"
+
+msgid "Pagina"
+msgstr "Page"
+
+msgid "Titel"
+msgstr "Title"
+
+msgid "Caption"
+msgstr "Caption"

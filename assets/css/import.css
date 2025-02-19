@@ -1,0 +1,46 @@
+/* Styling voor filtercontroles */
+.filter-controls {
+  margin-bottom: 1.25rem; /* 20px */
+  display: flex;
+  gap: 0.625rem; /* 10px */
+  align-items: center;
+}
+
+/* Specifieke styling voor de 'Page Filter' dropdown */
+.page-filter-select {
+  padding: 0 0.75rem !important; /* 0px 12px */
+  font-size: var(--font-size-base) !important;
+  border: 1px solid #ccc !important;
+  border-radius: 0.25rem !important; /* 4px */
+  background-color: #fff !important;
+  cursor: pointer !important;
+  transition: border-color 0.2s !important;
+}
+
+.page-filter-select:focus {
+  border-color: var(--primary-color) !important;
+  outline: none !important;
+}
+
+/* Specifieke styling voor 'Rijen per pagina' dropdown */
+.rows-per-page-select {
+  padding: 0 2.1875rem 0 1.25rem !important; /* 0px 35px 0 20px */
+  font-size: var(--font-size-base) !important;
+  border: 1px solid #ccc !important;
+  border-radius: 0.25rem !important; /* 4px */
+  background-color: #fff !important;
+  cursor: pointer !important;
+  transition: border-color 0.2s !important;
+}
+
+.rows-per-page-select:focus {
+  border-color: var(--primary-color) !important;
+  outline: none !important;
+}
+
+/* Algemene uniforme hover-effect voor alle knoppen */
+button:hover {
+  background-color: var(--button-hover-bg-color) !important;
+  transform: translateY(-0.125rem); /* -2px */
+  transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
+}

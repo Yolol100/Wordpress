@@ -1,0 +1,52 @@
+/* Media queries voor unieke tabel en moderne image manager interface */
+@media (max-width: 48rem) {
+  /* Unieke tabel responsiviteit */
+  .unique-table {
+    font-size: 0.85em;
+  }
+
+  .unique-tbody input[type="text"],
+  .unique-tbody textarea {
+    font-size: 0.85em;
+    padding: 0.5rem; /* 8px */
+  }
+
+  .unique-td-acties button.save-meta {
+    padding: 0.5rem 1rem; /* 8px 16px */
+    font-size: 0.85em;
+  }
+
+  /* Moderne Image Manager responsiviteit */
+  .table-header,
+  .table-body,
+  .table-body tr,
+  .table-body td {
+    display: block;
+    width: 100%;
+  }
+
+  .table-header {
+    display: none;
+  }
+
+  .table-body tr {
+    margin-bottom: 0.9375rem; /* 15px */
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 0.9375rem; /* 15px */
+  }
+
+  .table-body td {
+    text-align: right;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  .table-body td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0.625rem; /* 10px */
+    width: calc(50% - 1.25rem); /* 50% - 20px */
+    text-align: left;
+    font-weight: bold;
+  }
+}

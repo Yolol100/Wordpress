@@ -1,0 +1,89 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Modern Image Manager\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-19 10:51+0000\n"
+"PO-Revision-Date: 2025-02-19 11:15+0000\n"
+"Last-Translator: \n"
+"Language-Team: Danish (Denmark)\n"
+"Language: da_DK\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.7.1; wp-6.7.2\n"
+"X-Domain: Wordpress-main"
+
+#. Description of the plugin
+msgid "Beheer en bewerk media-informatie direct vanuit WordPress."
+msgstr "Administrer og rediger medieinformation direkte fra WordPress."
+
+#. Author URI of the plugin
+msgid "https://example.com"
+msgstr "https://example.com"
+
+#. URI of the plugin
+msgid "https://example.com/plugins/modern-image-manager/"
+msgstr "https://example.com/plugins/modern-image-manager/"
+
+#. Name of the plugin
+msgid "Modern Image Manager"
+msgstr "Moderne Billede Manager"
+
+#. Author of the plugin
+msgid "Webactueel"
+msgstr "Webactueel"
+
+#. Feature strings
+msgid "Niet gekoppeld"
+msgstr "Ikke forbundet"
+
+msgid "Modern Image Manager"
+msgstr "Moderne Billede Manager"
+
+msgid "Modern Image"
+msgstr "Moderne Billede"
+
+msgid "Exporteer Media"
+msgstr "Eksporter Medier"
+
+msgid "Exporteren"
+msgstr "Eksportere"
+
+msgid "Importeer Media"
+msgstr "Importer Medier"
+
+msgid "Importeren"
+msgstr "Importere"
+
+msgid "Geen bestand geüpload."
+msgstr "Ingen fil uploadet."
+
+msgid "Ongeldig CSV-bestand."
+msgstr "Ugyldig CSV-fil."
+
+msgid "Ongeldige CSV headers."
+msgstr "Ugyldige CSV-overskrifter."
+
+msgid "Import voltooid en alle waarden overschreven!"
+msgstr "Import afsluttet og alle værdier overskrevet!"
+
+msgid "Kon output stream niet openen."
+msgstr "Kunne ikke åbne output-strømmen."
+
+msgid "Bestandsnaam"
+msgstr "Filnavn"
+
+msgid "Nieuwe bestandsnaam"
+msgstr "Nyt filnavn"
+
+msgid "Pagina"
+msgstr "Side"
+
+msgid "Titel"
+msgstr "Titel"
+
+msgid "Caption"
+msgstr "Undertekst"

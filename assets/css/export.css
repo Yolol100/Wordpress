@@ -1,0 +1,135 @@
+/* Knoppen - basis styling */
+.unique-td-acties button.save-meta,
+.page-button,
+.action-button,
+.filter-controls button,
+.pagination-buttons button,
+.pagination-navigation button {
+  padding: 0.625rem 1.25rem; /* 10px 20px */
+  font-size: var(--font-size-base);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 0.375rem; /* 6px */
+  color: var(--header-text-color);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) var(--transition-ease),
+  transform 0.2s var(--transition-ease);
+  box-shadow: var(--box-shadow-medium);
+}
+
+/* Lege tabel melding */
+.unique-tr-no-media .unique-td-no-media {
+  text-align: center;
+  font-size: var(--font-size-base);
+  font-weight: bold;
+  color: #666666;
+  padding: 1.25rem 0; /* 20px 0 */
+  background-color: var(--background-color);
+}
+
+/* Algemene styling voor de Modern Image Manager interface */
+.page-container {
+  padding: 1.875rem; /* 30px */
+  max-width: 50rem; /* 800px */
+  margin: 1.25rem auto; /* 20px auto */
+  background: var(--table-background);
+  border: 1px solid var(--border-color);
+  border-radius: 0.625rem; /* 10px */
+  box-shadow: var(--box-shadow-light);
+  font-family: var(--font-family-alt);
+  color: #333;
+  font-size: var(--font-size-base);
+}
+
+.page-title {
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 1.25rem; /* 20px */
+}
+
+.page-description {
+  font-size: 1.2rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 1.875rem; /* 30px */
+  line-height: 1.6;
+}
+
+.page-form {
+  text-align: center;
+}
+
+.page-file-input {
+  display: block;
+  margin: 0 auto 1.25rem; /* 0 auto 20px */
+  padding: 0.625rem; /* 10px */
+  border: 1px solid #ccc;
+  border-radius: 0.375rem; /* 6px */
+  font-size: var(--font-size-base);
+  transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.page-file-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0.3125rem rgba(0, 124, 186, 0.5); /* 5px */
+  outline: none;
+}
+
+/* Pagination controls */
+.pagination-controls {
+  margin-top: 0.9375rem; /* 15px */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pagination-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem; /* 10px */
+}
+
+.no-results {
+  margin: 1rem 1rem 1rem 0rem;
+  padding: 1rem;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-light);
+  font-family: var(--font-family-main);
+  font-size: var(--font-size-base);
+}
+
+/* Stijl de form-groepen en zorg voor een nette uitlijning */
+.form-group {
+  display: flex;
+  flex-direction: column; /* Zorg ervoor dat de elementen verticaal gestapeld worden */
+  margin-bottom: 20px;
+}
+
+/* Zorg ervoor dat de label boven de dropdown komt en links uitgelijnd is */
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px; /* Ruimte tussen het label en de dropdown */
+  text-align: left; /* Zorg ervoor dat de tekst links uitgelijnd is */
+  width: 100%; /* Zorgt ervoor dat de label dezelfde breedte heeft als de select */
+}
+
+/* De select box moet de volle breedte innemen */
+.form-group select {
+  width: 100%; /* Zorgt ervoor dat de dropdown de volle breedte inneemt */
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  background: var(--table-background);
+}
+
+/* Zorg ervoor dat de multi-select dropdowns goed weergeven worden */
+#exportColumns {
+  height: 200px; /* Verhoogt de hoogte van de multi-select dropdown */
+  resize: vertical;
+}

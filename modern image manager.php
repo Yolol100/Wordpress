@@ -11,6 +11,8 @@
  * Requires PHP:      7.4
  * Requires at least: 6.0
  * Tested up to:      6.4
+ * Text Domain:       modern-image-manager
+ * Domain Path:       /languages
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -20,6 +22,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Defineer plugin-constanten
 define( 'MODERN_IMAGE_MANAGER_PATH', plugin_dir_path( __FILE__ ) );
 define( 'MODERN_IMAGE_MANAGER_URL', plugin_dir_url( __FILE__ ) );
+
+/**
+ * Laadt de vertaalbestanden voor de plugin.
+ */
+function modern_image_manager_load_textdomain() {
+    load_plugin_textdomain( 'modern-image-manager', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+}
+add_action( 'plugins_loaded', 'modern_image_manager_load_textdomain' );
 
 /**
  * Initialiseert de plugin.
@@ -64,14 +74,48 @@ function mim_enqueue_admin_assets( $hook ) {
     ];
 
     if ( isset( $screen->id ) && in_array( $screen->id, $allowed_screens, true ) ) {
+        // Laad de algemene CSS-bestanden
         wp_enqueue_style(
-            'modern-image-manager-styles',
-            MODERN_IMAGE_MANAGER_URL . 'assets/css/styles.css',
+            'modern-image-manager-general-styles',
+            MODERN_IMAGE_MANAGER_URL . 'assets/css/general.css',
             [],
             '1.0.0',
             'all'
         );
 
+        wp_enqueue_style(
+            'modern-image-manager-table-styles',
+            MODERN_IMAGE_MANAGER_URL . 'assets/css/table.css',
+            [],
+            '1.0.0',
+            'all'
+        );
+
+        wp_enqueue_style(
+            'modern-image-manager-export-styles',
+            MODERN_IMAGE_MANAGER_URL . 'assets/css/export.css',
+            [],
+            '1.0.0',
+            'all'
+        );
+
+        wp_enqueue_style(
+            'modern-image-manager-import-styles',
+            MODERN_IMAGE_MANAGER_URL . 'assets/css/import.css',
+            [],
+            '1.0.0',
+            'all'
+        );
+
+        wp_enqueue_style(
+            'modern-image-manager-media-queries',
+            MODERN_IMAGE_MANAGER_URL . 'assets/css/media-queries.css',
+            [],
+            '1.0.0',
+            'all'
+        );
+
+        // Laad de JavaScript-bestanden
         wp_enqueue_script(
             'modern-image-manager-scripts',
             MODERN_IMAGE_MANAGER_URL . 'assets/js/scripts.js',
@@ -99,7 +143,7 @@ function mim_enqueue_frontend_assets() {
     //     wp_enqueue_style(
     //         'modern-image-manager-frontend-styles',
     //         MODERN_IMAGE_MANAGER_URL . 'assets/css/frontend.css',
-    //         [],
+    //         [], 
     //         '1.0.0',
     //         'all'
     //     );

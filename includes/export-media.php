@@ -18,7 +18,9 @@ class Modern_Image_Manager_Export {
     public static function render_export_page(): void {
         if (isset($_POST['export_csv'])) {
             $export_option = $_POST['export_option'] ?? 'all';
-            self::generate_csv($export_option);
+            // Verkrijg de geselecteerde kolommen uit de POST-gegevens
+            $selected_columns = isset($_POST['export_columns']) ? $_POST['export_columns'] : [];
+            self::generate_csv($export_option, $selected_columns);
             exit;
         }
         // Laad de HTML-template
@@ -29,9 +31,10 @@ class Modern_Image_Manager_Export {
      * Genereert en verstuurt een CSV-bestand met media-informatie.
      *
      * @param string $export_option Export-optie (all, linked, unlinked)
+     * @param array $selected_columns De geselecteerde kolommen voor export
      * @return void
      */
-    public static function generate_csv(string $export_option = 'all'): void {
+    public static function generate_csv(string $export_option = 'all', array $selected_columns = []): void {
         if (ob_get_length()) {
             ob_end_clean();
         }
@@ -43,20 +46,34 @@ class Modern_Image_Manager_Export {
 
         $output = fopen('php://output', 'w');
         if ($output === false) {
-            wp_die('Kon output stream niet openen.');
+            wp_die(__('Kon output stream niet openen.', 'modern-image-manager'));
         }
 
-        // Schrijf de kolomheaders naar het CSV-bestand
-        fputcsv($output, [
-            'Bestandsnaam',
-            'Nieuwe bestandsnaam',
-            'Pagina',
-            'Titel',
-            'Caption',
-            'Description',
-            'Alt-tag',
-            'Bestands-URL'
-        ]);
+        // Definieer de kolomkoppen voor de CSV
+        $column_headers = [
+            'filename' => __('Bestandsnaam', 'modern-image-manager'),
+            'new_filename' => __('Nieuwe bestandsnaam', 'modern-image-manager'),
+            'page' => __('Pagina', 'modern-image-manager'),
+            'title' => __('Titel', 'modern-image-manager'),
+            'caption' => __('Caption', 'modern-image-manager'),
+            'description' => __('Description', 'modern-image-manager'),
+            'alt_text' => __('Alt-tag', 'modern-image-manager'),
+            'file_url' => __('Bestands-URL', 'modern-image-manager')
+        ];
+
+        // Als er geen kolommen zijn geselecteerd, geef dan een standaardkolomset weer
+        if (empty($selected_columns)) {
+            $selected_columns = array_keys($column_headers); // Alle kolommen exporteren
+        }
+
+        // Schrijf de geselecteerde kolomkoppen naar het CSV-bestand
+        $csv_headers = [];
+        foreach ($selected_columns as $column) {
+            if (isset($column_headers[$column])) {
+                $csv_headers[] = $column_headers[$column];
+            }
+        }
+        fputcsv($output, $csv_headers);
 
         // Query alle media bijlagen
         $args = [
@@ -84,7 +101,7 @@ class Modern_Image_Manager_Export {
             $file_url    = wp_get_attachment_url($attachment_id) ?: '';
 
             // Bepaal of de afbeelding gelinkt is aan een pagina
-            $pagina = 'Geen';
+            $pagina = __('Geen', 'modern-image-manager');
             if ($attachment->post_parent) {
                 $parent_post = get_post($attachment->post_parent);
                 if ($parent_post) {
@@ -93,23 +110,44 @@ class Modern_Image_Manager_Export {
             }
 
             // Filteren op basis van de gekozen export-optie
-            if ($export_option === 'linked' && $pagina === 'Geen') {
+            if ($export_option === 'linked' && $pagina === __('Geen', 'modern-image-manager')) {
                 continue;
-            } elseif ($export_option === 'unlinked' && $pagina !== 'Geen') {
+            } elseif ($export_option === 'unlinked' && $pagina !== __('Geen', 'modern-image-manager')) {
                 continue;
             }
 
-            // Schrijf de gegevens naar de CSV
-            fputcsv($output, [
-                $filename,
-                '',
-                $pagina,
-                $title,
-                $caption,
-                $description,
-                $alt_text,
-                $file_url
-            ]);
+            // Schrijf de gegevens naar de CSV op basis van de geselecteerde kolommen
+            $data = [];
+            foreach ($selected_columns as $column) {
+                switch ($column) {
+                    case 'filename':
+                        $data[] = $filename;
+                        break;
+                    case 'new_filename':
+                        $data[] = ''; // Voeg logica toe voor nieuwe bestandsnaam indien nodig
+                        break;
+                    case 'page':
+                        $data[] = $pagina;
+                        break;
+                    case 'title':
+                        $data[] = $title;
+                        break;
+                    case 'caption':
+                        $data[] = $caption;
+                        break;
+                    case 'description':
+                        $data[] = $description;
+                        break;
+                    case 'alt_text':
+                        $data[] = $alt_text;
+                        break;
+                    case 'file_url':
+                        $data[] = $file_url;
+                        break;
+                }
+            }
+
+            fputcsv($output, $data);
         }
 
         fclose($output);

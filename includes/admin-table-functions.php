@@ -17,13 +17,13 @@ function modern_image_manager_get_attached_post_title(int $attachment_id): strin
     // Haal de bijlage op.
     $attachment = get_post($attachment_id);
     if (!$attachment) {
-        return 'Niet gekoppeld';
+        return __('Niet gekoppeld', 'modern-image-manager');
     }
 
     // Controleer of de afbeelding als uitgelichte afbeelding is ingesteld.
     if ($attachment->post_parent > 0) {
         $parent = get_post($attachment->post_parent);
-        return $parent ? $parent->post_title : 'Niet gekoppeld';
+        return $parent ? $parent->post_title : __('Niet gekoppeld', 'modern-image-manager');
     }
 
     // Zoek naar een koppeling via ACF-meta-velden.
@@ -35,10 +35,10 @@ function modern_image_manager_get_attached_post_title(int $attachment_id): strin
     );
     if ($acf_data && !empty($acf_data->post_id)) {
         $parent = get_post((int) $acf_data->post_id);
-        return $parent ? $parent->post_title : 'Niet gekoppeld';
+        return $parent ? $parent->post_title : __('Niet gekoppeld', 'modern-image-manager');
     }
 
-    return 'Niet gekoppeld';
+    return __('Niet gekoppeld', 'modern-image-manager');
 }
 
 /**

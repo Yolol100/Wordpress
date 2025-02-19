@@ -1,0 +1,89 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Modern Image Manager\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-19 10:51+0000\n"
+"PO-Revision-Date: 2025-02-19 11:15+0000\n"
+"Last-Translator: \n"
+"Language-Team: Finnish (Finland)\n"
+"Language: fi_FI\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.7.1; wp-6.7.2\n"
+"X-Domain: Wordpress-main"
+
+#. Description of the plugin
+msgid "Beheer en bewerk media-informatie direct vanuit WordPress."
+msgstr "Hallitse ja muokkaa mediasisältöä suoraan WordPressistä."
+
+#. Author URI of the plugin
+msgid "https://example.com"
+msgstr "https://example.com"
+
+#. URI of the plugin
+msgid "https://example.com/plugins/modern-image-manager/"
+msgstr "https://example.com/plugins/modern-image-manager/"
+
+#. Name of the plugin
+msgid "Modern Image Manager"
+msgstr "Moderni Kuvahallinta"
+
+#. Author of the plugin
+msgid "Webactueel"
+msgstr "Webactueel"
+
+#. Feature strings
+msgid "Niet gekoppeld"
+msgstr "Ei liitetty"
+
+msgid "Modern Image Manager"
+msgstr "Moderni Kuvahallinta"
+
+msgid "Modern Image"
+msgstr "Moderni Kuva"
+
+msgid "Exporteer Media"
+msgstr "Vie Mediaa"
+
+msgid "Exporteren"
+msgstr "Viedä"
+
+msgid "Importeer Media"
+msgstr "Tuo Mediaa"
+
+msgid "Importeren"
+msgstr "Tuonti"
+
+msgid "Geen bestand geüpload."
+msgstr "Ei tiedostoa ladattu."
+
+msgid "Ongeldig CSV-bestand."
+msgstr "Virheellinen CSV-tiedosto."
+
+msgid "Ongeldige CSV headers."
+msgstr "Virheelliset CSV-otsikot."
+
+msgid "Import voltooid en alle waarden overschreven!"
+msgstr "Tuo valmis ja kaikki arvot ylikirjoitettu!"
+
+msgid "Kon output stream niet openen."
+msgstr "Ei voitu avata lähtövirtaa."
+
+msgid "Bestandsnaam"
+msgstr "Tiedostonimi"
+
+msgid "Nieuwe bestandsnaam"
+msgstr "Uusi tiedostonimi"
+
+msgid "Pagina"
+msgstr "Sivu"
+
+msgid "Titel"
+msgstr "Otsikko"
+
+msgid "Caption"
+msgstr "Kuvateksti"
