@@ -18,6 +18,13 @@ jQuery(document).ready(($) => {
 
     $('#prevPage, #prevPageBottom').prop('disabled', window.currentPage === 1);
     $('#nextPage, #nextPageBottom').prop('disabled', window.currentPage === totalPages);
+
+    // Toon de "Geen resultaten"-melding als er geen resultaten zijn.
+    if ($filteredRows.length === 0) {
+      document.getElementById("noResults").style.display = "block";
+    } else {
+      document.getElementById("noResults").style.display = "none";
+    }
   };
 
   // Aangepaste zoekfunctie: als er geen invoer is, voeg 'filtered-match' toe aan alle rijen.

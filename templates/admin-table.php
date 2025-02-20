@@ -2,6 +2,7 @@
 declare(strict_types=1);
 defined('ABSPATH') || exit;
 
+// Haal media-items op
 $media_items = modern_image_manager_get_media_items();
 ?>
 
@@ -137,7 +138,7 @@ $media_items = modern_image_manager_get_media_items();
 
 <!-- Geen resultaten container -->
 <div id="noResults" class="filter-footer no-results media-items-no-results" style="display: none;">
-    <p><?php echo __("Geen resultaten gevonden.", "modern-image-manager"); ?></p>
+    <p><?php echo __("Geen afbeeldingen gevonden voor de geselecteerde filteroptie.", "modern-image-manager"); ?></p>
 </div>
 
 <!-- Filter balk onderaan -->
@@ -161,7 +162,7 @@ $media_items = modern_image_manager_get_media_items();
         </div>
         <div class="rows-controls filter-bottom-rows-controls">
             <div class="rows-per-page-container filter-bottom-rows-per-page-container">
-                <label for="rowsPerPageBottom" class="filter-bottom-rows-per-page-label"><?php echo __("Rijen per pagina:", "modern-image-manager"); ?></label>
+                <label for="rows-per-pageBottom" class="filter-bottom-rows-per-page-label"><?php echo __("Rijen per pagina:", "modern-image-manager"); ?></label>
                 <select id="rows-per-pageBottom" class="rows-per-page-select filter-bottom-rows-per-page-select">
                     <option value="10">10</option>
                     <option value="20">20</option>

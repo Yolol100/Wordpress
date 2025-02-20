@@ -37,10 +37,11 @@ add_action( 'plugins_loaded', 'modern_image_manager_load_textdomain' );
 function mim_init(): void {
     // Inclusie van overige benodigde bestanden
     $includes = [
-        'includes/class-modern-image-manager.php',
-        'includes/class-ajax-handler.php',
-        'includes/export-media.php',
-        'includes/import-media.php',
+        'includes/modern-images/class-modern-image-manager.php',
+        'includes/modern-images/class-ajax-handler.php',
+        'includes/modern-images/export-media.php',
+        'includes/modern-images/import-media.php',
+        'includes/scan-images/modern_image_manager_scan.php', // Laad de scan-functionaliteit
     ];
 
     foreach ( $includes as $file ) {
@@ -60,43 +61,46 @@ function mim_init(): void {
 add_action( 'plugins_loaded', 'mim_init' );
 
 /**
- * Laadt alleen style.css in plaats van meerdere CSS-bestanden.
+ * Laadt admin assets (CSS en JS) voor de plugin.
  */
 function mim_enqueue_admin_assets( $hook ) {
-    // Verkrijg het huidige scherm
-    $screen = get_current_screen();
+    // Laad de algemene pluginstijl
+    wp_enqueue_style(
+        'modern-image-manager-styles',
+        MODERN_IMAGE_MANAGER_URL . 'assets/css/style.css',
+        [], 
+        '1.0.0',
+        'all'
+    );
 
-    // Definieer de toegestane scherm-ID's voor de plugin:
-    $allowed_screens = [
-        'toplevel_page_modern-image-manager',
-        'modern-image_page_import-media',
-        'modern-image_page_export-media'
-    ];
+    // Laad de hoofd JavaScript-bestand
+    wp_enqueue_script(
+        'modern-image-manager-scripts',
+        MODERN_IMAGE_MANAGER_URL . 'assets/js/scripts.js',
+        [ 'jquery' ],
+        '1.0.0',
+        true
+    );
 
-    if ( isset( $screen->id ) && in_array( $screen->id, $allowed_screens, true ) ) {
-        // Laad alleen de algemene stijl voor de plugin (style.css)
-        wp_enqueue_style(
-            'modern-image-manager-styles',
-            MODERN_IMAGE_MANAGER_URL . 'assets/css/style.css',
-            [], 
-            '1.0.0', 
-            'all'
-        );
+    wp_localize_script( 'modern-image-manager-scripts', 'modernImageManagerAjax', [
+        'ajax_url' => admin_url( 'admin-ajax.php' ),
+    ] );
 
-        // Laad de JavaScript-bestanden
-        wp_enqueue_script(
-            'modern-image-manager-scripts',
-            MODERN_IMAGE_MANAGER_URL . 'assets/js/scripts.js',
-            [ 'jquery' ],
-            '1.0.0',
-            true
-        );
-
-        // Voeg AJAX-URL toe aan het script
-        wp_localize_script( 'modern-image-manager-scripts', 'modernImageManagerAjax', [
-            'ajax_url' => admin_url( 'admin-ajax.php' ),
-        ] );
-    }
+    // Laad extra assets voor de duplicaten pagina (altijd)
+    wp_enqueue_style(
+        'scan-duplicate-images',
+        MODERN_IMAGE_MANAGER_URL . 'assets/css/scan-duplicate-images.css',
+        [], 
+        '1.0.0',
+        'all'
+    );
+    wp_enqueue_script(
+        'scan-duplicate-images',
+        MODERN_IMAGE_MANAGER_URL . 'assets/js/scan-duplicate-images.js',
+        [ 'jquery' ],
+        '1.0.0',
+        true
+    );
 }
 add_action( 'admin_enqueue_scripts', 'mim_enqueue_admin_assets' );
 
@@ -104,24 +108,7 @@ add_action( 'admin_enqueue_scripts', 'mim_enqueue_admin_assets' );
  * (Optioneel) Laadt frontend assets als dat nodig is.
  */
 function mim_enqueue_frontend_assets() {
-    // Als je frontend-functionaliteit hebt, laad dan de assets op de juiste voorwaarde.
-    // Voorbeeld:
-    // if ( is_singular('modern_media') ) {
-    //     wp_enqueue_style(
-    //         'modern-image-manager-frontend-styles',
-    //         MODERN_IMAGE_MANAGER_URL . 'assets/css/frontend.css',
-    //         [], 
-    //         '1.0.0',
-    //         'all'
-    //     );
-    //     wp_enqueue_script(
-    //         'modern-image-manager-frontend-scripts',
-    //         MODERN_IMAGE_MANAGER_URL . 'assets/js/frontend.js',
-    //         [ 'jquery' ],
-    //         '1.0.0',
-    //         true
-    //     );
-    // }
+    // Indien nodig: laad assets voor de frontend.
 }
 add_action( 'wp_enqueue_scripts', 'mim_enqueue_frontend_assets' );
 
@@ -129,8 +116,21 @@ add_action( 'wp_enqueue_scripts', 'mim_enqueue_frontend_assets' );
  * Callback voor het renderen van de admin-tabelpagina.
  */
 function mim_render_admin_table_page(): void {
-    // Laad de PHP-logica voor de admin-tabel
-    require_once MODERN_IMAGE_MANAGER_PATH . 'includes/admin-table-functions.php';
-    // Laad het templatebestand dat uitsluitend de HTML bevat
+    require_once MODERN_IMAGE_MANAGER_PATH . 'includes/modern-images/admin-table-functions.php';
     include MODERN_IMAGE_MANAGER_PATH . 'templates/admin-table.php';
+}
+
+/**
+ * Render de pagina voor de duplicaten-scanner.
+ */
+function scan_duplicate_images_page() {
+    include MODERN_IMAGE_MANAGER_PATH . 'templates/scan-duplicate-page.php';
+}
+
+/**
+ * Functie om de scanner-functionaliteit in te laden.
+ * Deze kan vanuit het template worden aangeroepen wanneer nodig.
+ */
+function include_scan_duplicate_images_functionality() {
+    include MODERN_IMAGE_MANAGER_PATH . 'includes/scan-images/scanner.php';
 }

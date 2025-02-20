@@ -1,9 +1,9 @@
+/* Root variables for colors, fonts, and other constants */
 :root {
-  /* Kleuren */
   --primary-color: #007cba;
   --primary-color-dark: #006299;
   --background-color: #f9fafb;
-  --table-background: #ffffff; /* Gewijzigd naar wit */
+  --table-background: #ffffff;
   --border-color: #e1e1e1;
   --text-color: #333333;
   --header-text-color: #ffffff;
@@ -11,79 +11,73 @@
   --hover-bg-color: #e9f5ff;
   --disabled-button-bg-color: #e1e1e1;
   --button-hover-bg-color: #005a9c;
-
-  /* Typografie */
   --font-family-main: 'Inter', Arial, sans-serif;
   --font-family-alt: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  --font-size-base: 1rem; /* 16px */
-  --font-size-small: 0.75rem; /* 12px */
-
-  /* Overige */
-  --border-radius: 0.75rem; /* 12px */
+  --font-size-base: 1rem;
+  --font-size-small: 0.75rem;
+  --border-radius: 0.75rem;
   --box-shadow-light: 0 4px 10px rgba(0, 0, 0, 0.1);
   --box-shadow-medium: 0 2px 4px rgba(0, 0, 0, 0.1);
   --transition-speed: 0.3s;
   --transition-ease: ease;
 }
 
-/*----------------Export------------------*/
-
-/* Styling voor de exportpagina */
+/* Container for the export page styling */
 .export-page-container {
-  padding: 1.875rem; /* 30px */
-  max-width: 50rem; /* 800px */
-  margin: 1.25rem auto; /* 20px auto */
-  background: var(--table-background); /* Aangepast naar wit */
+  padding: 1.875rem;
+  max-width: 50rem;
+  margin: 1.25rem auto;
+  background: var(--table-background);
   border: 1px solid var(--border-color);
-  border-radius: 0.625rem; /* 10px */
+  border-radius: 0.625rem;
   box-shadow: var(--box-shadow-light);
   font-family: var(--font-family-alt);
   color: #333;
   font-size: var(--font-size-base);
 }
 
-/* Titel van de exportpagina */
+/* Title of the export page */
 .export-page-title {
   font-size: 2rem;
   color: #333;
   text-align: center;
   font-weight: 600;
-  margin-bottom: 1.25rem; /* 20px */
+  margin-bottom: 1.25rem;
 }
 
-/* Beschrijving van de exportpagina */
+/* Description of the export page */
 .export-page-description {
   font-size: 1.2rem;
   color: #555;
   text-align: center;
-  margin-bottom: 1.875rem; /* 30px */
+  margin-bottom: 1.875rem;
   line-height: 1.6;
 }
 
-/* Formulier voor exportpagina */
+/* Form container for the export page */
 .export-page-form {
   text-align: center;
 }
 
-/* Styling voor form-groepen op de exportpagina */
+/* Grouping of form elements on the export page */
 .export-page-form .form-group {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   text-align: center;
   width: 100%;
   margin-bottom: 20px;
 }
 
-/* Label voor de dropdown voor exportoptie */
+/* Label for the export option dropdown */
 .export-option-label {
   font-weight: bold;
   margin-bottom: 5px;
-  text-align: left;
-  width: 50%;
+  text-align: center;
+  width: 100%;
 }
 
-/* Dropdown voor exportoptie */
+/* Dropdown for the export option selection */
 .export-option-dropdown {
   width: 50%;
   padding: 10px;
@@ -95,22 +89,22 @@
   margin: 5px 0;
 }
 
-/* Styling voor form-groep voor kolommen selecteren */
+/* Grouping for column selection dropdown */
 .columns-select-group {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Label voor de kolom-select dropdown */
+/* Label for the column selection dropdown */
 .columns-select-label {
   font-weight: bold;
   margin-bottom: 5px;
-  text-align: left;
-  width: 50%;
+  text-align: center;
+  width: 100%;
 }
 
-/* Dropdown voor kolomselectie */
+/* Dropdown for column selection */
 .columns-select-dropdown {
   width: 50%;
   padding: 10px;
@@ -121,11 +115,11 @@
   color: var(--text-color);
 }
 
-/* Exporteer knop */
+/* Export button styling */
 .export-button {
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: var(--primary-color); /* Kleur van de knop is nu de primaire kleur */
+  background-color: var(--primary-color);
   color: var(--header-text-color);
   border: none;
   border-radius: 8px;
@@ -135,20 +129,20 @@
   box-shadow: var(--box-shadow-medium);
 }
 
-/* Hover voor de export knop */
+/* Hover effect for the export button */
 .export-button:hover {
-  background-color: var(--button-hover-bg-color); /* Kleur van de knop verandert bij hover */
-  transform: translateY(-0.125rem); /* -2px */
+  background-color: var(--button-hover-bg-color);
+  transform: translateY(-0.125rem);
   transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
 }
 
-/* Specifieke styling voor multi-select dropdown */
+/* Export columns dropdown height and resizing */
 #exportColumns {
-  height: 200px; /* Verhoogt de hoogte van de multi-select dropdown */
+  height: 200px;
   resize: vertical;
 }
 
-/* Zorg ervoor dat de dropdowns de juiste padding hebben */
+/* Custom dropdown styling */
 .custom-dropdown {
   width: 100% !important;
   padding: 4px 12px 4px 12px !important;
@@ -159,7 +153,7 @@
   color: var(--text-color) !important;
   cursor: pointer !important;
   transition: all var(--transition-speed) var(--transition-ease) !important;
-  appearance: none !important; /* Verbergt standaard dropdown-pijl in sommige browsers */
+  appearance: none !important;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='%23007cba' d='M7 10l5 5 5-5z'/></svg>") !important;
   background-repeat: no-repeat !important;
   background-position: right 12px center !important;
@@ -167,19 +161,34 @@
   vertical-align: unset !important;
 }
 
-/* Hover en focus voor custom dropdown */
+/* Hover effect for the custom dropdown */
 .custom-dropdown:hover {
   border-color: var(--primary-color-dark) !important;
 }
 
+/* Focus effect for the custom dropdown */
 .custom-dropdown:focus {
   border-color: var(--primary-color) !important;
   box-shadow: var(--box-shadow-light) !important;
   outline: none !important;
 }
 
-/*----------------Tabel------------------*/
+/* Column dropdown appearance */
+.columns-select-dropdown {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  background-image: none !important;
+}
 
+/* Export option dropdown appearance */
+.export-option-dropdown {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+/* Styling for top and bottom filter containers */
 .filter-top-container,
 .filter-bottom-container {
   margin: 1rem 1rem 1rem 0rem;
@@ -192,19 +201,21 @@
   font-size: var(--font-size-base);
 }
 
+/* Header and footer for the filter container */
 .filter-top-header,
 .filter-bottom-footer {
   display: flex;
   justify-content: space-between;
 }
 
+/* Navigation controls for the filter */
 .filter-top-nav-controls,
 .filter-bottom-nav-controls {
   display: flex;
-  gap: 0.625rem; /* 10px */
-  align-items: center;
+  gap: 0.625rem;
 }
 
+/* Filter button styling */
 .filter-top-page-filter,
 .filter-bottom-page-filter {
   padding: 0 0.75rem;
@@ -215,6 +226,7 @@
   cursor: pointer;
 }
 
+/* Filter apply and page navigation buttons */
 .filter-top-apply-button,
 .filter-bottom-apply-button,
 .filter-top-prev-button,
@@ -233,18 +245,20 @@
   box-shadow: var(--box-shadow-medium);
 }
 
-/* Hover effect for buttons */
+/* Hover effect for filter buttons */
 button:hover {
   background-color: var(--button-hover-bg-color) !important;
   transform: translateY(-0.125rem);
   transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
 }
 
+/* Search container for filters */
 .filter-top-search-container,
 .filter-bottom-search-container {
   text-align: right;
 }
 
+/* Search box for filters */
 .filter-top-search-box,
 .filter-bottom-search-box {
   width: 100%;
@@ -258,6 +272,7 @@ button:hover {
   transition: all 0.3s ease;
 }
 
+/* Table styling for media items */
 .media-items-table {
   table-layout: unset !important;
   width: 99%;
@@ -269,6 +284,7 @@ button:hover {
   font-size: var(--font-size-base);
 }
 
+/* Table header styling for media items */
 .media-items-thead th,
 .media-items-tr-head th {
   padding: 0.75rem 0.9375rem;
@@ -282,15 +298,18 @@ button:hover {
   border-bottom: 2px solid var(--primary-color-dark);
 }
 
+/* Even row styling for media items */
 .media-items-tbody tr:nth-child(even) {
   background-color: var(--even-row-bg-color);
 }
 
+/* Hover effect for media items */
 .media-items-tbody tr:hover {
   background-color: var(--hover-bg-color);
   transition: background-color var(--transition-speed) var(--transition-ease);
 }
 
+/* Table cell styling for media items */
 .media-items-tbody td {
   padding: 0.75rem 0.9375rem;
   font-size: var(--font-size-base);
@@ -299,6 +318,7 @@ button:hover {
   vertical-align: middle;
 }
 
+/* Input fields for media items */
 .media-items-filename-input,
 .media-items-new-filename-input,
 .media-items-title-input,
@@ -314,6 +334,7 @@ button:hover {
   transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
+/* Focus effect for media item input fields */
 .media-items-filename-input:focus,
 .media-items-new-filename-input:focus,
 .media-items-title-input:focus,
@@ -321,10 +342,11 @@ button:hover {
 .media-items-description-input:focus,
 .media-items-alt-input:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0.3125rem rgba(0, 124, 186, 0.3); /* 5px */
+  box-shadow: 0 0 0.3125rem rgba(0, 124, 186, 0.3);
   outline: none;
 }
 
+/* Save and delete buttons for media items */
 .media-items-save-meta,
 .media-items-delete-media {
   padding: 0.625rem 1.25rem;
@@ -339,6 +361,7 @@ button:hover {
   box-shadow: var(--box-shadow-medium);
 }
 
+/* Hover effect for media item save and delete buttons */
 .media-items-save-meta:hover,
 .media-items-delete-media:hover {
   background-color: var(--button-hover-bg-color) !important;
@@ -346,17 +369,20 @@ button:hover {
   transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
 }
 
+/* Export columns input */
 #exportColumns {
   height: 150px;
   resize: vertical;
 }
 
+/* Pagination navigation styling */
 .pagination-navigation {
   display: flex;
   align-items: center;
   gap: 0.625rem;
 }
 
+/* Pagination button styling */
 .pagination-navigation button {
   padding: 0.625rem 1.25rem;
   font-size: var(--font-size-base);
@@ -370,18 +396,21 @@ button:hover {
   box-shadow: var(--box-shadow-medium);
 }
 
+/* Hover effect for pagination buttons */
 .pagination-navigation button:hover {
   background-color: var(--button-hover-bg-color);
   transform: translateY(-0.125rem);
   transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
 }
 
+/* Focus effect for search box */
 .search-box:focus {
   border-color: var(--primary-color);
   box-shadow: var(--box-shadow-light);
   outline: none;
 }
 
+/* Filter pagination styling */
 .filter-top-pagination,
 .filter-bottom-pagination {
   display: flex;
@@ -389,6 +418,7 @@ button:hover {
   gap: 0.625rem;
 }
 
+/* Filter pagination button styling */
 .filter-top-pagination button,
 .filter-bottom-pagination button {
   padding: 0.625rem 1.25rem;
@@ -403,6 +433,7 @@ button:hover {
   box-shadow: var(--box-shadow-medium);
 }
 
+/* Hover effect for filter pagination buttons */
 .filter-top-pagination button:hover,
 .filter-bottom-pagination button:hover {
   background-color: var(--button-hover-bg-color);
@@ -410,69 +441,68 @@ button:hover {
   transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
 }
 
-/*----------------Import------------------*/
-
-/* Styling voor de import pagina container */
+/* Import page container styling */
 .import-page-container {
-  padding: 1.875rem; /* 30px */
-  max-width: 50rem; /* 800px */
-  margin: 1.25rem auto; /* 20px auto */
+  padding: 1.875rem;
+  max-width: 50rem;
+  margin: 1.25rem auto;
   background: var(--table-background);
   border: 1px solid var(--border-color);
-  border-radius: 0.625rem; /* 10px */
+  border-radius: 0.625rem;
   box-shadow: var(--box-shadow-light);
   font-family: var(--font-family-alt);
   color: #333;
   font-size: var(--font-size-base);
 }
 
-/* Styling voor de titel op de importpagina */
+/* Import page title styling */
 .import-page-title {
   font-size: 2rem;
   color: #333;
   text-align: center;
   font-weight: 600;
-  margin-bottom: 1.25rem; /* 20px */
+  margin-bottom: 1.25rem;
 }
 
-/* Styling voor de beschrijving van de importpagina */
+/* Import page description styling */
 .import-page-description {
   font-size: 1.2rem;
   color: #555;
   text-align: center;
-  margin-bottom: 1.875rem; /* 30px */
+  margin-bottom: 1.875rem;
   line-height: 1.6;
 }
 
-/* Styling voor het formulier op de importpagina */
+/* Import page form styling */
 .import-page-form {
   text-align: center;
 }
 
-/* Styling voor het bestand invoerveld */
+/* File input field styling for the import page */
 .import-file-input {
   display: block;
-  margin: 0 auto 1.25rem; /* 0 auto 20px */
-  padding: 0.625rem; /* 10px */
+  margin: 0 auto 1.25rem;
+  padding: 0.625rem;
   border: 1px solid #ccc;
-  border-radius: 0.375rem; /* 6px */
+  border-radius: 0.375rem;
   font-size: var(--font-size-base);
   transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 
+/* Focus effect for the file input */
 .import-file-input:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0.3125rem rgba(0, 124, 186, 0.5); /* 5px */
+  box-shadow: 0 0 0.3125rem rgba(0, 124, 186, 0.5);
   outline: none;
 }
 
-/* Styling voor de importeer knop */
+/* Import button styling */
 .import-button {
-  padding: 0.625rem 1.25rem; /* 10px 20px */
+  padding: 0.625rem 1.25rem;
   font-size: var(--font-size-base);
   background-color: var(--primary-color);
   border: none;
-  border-radius: 0.375rem; /* 6px */
+  border-radius: 0.375rem;
   color: var(--header-text-color);
   font-weight: 500;
   cursor: pointer;
@@ -480,9 +510,32 @@ button:hover {
   box-shadow: var(--box-shadow-medium);
 }
 
-/* Hover effect voor de importeer knop */
+/* Hover effect for the import button */
 .import-button:hover {
   background-color: var(--button-hover-bg-color);
-  transform: translateY(-0.125rem); /* -2px */
+  transform: translateY(-0.125rem);
   transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
+}
+
+/* Styling for the 'No Results' message */
+#noResults {
+  width: 95.2%;
+  background-color: var(--table-background);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-light);
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-family-main);
+  margin-top: 1rem;
+}
+
+/* 'No Results' message text styling */
+#noResults p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--text-color);
+  text-align: center;
 }
