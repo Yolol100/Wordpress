@@ -1,72 +1,78 @@
-## Modern Image Manager
+# Modern Image Manager
 
-**Modern Image Manager** is a WordPress plugin that allows users to easily manage media items, import and export media data, and update metadata. It provides a user-friendly interface to work with attachments and images, with features like renaming files, exporting media information to CSV, and importing media via CSV files.
+[![WordPress](https://img.shields.io/badge/WordPress-6.4%2B-blue.svg)](https://wordpress.org)
+[![PHP](https://img.shields.io/badge/PHP-7.4%2B-green.svg)](https://www.php.net/)
+[![License](https://img.shields.io/badge/license-GPL--2.0-orange.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 
-### Features
+Modern Image Manager is een krachtige WordPress-plugin voor het beheren van media-items. Hiermee kun je eenvoudig afbeeldingen en bijlagen organiseren, metadata bijwerken en media importeren/exporteren via CSV.
 
-- **Export Media to CSV**: Export media item information such as filename, title, caption, description, alt-tag, and more.
-- **Import Media via CSV**: Import media items and update existing attachments based on a CSV file.
-- **Rename Files**: Rename media files and update the associated metadata and post information.
-- **Edit Metadata**: Update the title, caption, description, and alt-tag of media items.
+## 📌 Functies
 
-### Installation
+✅ **Media exporteren naar CSV** – Exporteer bestandsnamen, titels, alt-tags en beschrijvingen naar CSV.  
+✅ **Media importeren via CSV** – Voeg nieuwe media-items toe of update bestaande met een CSV-bestand.  
+✅ **Bestanden hernoemen** – Hernoem mediabestanden en update de gekoppelde metadata automatisch.  
+✅ **Metagegevens bijwerken** – Bewerk titels, alt-tags en beschrijvingen in bulk.  
+✅ **WordPress Post Koppeling** – Controleert of een afbeelding is gekoppeld aan een bericht of ACF-veld.  
+✅ **AJAX-gebaseerde media beheer** – Snelle updates zonder pagina herladen.  
 
-#### Manual Installation
+## 🚀 Installatie
 
-1. Download the plugin files or clone this repository:
+### Automatische installatie
+1. Ga naar het WordPress dashboard.
+2. Navigeer naar **Plugins > Nieuwe Plugin**.
+3. Zoek op _Modern Image Manager_ en klik op **Nu Installeren**.
+4. Activeer de plugin.
+
+### Handmatige installatie
+1. Download de plugin of clone deze repository:
     ```bash
     git clone https://github.com/yourusername/modern-image-manager.git
     ```
+2. Upload de map naar `/wp-content/plugins/`.
+3. Activeer de plugin via het **Plugins** menu in WordPress.
 
-2. Upload the plugin folder to the `/wp-content/plugins/` directory.
-3. Activate the plugin through the **Plugins** menu in WordPress.
+## 🔧 Gebruik
 
-### Requirements
+### 📤 Media exporteren
+1. Ga naar **Modern Image > Export Media**.
+2. Selecteer welke media je wilt exporteren (alles, gekoppeld of niet-gekoppeld).
+3. Klik op **Exporteren naar CSV** en download het bestand.
 
-- WordPress 5.0 or higher
-- PHP 7.4 or higher
-- MySQL 5.6 or higher
+### 📥 Media importeren
+1. Ga naar **Modern Image > Import Media**.
+2. Upload je CSV-bestand met media-informatie.
+3. Klik op **Importeren** om media te updaten of toe te voegen.
 
-### Usage
+### ✏️ Bestanden hernoemen en metadata bewerken
+- Hernoem bestanden rechtstreeks via de plugin-interface.
+- Update titels, beschrijvingen en alt-tags van meerdere bestanden tegelijk.
 
-Once installed and activated, the plugin adds a new menu item called **Modern Image** in the WordPress dashboard. From here, you can access the following features:
+## 📷 Screenshots
+![Modern Image Manager](https://example.com/screenshot.png)
 
-#### Export Media
+## 🛠️ Vereisten
+- **WordPress**: 6.0 of hoger
+- **PHP**: 7.4 of hoger
+- **MySQL**: 5.6 of hoger
 
-1. Navigate to the **Modern Image** menu in the dashboard.
-2. Click on **Export Media**.
-3. Select the export option (All, Linked, or Unlinked).
-4. Click **Export to CSV** to download the media data in a CSV file.
+## 🛡️ Beveiliging
+- Voorkomt directe toegang tot bestanden (`defined('ABSPATH')` check).
+- AJAX-verzoeken worden verwerkt met **nonce-validatie**.
+- WordPress' **sanitize- en escape-functies** worden gebruikt om XSS en SQL-injecties te voorkomen.
 
-#### Import Media
+## 🎭 Vertalingen
+Ondersteunt meertalige vertaling via **Loco Translate** en `.pot` bestanden.
 
-1. Go to the **Modern Image** menu and select **Import Media**.
-2. Upload your CSV file containing the media data.
-3. The plugin will update existing media items or create new ones based on the CSV data.
+## 🤝 Bijdragen
+Wil je bijdragen? Volg deze stappen:
+1. Fork deze repository.
+2. Maak een nieuwe branch (`feature/nieuwe-functionaliteit`).
+3. Commit je wijzigingen en push naar GitHub.
+4. Start een pull request!
 
-#### Renaming Files
+## 📜 Licentie
+Dit project valt onder de **GPL-2.0** licentie.
 
-- When importing or editing media, you can also rename files directly through the plugin.
-- The new filenames will be applied to both the media file and its corresponding post metadata.
+---
 
-### Translation
-
-The plugin supports translation into multiple languages. To translate the plugin to your preferred language, use a translation tool like **Loco Translate**. Simply load the `.pot` file, and you can begin translating the strings used in the plugin.
-
-### Support
-
-If you encounter any issues or need help with the plugin, feel free to reach out to the plugin's support team.
-
-### License
-
-This plugin is licensed under the **GPL-2.0** license. You can freely use, modify, and distribute the plugin according to the terms of the GPL.
-
-### Contributing
-
-Contributions to the plugin are welcome! If you'd like to contribute, feel free to submit pull requests or suggest improvements.
-
-### Changelog
-
-#### Version 1.0.0
-
-- Initial release of **Modern Image Manager** plugin.
+🚀 **Modern Image Manager** – De slimste manier om je WordPress-media te beheren!
