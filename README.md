@@ -4,75 +4,75 @@
 [![PHP](https://img.shields.io/badge/PHP-7.4%2B-green.svg)](https://www.php.net/)
 [![License](https://img.shields.io/badge/license-GPL--2.0-orange.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 
-Modern Image Manager is een krachtige WordPress-plugin voor het beheren van media-items. Hiermee kun je eenvoudig afbeeldingen en bijlagen organiseren, metadata bijwerken en media importeren/exporteren via CSV.
+**Modern Image Manager** is a powerful WordPress plugin for managing media items. Easily organize images and attachments, update metadata, and import/export media via CSV.
 
-## 📌 Functies
+## 📌 Features
 
-✅ **Media exporteren naar CSV** – Exporteer bestandsnamen, titels, alt-tags en beschrijvingen naar CSV.  
-✅ **Media importeren via CSV** – Voeg nieuwe media-items toe of update bestaande met een CSV-bestand.  
-✅ **Bestanden hernoemen** – Hernoem mediabestanden en update de gekoppelde metadata automatisch.  
-✅ **Metagegevens bijwerken** – Bewerk titels, alt-tags en beschrijvingen in bulk.  
-✅ **WordPress Post Koppeling** – Controleert of een afbeelding is gekoppeld aan een bericht of ACF-veld.  
-✅ **AJAX-gebaseerde media beheer** – Snelle updates zonder pagina herladen.  
+✅ **Export media to CSV** – Export filenames, titles, alt tags, and descriptions to a CSV file.  
+✅ **Import media via CSV** – Add new media items or update existing ones using a CSV file.  
+✅ **Rename files** – Rename media files and automatically update linked metadata.  
+✅ **Edit metadata** – Bulk edit titles, alt tags, and descriptions.  
+✅ **WordPress post linking** – Check if an image is linked to a post or ACF field.  
+✅ **AJAX-based media management** – Perform quick updates without reloading the page.  
 
-## 🚀 Installatie
+## 🚀 Installation
 
-### Automatische installatie
-1. Ga naar het WordPress dashboard.
-2. Navigeer naar **Plugins > Nieuwe Plugin**.
-3. Zoek op _Modern Image Manager_ en klik op **Nu Installeren**.
-4. Activeer de plugin.
+### Automatic Installation
+1. Go to your **WordPress dashboard**.
+2. Navigate to **Plugins > Add New**.
+3. Search for _Modern Image Manager_ and click **Install Now**.
+4. Activate the plugin.
 
-### Handmatige installatie
-1. Download de plugin of clone deze repository:
+### Manual Installation
+1. Download the plugin files or clone this repository:
     ```bash
     git clone https://github.com/yourusername/modern-image-manager.git
     ```
-2. Upload de map naar `/wp-content/plugins/`.
-3. Activeer de plugin via het **Plugins** menu in WordPress.
+2. Upload the plugin folder to `/wp-content/plugins/`.
+3. Activate the plugin via the **Plugins** menu in WordPress.
 
-## 🔧 Gebruik
+## 🔧 Usage
 
-### 📤 Media exporteren
-1. Ga naar **Modern Image > Export Media**.
-2. Selecteer welke media je wilt exporteren (alles, gekoppeld of niet-gekoppeld).
-3. Klik op **Exporteren naar CSV** en download het bestand.
+### 📤 Export Media
+1. Go to **Modern Image > Export Media**.
+2. Select which media to export (All, Linked, or Unlinked).
+3. Click **Export to CSV** to download the file.
 
-### 📥 Media importeren
-1. Ga naar **Modern Image > Import Media**.
-2. Upload je CSV-bestand met media-informatie.
-3. Klik op **Importeren** om media te updaten of toe te voegen.
+### 📥 Import Media
+1. Go to **Modern Image > Import Media**.
+2. Upload your CSV file with media data.
+3. Click **Import** to update or add media.
 
-### ✏️ Bestanden hernoemen en metadata bewerken
-- Hernoem bestanden rechtstreeks via de plugin-interface.
-- Update titels, beschrijvingen en alt-tags van meerdere bestanden tegelijk.
+### ✏️ Rename Files & Edit Metadata
+- Rename files directly from the plugin interface.
+- Bulk update titles, descriptions, and alt tags.
 
 ## 📷 Screenshots
 ![Modern Image Manager](https://example.com/screenshot.png)
 
-## 🛠️ Vereisten
-- **WordPress**: 6.0 of hoger
-- **PHP**: 7.4 of hoger
-- **MySQL**: 5.6 of hoger
+## 🛠️ Requirements
+- **WordPress**: 6.0 or higher
+- **PHP**: 7.4 or higher
+- **MySQL**: 5.6 or higher
 
-## 🛡️ Beveiliging
-- Voorkomt directe toegang tot bestanden (`defined('ABSPATH')` check).
-- AJAX-verzoeken worden verwerkt met **nonce-validatie**.
-- WordPress' **sanitize- en escape-functies** worden gebruikt om XSS en SQL-injecties te voorkomen.
+## 🛡️ Security
+- Prevents direct file access (`defined('ABSPATH')` check).
+- AJAX requests are processed with **nonce validation**.
+- Uses WordPress' **sanitize and escape functions** to prevent XSS and SQL injections.
 
-## 🎭 Vertalingen
-Ondersteunt meertalige vertaling via **Loco Translate** en `.pot` bestanden.
+## 🎭 Translations
+Supports multilingual translation via **Loco Translate** and `.pot` files.
 
-## 🤝 Bijdragen
-Wil je bijdragen? Volg deze stappen:
-1. Fork deze repository.
-2. Maak een nieuwe branch (`feature/nieuwe-functionaliteit`).
-3. Commit je wijzigingen en push naar GitHub.
-4. Start een pull request!
+## 🤝 Contributing
+Want to contribute? Follow these steps:
+1. Fork this repository.
+2. Create a new branch (`feature/new-functionality`).
+3. Commit your changes and push to GitHub.
+4. Open a pull request!
 
-## 📜 Licentie
-Dit project valt onder de **GPL-2.0** licentie.
+## 📜 License
+This project is licensed under **GPL-2.0**.
 
 ---
 
-🚀 **Modern Image Manager** – De slimste manier om je WordPress-media te beheren!
+🚀 **Modern Image Manager** – The smartest way to manage your WordPress media!
