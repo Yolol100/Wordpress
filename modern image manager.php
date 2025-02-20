@@ -60,7 +60,7 @@ function mim_init(): void {
 add_action( 'plugins_loaded', 'mim_init' );
 
 /**
- * Laadt CSS- en JavaScript-assets, maar alleen op de admin-pagina's van de plugin.
+ * Laadt alleen style.css in plaats van meerdere CSS-bestanden.
  */
 function mim_enqueue_admin_assets( $hook ) {
     // Verkrijg het huidige scherm
@@ -74,44 +74,12 @@ function mim_enqueue_admin_assets( $hook ) {
     ];
 
     if ( isset( $screen->id ) && in_array( $screen->id, $allowed_screens, true ) ) {
-        // Laad de algemene CSS-bestanden
+        // Laad alleen de algemene stijl voor de plugin (style.css)
         wp_enqueue_style(
-            'modern-image-manager-general-styles',
-            MODERN_IMAGE_MANAGER_URL . 'assets/css/general.css',
-            [],
-            '1.0.0',
-            'all'
-        );
-
-        wp_enqueue_style(
-            'modern-image-manager-table-styles',
-            MODERN_IMAGE_MANAGER_URL . 'assets/css/table.css',
-            [],
-            '1.0.0',
-            'all'
-        );
-
-        wp_enqueue_style(
-            'modern-image-manager-export-styles',
-            MODERN_IMAGE_MANAGER_URL . 'assets/css/export.css',
-            [],
-            '1.0.0',
-            'all'
-        );
-
-        wp_enqueue_style(
-            'modern-image-manager-import-styles',
-            MODERN_IMAGE_MANAGER_URL . 'assets/css/import.css',
-            [],
-            '1.0.0',
-            'all'
-        );
-
-        wp_enqueue_style(
-            'modern-image-manager-media-queries',
-            MODERN_IMAGE_MANAGER_URL . 'assets/css/media-queries.css',
-            [],
-            '1.0.0',
+            'modern-image-manager-styles',
+            MODERN_IMAGE_MANAGER_URL . 'assets/css/style.css',
+            [], 
+            '1.0.0', 
             'all'
         );
 
@@ -134,7 +102,6 @@ add_action( 'admin_enqueue_scripts', 'mim_enqueue_admin_assets' );
 
 /**
  * (Optioneel) Laadt frontend assets als dat nodig is.
- * Pas de voorwaarde aan, bijvoorbeeld voor een specifiek custom post type.
  */
 function mim_enqueue_frontend_assets() {
     // Als je frontend-functionaliteit hebt, laad dan de assets op de juiste voorwaarde.
@@ -160,7 +127,6 @@ add_action( 'wp_enqueue_scripts', 'mim_enqueue_frontend_assets' );
 
 /**
  * Callback voor het renderen van de admin-tabelpagina.
- * Hier wordt de admin-table-logica geladen en daarna het templatebestand.
  */
 function mim_render_admin_table_page(): void {
     // Laad de PHP-logica voor de admin-tabel

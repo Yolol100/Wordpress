@@ -1,0 +1,488 @@
+:root {
+  /* Kleuren */
+  --primary-color: #007cba;
+  --primary-color-dark: #006299;
+  --background-color: #f9fafb;
+  --table-background: #ffffff; /* Gewijzigd naar wit */
+  --border-color: #e1e1e1;
+  --text-color: #333333;
+  --header-text-color: #ffffff;
+  --even-row-bg-color: #f3f4f6;
+  --hover-bg-color: #e9f5ff;
+  --disabled-button-bg-color: #e1e1e1;
+  --button-hover-bg-color: #005a9c;
+
+  /* Typografie */
+  --font-family-main: 'Inter', Arial, sans-serif;
+  --font-family-alt: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-size-base: 1rem; /* 16px */
+  --font-size-small: 0.75rem; /* 12px */
+
+  /* Overige */
+  --border-radius: 0.75rem; /* 12px */
+  --box-shadow-light: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --box-shadow-medium: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --transition-speed: 0.3s;
+  --transition-ease: ease;
+}
+
+/*----------------Export------------------*/
+
+/* Styling voor de exportpagina */
+.export-page-container {
+  padding: 1.875rem; /* 30px */
+  max-width: 50rem; /* 800px */
+  margin: 1.25rem auto; /* 20px auto */
+  background: var(--table-background); /* Aangepast naar wit */
+  border: 1px solid var(--border-color);
+  border-radius: 0.625rem; /* 10px */
+  box-shadow: var(--box-shadow-light);
+  font-family: var(--font-family-alt);
+  color: #333;
+  font-size: var(--font-size-base);
+}
+
+/* Titel van de exportpagina */
+.export-page-title {
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 1.25rem; /* 20px */
+}
+
+/* Beschrijving van de exportpagina */
+.export-page-description {
+  font-size: 1.2rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 1.875rem; /* 30px */
+  line-height: 1.6;
+}
+
+/* Formulier voor exportpagina */
+.export-page-form {
+  text-align: center;
+}
+
+/* Styling voor form-groepen op de exportpagina */
+.export-page-form .form-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Label voor de dropdown voor exportoptie */
+.export-option-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: left;
+  width: 50%;
+}
+
+/* Dropdown voor exportoptie */
+.export-option-dropdown {
+  width: 50%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--table-background);
+  color: var(--text-color);
+  margin: 5px 0;
+}
+
+/* Styling voor form-groep voor kolommen selecteren */
+.columns-select-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Label voor de kolom-select dropdown */
+.columns-select-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: left;
+  width: 50%;
+}
+
+/* Dropdown voor kolomselectie */
+.columns-select-dropdown {
+  width: 50%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--table-background);
+  color: var(--text-color);
+}
+
+/* Exporteer knop */
+.export-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: var(--primary-color); /* Kleur van de knop is nu de primaire kleur */
+  color: var(--header-text-color);
+  border: none;
+  border-radius: 8px;
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition: background-color var(--transition-speed) var(--transition-ease), transform 0.2s var(--transition-ease);
+  box-shadow: var(--box-shadow-medium);
+}
+
+/* Hover voor de export knop */
+.export-button:hover {
+  background-color: var(--button-hover-bg-color); /* Kleur van de knop verandert bij hover */
+  transform: translateY(-0.125rem); /* -2px */
+  transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
+}
+
+/* Specifieke styling voor multi-select dropdown */
+#exportColumns {
+  height: 200px; /* Verhoogt de hoogte van de multi-select dropdown */
+  resize: vertical;
+}
+
+/* Zorg ervoor dat de dropdowns de juiste padding hebben */
+.custom-dropdown {
+  width: 100% !important;
+  padding: 4px 12px 4px 12px !important;
+  font-size: 16px !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  background: var(--table-background) !important;
+  color: var(--text-color) !important;
+  cursor: pointer !important;
+  transition: all var(--transition-speed) var(--transition-ease) !important;
+  appearance: none !important; /* Verbergt standaard dropdown-pijl in sommige browsers */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='%23007cba' d='M7 10l5 5 5-5z'/></svg>") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 16px !important;
+  vertical-align: unset !important;
+}
+
+/* Hover en focus voor custom dropdown */
+.custom-dropdown:hover {
+  border-color: var(--primary-color-dark) !important;
+}
+
+.custom-dropdown:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: var(--box-shadow-light) !important;
+  outline: none !important;
+}
+
+/*----------------Tabel------------------*/
+
+.filter-top-container,
+.filter-bottom-container {
+  margin: 1rem 1rem 1rem 0rem;
+  padding: 1rem;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-light);
+  font-family: var(--font-family-main);
+  font-size: var(--font-size-base);
+}
+
+.filter-top-header,
+.filter-bottom-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter-top-nav-controls,
+.filter-bottom-nav-controls {
+  display: flex;
+  gap: 0.625rem; /* 10px */
+  align-items: center;
+}
+
+.filter-top-page-filter,
+.filter-bottom-page-filter {
+  padding: 0 0.75rem;
+  font-size: var(--font-size-base);
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.filter-top-apply-button,
+.filter-bottom-apply-button,
+.filter-top-prev-button,
+.filter-bottom-prev-button,
+.filter-top-next-button,
+.filter-bottom-next-button {
+  padding: 0.625rem 1.25rem;
+  font-size: var(--font-size-base);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 0.375rem;
+  color: var(--header-text-color);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-speed), transform 0.2s var(--transition-ease);
+  box-shadow: var(--box-shadow-medium);
+}
+
+/* Hover effect for buttons */
+button:hover {
+  background-color: var(--button-hover-bg-color) !important;
+  transform: translateY(-0.125rem);
+  transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
+}
+
+.filter-top-search-container,
+.filter-bottom-search-container {
+  text-align: right;
+}
+
+.filter-top-search-box,
+.filter-bottom-search-box {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background: var(--table-background);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.media-items-table {
+  table-layout: unset !important;
+  width: 99%;
+  border-collapse: collapse;
+  background: var(--table-background);
+  box-shadow: var(--box-shadow-medium);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  font-size: var(--font-size-base);
+}
+
+.media-items-thead th,
+.media-items-tr-head th {
+  padding: 0.75rem 0.9375rem;
+  background-color: var(--primary-color);
+  color: var(--header-text-color) !important;
+  text-align: left;
+  font-size: var(--font-size-small);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--primary-color-dark);
+}
+
+.media-items-tbody tr:nth-child(even) {
+  background-color: var(--even-row-bg-color);
+}
+
+.media-items-tbody tr:hover {
+  background-color: var(--hover-bg-color);
+  transition: background-color var(--transition-speed) var(--transition-ease);
+}
+
+.media-items-tbody td {
+  padding: 0.75rem 0.9375rem;
+  font-size: var(--font-size-base);
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+
+.media-items-filename-input,
+.media-items-new-filename-input,
+.media-items-title-input,
+.media-items-caption-input,
+.media-items-description-input,
+.media-items-alt-input {
+  width: 100%;
+  padding: 0.625rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: var(--font-size-base);
+  background-color: var(--background-color);
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.media-items-filename-input:focus,
+.media-items-new-filename-input:focus,
+.media-items-title-input:focus,
+.media-items-caption-input:focus,
+.media-items-description-input:focus,
+.media-items-alt-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0.3125rem rgba(0, 124, 186, 0.3); /* 5px */
+  outline: none;
+}
+
+.media-items-save-meta,
+.media-items-delete-media {
+  padding: 0.625rem 1.25rem;
+  font-size: var(--font-size-base);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 0.375rem;
+  color: var(--header-text-color);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-speed), transform 0.2s var(--transition-ease);
+  box-shadow: var(--box-shadow-medium);
+}
+
+.media-items-save-meta:hover,
+.media-items-delete-media:hover {
+  background-color: var(--button-hover-bg-color) !important;
+  transform: translateY(-0.125rem);
+  transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
+}
+
+#exportColumns {
+  height: 150px;
+  resize: vertical;
+}
+
+.pagination-navigation {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.pagination-navigation button {
+  padding: 0.625rem 1.25rem;
+  font-size: var(--font-size-base);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 0.375rem;
+  color: var(--header-text-color);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-speed), transform 0.2s var(--transition-ease);
+  box-shadow: var(--box-shadow-medium);
+}
+
+.pagination-navigation button:hover {
+  background-color: var(--button-hover-bg-color);
+  transform: translateY(-0.125rem);
+  transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
+}
+
+.search-box:focus {
+  border-color: var(--primary-color);
+  box-shadow: var(--box-shadow-light);
+  outline: none;
+}
+
+.filter-top-pagination,
+.filter-bottom-pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.filter-top-pagination button,
+.filter-bottom-pagination button {
+  padding: 0.625rem 1.25rem;
+  font-size: var(--font-size-base);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 0.375rem;
+  color: var(--header-text-color);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-speed), transform 0.2s var(--transition-ease);
+  box-shadow: var(--box-shadow-medium);
+}
+
+.filter-top-pagination button:hover,
+.filter-bottom-pagination button:hover {
+  background-color: var(--button-hover-bg-color);
+  transform: translateY(-0.125rem);
+  transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
+}
+
+/*----------------Import------------------*/
+
+/* Styling voor de import pagina container */
+.import-page-container {
+  padding: 1.875rem; /* 30px */
+  max-width: 50rem; /* 800px */
+  margin: 1.25rem auto; /* 20px auto */
+  background: var(--table-background);
+  border: 1px solid var(--border-color);
+  border-radius: 0.625rem; /* 10px */
+  box-shadow: var(--box-shadow-light);
+  font-family: var(--font-family-alt);
+  color: #333;
+  font-size: var(--font-size-base);
+}
+
+/* Styling voor de titel op de importpagina */
+.import-page-title {
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 1.25rem; /* 20px */
+}
+
+/* Styling voor de beschrijving van de importpagina */
+.import-page-description {
+  font-size: 1.2rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 1.875rem; /* 30px */
+  line-height: 1.6;
+}
+
+/* Styling voor het formulier op de importpagina */
+.import-page-form {
+  text-align: center;
+}
+
+/* Styling voor het bestand invoerveld */
+.import-file-input {
+  display: block;
+  margin: 0 auto 1.25rem; /* 0 auto 20px */
+  padding: 0.625rem; /* 10px */
+  border: 1px solid #ccc;
+  border-radius: 0.375rem; /* 6px */
+  font-size: var(--font-size-base);
+  transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.import-file-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0.3125rem rgba(0, 124, 186, 0.5); /* 5px */
+  outline: none;
+}
+
+/* Styling voor de importeer knop */
+.import-button {
+  padding: 0.625rem 1.25rem; /* 10px 20px */
+  font-size: var(--font-size-base);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 0.375rem; /* 6px */
+  color: var(--header-text-color);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-speed), transform 0.2s var(--transition-ease);
+  box-shadow: var(--box-shadow-medium);
+}
+
+/* Hover effect voor de importeer knop */
+.import-button:hover {
+  background-color: var(--button-hover-bg-color);
+  transform: translateY(-0.125rem); /* -2px */
+  transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
+}
