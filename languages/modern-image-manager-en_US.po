@@ -1,0 +1,178 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-20 14:48+0000\n"
+"PO-Revision-Date: 2025-02-20 14:48+0000\n"
+"Last-Translator: \n"
+"Language-Team: English (United States)\n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/"
+
+msgid "Actie succesvol uitgevoerd."
+msgstr "Action successfully completed."
+
+msgid "Alt-tag"
+msgstr "Alt text"
+
+#. Description of the plugin
+msgid "Beheer en bewerk media-informatie direct vanuit WordPress."
+msgstr "Manage and edit media information directly from WordPress."
+
+msgid "Beschrijving"
+msgstr "Description"
+
+msgid "Bestand niet gevonden voor bijlage ID."
+msgstr "File not found for attachment ID."
+
+msgid "Bestandsnaam"
+msgstr "Filename"
+
+msgid "Bijlage niet gevonden of nog niet volledig opgeslagen (raceconditie)"
+msgstr "Attachment not found or not fully saved (race condition)"
+
+msgid "Caption"
+msgstr "Caption"
+
+msgid "De nieuwe bestandsnaam bestaat al."
+msgstr "The new filename already exists."
+
+msgid "Duplicaten gevonden"
+msgstr "Duplicates found"
+
+msgid "Er is een fout opgetreden bij het verzenden van het verzoek."
+msgstr "An error occurred while sending the request."
+
+msgid "Exporteer Media"
+msgstr "Export Media"
+
+msgid "Exporteer naar CSV"
+msgstr "Export to CSV"
+
+msgid "Exporteren"
+msgstr "Export"
+
+msgid "Filter toepassen"
+msgstr "Apply filter"
+
+msgid "Filteren"
+msgstr "Filter"
+
+msgid "Fout bij het bijwerken van de bestandsnaam."
+msgstr "Error updating filename."
+
+msgid "Fout bij het bijwerken van de media gegevens."
+msgstr "Error updating media data."
+
+msgid "Fout bij het bijwerken van de metadata."
+msgstr "Error updating metadata."
+
+msgid "Fout bij het hernoemen van het bestand."
+msgstr "Error renaming the file."
+
+msgid "Fout bij het verwijderen van de media."
+msgstr "Error deleting media."
+
+msgid "Fout bij het verwijderen van media."
+msgstr "Error deleting media."
+
+msgid "Geen afbeeldingen gevonden voor de geselecteerde filteroptie."
+msgstr "No images found for the selected filter option."
+
+msgid "Geen afbeeldingen gevonden."
+msgstr "No images found."
+
+msgid "Geen bestand geüpload."
+msgstr "No file uploaded."
+
+msgid "Geen duplicaten gevonden"
+msgstr "No duplicates found"
+
+msgid "Geen toestemming."
+msgstr "No permission."
+
+#. Author URI of the plugin
+msgid "https://example.com"
+msgstr "https://example.com"
+
+#. URI of the plugin
+msgid "https://example.com/plugins/modern-image-manager/"
+msgstr "https://example.com/plugins/modern-image-manager/"
+
+msgid "Import voltooid en alle waarden overschreven!"
+msgstr "Import completed and all values overwritten!"
+
+msgid "Importeer Media"
+msgstr "Import Media"
+
+msgid "Importeren"
+msgstr "Import"
+
+msgid "Kon output stream niet openen."
+msgstr "Could not open output stream."
+
+msgid "Media-instellingen"
+msgstr "Media settings"
+
+msgid "Metadata niet correct gegenereerd voor attachment ID"
+msgstr "Metadata not correctly generated for attachment ID"
+
+msgid "Modern Image"
+msgstr "Modern Image"
+
+msgid "Modern Image Manager"
+msgstr "Modern Image Manager"
+
+msgid "Naam"
+msgstr "Name"
+
+#. Feature strings
+msgid "Niet gekoppeld"
+msgstr "Not linked"
+
+msgid "Nieuwe bestandsnaam"
+msgstr "New filename"
+
+msgid "Ongeldig CSV-bestand."
+msgstr "Invalid CSV file."
+
+msgid "Ongeldige CSV headers."
+msgstr "Invalid CSV headers."
+
+msgid "Opslaan"
+msgstr "Save"
+
+msgid "Pagina"
+msgstr "Page"
+
+msgid "Pagina-instellingen"
+msgstr "Page settings"
+
+msgid "Rijen per pagina"
+msgstr "Rows per page"
+
+msgid "Scan starten"
+msgstr "Start scan"
+
+msgid "Titel"
+msgstr "Title"
+
+msgid "Update voltooid"
+msgstr "Update completed"
+
+msgid "Verwijderen"
+msgstr "Delete"
+
+msgid "Volgende"
+msgstr "Next"
+
+msgid "Vorige"
+msgstr "Previous"
+
+#. Author of the plugin
+msgid "Webactueel"
+msgstr "Webactueel"
