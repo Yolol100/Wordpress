@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Voorkomt directe toegang.
+}
+
 class Modern_Image_Manager {
     /**
      * Initialiseert de Modern Image Manager.
@@ -9,50 +13,57 @@ class Modern_Image_Manager {
     }
 
     /**
-     * Voegt het hoofdmenu en de submenus toe in het WordPress admin dashboard.
+     * Voegt het hoofdmenu en de submenu's toe in het WordPress admin dashboard.
      */
     public static function add_admin_menu(): void {
         // Voeg het top-level menu toe.
         add_menu_page(
-            __( 'Modern Image Manager', 'modern-image-manager' ),    // Paginatitel
-            __( 'Modern Image', 'modern-image-manager' ),            // Menutitel
-            'manage_options',                                         // Bevoegdheden
-            'modern-image-manager',                                   // Menu slug
-            'mim_render_admin_table_page',                            // Callback (extern gedefinieerd in de hoofdplugin)
-            'dashicons-media-document',                               // Icon
-            20                                                        // Positie
+            __( 'Modern Image Manager', 'modern-image-manager' ),
+            __( 'Modern Image', 'modern-image-manager' ),
+            'manage_options',
+            'modern-image-manager',
+            'mim_render_admin_table_page',
+            'dashicons-media-document',
+            20
         );
 
         // Verwijder het automatisch gegenereerde duplicaatsubmenu-item.
         remove_submenu_page( 'modern-image-manager', 'modern-image-manager' );
 
-        // Voeg submenus toe.
-        add_submenu_page(
-            'modern-image-manager',                                  // Hoofdmenu slug
-            __( 'Exporteer Media', 'modern-image-manager' ),         // Paginatitel
-            __( 'Exporteren', 'modern-image-manager' ),              // Submenu naam
-            'manage_options',                                        // Bevoegdheden
-            'export-media',                                          // Submenu slug
-            [ 'Modern_Image_Manager_Export', 'render_export_page' ]   // Callback
+        // Voeg submenu's toe.
+        self::add_submenu_item(
+            __( 'Exporteer Media', 'modern-image-manager' ),
+            __( 'Exporteren', 'modern-image-manager' ),
+            'export-media',
+            [ 'Modern_Image_Manager_Export', 'render_export_page' ]
         );
 
-        add_submenu_page(
-            'modern-image-manager',                                  // Hoofdmenu slug
-            __( 'Importeer Media', 'modern-image-manager' ),         // Paginatitel
-            __( 'Importeren', 'modern-image-manager' ),              // Submenu naam
-            'manage_options',                                        // Bevoegdheden
-            'import-media',                                          // Submenu slug
-            [ 'Modern_Image_Manager_Import', 'render_import_page' ]   // Callback
+        self::add_submenu_item(
+            __( 'Importeer Media', 'modern-image-manager' ),
+            __( 'Importeren', 'modern-image-manager' ),
+            'import-media',
+            [ 'Modern_Image_Manager_Import', 'render_import_page' ]
         );
 
-        // Voeg het "Scan Duplicate Images" submenu-item toe.
+        self::add_submenu_item(
+            __( 'Scan Duplicate Images', 'modern-image-manager' ),
+            __( 'Scan Duplicate Images', 'modern-image-manager' ),
+            'scan-duplicate-images',
+            'scan_duplicate_images_page' // Gebruik nu direct de functie zonder extra class
+        );
+    }
+
+    /**
+     * Voegt een submenu-item toe aan het hoofdmenu.
+     */
+    private static function add_submenu_item( string $page_title, string $menu_title, string $slug, callable|string $callback ): void {
         add_submenu_page(
-            'modern-image-manager',                                  // Hoofdmenu slug
-            __( 'Scan Duplicate Images', 'modern-image-manager' ),   // Paginatitel
-            __( 'Scan Duplicate Images', 'modern-image-manager' ),   // Menu titel
-            'manage_options',                                        // Bevoegdheden
-            'scan-duplicate-images',                                 // Menu slug
-            [ 'Modern_Image_Manager_Scan', 'render_scan_page' ]        // Callback
+            'modern-image-manager',
+            $page_title,
+            $menu_title,
+            'manage_options',
+            $slug,
+            $callback
         );
     }
 
@@ -71,8 +82,10 @@ class Modern_Image_Manager {
         ], true ) ) {
             return;
         }
-        
+
         // Assets worden globaal ingeladen via een globale asset-functie.
-        // Voeg hier indien nodig extra admin-specifieke assets toe.
     }
 }
+
+// Initialiseer de plugin
+Modern_Image_Manager::init();

@@ -42,47 +42,137 @@
     cursor: pointer;
     transition: background-color var(--transition-speed), transform 0.2s var(--transition-ease);
     box-shadow: var(--box-shadow-medium);
+    /* Toegevoegd om de knop te centreren */
+    display: block;
+    margin: 0 auto;
 }
 
 /* Hover-effect voor de scanbutton */
 .mim-scan-page-button:hover {
-  background-color: var(--button-hover-bg-color);
-  transform: translateY(-0.125rem); /* -2px */
-  transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
+    background-color: var(--button-hover-bg-color);
+    transform: translateY(-0.125rem); /* -2px */
+    transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
 }
 
 /* Styling voor de lijst met items */
 .mim-scan-page ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin: 1rem 0;
+    list-style-type: none;
+    padding-left: 0;
+    margin: 1rem 0;
 }
 
 /* Styling voor elk lijstitem */
 .mim-scan-page ul li {
-  margin-bottom: 1rem;
-  padding: 0.75rem;
-  background-color: var(--table-background); /* Witte achtergrond voor items */
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius); /* Rand met afgeronde hoeken */
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background-color: var(--table-background); /* Witte achtergrond voor items */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius); /* Rand met afgeronde hoeken */
 }
 
 /* Styling voor de sterkere tekst in lijstitems */
 .mim-scan-page ul li strong {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-  color: var(--font-color);
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: var(--font-color);
 }
 
 /* Sub-lijsten in de scanresultaten */
 .mim-scan-page ul li ul {
-  list-style-type: disc;
-  padding-left: 1.5rem;
+    list-style-type: disc;
+    padding-left: 1.5rem;
 }
 
 /* Styling voor de items in de sublijst */
 .mim-scan-page ul li ul li {
-  margin-bottom: 0.5rem;
-  font-size: var(--font-size-base);
+    margin-bottom: 0.5rem;
+    font-size: var(--font-size-base);
+}
+
+/* ======================================= */
+/* ✅ Nieuw: Styling voor de duplicaten-tabel */
+/* ======================================= */
+
+/* Algemene tabel styling */
+.dius-results-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--table-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-light);
+    overflow: hidden;
+    font-size: var(--font-size-base);
+    margin: 0 auto; /* Zorgt ervoor dat de tabel gecentreerd is en dezelfde breedte heeft */
+}
+
+/* Tabel kop (thead) met witte tekst */
+.dius-results-table thead {
+    background-color: var(--primary-color);
+    color: #fff; /* Tekstkleur wit */
+    text-align: left;
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Tabel kop rijen met witte tekst */
+.dius-results-table thead th {
+    padding: 12px 15px;
+    border-bottom: 2px solid var(--primary-color-dark);
+    color: #fff !important;
+    text-align: left;
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Tabel body */
+.dius-results-table tbody tr {
+    transition: background-color var(--transition-speed) var(--transition-ease);
+}
+
+/* Afwisselende rij kleuren */
+.dius-results-table tbody tr:nth-child(even) {
+    background-color: var(--even-row-bg-color);
+}
+
+/* Hover effect */
+.dius-results-table tbody tr:hover {
+    background-color: var(--hover-bg-color);
+}
+
+/* Cellen in de tabel */
+.dius-results-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+    color: var(--text-color);
+}
+
+/* Klikbare links in de tabel */
+.dius-results-table td a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition-speed) ease-in-out;
+}
+
+.dius-results-table td a:hover {
+    color: var(--primary-color-dark);
+    text-decoration: underline;
+}
+
+/* Afbeelding kolom */
+.dius-results-table td img {
+    max-width: 60px;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow-medium);
+    transition: transform 0.2s ease-in-out;
+}
+
+.dius-results-table td img:hover {
+    transform: scale(1.1);
 }
