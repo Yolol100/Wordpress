@@ -1,8 +1,10 @@
 <?php
 /**
- * Unified Admin Page en Scanner voor Duplicate Images.
- * Dit bestand combineert de functionaliteit van de admin-page (voor het tonen van de resultaten)
- * en de scan-logica (voor het ophalen en verwerken van afbeeldingen).
+ * includes/scan-images/scanner.php
+ * Unified Admin Page en Scanner voor Duplicate Images,
+ * uitgebreid met support voor Elementor-templates
+ * én verificatie op echte WP-attachments (via attachment IDs),
+ * plus checkboxes voor bulk-delete in de resultaten.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,10 +16,12 @@ if ( ! current_user_can( 'manage_options' ) ) {
 }
 
 /**
- * Zorgt ervoor dat de CSS correct wordt ingeladen op de scanpagina.
+ * Laad de CSS voor de scanpagina.
  */
 function mim_enqueue_admin_assets_for_scan_page( $hook ) {
-    if ( $hook !== 'toplevel_page_modern-image-manager' && $hook !== 'modern-image-manager_page_scan-duplicate-images' ) {
+    if ( $hook !== 'toplevel_page_modern-image-manager'
+      && $hook !== 'modern-image-manager_page_scan-duplicate-images'
+    ) {
         return;
     }
 
@@ -32,181 +36,360 @@ function mim_enqueue_admin_assets_for_scan_page( $hook ) {
 add_action( 'admin_enqueue_scripts', 'mim_enqueue_admin_assets_for_scan_page' );
 
 /**
- * Haalt afbeeldingen uit de content van berichten en pagina’s.
+ * Verwijdert image size suffix (-300x200) uit een URL.
  */
-function get_images_from_posts_pages() {
-    global $wpdb;
+function mim_strip_image_size_suffix( string $url ): string {
+    return preg_replace( '/-\d+x\d+(?=\.\w{3,4}$)/', '', $url );
+}
 
-    $query = "
-        SELECT ID, post_content 
-        FROM {$wpdb->posts} 
-        WHERE post_type IN ('post', 'page') 
-        AND post_status = 'publish'
-    ";
+/**
+ * Recursief zoeken in Elementor-widget-data en omzet naar attachment ID.
+ * Controleert op image.id, achtergrond-id en fallback via URL (met suffix stripping).
+ */
+function mim_extract_images_from_elementor_data( $elements, & $result, $context ) {
+    foreach ( (array) $elements as $el ) {
+        $aid = 0;
+        // widget image ID
+        if ( ! empty( $el['settings']['image']['id'] ) ) {
+            $aid = absint( $el['settings']['image']['id'] );
+        }
+        // widget image URL fallback
+        if ( ! $aid && ! empty( $el['settings']['image']['url'] ) ) {
+            $url = mim_strip_image_size_suffix( $el['settings']['image']['url'] );
+            $aid = attachment_url_to_postid( $url );
+        }
+        // background image ID
+        if ( ! $aid && ! empty( $el['settings']['background_image']['id'] ) ) {
+            $aid = absint( $el['settings']['background_image']['id'] );
+        }
+        // background image URL fallback
+        if ( ! $aid && ! empty( $el['settings']['background_image']['url'] ) ) {
+            $url = mim_strip_image_size_suffix( $el['settings']['background_image']['url'] );
+            $aid = attachment_url_to_postid( $url );
+        }
 
-    $results = $wpdb->get_results( $query );
-    $images = [];
+        if ( $aid ) {
+            $result[ $aid ][] = [
+                'type'    => 'elementor_template',
+                'context' => $context,
+            ];
+        }
 
-    foreach ( $results as $post ) {
-        if ( preg_match_all( '/<img[^>]+src=["\']([^"\']+)["\']/i', $post->post_content, $matches ) ) {
-            foreach ( $matches[1] as $image ) {
-                $images[ $image ][] = [
-                    'type'    => 'post_content',
-                    'post_id' => $post->ID,
-                ];
+        if ( ! empty( $el['elements'] ) ) {
+            mim_extract_images_from_elementor_data( $el['elements'], $result, $context );
+        }
+    }
+}
+
+/**
+ * Haal alle attachment-IDs uit opgeslagen Elementor-templates.
+ */
+function mim_get_elementor_template_images() {
+    if ( ! class_exists( '\Elementor\Plugin' ) ) {
+        return [];
+    }
+    $templates = get_posts( [
+        'post_type'      => \Elementor\Plugin::instance()->post_type,
+        'posts_per_page' => -1,
+        'post_status'    => 'publish',
+    ] );
+    $result = [];
+    foreach ( $templates as $tpl ) {
+        $data     = get_post_meta( $tpl->ID, '_elementor_data', true );
+        $elements = json_decode( $data, true );
+        $context  = sprintf( 'Template: %s (ID %d)', $tpl->post_title, $tpl->ID );
+        mim_extract_images_from_elementor_data( $elements, $result, $context );
+    }
+    return $result;
+}
+
+/**
+ * Lees Elementor display conditions om templates te mappen naar pagina-ID's.
+ */
+function mim_map_elementor_templates_to_pages() {
+    if ( ! class_exists( '\Elementor\Plugin' ) ) {
+        return [];
+    }
+    $map       = [];
+    $templates = get_posts( [
+        'post_type'      => \Elementor\Plugin::instance()->post_type,
+        'posts_per_page' => -1,
+        'post_status'    => 'publish',
+    ] );
+    foreach ( $templates as $tpl ) {
+        $conds = get_post_meta( $tpl->ID, '_elementor_conditions', true );
+        if ( is_array( $conds ) ) {
+            foreach ( $conds as $groups ) {
+                foreach ( (array) $groups as $group ) {
+                    foreach ( (array) $group as $cond ) {
+                        if ( in_array( $cond['param'], [ 'post', 'page' ], true ) ) {
+                            foreach ( (array) $cond['value'] as $pid ) {
+                                $map[ $tpl->ID ][] = (int) $pid;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
+    return $map;
+}
 
+/**
+ * Haal attachment-IDs uit inline <img> tags, srcset, gallery-shortcodes en Elementor-shortcodes.
+ * Negeert afbeeldingen die niet in de mediabibliotheek staan.
+ */
+function get_images_from_posts_pages() {
+    global $wpdb;
+    $posts   = $wpdb->get_results( "
+        SELECT ID, post_content
+        FROM {$wpdb->posts}
+        WHERE post_type IN ('post','page')
+          AND post_status = 'publish'
+    " );
+    $images = [];
+    foreach ( $posts as $post ) {
+        $content = $post->post_content;
+
+        // inline <img>
+        if ( preg_match_all( '/<img[^>]+src=[\'"]([^\'"]+)[\'"]/i', $content, $m ) ) {
+            foreach ( $m[1] as $url ) {
+                $url = mim_strip_image_size_suffix( $url );
+                if ( $aid = attachment_url_to_postid( $url ) ) {
+                    $images[ $aid ][] = [
+                        'type'    => 'post_content',
+                        'post_id' => $post->ID,
+                    ];
+                }
+            }
+        }
+
+        // srcset
+        if ( preg_match_all( '/srcset=[\'"]([^\'"]+)[\'"]/i', $content, $s ) ) {
+            foreach ( $s[1] as $srcset ) {
+                foreach ( explode( ',', $srcset ) as $pair ) {
+                    list( $url ) = preg_split( '/\s+/', trim( $pair ) );
+                    $url = mim_strip_image_size_suffix( $url );
+                    if ( $aid = attachment_url_to_postid( $url ) ) {
+                        $images[ $aid ][] = [
+                            'type'    => 'post_srcset',
+                            'post_id' => $post->ID,
+                        ];
+                    }
+                }
+            }
+        }
+
+        // [gallery ids="..."]
+        if ( preg_match_all( '/\[gallery\s+ids=[\'"]([^\'"]+)[\'"]/', $content, $g ) ) {
+            foreach ( explode( ',', $g[1][0] ) as $aid ) {
+                $aid = absint( $aid );
+                if ( $aid && get_post_mime_type( $aid ) ) {
+                    $images[ $aid ][] = [
+                        'type'    => 'gallery_shortcode',
+                        'post_id' => $post->ID,
+                    ];
+                }
+            }
+        }
+
+        // [elementor-template]
+        if ( preg_match_all( '/\[elementor-template\s+id=[\'"](\d+)[\'"]/', $content, $s ) ) {
+            foreach ( $s[1] as $tpl_id ) {
+                $data     = get_post_meta( $tpl_id, '_elementor_data', true );
+                $elements = json_decode( $data, true );
+                $context  = sprintf( 'Template via shortcode op Pagina %d', $post->ID );
+                mim_extract_images_from_elementor_data( $elements, $images, $context );
+            }
+        }
+    }
     return $images;
 }
 
 /**
- * Haalt uitgelichte afbeeldingen op.
+ * Haal attachment-IDs uit uitgelichte afbeeldingen.
  */
 function get_featured_images() {
     global $wpdb;
-
-    $query = "
-        SELECT post_id, meta_value 
-        FROM {$wpdb->postmeta} 
+    $rows   = $wpdb->get_results( "
+        SELECT post_id, meta_value
+        FROM {$wpdb->postmeta}
         WHERE meta_key = '_thumbnail_id'
-    ";
-
-    $results = $wpdb->get_results( $query );
+    " );
     $images = [];
-
-    foreach ( $results as $row ) {
-        $image_url = wp_get_attachment_url( $row->meta_value );
-        if ( $image_url ) {
-            $images[ $image_url ][] = [
+    foreach ( $rows as $row ) {
+        $aid = (int) $row->meta_value;
+        if ( get_post_mime_type( $aid ) ) {
+            $images[ $aid ][] = [
                 'type'    => 'featured_image',
                 'post_id' => $row->post_id,
             ];
         }
     }
-
     return $images;
 }
 
 /**
- * Haalt afbeeldingen uit ACF-velden op.
- * Deze functie sluit meta_key _thumbnail_id uit, zodat deze niet dubbel komt (als uitgelichte afbeelding).
+ * Haal attachment-IDs uit ACF-image velden.
  */
 function get_acf_images() {
     global $wpdb;
-
-    $query = "
-        SELECT post_id, meta_key, meta_value 
-        FROM {$wpdb->postmeta} 
-        WHERE meta_value REGEXP '^[0-9]+$'
+    $rows   = $wpdb->get_results( "
+        SELECT post_id, meta_key, meta_value
+        FROM {$wpdb->postmeta}
+        WHERE meta_value REGEXP '^[0-9]+|^a:' 
           AND meta_key NOT IN ('_thumbnail_id')
-    ";
-
-    $results = $wpdb->get_results( $query );
+    " );
     $images = [];
-
-    foreach ( $results as $row ) {
-        $image_url = wp_get_attachment_url( $row->meta_value );
-        if ( $image_url ) {
-            $images[ $image_url ][] = [
-                'type'      => 'acf_field',
-                'post_id'   => $row->post_id,
-                'acf_field' => $row->meta_key,
-            ];
+    foreach ( $rows as $row ) {
+        $value = maybe_unserialize( $row->meta_value );
+        $ids   = is_array( $value ) ? $value : [ (int) $value ];
+        foreach ( $ids as $aid ) {
+            $aid = absint( $aid );
+            if ( $aid && get_post_mime_type( $aid ) ) {
+                $images[ $aid ][] = [
+                    'type'      => 'acf_field',
+                    'post_id'   => $row->post_id,
+                    'acf_field' => $row->meta_key,
+                ];
+            }
         }
     }
-
     return $images;
 }
 
 /**
- * Voegt alle afbeeldingen samen en zoekt duplicaten.
+ * Scan en vind duplicaten op basis van attachment gebruik.
  */
 function scan_duplicate_images() {
-    $post_images     = get_images_from_posts_pages();
-    $featured_images = get_featured_images();
-    $acf_images      = get_acf_images();
-    
-    $all_images = array_merge_recursive( $post_images, $featured_images, $acf_images );
-    
-    $duplicates = [];
-    foreach ( $all_images as $image_url => $usage ) {
-        if ( count( $usage ) > 1 ) {
-            $duplicates[ $image_url ] = $usage;
+    $all = array_merge_recursive(
+        get_images_from_posts_pages(),
+        get_featured_images(),
+        get_acf_images(),
+        mim_get_elementor_template_images()
+    );
+
+    // voeg template pages toe...
+    $tpl_map = mim_map_elementor_templates_to_pages();
+    foreach ( mim_get_elementor_template_images() as $aid => $usages ) {
+        foreach ( $usages as $u ) {
+            if ( preg_match( '/ID (\d+)$/', $u['context'], $m ) ) {
+                $tpl_id = (int) $m[1];
+                if ( ! empty( $tpl_map[ $tpl_id ] ) ) {
+                    foreach ( $tpl_map[ $tpl_id ] as $pid ) {
+                        $all[ $aid ][] = [
+                            'type'    => 'elementor_template_page',
+                            'post_id' => $pid,
+                            'context' => sprintf( 'Toont via Template %d op Pagina %d', $tpl_id, $pid ),
+                        ];
+                    }
+                }
+            }
         }
     }
-    
+
+    $duplicates = [];
+    foreach ( $all as $aid => $usages ) {
+        if ( count( $usages ) > 1 ) {
+            $duplicates[ $aid ] = $usages;
+        }
+    }
     return $duplicates;
 }
 
 /**
- * Alias voor compatibiliteit met eerdere aanroepen.
+ * Alias.
  */
 function dius_scan_pages_for_duplicate_images() {
     return scan_duplicate_images();
 }
 
 /**
- * Toont de scanresultaten in een nette tabel, met een gecombineerde weergave van de herkomst.
+ * Render de resultaten met één bulk-delete knop (met margin-bottom).
  */
 function dius_display_results( $results ) {
     if ( empty( $results ) ) {
-        echo '<p class="mim-scan-page-description">' . esc_html__( 'Geen dubbele afbeeldingen gevonden.', 'modern-image-manager' ) . '</p>';
+        echo '<p class="mim-scan-page-description">'
+           . esc_html__( 'Geen dubbele afbeeldingen gevonden.', 'modern-image-manager' )
+           . '</p>';
         return;
     }
 
-    echo '<h2 class="mim-scan-page-title">' . esc_html__( 'Scan resultaten', 'modern-image-manager' ) . '</h2>';
-    echo '<p class="mim-scan-page-description"><strong>' . esc_html__( 'Totaal aantal dubbele afbeeldingen gevonden:', 'modern-image-manager' ) . '</strong> ' . esc_html( count( $results ) ) . '</p>';
+    echo '<h2 class="mim-scan-page-title">'
+       . esc_html__( 'Scan resultaten', 'modern-image-manager' )
+       . '</h2>';
+    echo '<p class="mim-scan-page-description"><strong>'
+       . esc_html__( 'Totaal aantal dubbele afbeeldingen gevonden:', 'modern-image-manager' )
+       . '</strong> ' . esc_html( count( $results ) ) . '</p>';
+
+    // Enkel deze knop, met inline margin-bottom
+    echo '<form method="POST" id="dius-bulk-delete-form">';
+    wp_nonce_field( 'modern_image_manager_bulk_delete', 'modern_image_manager_bulk_delete_nonce' );
+    echo '<button type="submit" name="bulk_delete" '
+       . 'class="page-button filter-top-apply-button" '
+       . 'id="dius-delete-selected" disabled '
+       . 'style="margin-bottom:1rem;">'
+       . esc_html__( 'Verwijder geselecteerde', 'modern-image-manager' )
+       . '</button>';
+    echo '</form>';
 
     echo '<table class="wp-list-table widefat fixed striped dius-results-table">';
-    echo '<thead>
-            <tr>
-                <th style="width:30%;">' . esc_html__( 'Post(s)', 'modern-image-manager' ) . '</th>
-                <th style="width:40%;">' . esc_html__( 'Afbeelding', 'modern-image-manager' ) . '</th>
-                <th style="width:30%;">' . esc_html__( 'Bron', 'modern-image-manager' ) . '</th>
-            </tr>
-          </thead>';
-    echo '<tbody>';
+    echo '<thead><tr>';
+    echo '<th style="width:2%;"><input type="checkbox" id="select_all"></th>';
+    echo '<th>' . esc_html__( 'Attachment', 'modern-image-manager' ) . '</th>';
+    echo '<th>' . esc_html__( 'Post(s) / Pagina(s)', 'modern-image-manager' ) . '</th>';
+    echo '<th>' . esc_html__( 'Bron', 'modern-image-manager' ) . '</th>';
+    echo '</tr></thead><tbody>';
 
-    foreach ( $results as $image_url => $usages ) {
-        // Verzamel alle posts waarin de afbeelding voorkomt, gesorteerd op post_id (om duplicaten te voorkomen).
-        $post_links = [];
-        foreach ( $usages as $usage ) {
-            if ( isset( $usage['post_id'] ) ) {
-                $post_id = $usage['post_id'];
-                $post_title = get_the_title( $post_id ) ? get_the_title( $post_id ) : esc_html__( 'Onbekend', 'modern-image-manager' );
-                $post_link  = get_edit_post_link( $post_id ) ? get_edit_post_link( $post_id ) : '#';
-                $post_links[ $post_id ] = '<a href="' . esc_url( $post_link ) . '" target="_blank">' . esc_html( $post_title ) . '</a>';
+    foreach ( $results as $aid => $usages ) {
+        $url      = wp_get_attachment_url( $aid );
+        $thumb    = wp_get_attachment_image( $aid, [80,80] );
+        $posts    = [];
+        $contexts = [];
+
+        foreach ( $usages as $u ) {
+            if ( ! empty( $u['post_id'] ) ) {
+                $pid   = $u['post_id'];
+                $title = get_the_title( $pid ) ?: __( 'Onbekend', 'modern-image-manager' );
+                $link  = get_edit_post_link( $pid ) ?: '#';
+                $posts[ $pid ] = sprintf(
+                    '<a href="%s" target="_blank">%s</a>',
+                    esc_url( $link ),
+                    esc_html( $title )
+                );
             }
-        }
-        // Maak een lijst van alle unieke posts (geordend op post_id).
-        ksort( $post_links );
-        $post_text = implode( ', ', $post_links );
-
-        // Verzamel alle bron-informatie.
-        $all_usage_types = [];
-        foreach ( $usages as $usage ) {
-            if ( isset( $usage['type'] ) ) {
-                if ( $usage['type'] === 'post_content' ) {
-                    $all_usage_types[] = esc_html__( 'Afbeelding in content (WordPress)', 'modern-image-manager' );
-                } elseif ( $usage['type'] === 'featured_image' ) {
-                    $all_usage_types[] = esc_html__( 'Uitgelichte afbeelding (WordPress)', 'modern-image-manager' );
-                } elseif ( $usage['type'] === 'acf_field' && isset( $usage['acf_field'] ) ) {
-                    $all_usage_types[] = esc_html__( 'ACF veld: ', 'modern-image-manager' ) . esc_html( $usage['acf_field'] );
+            if ( ! empty( $u['type'] ) ) {
+                switch ( $u['type'] ) {
+                    case 'post_content':
+                        $contexts[] = __( 'In content', 'modern-image-manager' );
+                        break;
+                    case 'post_srcset':
+                        $contexts[] = __( 'In srcset', 'modern-image-manager' );
+                        break;
+                    case 'gallery_shortcode':
+                        $contexts[] = __( 'Gallery shortcode', 'modern-image-manager' );
+                        break;
+                    case 'featured_image':
+                        $contexts[] = __( 'Uitgelichte afbeelding', 'modern-image-manager' );
+                        break;
+                    case 'acf_field':
+                        $contexts[] = __( 'ACF veld:', 'modern-image-manager' ) . ' ' . esc_html( $u['acf_field'] );
+                        break;
+                    case 'elementor_template':
+                    case 'elementor_template_page':
+                        $contexts[] = esc_html( $u['context'] );
+                        break;
                 }
             }
         }
-        $all_usage_types = array_unique( $all_usage_types );
-        $usage_text = implode( ', ', $all_usage_types );
 
-        echo "<tr>";
-        echo "<td>" . $post_text . "</td>";
-        echo "<td><a href='" . esc_url( $image_url ) . "' target='_blank'><img src='" . esc_url( $image_url ) . "' width='80'></a></td>";
-        echo "<td>" . $usage_text . "</td>";
-        echo "</tr>";
+        echo '<tr>';
+        echo '<td><input type="checkbox" class="delete-checkbox" name="delete_ids[]" value="' . esc_attr( $aid ) . '"></td>';
+        echo '<td><a href="' . esc_url( $url ) . '" target="_blank">' . $thumb . '</a></td>';
+        echo '<td>' . implode( ', ', array_unique( $posts ) ) . '</td>';
+        echo '<td>' . implode( ', ', array_unique( $contexts ) ) . '</td>';
+        echo '</tr>';
     }
 
     echo '</tbody></table>';
 }
-?>

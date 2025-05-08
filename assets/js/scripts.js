@@ -284,6 +284,25 @@ jQuery(document).ready(($) => {
     window.updatePagination();
   });
 
+  // **Bulk-delete checkbox logica**
+  const $selectAll      = $('#mim-select-all');
+  const $rowCheckboxes  = $('.mim-select-row');
+  const $bulkDeleteBtn  = $('#mim-bulk-delete');
+
+  // Selecteer of deselecteer alle rijen
+  $selectAll.on('change', function() {
+    const checked = $(this).is(':checked');
+    $rowCheckboxes.prop('checked', checked);
+    $bulkDeleteBtn.prop('disabled', !$rowCheckboxes.is(':checked'));
+  });
+
+  // Schakel bulk-delete knop op basis van individuele checkboxen
+  $rowCheckboxes.on('change', function() {
+    const anyChecked = $rowCheckboxes.is(':checked');
+    $bulkDeleteBtn.prop('disabled', !anyChecked);
+    $selectAll.prop('checked', $rowCheckboxes.length === $rowCheckboxes.filter(':checked').length);
+  });
+
   // Begin met alle rijen als match (geen filter) en initialiseer de paginering.
   $('.unique-tbody tr').addClass('filtered-match');
   window.updatePagination();

@@ -215,7 +215,7 @@
   gap: 0.625rem;
 }
 
-/* Filter button styling */
+/* Filter dropdown styling */
 .filter-top-page-filter,
 .filter-bottom-page-filter {
   padding: 0 0.75rem;
@@ -246,10 +246,23 @@
 }
 
 /* Hover effect for filter buttons */
-button:hover {
+.filter-top-apply-button:hover,
+.filter-bottom-apply-button:hover,
+.filter-top-prev-button:hover,
+.filter-bottom-prev-button:hover,
+.filter-top-next-button:hover,
+.filter-bottom-next-button:hover {
   background-color: var(--button-hover-bg-color) !important;
   transform: translateY(-0.125rem);
   transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
+}
+
+/* Disabled state for Filter toepassen and Verwijder geselecteerde knoppen */
+.filter-top-apply-button[disabled],
+.filter-bottom-apply-button[disabled] {
+  background-color: var(--disabled-button-bg-color);
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 /* Search container for filters */
@@ -435,7 +448,7 @@ button:hover {
 
 /* Hover effect for filter pagination buttons */
 .filter-top-pagination button:hover,
-.filter-bottom-pagination button:hover {
+	filter-bottom-pagination button:hover {
   background-color: var(--button-hover-bg-color);
   transform: translateY(-0.125rem);
   transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);

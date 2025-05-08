@@ -5,18 +5,23 @@ defined('ABSPATH') || exit;
 /**
  * Class ModernImageManagerAjaxHandler
  *
- * Verwerkt AJAX-verzoeken voor het bijwerken van media meta.
+ * Verwerkt AJAX-verzoeken voor het bijwerken van media meta,
+ * en het verwerken van bulk-delete via admin-post.
  * Debug-meldingen worden gelogd naar wp-content/debug.log.
  */
 class ModernImageManagerAjaxHandler
 {
     /**
-     * Initialiseert de AJAX handler.
+     * Initialiseert de AJAX handler en bulk-delete handler.
      */
     public static function init(): void
     {
+        // AJAX callbacks
         add_action('wp_ajax_update_media_meta', [self::class, 'updateMediaMetaCallback']);
-        add_action('wp_ajax_delete_media', [self::class, 'deleteMediaCallback']);
+        add_action('wp_ajax_delete_media',      [self::class, 'deleteMediaCallback']);
+
+        // Bulk-delete via form submit (admin-post)
+        add_action('admin_post_modern_image_manager_bulk_delete', [self::class, 'bulkDeleteCallback']);
     }
 
     /**
@@ -43,7 +48,6 @@ class ModernImageManagerAjaxHandler
             return;
         }
 
-        // Controleer of de bijlage bestaat om racecondities te vermijden
         $attachment = get_post($attachmentId);
         if (!$attachment) {
             error_log('DEBUG: Bijlage niet gevonden of nog niet volledig opgeslagen (raceconditie)');
@@ -51,13 +55,13 @@ class ModernImageManagerAjaxHandler
             return;
         }
 
-        // Verwijder bestandsextensie uit titel, caption, description en alt-tag
+        // Verwijder bestandsextensie uit inputvelden
         $newTitle       = self::removeFileExtension($newTitle);
         $newCaption     = self::removeFileExtension($newCaption);
         $newDescription = self::removeFileExtension($newDescription);
         $newAlt         = self::removeFileExtension($newAlt);
 
-        // Update post gegevens (titel, caption, description)
+        // Update post data
         $attachmentPost = [
             'ID'           => $attachmentId,
             'post_title'   => $newTitle,
@@ -72,13 +76,11 @@ class ModernImageManagerAjaxHandler
             return;
         }
 
-        // Alt-tekst bijwerken als er een waarde is
         if (!empty($newAlt)) {
             error_log('DEBUG: Nieuwe alt-tekst: ' . $newAlt);
             update_post_meta($attachmentId, '_wp_attachment_image_alt', $newAlt);
         }
 
-        // Bestandsnaam ALLEEN updaten als er een nieuwe bestandsnaam is opgegeven
         if (!empty($newFilename)) {
             if (!self::updateFileName($attachmentId, $newFilename)) {
                 wp_send_json_error(['message' => __('Fout bij het hernoemen van het bestand.', 'modern-image-manager')]);
@@ -91,22 +93,7 @@ class ModernImageManagerAjaxHandler
     }
 
     /**
-     * Verwijdert de bestandsextensie (zoals .png) van de bestandsnaam.
-     *
-     * @param string $string
-     * @return string
-     */
-    private static function removeFileExtension(string $string): string
-    {
-        return preg_replace('/\.[^.\s]{3,4}$/', '', $string);
-    }
-
-    /**
-     * Callback voor het verwijderen van een media-item.
-     *
-     * Verwijdert de bijlage uit de database en de server.
-     *
-     * @return void
+     * Callback voor het verwijderen van een enkel media-item via AJAX.
      */
     public static function deleteMediaCallback(): void
     {
@@ -130,29 +117,59 @@ class ModernImageManagerAjaxHandler
     }
 
     /**
-     * Hernoemt het bestand van de bijlage en werkt de guid en post_name bij.
-     *
-     * @param int    $attachmentId
-     * @param string $newFilename
-     *
-     * @return bool
+     * Callback voor bulk-delete van media-items via admin-post.
+     */
+    public static function bulkDeleteCallback(): void
+    {
+        // Controleer permissies en nonce
+        if (! current_user_can('manage_options')
+            || ! isset($_POST['modern_image_manager_bulk_delete_nonce'])
+            || ! check_admin_referer('modern_image_manager_bulk_delete', 'modern_image_manager_bulk_delete_nonce')
+        ) {
+            wp_die(__('Niet toegestaan.', 'modern-image-manager'));
+        }
+
+        $toDelete = array_map('intval', $_POST['delete_ids'] ?? []);
+        $count    = 0;
+
+        foreach ($toDelete as $aid) {
+            if (wp_delete_attachment($aid, true)) {
+                $count++;
+            }
+        }
+
+        // Redirect terug met een query-parameter voor succesmelding
+        $redirect = wp_get_referer() ?: admin_url();
+        $redirect = add_query_arg('mim_bulk_delete_success', $count, $redirect);
+        wp_safe_redirect($redirect);
+        exit;
+    }
+
+    /**
+     * Verwijdert de bestandsextensie (zoals .png) van de bestandsnaam.
+     */
+    private static function removeFileExtension(string $string): string
+    {
+        return preg_replace('/\.[^.\s]{3,4}$/', '', $string);
+    }
+
+    /**
+     * Hernoemt het bestand van de bijlage en werkt metadata, guid en post_name bij.
      */
     private static function updateFileName(int $attachmentId, string $newFilename): bool
     {
         error_log(sprintf('DEBUG: updateFileName aangeroepen met attachmentId: %d en newFilename: %s', $attachmentId, $newFilename));
 
         $file = get_attached_file($attachmentId);
-        if (!$file || !file_exists($file)) {
+        if (!$file || ! file_exists($file)) {
             error_log('DEBUG: Bestand niet gevonden voor bijlage ID: ' . $attachmentId);
-            wp_send_json_error(['message' => __('Bestand niet gevonden voor bijlage ID.', 'modern-image-manager')]);
             return false;
         }
 
-        $dir = pathinfo($file, PATHINFO_DIRNAME);
-        $ext = pathinfo($file, PATHINFO_EXTENSION);
-        $newFile = $dir . '/' . $newFilename . '.' . $ext;
+        $dir     = pathinfo($file, PATHINFO_DIRNAME);
+        $ext     = pathinfo($file, PATHINFO_EXTENSION);
+        $newFile = "{$dir}/{$newFilename}.{$ext}";
 
-        // Controleer of de bestandsnaam niet onnodig wordt veranderd
         if ($file === $newFile) {
             error_log('DEBUG: Bestandsnaam is al correct, geen wijziging nodig');
             return true;
@@ -160,59 +177,46 @@ class ModernImageManagerAjaxHandler
 
         if (file_exists($newFile)) {
             error_log('DEBUG: De nieuwe bestandsnaam bestaat al: ' . $newFile);
-            wp_send_json_error(['message' => __('De nieuwe bestandsnaam bestaat al.', 'modern-image-manager')]);
             return false;
         }
 
-        if (!rename($file, $newFile)) {
-            $errorMessage = error_get_last()['message'] ?? 'Onbekende fout';
-            error_log(sprintf('DEBUG: Fout bij rename: %s (Oude bestand: %s, Nieuw bestand: %s)', $errorMessage, $file, $newFile));
-            wp_send_json_error(['message' => __('Fout bij het hernoemen van het bestand.', 'modern-image-manager')]);
+        if (! rename($file, $newFile)) {
+            $err = error_get_last()['message'] ?? 'Onbekende fout';
+            error_log("DEBUG: Fout bij rename: {$err}");
             return false;
         }
 
         update_attached_file($attachmentId, $newFile);
-        error_log('DEBUG: Nieuw bestandspad: ' . $newFile);
-
-        // Voeg een korte vertraging toe om racecondities te vermijden
-        sleep(1);
+        sleep(1); // korte vertraging tegen racecondities
 
         require_once ABSPATH . 'wp-admin/includes/image.php';
         $metadata = wp_generate_attachment_metadata($attachmentId, $newFile);
-        error_log('DEBUG: Gegenereerde metadata: ' . print_r($metadata, true));
-
-        if (!$metadata) {
+        if (! $metadata) {
             error_log('DEBUG: Metadata niet correct gegenereerd voor attachment ID ' . $attachmentId);
-            wp_send_json_error(['message' => __('Fout bij het genereren van metadata.', 'modern-image-manager')]);
             return false;
         }
 
-        // Forceer de metadata-update, zelfs als de data hetzelfde is
         delete_post_meta($attachmentId, '_wp_attachment_metadata');
-        $metadataUpdated = wp_update_attachment_metadata($attachmentId, $metadata);
-        if (is_wp_error($metadataUpdated) || $metadataUpdated === false) {
-            error_log('DEBUG: Fout bij wp_update_attachment_metadata voor bestand: ' . $newFile);
-            wp_send_json_error(['message' => __('Fout bij het bijwerken van de metadata.', 'modern-image-manager')]);
+        $metaResult = wp_update_attachment_metadata($attachmentId, $metadata);
+        if (is_wp_error($metaResult) || ! $metaResult) {
+            error_log('DEBUG: Fout bij wp_update_attachment_metadata');
             return false;
         }
 
-        // Update guid en post_name in de database
-        $upload_dir = wp_upload_dir();
-        $new_url = $upload_dir['baseurl'] . '/' . basename($newFile);
+        $uploadDir = wp_upload_dir();
+        $newUrl    = trailingslashit($uploadDir['baseurl']) . basename($newFile);
         wp_update_post([
             'ID'        => $attachmentId,
-            'guid'      => $new_url,
+            'guid'      => $newUrl,
             'post_name' => sanitize_title($newFilename),
         ]);
+
         error_log('DEBUG: updateFileName succesvol afgerond voor ' . $newFile);
         return true;
     }
 
     /**
      * Sanitizeert een waarde als integer.
-     *
-     * @param mixed $value
-     * @return int|null
      */
     private static function sanitizeInt($value): ?int
     {
