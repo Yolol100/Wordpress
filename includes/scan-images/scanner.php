@@ -269,7 +269,6 @@ function scan_duplicate_images() {
         mim_get_elementor_template_images()
     );
 
-    // voeg template pages toe...
     $tpl_map = mim_map_elementor_templates_to_pages();
     foreach ( mim_get_elementor_template_images() as $aid => $usages ) {
         foreach ( $usages as $u ) {
@@ -305,7 +304,7 @@ function dius_scan_pages_for_duplicate_images() {
 }
 
 /**
- * Render de resultaten met één bulk-delete knop (met margin-bottom).
+ * Render de resultaten met checkboxes (zonder eigen form).
  */
 function dius_display_results( $results ) {
     if ( empty( $results ) ) {
@@ -318,20 +317,10 @@ function dius_display_results( $results ) {
     echo '<h2 class="mim-scan-page-title">'
        . esc_html__( 'Scan resultaten', 'modern-image-manager' )
        . '</h2>';
+
     echo '<p class="mim-scan-page-description"><strong>'
        . esc_html__( 'Totaal aantal dubbele afbeeldingen gevonden:', 'modern-image-manager' )
        . '</strong> ' . esc_html( count( $results ) ) . '</p>';
-
-    // Enkel deze knop, met inline margin-bottom
-    echo '<form method="POST" id="dius-bulk-delete-form">';
-    wp_nonce_field( 'modern_image_manager_bulk_delete', 'modern_image_manager_bulk_delete_nonce' );
-    echo '<button type="submit" name="bulk_delete" '
-       . 'class="page-button filter-top-apply-button" '
-       . 'id="dius-delete-selected" disabled '
-       . 'style="margin-bottom:1rem;">'
-       . esc_html__( 'Verwijder geselecteerde', 'modern-image-manager' )
-       . '</button>';
-    echo '</form>';
 
     echo '<table class="wp-list-table widefat fixed striped dius-results-table">';
     echo '<thead><tr>';

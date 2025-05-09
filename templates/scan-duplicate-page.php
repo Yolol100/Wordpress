@@ -30,15 +30,14 @@ if ( isset( $_POST['delete_selected'] ) && check_admin_referer( 'delete_duplicat
 
 <div class="wrap mim-scan-container mim-scan-page">
 
+  <!-- SCAN INTRO : alleen tonen als er nog niet gescand is -->
   <?php if ( ! isset( $_POST['scan_duplicates'] ) || ! check_admin_referer( 'scan_duplicates_action', 'scan_duplicates_nonce' ) ) : ?>
     <div id="mim-scan-intro">
       <h1 class="mim-scan-page-title">
         <?php echo esc_html__( 'Scan Duplicate Images', 'modern-image-manager' ); ?>
       </h1>
       <p class="mim-scan-page-description">
-        <?php
-          echo esc_html__( 'Klik op de onderstaande knop om alle dubbele afbeeldingen te scannen, inclusief afbeeldingen uit Elementor-templates.', 'modern-image-manager' );
-        ?>
+        <?php esc_html_e( 'Klik op de onderstaande knop om alle dubbele afbeeldingen te scannen.', 'modern-image-manager' ); ?>
       </p>
 
       <form method="POST" class="mim-scan-page-form">
@@ -50,37 +49,37 @@ if ( isset( $_POST['delete_selected'] ) && check_admin_referer( 'delete_duplicat
     </div>
   <?php endif; ?>
 
+  <!-- SCAN RESULTATEN + DELETE-BUTTON -->
   <?php
-    // 2) Run scan & toon resultaten met bulk-delete
-    if ( isset( $_POST['scan_duplicates'] ) && check_admin_referer( 'scan_duplicates_action', 'scan_duplicates_nonce' ) ) {
-        require_once MODERN_IMAGE_MANAGER_PATH . 'includes/scan-images/scanner.php';
-        $results = dius_scan_pages_for_duplicate_images();
+  if ( isset( $_POST['scan_duplicates'] ) && check_admin_referer( 'scan_duplicates_action', 'scan_duplicates_nonce' ) ) {
 
-        echo '<p class="mim-scan-scope">'
-           . esc_html__( 'De scan omvat nu ook afbeeldingen uit Elementor-templates en toont de pagina\'s waarop ze worden geladen.', 'modern-image-manager' )
-           . '</p>';
-
-        // Form wrapper voor bulk delete
-        echo '<form method="POST">';
-        wp_nonce_field( 'delete_duplicates_action', 'delete_duplicates_nonce' );
-        // Zorg dat de scan-flag behouden blijft bij re-submit
-        echo '<input type="hidden" name="scan_duplicates" value="1">';
-
-        // Bulk-delete knop boven de tabel
-        echo '<p><button type="submit" name="delete_selected" class="button button-danger">'
-           . esc_html__( 'Verwijder geselecteerde', 'modern-image-manager' )
-           . '</button></p>';
-
-        // Tabel met checkboxes
-        dius_display_results( $results );
-
-        // Bulk-delete knop onder de tabel
-        echo '<p><button type="submit" name="delete_selected" class="button button-danger">'
-           . esc_html__( 'Verwijder geselecteerde', 'modern-image-manager' )
-           . '</button></p>';
-
-        echo '</form>';
-    }
+      require_once MODERN_IMAGE_MANAGER_PATH . 'includes/scan-images/scanner.php';
+      $results = dius_scan_pages_for_duplicate_images();
   ?>
+
+    <form method="POST">
+      <?php
+        // Bevat beide nonces
+        wp_nonce_field( 'scan_duplicates_action',   'scan_duplicates_nonce' );
+        wp_nonce_field( 'delete_duplicates_action','delete_duplicates_nonce' );
+        echo '<input type="hidden" name="scan_duplicates" value="1">';
+      ?>
+
+      <?php dius_display_results( $results ); ?>
+
+      <div style="text-align:center; margin-top:20px;">
+        <button
+          type="submit"
+          name="delete_selected"
+          class="button button-danger"
+          id="dius-delete-selected"
+          disabled
+        >
+          <?php esc_html_e( 'Verwijder geselecteerde', 'modern-image-manager' ); ?>
+        </button>
+      </div>
+    </form>
+
+  <?php } ?>
 
 </div>
