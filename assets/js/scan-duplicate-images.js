@@ -9,24 +9,31 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('mim-scan-intro')?.setAttribute('hidden', 'hidden');
   });
 
-  // 2) Select-all checkbox
-  const selectAll = document.getElementById('select_all');
-  selectAll?.addEventListener('change', () => {
-    const checked = selectAll.checked;
-    document.querySelectorAll('.delete-checkbox')
-      .forEach(cb => {
-        cb.checked = checked;
+  // Gebruik event delegation zodat alles blijft werken, ook als de tabel vernieuwd wordt
+  document.addEventListener('change', (e) => {
+    const deleteButton = document.getElementById('dius-delete-selected');
+
+    // 2) Select-all checkbox
+    if (e.target && e.target.id === 'select_all') {
+      const checked = e.target.checked;
+      document.querySelectorAll('.delete-checkbox')
+        .forEach(cb => {
+          cb.checked = checked;
+        });
+      // Trigger change event voor accessibility en consistent gedrag
+      document.querySelectorAll('.delete-checkbox').forEach(cb => {
         cb.dispatchEvent(new Event('change'));
       });
-  });
+    }
 
-  // 3) Enable/disable delete-knop op basis van selectie
-  const deleteButton = document.getElementById('dius-delete-selected');
-  document.querySelectorAll('.delete-checkbox').forEach(cb => {
-    cb.addEventListener('change', () => {
+    // 3) Enable/disable delete-knop op basis van selectie
+    if (
+      (e.target && e.target.classList.contains('delete-checkbox')) ||
+      (e.target && e.target.id === 'select_all')
+    ) {
       const anyChecked = Array.from(document.querySelectorAll('.delete-checkbox'))
-                              .some(c => c.checked);
-      deleteButton.disabled = ! anyChecked;
-    });
+        .some(c => c.checked);
+      if (deleteButton) deleteButton.disabled = !anyChecked;
+    }
   });
 });

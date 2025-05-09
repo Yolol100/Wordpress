@@ -16,7 +16,7 @@ if ( ! current_user_can( 'manage_options' ) ) {
 }
 
 /**
- * Laad de CSS voor de scanpagina.
+ * Laad de CSS én JS voor de scanpagina.
  */
 function mim_enqueue_admin_assets_for_scan_page( $hook ) {
     if ( $hook !== 'toplevel_page_modern-image-manager'
@@ -31,6 +31,15 @@ function mim_enqueue_admin_assets_for_scan_page( $hook ) {
         [],
         '1.0.0',
         'all'
+    );
+
+    // **Toegevoegd: laad de JS voor bulk-select en knop enable/disable**
+    wp_enqueue_script(
+        'scan-duplicate-images-js',
+        MODERN_IMAGE_MANAGER_URL . 'assets/js/scan-duplicate-images.js',
+        [],    // geen jQuery-afhankelijkheid
+        '1.0.0',
+        true   // in footer laden
     );
 }
 add_action( 'admin_enqueue_scripts', 'mim_enqueue_admin_assets_for_scan_page' );
@@ -304,7 +313,8 @@ function dius_scan_pages_for_duplicate_images() {
 }
 
 /**
- * Render de resultaten met checkboxes (zonder eigen form).
+ * Render alleen de tabel met checkboxes (zonder eigen form, zonder header of aantal).
+ * Aangepast: altijd robuust de attachment tonen indien mogelijk.
  */
 function dius_display_results( $results ) {
     if ( empty( $results ) ) {
@@ -314,14 +324,7 @@ function dius_display_results( $results ) {
         return;
     }
 
-    echo '<h2 class="mim-scan-page-title">'
-       . esc_html__( 'Scan resultaten', 'modern-image-manager' )
-       . '</h2>';
-
-    echo '<p class="mim-scan-page-description"><strong>'
-       . esc_html__( 'Totaal aantal dubbele afbeeldingen gevonden:', 'modern-image-manager' )
-       . '</strong> ' . esc_html( count( $results ) ) . '</p>';
-
+    // Alleen de tabel, geen kop of aantal
     echo '<table class="wp-list-table widefat fixed striped dius-results-table">';
     echo '<thead><tr>';
     echo '<th style="width:2%;"><input type="checkbox" id="select_all"></th>';
@@ -331,8 +334,22 @@ function dius_display_results( $results ) {
     echo '</tr></thead><tbody>';
 
     foreach ( $results as $aid => $usages ) {
-        $url      = wp_get_attachment_url( $aid );
-        $thumb    = wp_get_attachment_image( $aid, [80,80] );
+        $url = wp_get_attachment_url( $aid );
+        $thumb = '';
+        // Toon alléén afbeelding als het een echte afbeelding is
+        if ( wp_attachment_is_image( $aid ) ) {
+            $thumb = wp_get_attachment_image( $aid, [80,80] );
+            // Fallback naar 'full' als thumb niet lukt
+            if ( ! $thumb ) {
+                $image_url = wp_get_attachment_image_url( $aid, 'full' );
+                if ( $image_url ) {
+                    $thumb = '<img src="' . esc_url( $image_url ) . '" style="max-width:80px;height:auto;" />';
+                }
+            }
+        } else {
+            $thumb = '<span style="color:#aaa;">(' . esc_html__( 'Geen afbeelding', 'modern-image-manager' ) . ')</span>';
+        }
+
         $posts    = [];
         $contexts = [];
 

@@ -138,7 +138,7 @@
 
 /* Export columns dropdown height and resizing */
 #exportColumns {
-  height: 200px;
+  height: 150px;
   resize: vertical;
 }
 
@@ -382,12 +382,6 @@
   transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
 }
 
-/* Export columns input */
-#exportColumns {
-  height: 150px;
-  resize: vertical;
-}
-
 /* Pagination navigation styling */
 .pagination-navigation {
   display: flex;
@@ -448,7 +442,7 @@
 
 /* Hover effect for filter pagination buttons */
 .filter-top-pagination button:hover,
-	filter-bottom-pagination button:hover {
+.filter-bottom-pagination button:hover {
   background-color: var(--button-hover-bg-color);
   transform: translateY(-0.125rem);
   transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
