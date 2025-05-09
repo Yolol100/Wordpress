@@ -3,9 +3,7 @@ declare(strict_types=1);
 defined('ABSPATH') || exit;
 
 // Haal media-items op
-$media_items = modern_image_manager_get_media_items();
-
-// Bepaal huidige filter uit querystring, default 'all'
+$media_items    = modern_image_manager_get_media_items();
 $current_filter = $_GET['pageFilter'] ?? 'all';
 ?>
 
@@ -42,7 +40,6 @@ $current_filter = $_GET['pageFilter'] ?? 'all';
                         <?php echo esc_html__( "Filter toepassen", "modern-image-manager" ); ?>
                     </button>
 
-                    <!-- Bulk-delete knop, zelfde styling als “Filter toepassen” -->
                     <button
                         type="submit"
                         name="bulk_delete"
@@ -80,7 +77,12 @@ $current_filter = $_GET['pageFilter'] ?? 'all';
                         <label for="rowsPerPage" class="filter-top-rows-per-page-label">
                             <?php echo esc_html__( "Rijen per pagina:", "modern-image-manager" ); ?>
                         </label>
-                        <select id="rowsPerPage" class="rows-per-page-select filter-top-rows-per-page-select">
+                        <select
+                            id="rowsPerPage"
+                            name="per_page"
+                            class="rows-per-page-select filter-top-rows-per-page-select"
+                            onchange="filterTable()"
+                        >
                             <option value="10">10</option>
                             <option value="20">20</option>
                             <option value="30" selected>30</option>
@@ -126,7 +128,7 @@ $current_filter = $_GET['pageFilter'] ?? 'all';
                         $status      = ( strpos( $page_title, 'Niet gekoppeld' ) !== false ) ? 'unlinked' : 'linked';
                         ?>
                         <tr
-                            class="unique-tr-item media-items-tr-item unique-tr-<?php echo esc_attr( $attachment_id ); ?>"`
+                            class="unique-tr-item media-items-tr-item unique-tr-<?php echo esc_attr( $attachment_id ); ?>"
                             data-status="<?php echo esc_attr( $status ); ?>"
                         >
                             <td>
@@ -181,10 +183,10 @@ $current_filter = $_GET['pageFilter'] ?? 'all';
                             </td>
                             <td class="unique-td-alttag media-items-td-alttag">
                                 <input
-                                    type="text"`
-                                    class="alt-input media-items-alt-input"`
-                                    data-attachment-id="<?php echo esc_attr( $attachment_id ); ?>"`
-                                    value="<?php echo esc_attr( $alt_text ); ?>"`
+                                    type="text"
+                                    class="alt-input media-items-alt-input"
+                                    data-attachment-id="<?php echo esc_attr( $attachment_id ); ?>"
+                                    value="<?php echo esc_attr( $alt_text ); ?>"
                                 />
                             </td>
                             <td class="unique-td-acties media-items-td-acties">
@@ -214,87 +216,88 @@ $current_filter = $_GET['pageFilter'] ?? 'all';
                 <?php endif; ?>
             </tbody>
         </table>
-    </form>
 
-    <!-- Geen resultaten container -->
-    <div id="noResults" class="filter-footer no-results media-items-no-results" style="display: none;">
-        <p><?php echo esc_html__( "Geen afbeeldingen gevonden voor de geselecteerde filteroptie.", "modern-image-manager" ); ?></p>
-    </div>
-
-    <!-- Filter balk onderaan -->
-    <div class="filter-bottom-container">
-        <div class="filter-footer filter-bottom-footer">
-            <div class="nav-controls filter-bottom-nav-controls">
-                <select
-                    id="pageFilterBottom"
-                    class="page-filter-select filter-bottom-page-filter"
-                >
-                    <option value="all"      <?php selected( $current_filter, 'all' ); ?>>
-                        <?php echo esc_html__( "Alle pagina's", "modern-image-manager" ); ?>
-                    </option>
-                    <option value="linked"   <?php selected( $current_filter, 'linked' ); ?>>
-                        <?php echo esc_html__( "Gekoppelde pagina's", "modern-image-manager" ); ?>
-                    </option>
-                    <option value="unlinked" <?php selected( $current_filter, 'unlinked' ); ?>>
-                        <?php echo esc_html__( "Niet gekoppelde pagina's", "modern-image-manager" ); ?>
-                    </option>
-                </select>
-
-                <button
-                    type="button"
-                    id="applyFilterBottom"`
-                    class="page-button filter-bottom-apply-button"`
-                >
-                    <?php echo esc_html__( "Filter toepassen", "modern-image-manager" ); ?>
-                </button>
-
-                <!-- Bulk-delete knop in footer, zelfde styling -->
-                <button
-                    type="submit"`
-                    name="bulk_delete"`
-                    id="mim-bulk-delete-bottom"`
-                    class="page-button filter-bottom-apply-button"`
-                    disabled`
-                >
-                    <?php esc_html_e( 'Verwijder geselecteerde afbeeldingen', 'modern-image-manager' ); ?>
-                </button>
-
-                <div class="pagination-navigation filter-bottom-pagination">
-                    <button id="prevPageBottom" class="page-button filter-bottom-prev-button">
-                        <?php echo esc_html__( "Vorige", "modern-image-manager" ); ?>
-                    </button>
-                    <span id="currentPageBottom" class="filter-bottom-current-page">1</span> /
-                    <span id="totalPagesBottom" class="filter-bottom-total-pages">50</span>
-                    <button id="nextPageBottom" class="page-button filter-bottom-next-button">
-                        <?php echo esc_html__( "Volgende", "modern-image-manager" ); ?>
-                    </button>
-                </div>
-            </div>
-
-            <div class="search-container filter-bottom-search-container">
-                <input
-                    type="text"`
-                    id="search-input-bottom"`
-                    class="search-box filter-bottom-search-box"`
-                    placeholder="<?php echo esc_attr__( "Zoeken…", "modern-image-manager" ); ?>"`
-                    onkeyup="filterTable()"`
-                />
-            </div>
-
-            <div class="rows-controls filter-bottom-rows-controls">
-                <div class="rows-per-page-container filter-bottom-rows-per-page-container">
-                    <label for="rows-per-pageBottom" class="filter-bottom-rows-per-page-label">
-                        <?php echo esc_html__( "Rijen per pagina:", "modern-image-manager" ); ?>
-                    </label>
-                    <select id="rows-per-pageBottom" class="rows-per-page-select filter-bottom-rows-per-page-select">
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30" selected>30</option>
-                        <option value="40">40</option>
-                        <option value="50">50</option>
+        <!-- Filter balk onderaan -->
+        <div class="filter-bottom-container">
+            <div class="filter-footer filter-bottom-footer">
+                <div class="nav-controls filter-bottom-nav-controls">
+                    <select
+                        name="pageFilter"
+                        id="pageFilterBottom"
+                        class="page-filter-select filter-bottom-page-filter"
+                    >
+                        <option value="all"      <?php selected( $current_filter, 'all' ); ?>>
+                            <?php echo esc_html__( "Alle pagina's", "modern-image-manager" ); ?>
+                        </option>
+                        <option value="linked"   <?php selected( $current_filter, 'linked' ); ?>>
+                            <?php echo esc_html__( "Gekoppelde pagina's", "modern-image-manager" ); ?>
+                        </option>
+                        <option value="unlinked" <?php selected( $current_filter, 'unlinked' ); ?>>
+                            <?php echo esc_html__( "Niet gekoppelde pagina's", "modern-image-manager" ); ?>
+                        </option>
                     </select>
+
+                    <button
+                        type="button"
+                        id="applyFilterBottom"
+                        class="page-button filter-bottom-apply-button"
+                    >
+                        <?php echo esc_html__( "Filter toepassen", "modern-image-manager" ); ?>
+                    </button>
+
+                    <button
+                        type="submit"
+                        name="bulk_delete"
+                        id="mim-bulk-delete-bottom"
+                        class="page-button filter-bottom-apply-button"
+                        disabled
+                    >
+                        <?php esc_html_e( 'Verwijder geselecteerde afbeeldingen', 'modern-image-manager' ); ?>
+                    </button>
+
+                    <div class="pagination-navigation filter-bottom-pagination">
+                        <button id="prevPageBottom" class="page-button filter-bottom-prev-button">
+                            <?php echo esc_html__( "Vorige", "modern-image-manager" ); ?>
+                        </button>
+                        <span id="currentPageBottom" class="filter-bottom-current-page">1</span> /
+                        <span id="totalPagesBottom" class="filter-bottom-total-pages">50</span>
+                        <button id="nextPageBottom" class="page-button filter-bottom-next-button">
+                            <?php echo esc_html__( "Volgende", "modern-image-manager" ); ?>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="search-container filter-bottom-search-container">
+                    <input
+                        type="text"
+                        id="search-input-bottom"
+                        class="search-box filter-bottom-search-box"
+                        placeholder="<?php echo esc_attr__( "Zoeken…", "modern-image-manager" ); ?>"
+                        onkeyup="filterTable()"
+                    />
+                </div>
+
+                <div class="rows-controls filter-bottom-rows-controls">
+                    <div class="rows-per-page-container filter-bottom-rows-per-page-container">
+                        <label for="rowsPerPage" class="filter-bottom-rows-per-page-label">
+                            <?php echo esc_html__( "Rijen per pagina:", "modern-image-manager" ); ?>
+                        </label>
+                        <select
+                            id="rowsPerPage"
+                            name="per_page"
+                            class="rows-per-page-select filter-bottom-rows-per-page-select"
+                            onchange="filterTable()"
+                        >
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30" selected>30</option>
+                            <option value="40">40</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+    </form>
 </div>
