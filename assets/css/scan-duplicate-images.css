@@ -1,178 +1,162 @@
-/* Container voor de scanpagina */
+/* Container voor scanpagina */
 .mim-scan-container {
-    padding: 1.875rem;
-    max-width: 50rem;
-    margin: 1.25rem auto;
-    background: var(--table-background);
-    border: 1px solid var(--border-color);
-    border-radius: 0.625rem;
-    box-shadow: var(--box-shadow-light);
-    font-family: var(--font-family-alt);
-    color: #333;
-    font-size: var(--font-size-base);
+  margin: 1.25rem auto;
+  max-width: 50rem;
+  padding: 1.875rem;
+  background: var(--table-background);
+  border: 1px solid var(--border-color);
+  border-radius: 0.625rem;
+  box-shadow: var(--box-shadow-light);
+  font-family: var(--font-family-alt);
+  font-size: var(--font-size-base);
+  color: #333;
 }
 
-/* Titel van de scanpagina */
+/* Titel */
 .mim-scan-page-title {
-    font-size: 1.7rem !important;
-    color: #333;
-    text-align: center;
-    font-weight: 600 !important;
-    margin-bottom: 1.25rem !important;
+  margin-bottom: 1.25rem !important;
+  text-align: center;
+  font-size: 1.7rem !important;
+  font-weight: 600 !important;
+  color: #333;
 }
 
-/* Beschrijving van de scanpagina */
+/* Beschrijving */
 .mim-scan-page-description {
-    font-size: 1.2rem;
-    color: #555;
-    text-align: center;
-    margin-bottom: 1.875rem;
-    line-height: 1.6;
+  margin-bottom: 1.875rem;
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #555;
 }
 
-/* Styling voor de scanbutton */
+/* Scanbutton */
 .mim-scan-page-button {
-    padding: 0.625rem 1.25rem;
-    font-size: var(--font-size-base);
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: 0.375rem;
-    color: var(--header-text-color);
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color var(--transition-speed), transform 0.2s var(--transition-ease);
-    box-shadow: var(--box-shadow-medium);
-    /* Toegevoegd om de knop te centreren */
-    display: block;
-    margin: 0 auto;
+  display: block;
+  margin: 0 auto;
+  padding: 0.625rem 1.25rem;
+  border: none;
+  border-radius: 0.375rem;
+  background-color: var(--primary-color);
+  color: var(--header-text-color);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: var(--box-shadow-medium);
+  transition: background-color var(--transition-speed), transform 0.2s var(--transition-ease);
 }
 
-/* Hover-effect voor de scanbutton */
 .mim-scan-page-button:hover {
-    background-color: var(--button-hover-bg-color);
-    transform: translateY(-0.125rem); /* -2px */
-    transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
+  background-color: var(--button-hover-bg-color);
+  transform: translateY(-0.125rem);
+  transition: background-color 0.3s var(--transition-ease), transform 0.2s var(--transition-ease);
 }
 
-/* Styling voor de lijst met items */
+/* Lijst met items */
 .mim-scan-page ul {
-    list-style-type: none;
-    padding-left: 0;
-    margin: 1rem 0;
+  margin: 1rem 0;
+  padding-left: 0;
+  list-style: none;
 }
 
-/* Styling voor elk lijstitem */
 .mim-scan-page ul li {
-    margin-bottom: 1rem;
-    padding: 0.75rem;
-    background-color: var(--table-background); /* Witte achtergrond voor items */
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius); /* Rand met afgeronde hoeken */
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: var(--table-background);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
 }
 
-/* Styling voor de sterkere tekst in lijstitems */
 .mim-scan-page ul li strong {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-    color: var(--font-color);
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--font-color);
 }
 
-/* Sub-lijsten in de scanresultaten */
 .mim-scan-page ul li ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
+  padding-left: 1.5rem;
+  list-style: disc;
 }
 
-/* Styling voor de items in de sublijst */
 .mim-scan-page ul li ul li {
-    margin-bottom: 0.5rem;
-    font-size: var(--font-size-base);
+  margin-bottom: 0.5rem;
+  font-size: var(--font-size-base);
 }
 
-/* ======================================= */
-/* ✅ Nieuw: Styling voor de duplicaten-tabel */
-/* ======================================= */
+/* ======================================== */
+/* ✅ Duplicaten-tabel styling */
+/* ======================================== */
 
-/* Algemene tabel styling */
 .dius-results-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--table-background);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-light);
-    overflow: hidden;
-    font-size: var(--font-size-base);
-    margin: 0 auto; /* Zorgt ervoor dat de tabel gecentreerd is en dezelfde breedte heeft */
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: var(--table-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-light);
+  font-size: var(--font-size-base);
 }
 
-/* Tabel kop (thead) met witte tekst */
 .dius-results-table thead {
-    background-color: var(--primary-color);
-    color: #fff; /* Tekstkleur wit */
-    text-align: left;
-    font-size: var(--font-size-small);
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  background-color: var(--primary-color);
+  color: #fff;
+  text-align: left;
+  font-size: var(--font-size-small);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-/* Tabel kop rijen met witte tekst */
 .dius-results-table thead th {
-    padding: 12px 15px;
-    border-bottom: 2px solid var(--primary-color-dark);
-    color: #fff !important;
-    text-align: left;
-    font-size: var(--font-size-small);
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  padding: 12px 15px;
+  border-bottom: 2px solid var(--primary-color-dark);
+  color: #fff !important;
+  font-size: var(--font-size-small);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
 }
 
-/* Tabel body */
 .dius-results-table tbody tr {
-    transition: background-color var(--transition-speed) var(--transition-ease);
+  transition: background-color var(--transition-speed) var(--transition-ease);
 }
 
-/* Afwisselende rij kleuren */
 .dius-results-table tbody tr:nth-child(even) {
-    background-color: var(--even-row-bg-color);
+  background-color: var(--even-row-bg-color);
 }
 
-/* Hover effect */
 .dius-results-table tbody tr:hover {
-    background-color: var(--hover-bg-color);
+  background-color: var(--hover-bg-color);
 }
 
-/* Cellen in de tabel */
 .dius-results-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid var(--border-color);
-    vertical-align: middle;
-    color: var(--text-color);
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+  color: var(--text-color);
 }
 
-/* Klikbare links in de tabel */
 .dius-results-table td a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color var(--transition-speed) ease-in-out;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-speed) ease-in-out;
 }
 
 .dius-results-table td a:hover {
-    color: var(--primary-color-dark);
-    text-decoration: underline;
+  color: var(--primary-color-dark);
+  text-decoration: underline;
 }
 
-/* Afbeelding kolom */
 .dius-results-table td img {
-    max-width: 60px;
-    border-radius: 8px;
-    box-shadow: var(--box-shadow-medium);
-    transition: transform 0.2s ease-in-out;
+  max-width: 60px;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow-medium);
+  transition: transform 0.2s ease-in-out;
 }
 
 .dius-results-table td img:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }

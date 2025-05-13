@@ -36,9 +36,13 @@ add_action( 'admin_enqueue_scripts', 'mim_enqueue_admin_assets_for_scan_page' );
 
 /**
  * Recursief zoeken in Elementor-widget-data en omzet naar attachment ID.
+ *
+ * @param array       $elements Data van Elementor (altijd een array, nooit null).
+ * @param array       &$result  Resultaten array per attachment ID.
+ * @param string      $context  Omschrijving waar we vandaan komen.
  */
-function mim_extract_images_from_elementor_data( $elements, & $result, $context ) {
-    foreach ( (array) $elements as $el ) {
+function mim_extract_images_from_elementor_data( array $elements, array & $result, string $context ): void {
+    foreach ( $elements as $el ) {
         if ( isset( $el['elType'], $el['widgetType'], $el['settings']['image']['url'] )
              && $el['elType'] === 'widget'
              && $el['widgetType'] === 'image'
@@ -51,7 +55,7 @@ function mim_extract_images_from_elementor_data( $elements, & $result, $context 
                 ];
             }
         }
-        if ( ! empty( $el['elements'] ) ) {
+        if ( ! empty( $el['elements'] ) && is_array( $el['elements'] ) ) {
             mim_extract_images_from_elementor_data( $el['elements'], $result, $context );
         }
     }
@@ -59,8 +63,10 @@ function mim_extract_images_from_elementor_data( $elements, & $result, $context 
 
 /**
  * Haal alle afbeelding-IDs uit opgeslagen Elementor-templates.
+ *
+ * @return array<int,array> Map van attachment_id => usages[]
  */
-function mim_get_elementor_template_images() {
+function mim_get_elementor_template_images(): array {
     if ( ! class_exists( '\Elementor\Plugin' ) ) {
         return [];
     }
@@ -71,9 +77,14 @@ function mim_get_elementor_template_images() {
     ] );
     $result = [];
     foreach ( $templates as $tpl ) {
-        $data     = get_post_meta( $tpl->ID, '_elementor_data', true );
-        $elements = json_decode( $data, true );
-        $context  = sprintf( 'Template: %s (ID %d)', $tpl->post_title, $tpl->ID );
+        // Raw JSON uit meta ophalen; mogelijk null of invalid JSON
+        $raw_data = get_post_meta( $tpl->ID, '_elementor_data', true );
+        $elements = json_decode( (string) $raw_data, true );
+        // Fallback naar lege array als decode mislukt
+        if ( ! is_array( $elements ) ) {
+            $elements = [];
+        }
+        $context = sprintf( 'Template: %s (ID %d)', $tpl->post_title, $tpl->ID );
         mim_extract_images_from_elementor_data( $elements, $result, $context );
     }
     return $result;
@@ -81,8 +92,10 @@ function mim_get_elementor_template_images() {
 
 /**
  * Lees Elementor display conditions om templates te mappen naar pagina-ID's.
+ *
+ * @return array<int,int[]> Map van template_id => [pagina_id, …]
  */
-function mim_map_elementor_templates_to_pages() {
+function mim_map_elementor_templates_to_pages(): array {
     if ( ! class_exists( '\Elementor\Plugin' ) ) {
         return [];
     }
@@ -113,8 +126,10 @@ function mim_map_elementor_templates_to_pages() {
 
 /**
  * Haal attachment-IDs uit inline <img> tags en Elementor-shortcodes in posts/pages.
+ *
+ * @return array<int,array> Map van attachment_id => usages[]
  */
-function get_images_from_posts_pages() {
+function get_images_from_posts_pages(): array {
     global $wpdb;
     $posts   = $wpdb->get_results( "
         SELECT ID, post_content
@@ -138,8 +153,8 @@ function get_images_from_posts_pages() {
         // Elementor-template shortcode
         if ( preg_match_all( '/\[elementor-template\s+id=[\'"](\d+)[\'"]/', $post->post_content, $s ) ) {
             foreach ( $s[1] as $tpl_id ) {
-                $data     = get_post_meta( $tpl_id, '_elementor_data', true );
-                $elements = json_decode( $data, true );
+                $raw_data = get_post_meta( $tpl_id, '_elementor_data', true );
+                $elements = json_decode( (string) $raw_data, true ) ?: [];
                 $context  = sprintf( 'Template via shortcode op Pagina %d', $post->ID );
                 mim_extract_images_from_elementor_data( $elements, $images, $context );
             }
@@ -150,8 +165,10 @@ function get_images_from_posts_pages() {
 
 /**
  * Haal attachment-IDs uit uitgelichte afbeeldingen (_thumbnail_id).
+ *
+ * @return array<int,array> Map van attachment_id => usages[]
  */
-function get_featured_images() {
+function get_featured_images(): array {
     global $wpdb;
     $rows   = $wpdb->get_results( "
         SELECT post_id, meta_value
@@ -173,8 +190,10 @@ function get_featured_images() {
 
 /**
  * Haal attachment-IDs uit ACF-image velden (numeric meta_value).
+ *
+ * @return array<int,array> Map van attachment_id => usages[]
  */
-function get_acf_images() {
+function get_acf_images(): array {
     global $wpdb;
     $rows   = $wpdb->get_results( "
         SELECT post_id, meta_key, meta_value
@@ -198,13 +217,15 @@ function get_acf_images() {
 
 /**
  * Combineer alle bronnen per attachment ID, voeg template-pages toe en filter duplicaten.
+ *
+ * @return array<int,array> Map van duplicate attachment_id => usages[]
  */
-function scan_duplicate_images() {
-    $post_imgs     = get_images_from_posts_pages();
-    $feat_imgs     = get_featured_images();
-    $acf_imgs      = get_acf_images();
-    $tpl_imgs      = mim_get_elementor_template_images();
-    $tpl_page_map  = mim_map_elementor_templates_to_pages();
+function scan_duplicate_images(): array {
+    $post_imgs    = get_images_from_posts_pages();
+    $feat_imgs    = get_featured_images();
+    $acf_imgs     = get_acf_images();
+    $tpl_imgs     = mim_get_elementor_template_images();
+    $tpl_page_map = mim_map_elementor_templates_to_pages();
 
     // Merge usages per ID
     $all = array_merge_recursive( $post_imgs, $feat_imgs, $acf_imgs, $tpl_imgs );
@@ -242,6 +263,8 @@ function scan_duplicate_images() {
 
 /**
  * Alias voor compatibiliteit.
+ *
+ * @return array<int,array>
  */
 function dius_scan_pages_for_duplicate_images() {
     return scan_duplicate_images();
@@ -249,6 +272,8 @@ function dius_scan_pages_for_duplicate_images() {
 
 /**
  * Weergave van de resultaten in een tabel (zonder checkboxes of bulk-delete).
+ *
+ * @param array<int,array> $results
  */
 function dius_display_results( $results ) {
     if ( empty( $results ) ) {
