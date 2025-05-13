@@ -7,11 +7,23 @@ final class Modern_Image_Manager_Export
 {
     public static function render_export_page(): void
     {
+        $error_message = get_transient('media_export_error_message');
+        if ($error_message) {
+            delete_transient('media_export_error_message');
+        }
+
         if (isset($_POST['export_csv'])) {
             $export_option    = $_POST['export_option'] ?? 'all';
             $selected_columns = isset($_POST['export_columns'])
                 ? array_map('sanitize_text_field', $_POST['export_columns'])
                 : [];
+
+            // Validatie: minimaal 1 kolom moet geselecteerd zijn
+            if (empty($selected_columns)) {
+                set_transient('media_export_error_message', __('Selecteer minstens één kolom om te exporteren.', 'modern-image-manager'), 30);
+                wp_redirect(admin_url('admin.php?page=export-media'));
+                exit;
+            }
 
             self::generate_csv($export_option, $selected_columns);
             exit;
@@ -67,8 +79,9 @@ final class Modern_Image_Manager_Export
         $media_items = get_posts($args);
 
         if (empty($media_items)) {
-            echo '<p>' . __('Geen afbeeldingen gevonden voor de geselecteerde filteroptie.', 'modern-image-manager') . '</p>';
-            return;
+            // Geen rijen, alleen de headers worden geëxporteerd
+            fclose($output);
+            exit;
         }
 
         foreach ($media_items as $media) {
@@ -95,6 +108,7 @@ final class Modern_Image_Manager_Export
                 }
             }
 
+            // Filteren op 'linked'/'unlinked' als gekozen
             if (
                 ($export_option === 'linked' && $pagina === __('Geen', 'modern-image-manager')) ||
                 ($export_option === 'unlinked' && $pagina !== __('Geen', 'modern-image-manager'))
@@ -106,7 +120,7 @@ final class Modern_Image_Manager_Export
             foreach ($selected_columns as $column) {
                 $data[] = match ($column) {
                     'filename'      => $filename,
-                    'new_filename'  => '',
+                    'new_filename'  => '', // Vul eventueel aan uit andere bron
                     'page'          => $pagina,
                     'title'         => $title,
                     'caption'       => $caption,

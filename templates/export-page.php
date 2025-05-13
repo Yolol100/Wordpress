@@ -17,6 +17,12 @@ if ($error_message) {
       <?php echo esc_html__('Selecteer de exportoptie en kies welke kolommen je wilt exporteren. Klik vervolgens op de knop om de CSV te genereren.', 'modern-image-manager'); ?>
     </p>
 
+    <?php if (!empty($error_message)): ?>
+      <div class="mim-notice mim-notice--error">
+        <p><?php echo esc_html($error_message); ?></p>
+      </div>
+    <?php endif; ?>
+
     <form method="post" class="page-form export-page-form">
 
       <!-- Exportoptie dropdown -->
@@ -52,15 +58,6 @@ if ($error_message) {
       <button type="submit" name="export_csv" class="page-button export-button">
         <?php echo esc_html__('Exporteer naar CSV', 'modern-image-manager'); ?>
       </button>
-
-      <!-- Foutmelding -->
-      <?php if ($error_message): ?>
-        <div id="noExportMessage">
-          <p style="color: red; text-align: center; margin-top: 10px;">
-            <?php echo esc_html($error_message); ?>
-          </p>
-        </div>
-      <?php endif; ?>
     </form>
   </div>
 </body>

@@ -483,3 +483,13 @@
   height: 1rem;
   vertical-align: middle;
 }
+
+.mim-notice {
+  border-radius: 4px;
+  margin: 16px 0;
+  padding: 12px 16px;
+  font-size: 15px;
+}
+.mim-notice--error { background: #ffebe9; color: #cf222e; border: 1px solid #cf222e; }
+.mim-notice--success { background: #dafbe1; color: #116329; border: 1px solid #116329; }
+.mim-notice--warning { background: #fff8c5; color: #9a6700; border: 1px solid #9a6700; }
