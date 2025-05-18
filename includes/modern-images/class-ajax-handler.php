@@ -7,25 +7,25 @@ final class ModernImageManagerAjaxHandler
 {
     public static function init(): void
     {
-        add_action('wp_ajax_update_media_meta',    [self::class, 'updateMediaMetaCallback']);
-        add_action('wp_ajax_delete_media',          [self::class, 'deleteMediaCallback']);
-        add_action('wp_ajax_bulk_delete_media',     [self::class, 'bulkDeleteMediaCallback']);
+        add_action('wp_ajax_update_media_meta',        [self::class, 'updateMediaMetaCallback']);
+        add_action('wp_ajax_delete_media',             [self::class, 'deleteMediaCallback']);
+        add_action('wp_ajax_bulk_delete_media',        [self::class, 'bulkDeleteMediaCallback']);
+        add_action('wp_ajax_get_export_row_count',     [self::class, 'getExportRowCountCallback']);
+        add_action('wp_ajax_get_export_preview_data',  [self::class, 'getExportPreviewDataCallback']);
     }
 
     public static function updateMediaMetaCallback(): void
     {
-        error_log('DEBUG: updateMediaMetaCallback aangeroepen');
-
         if (! current_user_can('manage_options')) {
             wp_send_json_error(['message' => __('Geen toestemming.', 'modern-image-manager')]);
         }
 
-        $attachmentId   = self::sanitizeInt($_POST['attachment_id']   ?? null);
-        $newTitle       = sanitize_text_field($_POST['title']         ?? '');
-        $newCaption     = sanitize_text_field($_POST['caption']       ?? '');
+        $attachmentId   = self::sanitizeInt($_POST['attachment_id'] ?? null);
+        $newTitle       = sanitize_text_field($_POST['title'] ?? '');
+        $newCaption     = sanitize_text_field($_POST['caption'] ?? '');
         $newDescription = sanitize_textarea_field($_POST['description'] ?? '');
-        $newAlt         = sanitize_text_field($_POST['alt']           ?? '');
-        $newFilename    = sanitize_file_name($_POST['new_filename']   ?? '');
+        $newAlt         = sanitize_text_field($_POST['alt'] ?? '');
+        $newFilename    = sanitize_file_name($_POST['new_filename'] ?? '');
 
         if (! $attachmentId) {
             wp_send_json_error(['message' => __('Ongeldig bijlage-ID.', 'modern-image-manager')]);
@@ -33,17 +33,14 @@ final class ModernImageManagerAjaxHandler
 
         $attachment = get_post($attachmentId);
         if (! $attachment) {
-            error_log('DEBUG: Bijlage niet gevonden (raceconditie)');
             wp_send_json_error(['message' => __('Bijlage niet gevonden.', 'modern-image-manager')]);
         }
 
-        // Strip file extension uit invoer
         $newTitle       = self::removeFileExtension($newTitle);
         $newCaption     = self::removeFileExtension($newCaption);
         $newDescription = self::removeFileExtension($newDescription);
         $newAlt         = self::removeFileExtension($newAlt);
 
-        // Update post fields
         $result = wp_update_post([
             'ID'           => $attachmentId,
             'post_title'   => $newTitle,
@@ -52,11 +49,7 @@ final class ModernImageManagerAjaxHandler
         ], true);
 
         if (is_wp_error($result)) {
-            error_log('DEBUG: wp_update_post error: ' . $result->get_error_message());
-            wp_send_json_error([
-                'message' => __('Fout bij bijwerken media: ', 'modern-image-manager')
-                            . $result->get_error_message()
-            ]);
+            wp_send_json_error(['message' => __('Fout bij bijwerken media: ', 'modern-image-manager') . $result->get_error_message()]);
         }
 
         if ($newAlt !== '') {
@@ -67,7 +60,6 @@ final class ModernImageManagerAjaxHandler
             wp_send_json_error(['message' => __('Fout bij hernoemen bestand.', 'modern-image-manager')]);
         }
 
-        error_log('DEBUG: updateMediaMetaCallback succesvol');
         wp_send_json_success(['message' => __('Media info bijgewerkt.', 'modern-image-manager')]);
     }
 
@@ -83,16 +75,11 @@ final class ModernImageManagerAjaxHandler
         }
 
         $deleted = wp_delete_attachment($attachmentId, true);
-        if ($deleted) {
-            wp_send_json_success(['message' => __('Media verwijderd.', 'modern-image-manager')]);
-        } else {
-            wp_send_json_error(['message' => __('Fout bij verwijderen media.', 'modern-image-manager')]);
-        }
+        $deleted
+            ? wp_send_json_success(['message' => __('Media verwijderd.', 'modern-image-manager')])
+            : wp_send_json_error(['message' => __('Fout bij verwijderen media.', 'modern-image-manager')]);
     }
 
-    /**
-     * Bulk delete handler: verwijder meerdere attachments tegelijk.
-     */
     public static function bulkDeleteMediaCallback(): void
     {
         if (! current_user_can('manage_options')) {
@@ -114,13 +101,131 @@ final class ModernImageManagerAjaxHandler
         wp_send_json_success(['message' => __('Geselecteerde media verwijderd.', 'modern-image-manager')]);
     }
 
+    public static function getExportRowCountCallback(): void
+    {
+        if (! current_user_can('manage_options')) {
+            wp_send_json_error(['message' => __('Geen toestemming.', 'modern-image-manager')]);
+        }
+
+        $option = sanitize_text_field($_POST['export_option'] ?? 'all');
+
+        $query_args = [
+            'post_type'      => 'attachment',
+            'post_status'    => 'inherit',
+            'posts_per_page' => -1,
+            'fields'         => 'ids',
+        ];
+
+        if ($option === 'linked') {
+            $query_args['meta_query'][] = [
+                'key'     => '_wp_attachment_context',
+                'compare' => 'EXISTS',
+            ];
+        } elseif ($option === 'unlinked') {
+            $query_args['meta_query'][] = [
+                'key'     => '_wp_attachment_context',
+                'compare' => 'NOT EXISTS',
+            ];
+        }
+
+        $query = new WP_Query($query_args);
+        $ids = $query->posts;
+        $totalSize = 0;
+
+        foreach ($ids as $id) {
+            $file = get_attached_file($id);
+            if ($file && file_exists($file)) {
+                $totalSize += filesize($file);
+            }
+        }
+
+        wp_send_json_success([
+            'count'       => count($ids),
+            'total_size'  => $totalSize, // in bytes
+        ]);
+    }
+
+    public static function getExportPreviewDataCallback(): void
+    {
+        if (! current_user_can('manage_options')) {
+            wp_send_json_error(['message' => __('Geen toestemming.', 'modern-image-manager')]);
+        }
+
+        $columns = isset($_POST['columns']) && is_array($_POST['columns'])
+            ? array_map('sanitize_text_field', $_POST['columns'])
+            : [];
+
+        $option = sanitize_text_field($_POST['export_option'] ?? 'all');
+
+        if (empty($columns)) {
+            wp_send_json_error(['message' => __('Geen kolommen geselecteerd.', 'modern-image-manager')]);
+        }
+
+        $query_args = [
+            'post_type'      => 'attachment',
+            'post_status'    => 'inherit',
+            'posts_per_page' => 5,
+        ];
+
+        if ($option === 'linked') {
+            $query_args['meta_query'][] = [
+                'key'     => '_wp_attachment_context',
+                'compare' => 'EXISTS',
+            ];
+        } elseif ($option === 'unlinked') {
+            $query_args['meta_query'][] = [
+                'key'     => '_wp_attachment_context',
+                'compare' => 'NOT EXISTS',
+            ];
+        }
+
+        $query = new WP_Query($query_args);
+        $data = [];
+
+        foreach ($query->posts as $post) {
+            $row = [];
+
+            foreach ($columns as $column) {
+                switch ($column) {
+                    case 'filename':
+                        $row['filename'] = basename(get_attached_file($post->ID));
+                        break;
+                    case 'new_filename':
+                        $row['new_filename'] = ''; // niet beschikbaar
+                        break;
+                    case 'page':
+                        $row['page'] = get_post_meta($post->ID, '_wp_attachment_context', true) ?: '-';
+                        break;
+                    case 'title':
+                        $row['title'] = $post->post_title;
+                        break;
+                    case 'caption':
+                        $row['caption'] = $post->post_excerpt;
+                        break;
+                    case 'description':
+                        $row['description'] = $post->post_content;
+                        break;
+                    case 'alt_text':
+                        $row['alt_text'] = get_post_meta($post->ID, '_wp_attachment_image_alt', true);
+                        break;
+                    case 'file_url':
+                        $row['file_url'] = wp_get_attachment_url($post->ID);
+                        break;
+                    default:
+                        $row[$column] = '-';
+                }
+            }
+
+            $data[] = $row;
+        }
+
+        wp_send_json_success(['preview' => $data]);
+    }
+
     private static function updateFileName(int $attachmentId, string $newFilename): bool
     {
-        error_log("DEBUG: updateFileName voor ID {$attachmentId} -> {$newFilename}");
-
         $file = get_attached_file($attachmentId);
         if (! $file || ! file_exists($file)) {
-            error_log("DEBUG: Bestand niet gevonden voor ID {$attachmentId}");
             return false;
         }
 
@@ -133,13 +238,11 @@ final class ModernImageManagerAjaxHandler
         }
 
         if (file_exists($newFile) || ! rename($file, $newFile)) {
-            error_log("DEBUG: Kon niet hernoemen naar {$newFile}");
             return false;
         }
 
         update_attached_file($attachmentId, $newFile);
 
-        // Regenerate metadata
         require_once ABSPATH . 'wp-admin/includes/image.php';
         $meta = wp_generate_attachment_metadata($attachmentId, $newFile);
         if (! $meta) {
@@ -147,7 +250,6 @@ final class ModernImageManagerAjaxHandler
         }
         wp_update_attachment_metadata($attachmentId, $meta);
 
-        // Update post guid & name
         $url = wp_upload_dir()['baseurl'] . '/' . basename($newFile);
         wp_update_post([
             'ID'        => $attachmentId,
@@ -165,7 +267,7 @@ final class ModernImageManagerAjaxHandler
 
     private static function sanitizeInt($value): ?int
     {
-        return filter_var($value, FILTER_VALIDATE_INT, ['options'=>['default'=>null]]);
+        return filter_var($value, FILTER_VALIDATE_INT, ['options' => ['default' => null]]);
     }
 }
 

@@ -60,6 +60,11 @@
   text-align: center;
 }
 
+/* Ruimte tussen de titel en de export-opties */
+.export-page-container .export-option-group {
+  margin-top: 2rem;
+}
+
 /* Form group */
 .export-page-form .form-group {
   display: flex;
@@ -493,3 +498,128 @@
 .mim-notice--error { background: #ffebe9; color: #cf222e; border: 1px solid #cf222e; }
 .mim-notice--success { background: #dafbe1; color: #116329; border: 1px solid #116329; }
 .mim-notice--warning { background: #fff8c5; color: #9a6700; border: 1px solid #9a6700; }
+
+/* Spinner / loader */
+#export-spinner {
+  color: #2271b1;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Checkboxgroep styling */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+@media (min-width: 600px) {
+  .checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+
+/* Individuele checkboxregels */
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.checkbox-item:hover {
+  background-color: #f1f1f1;
+}
+
+/* Checkbox zelf */
+.checkbox-item input[type="checkbox"] {
+  margin-right: 12px;
+  width: 18px;
+  height: 18px;
+  accent-color: #2271b1; /* WordPress adminkleur */
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.checkbox-item input[type="checkbox"]:focus {
+  outline: 2px solid #2271b1;
+  outline-offset: 2px;
+}
+
+/* Selecteer-/deselecteerknoppen */
+.checkbox-actions {
+  margin-bottom: 10px;
+}
+
+.checkbox-actions button {
+  margin-right: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  background-color: #f6f7f7;
+  border: 1px solid #ccd0d4;
+  border-radius: 3px;
+}
+
+.checkbox-actions button:hover {
+  background-color: #e4e4e4;
+}
+
+/* Bestandsnaamveld */
+.export-filename-group {
+  margin-bottom: 20px;
+}
+
+.export-filename-group label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.export-filename-group input[type="text"] {
+  width: 100%;
+  max-width: 300px;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.export-filename-group .description {
+  font-size: 12px;
+  color: #666;
+}
+
+/* CSV-preview */
+#csv-preview {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  padding-top: 15px;
+  font-size: 14px;
+}
+
+#csv-preview table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+#csv-preview th,
+#csv-preview td {
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+  font-size: 13px;
+}
+
+#csv-preview th {
+  background-color: #f0f0f0;
+  font-weight: 600;
+}
