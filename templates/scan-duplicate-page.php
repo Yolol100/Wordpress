@@ -5,20 +5,17 @@
 
 defined('ABSPATH') || exit;
 
-if ( ! current_user_can('manage_options') ) {
-    wp_die( esc_html__('Je hebt geen rechten om deze pagina te bekijken.', 'modern-image-manager') );
+if (!current_user_can('manage_options')) {
+    wp_die(esc_html__('Je hebt geen rechten om deze pagina te bekijken.', 'modern-image-manager'));
 }
-?>
 
+?>
 <div class="wrap mim-scan-container mim-scan-page">
 
-  <div id="mim-scan-loader" hidden style="text-align:center; margin-top: 1rem;">
-    🔄 <em><?php esc_html_e('Afbeeldingen worden gescand... Een ogenblik geduld.', 'modern-image-manager'); ?></em>
-  </div>
-
+  <!-- Intro en startknop -->
   <?php if (
-    ! isset($_POST['scan_duplicates']) ||
-    ! check_admin_referer('scan_duplicates_action', 'scan_duplicates_nonce')
+    !isset($_POST['scan_duplicates']) ||
+    !check_admin_referer('scan_duplicates_action', 'scan_duplicates_nonce')
   ) : ?>
 
     <div id="mim-scan-intro">
@@ -28,7 +25,6 @@ if ( ! current_user_can('manage_options') ) {
       <p class="mim-scan-page-description">
         <?php echo esc_html__('Klik op de onderstaande knop om alle dubbele afbeeldingen te scannen, inclusief afbeeldingen uit Elementor-templates.', 'modern-image-manager'); ?>
       </p>
-
       <form method="post" class="mim-scan-page-form">
         <?php wp_nonce_field('scan_duplicates_action', 'scan_duplicates_nonce'); ?>
         <button type="submit" name="scan_duplicates" class="mim-scan-page-button">
@@ -39,6 +35,15 @@ if ( ! current_user_can('manage_options') ) {
 
   <?php endif; ?>
 
+  <!-- Scan loader met animatie -->
+  <div id="mim-scan-loader" hidden>
+    <div class="spinner"></div>
+    <em><?php esc_html_e('Afbeeldingen worden gescand... Een ogenblik geduld.', 'modern-image-manager'); ?></em>
+  </div>
+
+  <!-- Toast container -->
+  <div id="mim-toast" role="alert" aria-live="assertive" hidden></div>
+
   <?php if (
     isset($_POST['scan_duplicates']) &&
     check_admin_referer('scan_duplicates_action', 'scan_duplicates_nonce')
@@ -47,31 +52,40 @@ if ( ! current_user_can('manage_options') ) {
     <?php
       require_once MODERN_IMAGE_MANAGER_PATH . 'includes/scan-images/scanner.php';
       $results = dius_scan_pages_for_duplicate_images();
-
-      if ( ! empty( $results ) ) {
-          echo '<div id="mim-enhanced-controls" style="margin-bottom: 1rem;">';
-          echo '<div id="mim-scan-summary" aria-live="polite" style="font-weight: bold; margin-bottom: 0.5rem;"></div>';
-          echo '<input type="search" id="mim-search" placeholder="Zoek op bestandsnaam..." oninput="filterScanResults()" style="width: 100%; padding: 8px; max-width: 400px;">';
-          echo '</div>';
-
-          echo '<div class="scan-wrapper">';
-          echo '<div class="mim-scan-filter" style="margin: 1rem 0;">';
-          echo '<label for="filter-type">' . esc_html__('Filter op type:', 'modern-image-manager') . '</label> ';
-          echo '<select id="filter-type" onchange="filterTableByType(this.value)">';
-          echo '<option value="all">' . esc_html__('Alle types', 'modern-image-manager') . '</option>';
-          echo '<option value="post_content">' . esc_html__('In content', 'modern-image-manager') . '</option>';
-          echo '<option value="featured_image">' . esc_html__('Uitgelichte afbeelding', 'modern-image-manager') . '</option>';
-          echo '<option value="acf_field">' . esc_html__('ACF veld', 'modern-image-manager') . '</option>';
-          echo '<option value="elementor_template">' . esc_html__('Elementor', 'modern-image-manager') . '</option>';
-          echo '</select>';
-          echo '</div>';
-      }
-
-      dius_display_results( $results );
-
-      if ( ! empty( $results ) ) {
-          echo '</div>'; // sluit .scan-wrapper
-      }
     ?>
+
+    <!-- Controls: summary, zoekveld, filter -->
+    <div id="mim-enhanced-controls">
+      <div id="mim-scan-summary" aria-live="polite"></div>
+      <input type="search" id="mim-search" placeholder="<?php esc_attr_e('Zoek op bestandsnaam...', 'modern-image-manager'); ?>">
+      <select id="filter-type">
+        <option value="all"><?php esc_html_e('Alle types', 'modern-image-manager'); ?></option>
+        <option value="post_content"><?php esc_html_e('In content', 'modern-image-manager'); ?></option>
+        <option value="featured_image"><?php esc_html_e('Uitgelichte afbeelding', 'modern-image-manager'); ?></option>
+        <option value="acf_field"><?php esc_html_e('ACF veld', 'modern-image-manager'); ?></option>
+        <option value="elementor_template"><?php esc_html_e('Elementor', 'modern-image-manager'); ?></option>
+      </select>
+    </div>
+
+    <!-- Resultaten en scan-opnieuw -->
+    <div class="scan-wrapper">
+      <?php dius_display_results($results); ?>
+
+      <div style="text-align:center; margin-top:1.5rem;">
+        <button id="mim-rescan-btn" class="mim-scan-page-button">
+          <?php esc_html_e('Opnieuw scannen', 'modern-image-manager'); ?>
+        </button>
+      </div>
+    </div>
+
+    <?php if ( ! empty( $results ) ) : ?>
+      <!-- Lightbox modal alleen bij resultaten -->
+      <div id="mim-lightbox" class="mim-lightbox" hidden>
+        <span class="mim-lightbox-close">&times;</span>
+        <img src="" alt="">
+      </div>
+    <?php endif; ?>
+
   <?php endif; ?>
+
 </div>

@@ -14,8 +14,8 @@ if ( ! current_user_can( 'manage_options' ) ) {
 }
 
 /**
- * Laad CSS voor de scanpagina en voeg inline CSS toe om de filter te verbergen als
- * er geen duplicaat-rijen in de resultaten-tabel staan.
+ * Laad CSS en JS voor de scanpagina en voeg inline CSS toe om de filter
+ * te verbergen als er geen duplicaat-rijen in de resultaten-tabel staan.
  */
 function mim_enqueue_admin_assets_for_scan_page( $hook ) {
     if ( $hook !== 'modern-image-manager_page_scan-duplicate-images' ) {
@@ -30,19 +30,21 @@ function mim_enqueue_admin_assets_for_scan_page( $hook ) {
     wp_add_inline_style(
         'scan-duplicate-images',
         "
-        /* verberg dropdown-container als er geen duplicaten zijn */
-        .scan-wrapper:not(:has(table.dius-results-table tbody tr)) .mim-scan-filter {
+        /* verberg controls als er geen duplicaten zijn */
+        .scan-wrapper:not(:has(table.dius-results-table tbody tr)) #mim-enhanced-controls {
             display: none;
         }
         "
     );
+    wp_enqueue_script(
+        'scan-duplicate-images-js',
+        MODERN_IMAGE_MANAGER_URL . 'assets/js/scan-duplicate-images.js',
+        [],
+        '1.0.0',
+        true
+    );
 }
 add_action( 'admin_enqueue_scripts', 'mim_enqueue_admin_assets_for_scan_page' );
-
-/**
- * Functie die scanpagina rendert. (Definitie hoort in hoofd-pluginbestand te staan.)
- * Hier alleen helper-functies.
- */
 
 /**
  * Scan alle gebruikte afbeeldingen en retourneer duplicaten.
@@ -54,7 +56,6 @@ function scan_duplicate_images(): array {
     $feat_imgs    = get_featured_images();
     $acf_imgs     = get_acf_images();
     $tpl_imgs     = mim_get_elementor_template_images();
-    $tpl_page_map = mim_map_elementor_templates_to_pages();
 
     $all = array_merge_recursive( $post_imgs, $feat_imgs, $acf_imgs, $tpl_imgs );
     $duplicates = [];
@@ -87,36 +88,32 @@ function dius_scan_pages_for_duplicate_images() {
 }
 
 /**
- * Toon de scanresultaten in een tabel.
+ * Toon de scanresultaten in een interactieve, sorteerbare tabel.
  *
  * @param array<int,array> $results
  */
 function dius_display_results( $results ) {
     if ( empty( $results ) ) {
         echo '<p class="mim-scan-page-description">'
-           . esc_html__( 'Geen dubbele afbeeldingen gevonden.', 'modern-image-manager' )
+           . esc_html__( '✅ Geen dubbele afbeeldingen gevonden.', 'modern-image-manager' )
            . '</p>';
         return;
     }
 
-    echo '<h2 class="mim-scan-page-title">'
-       . esc_html__( 'Scan resultaten', 'modern-image-manager' )
-       . '</h2>';
-    echo '<p class="mim-scan-page-description"><strong>'
-       . esc_html__( 'Totaal aantal dubbele afbeeldingen gevonden:', 'modern-image-manager' ) . '</strong> '
-       . esc_html( count( $results ) ) . '</p>';
-
-    echo '<table class="wp-list-table widefat fixed striped dius-results-table">';
+    // Tabel header en summary
+    echo '<h2 class="mim-scan-page-title">' . esc_html__( 'Scan resultaten', 'modern-image-manager' ) . '</h2>';
+    echo '<table class="wp-list-table widefat fixed striped dius-results-table" data-sort-asc="false">';
     echo '<thead><tr>';
-    echo '<th>' . esc_html__( 'Attachment', 'modern-image-manager' ) . '</th>';
-    echo '<th>' . esc_html__( 'Post(s) / Pagina(s)', 'modern-image-manager' ) . '</th>';
-    echo '<th>' . esc_html__( 'Bron', 'modern-image-manager' ) . '</th>';
+      echo '<th onclick="sortTable(0)">' . esc_html__( 'Attachment', 'modern-image-manager' ) . ' <span class="sort-arrow"></span></th>';
+      echo '<th onclick="sortTable(1)">' . esc_html__( 'Post(s) / Pagina(s)', 'modern-image-manager' ) . ' <span class="sort-arrow"></span></th>';
+      echo '<th onclick="sortTable(2)">' . esc_html__( 'Bron', 'modern-image-manager' ) . ' <span class="sort-arrow"></span></th>';
     echo '</tr></thead><tbody>';
 
     foreach ( $results as $aid => $usages ) {
         $url      = wp_get_attachment_url( $aid );
         $filename = $url ? basename( parse_url( $url, PHP_URL_PATH ) ) : '(bestand niet gevonden)';
 
+        // Posts en contexten verzamelen
         $posts    = [];
         $contexts = [];
         foreach ( $usages as $u ) {
@@ -149,22 +146,30 @@ function dius_display_results( $results ) {
             }
         }
 
-        // Unieke posts dedupliceren
-        $unique_titles = array_unique( array_map( 'strip_tags', $posts ) );
-        $unique_links  = [];
-        foreach ( $unique_titles as $title ) {
-            foreach ( $posts as $html ) {
-                if ( strip_tags( $html ) === $title ) {
-                    $unique_links[] = $html;
-                    break;
-                }
-            }
-        }
+        // Deduplicate links
+        $unique_links = array_values( array_unique( $posts ) );
+        $first_link   = $unique_links[0] ?? '';
 
         echo '<tr>';
-        echo '<td>' . esc_html( $filename ) . '</td>';
-        echo '<td>' . implode( ', ', $unique_links ) . '</td>';
-        echo '<td>' . implode( ', ', array_unique( $contexts ) ) . '</td>';
+          // Attachment-cel
+          echo '<td>';
+          if ( $url ) {
+              echo '<img class="scan-thumb" src="' . esc_url( $url ) . '" alt="' . esc_attr( $filename ) . '">';
+          }
+          echo esc_html( $filename );
+          echo '</td>';
+
+          // Posts/Pagina's-cel + knop
+          echo '<td>' . implode( ', ', $unique_links );
+          if ( $first_link ) {
+              echo ' <a class="mim-view-page-btn" href="' . esc_url( strip_tags( $first_link ) ) . '" target="_blank">'
+                 . esc_html__( 'Bekijk pagina', 'modern-image-manager' ) .
+                 '</a>';
+          }
+          echo '</td>';
+
+          // Bron-cel
+          echo '<td>' . implode( ', ', array_unique( $contexts ) ) . '</td>';
         echo '</tr>';
     }
 
