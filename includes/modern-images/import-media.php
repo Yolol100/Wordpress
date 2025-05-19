@@ -11,12 +11,28 @@ final class Modern_Image_Manager_Import
         $imported_count = 0;
         $skipped_rows = [];
         $success = '';
+        $import_summary = '';
 
         if (isset($_POST['import_csv'])) {
             list($errors, $imported_count, $skipped_rows) = self::handle_import();
             if ($imported_count > 0 && empty($errors)) {
                 $success = sprintf(__('%d rijen geïmporteerd.', 'modern-image-manager'), $imported_count);
             }
+
+            // Uitgebreide samenvatting tonen na import
+            $skipped_count = count($skipped_rows);
+            $import_summary = '<div class="import-summary">';
+            $import_summary .= '<strong>' . esc_html__('Import samenvatting', 'modern-image-manager') . '</strong><ul>';
+            $import_summary .= '<li>' . sprintf(esc_html__('%d rijen succesvol geïmporteerd.', 'modern-image-manager'), $imported_count) . '</li>';
+            $import_summary .= '<li>' . sprintf(esc_html__('%d rijen overgeslagen wegens fouten.', 'modern-image-manager'), $skipped_count) . '</li>';
+            if ($skipped_count > 0) {
+                $import_summary .= '<details><summary>' . esc_html__('Bekijk overgeslagen rijen', 'modern-image-manager') . '</summary><ul>';
+                foreach ($skipped_rows as $rownum => $reason) {
+                    $import_summary .= '<li>' . sprintf(esc_html__('Rij %d: %s', 'modern-image-manager'), $rownum, esc_html($reason)) . '</li>';
+                }
+                $import_summary .= '</ul></details>';
+            }
+            $import_summary .= '</ul></div>';
         }
 
         include MODERN_IMAGE_MANAGER_PATH . 'templates/import-page.php';
@@ -34,14 +50,8 @@ final class Modern_Image_Manager_Import
             echo '<div class="mim-notice mim-notice--success"><p>' . esc_html($success) . '</p></div>';
         }
 
-        if (!empty($skipped_rows)) {
-            echo '<div class="mim-notice mim-notice--warning"><p>';
-            printf(esc_html__('%d rijen zijn overgeslagen wegens fouten:', 'modern-image-manager'), count($skipped_rows));
-            echo '</p><ul>';
-            foreach ($skipped_rows as $rownum => $reason) {
-                echo '<li>' . sprintf(esc_html__('Rij %d: %s', 'modern-image-manager'), $rownum, esc_html($reason)) . '</li>';
-            }
-            echo '</ul></div>';
+        if (!empty($import_summary)) {
+            echo $import_summary;
         }
     }
 
