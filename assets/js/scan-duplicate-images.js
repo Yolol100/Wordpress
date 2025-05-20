@@ -2,6 +2,8 @@
  * assets/js/scan-duplicate-images.js
  * Complete JS for scan page: loader, toast, search/filter, sort, lightbox, rescan, localStorage & “no results” logic.
  */
+'use strict';
+
 document.addEventListener('DOMContentLoaded', () => {
   const intro       = document.getElementById('mim-scan-intro');
   const loader      = document.getElementById('mim-scan-loader');
@@ -55,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Rescan button
   if (rescanBtn) {
     rescanBtn.addEventListener('click', () => {
-      showToast('<?php echo esc_js(__('Opnieuw scannen…', 'modern-image-manager')); ?>');
+      showToast('Opnieuw scannen…');
       setTimeout(() => location.reload(), 500);
     });
   }
@@ -100,13 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const summaryEl = document.getElementById('mim-scan-summary');
     if (summaryEl) {
       summaryEl.textContent =
-        ${count} dubbele afbeelding${count !== 1 ? 'en' : ''} gevonden in ${pages.size} pagina${pages.size !== 1 ? "'s" : ''}.;
+        `${count} dubbele afbeelding${count !== 1 ? 'en' : ''} gevonden in ${pages.size} pagina${pages.size !== 1 ? "'s" : ''}.`;
     }
 
-    // Show toast if no results
-    if (count === 0) {
-      showToast('<?php echo esc_js(__('✅ Geen dubbele afbeeldingen gevonden.', 'modern-image-manager')); ?>');
-    }
+    // Show toast if no results – verwijderd zoals gevraagd
+    // if (count === 0) {
+    //   showToast('Geen dubbele afbeeldingen gevonden.');
+    // }
   }
 
   function filterScanResults() {
@@ -144,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     rows.forEach(r => tbody.appendChild(r));
     table.dataset.sortAsc = asc;
     table.querySelectorAll('.sort-arrow').forEach(el => el.textContent = '');
-    const arrow = table.querySelector(thead th:nth-child(${colIndex+1}) .sort-arrow);
+    const arrow = table.querySelector(`thead th:nth-child(${colIndex+1}) .sort-arrow`);
     if (arrow) arrow.textContent = asc ? ' ▲' : ' ▼';
   }
 

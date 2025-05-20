@@ -7,11 +7,12 @@ final class ModernImageManagerAjaxHandler
 {
     public static function init(): void
     {
-        add_action('wp_ajax_update_media_meta',        [self::class, 'updateMediaMetaCallback']);
-        add_action('wp_ajax_delete_media',             [self::class, 'deleteMediaCallback']);
-        add_action('wp_ajax_bulk_delete_media',        [self::class, 'bulkDeleteMediaCallback']);
-        add_action('wp_ajax_get_export_row_count',     [self::class, 'getExportRowCountCallback']);
-        add_action('wp_ajax_get_export_preview_data',  [self::class, 'getExportPreviewDataCallback']);
+        add_action('wp_ajax_update_media_meta',       [self::class, 'updateMediaMetaCallback']);
+        add_action('wp_ajax_delete_media',            [self::class, 'deleteMediaCallback']);
+        add_action('wp_ajax_bulk_delete_media',       [self::class, 'bulkDeleteMediaCallback']);
+        add_action('wp_ajax_get_export_row_count',    [self::class, 'getExportRowCountCallback']);
+        add_action('wp_ajax_get_export_preview_data', [self::class, 'getExportPreviewDataCallback']);
+        add_action('wp_ajax_filter_media',            [self::class, 'filterMediaCallback']);
     }
 
     public static function updateMediaMetaCallback(): void
@@ -49,7 +50,10 @@ final class ModernImageManagerAjaxHandler
         ], true);
 
         if (is_wp_error($result)) {
-            wp_send_json_error(['message' => __('Fout bij bijwerken media: ', 'modern-image-manager') . $result->get_error_message()]);
+            wp_send_json_error([
+                'message' => __('Fout bij bijwerken media: ', 'modern-image-manager')
+                    . $result->get_error_message()
+            ]);
         }
 
         if ($newAlt !== '') {
@@ -140,8 +144,8 @@ final class ModernImageManagerAjaxHandler
         }
 
         wp_send_json_success([
-            'count'       => count($ids),
-            'total_size'  => $totalSize, // in bytes
+            'count'      => count($ids),
+            'total_size' => $totalSize,
         ]);
     }
 
@@ -191,7 +195,7 @@ final class ModernImageManagerAjaxHandler
                         $row['filename'] = basename(get_attached_file($post->ID));
                         break;
                     case 'new_filename':
-                        $row['new_filename'] = ''; // niet beschikbaar
+                        $row['new_filename'] = '';
                         break;
                     case 'page':
                         $row['page'] = get_post_meta($post->ID, '_wp_attachment_context', true) ?: '-';
@@ -220,6 +224,91 @@ final class ModernImageManagerAjaxHandler
         }
 
         wp_send_json_success(['preview' => $data]);
+    }
+
+    public static function filterMediaCallback(): void
+    {
+        if (! current_user_can('manage_options')) {
+            wp_send_json_error(['message' => __('Geen toestemming.', 'modern-image-manager')]);
+        }
+
+        $search = sanitize_text_field($_POST['search'] ?? '');
+        $filter = sanitize_text_field($_POST['filter'] ?? 'all');
+
+        $args = [
+            'post_type'      => 'attachment',
+            'post_status'    => 'inherit',
+            'posts_per_page' => -1,
+            'fields'         => 'ids',
+        ];
+
+        if ($search !== '') {
+            // Zoek in post_title (Titel), post_excerpt (Caption), post_content (Description)
+            $args['s'] = $search;
+
+            // Zoek in alt-tag
+            $args['meta_query'] = [
+                'relation' => 'OR',
+                [
+                    'key'     => '_wp_attachment_image_alt',
+                    'value'   => $search,
+                    'compare' => 'LIKE',
+                ],
+            ];
+
+            // Zoek in bestandsnaam (guid)
+            add_filter('posts_where', function ($where, $query) use ($search) {
+                global $wpdb;
+                $where .= " OR {$wpdb->posts}.guid LIKE '%" . esc_sql($wpdb->esc_like($search)) . "%'";
+                return $where;
+            }, 10, 2);
+        }
+
+        if ($filter === 'linked') {
+            $args['meta_query'][] = [
+                'relation' => 'OR',
+                ['key' => '_wp_attachment_context', 'compare' => 'EXISTS'],
+                ['key' => '_thumbnail_id', 'compare' => 'EXISTS'],
+            ];
+            $args['post_parent__not_in'] = [0];
+        } elseif ($filter === 'unlinked') {
+            $args['meta_query'][] = [
+                'relation' => 'AND',
+                ['key' => '_wp_attachment_context', 'compare' => 'NOT EXISTS'],
+                ['key' => '_thumbnail_id', 'compare' => 'NOT EXISTS'],
+            ];
+            $args['post_parent'] = 0;
+        }
+
+        $query = new WP_Query($args);
+        $rows  = [];
+
+        foreach ($query->posts as $id) {
+            $status   = get_post_meta($id, '_wp_attachment_context', true) ? 'linked' : 'unlinked';
+            $filename = esc_html(pathinfo(get_attached_file($id), PATHINFO_FILENAME));
+            $page     = esc_html(modern_image_manager_get_attached_post_title($id));
+            $title    = esc_attr(get_post($id)->post_title);
+            $caption  = esc_attr(get_post($id)->post_excerpt);
+            $desc     = esc_textarea(get_post($id)->post_content);
+            $alt      = esc_attr(get_post_meta($id, '_wp_attachment_image_alt', true));
+
+            $tr  = "<tr class=\"media-items-tr-item unique-tr-{$id}\" data-status=\"{$status}\">";
+            $tr .= "<td><input type=\"checkbox\" class=\"bulk-delete-checkbox\" data-attachment-id=\"{$id}\" /></td>";
+            $tr .= "<td><input type=\"text\" class=\"filename-input media-items-filename-input\" data-attachment-id=\"{$id}\" value=\"{$filename}\" readonly></td>";
+            $tr .= "<td><input type=\"text\" class=\"new-filename-input media-items-new-filename-input\" data-attachment-id=\"{$id}\" placeholder=\"" . esc_attr__('Voer nieuwe bestandsnaam in', 'modern-image-manager') . "\"></td>";
+            $tr .= "<td>{$page}</td>";
+            $tr .= "<td><input type=\"text\" class=\"title-input media-items-title-input\" data-attachment-id=\"{$id}\" value=\"{$title}\" placeholder=\"" . esc_attr__('Voer titel in', 'modern-image-manager') . "\"></td>";
+            $tr .= "<td><input type=\"text\" class=\"caption-input media-items-caption-input\" data-attachment-id=\"{$id}\" value=\"{$caption}\" placeholder=\"" . esc_attr__('Voer caption in', 'modern-image-manager') . "\"></td>";
+            $tr .= "<td><textarea class=\"description-input media-items-description-input\" data-attachment-id=\"{$id}\" placeholder=\"" . esc_attr__('Voer description in', 'modern-image-manager') . "\">{$desc}</textarea></td>";
+            $tr .= "<td><input type=\"text\" class=\"alt-input media-items-alt-input\" data-attachment-id=\"{$id}\" value=\"{$alt}\" placeholder=\"" . esc_attr__('Voer alt-tag in', 'modern-image-manager') . "\"></td>";
+            $tr .= "<td><button class=\"save-meta page-button media-items-save-meta\" data-attachment-id=\"{$id}\">" . esc_html__('Opslaan', 'modern-image-manager') . "</button></td>";
+            $tr .= "<td><button class=\"delete-media page-button media-items-delete-media\" data-attachment-id=\"{$id}\">" . esc_html__('Verwijderen', 'modern-image-manager') . "</button></td>";
+            $tr .= '</tr>';
+
+            $rows[] = $tr;
+        }
+
+        wp_send_json_success(['rows' => $rows]);
     }
 
     private static function updateFileName(int $attachmentId, string $newFilename): bool

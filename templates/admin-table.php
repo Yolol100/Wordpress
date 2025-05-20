@@ -38,32 +38,27 @@ $media_items = modern_image_manager_get_media_items();
         id="search-input"
         class="search-box filter-top-search-box"
         placeholder="<?php echo esc_attr__('Zoeken...', 'modern-image-manager'); ?>"
-        onkeyup="filterTable()"
       >
     </div>
 
     <div class="rows-controls filter-top-rows-controls">
-      <div class="rows-per-page-container filter-top-rows-per-page-container">
-        <label for="rowsPerPage" class="filter-top-rows-per-page-label">
-          <?php echo esc_html__('Rijen per pagina:', 'modern-image-manager'); ?>
-        </label>
-        <select id="rowsPerPage" class="rows-per-page-select filter-top-rows-per-page-select">
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30" selected>30</option>
-          <option value="40">40</option>
-          <option value="50">50</option>
-        </select>
-      </div>
+      <label for="rowsPerPage" class="filter-top-rows-per-page-label">
+        <?php echo esc_html__('Rijen per pagina:', 'modern-image-manager'); ?>
+      </label>
+      <select id="rowsPerPage" class="rows-per-page-select filter-top-rows-per-page-select">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30" selected>30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+      </select>
     </div>
   </div>
 </div>
 
-<!-- Tabel -->
 <table class="wp-list-table widefat fixed striped unique-table media-items-table">
   <thead class="unique-thead media-items-thead">
     <tr class="unique-tr-head media-items-tr-head">
-      <!-- Bulk-select ALL checkbox -->
       <th><input type="checkbox" id="bulkSelectAll" /></th>
       <?php
       $headers = [
@@ -81,12 +76,11 @@ $media_items = modern_image_manager_get_media_items();
     <?php if ($media_items->have_posts()) : ?>
       <?php while ($media_items->have_posts()) : $media_items->the_post(); ?>
         <?php
-        $id = (int) get_the_ID();
-        $post = get_post($id);
+        $id       = (int) get_the_ID();
+        $post     = get_post($id);
         if (! $post) {
           continue;
         }
-
         $alt      = get_post_meta($id, '_wp_attachment_image_alt', true);
         $caption  = $post->post_excerpt;
         $desc     = $post->post_content;
@@ -99,7 +93,6 @@ $media_items = modern_image_manager_get_media_items();
           class="unique-tr-item media-items-tr-item unique-tr-<?php echo esc_attr($id); ?>"
           data-status="<?php echo esc_attr($status); ?>"
         >
-          <!-- Individuele bulk-checkbox -->
           <td>
             <input
               type="checkbox"
@@ -114,7 +107,6 @@ $media_items = modern_image_manager_get_media_items();
               data-attachment-id="<?php echo esc_attr($id); ?>"
               value="<?php echo esc_attr($filename); ?>"
               readonly
-              placeholder="<?php esc_attr_e('Voer bestandsnaam in', 'modern-image-manager'); ?>"
             >
           </td>
           <td>
@@ -187,13 +179,13 @@ $media_items = modern_image_manager_get_media_items();
   <p><?php esc_html_e('Geen afbeeldingen gevonden voor de geselecteerde filteroptie.', 'modern-image-manager'); ?></p>
 </div>
 
-<!-- Filter onderaan -->
+<!-- Filter & paginering onderaan -->
 <div class="wrap unique-wrap filter-bottom-container">
   <div class="filter-footer filter-bottom-footer">
     <div class="nav-controls filter-bottom-nav-controls">
       <select id="pageFilterBottom" class="page-filter-select filter-bottom-page-filter">
         <option value="all"><?php echo esc_html__('Alle pagina\'s', 'modern-image-manager'); ?></option>
-        <option value="linked"><?php echo esc_html__('Gekoppelde pagina\'s', 'modern-image-manager'); ?></option>
+        <option value="linked"><?php echo esc_html__('Gekoppelde pagina\'s', 'modern-image-manager'); ?></option?>
         <option value="unlinked"><?php echo esc_html__('Niet gekoppelde pagina\'s', 'modern-image-manager'); ?></option>
       </select>
       <button id="applyFilterBottom" class="page-button filter-bottom-apply-button"><?php esc_html_e('Filter toepassen', 'modern-image-manager'); ?></button>
@@ -205,7 +197,6 @@ $media_items = modern_image_manager_get_media_items();
       </div>
     </div>
 
-    <!-- Bulk-delete knop onderaan -->
     <div class="bulk-delete-controls filter-bottom-bulk-delete">
       <button id="bulkDeleteBottom" class="page-button bulk-delete-button">
         <?php echo esc_html__('Verwijder geselecteerde', 'modern-image-manager'); ?>
@@ -218,23 +209,20 @@ $media_items = modern_image_manager_get_media_items();
         id="search-input-bottom"
         class="search-box filter-bottom-search-box"
         placeholder="<?php echo esc_attr__('Zoeken...', 'modern-image-manager'); ?>"
-        onkeyup="filterTable()"
       >
     </div>
 
     <div class="rows-controls filter-bottom-rows-controls">
-      <div class="rows-per-page-container filter-bottom-rows-per-page-container">
-        <label for="rowsPerPageBottom" class="filter-bottom-rows-per-page-label">
-          <?php esc_html_e('Rijen per pagina:', 'modern-image-manager'); ?>
-        </label>
-        <select id="rowsPerPageBottom" class="rows-per-page-select filter-bottom-rows-per-page-select">
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30" selected>30</option>
-          <option value="40">40</option>
-          <option value="50">50</option>
-        </select>
-      </div>
+      <label for="rowsPerPageBottom" class="filter-bottom-rows-per-page-label">
+        <?php esc_html_e('Rijen per pagina:', 'modern-image-manager'); ?>
+      </label>
+      <select id="rowsPerPageBottom" class="rows-per-page-select filter-bottom-rows-per-page-select">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30" selected>30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+      </select>
     </div>
   </div>
 </div>

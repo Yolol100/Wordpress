@@ -1,7 +1,7 @@
 # Modern Image Manager
 
 [![WordPress](https://img.shields.io/badge/WordPress-6.4%2B-blue.svg)](https://wordpress.org)
-[![PHP](https://img.shields.io/badge/PHP-7.4%2B-green.svg)](https://www.php.net/)
+[![PHP](https://img.shields.io/badge/PHP-8.2%2B-green.svg)](https://www.php.net/)
 [![License](https://img.shields.io/badge/license-GPL--2.0-orange.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 
 **Modern Image Manager** is a powerful WordPress plugin for managing media items. Easily organize images and attachments, update metadata, and import/export media via CSV.
@@ -26,7 +26,7 @@
 ### Manual Installation
 1. Download the plugin files or clone this repository:
     ```bash
-    git clone https://github.com/yourusername/modern-image-manager.git
+    git clone https://github.com/Yolol100/Wordpress.git
     ```
 2. Upload the plugin folder to `/wp-content/plugins/`.
 3. Activate the plugin via the **Plugins** menu in WordPress.
@@ -47,12 +47,9 @@
 - Rename files directly from the plugin interface.
 - Bulk update titles, descriptions, and alt tags.
 
-## 📷 Screenshots
-![Modern Image Manager](https://example.com/screenshot.png)
-
 ## 🛠️ Requirements
 - **WordPress**: 6.0 or higher
-- **PHP**: 7.4 or higher
+- **PHP**: 8.2 or higher
 - **MySQL**: 5.6 or higher
 
 ## 🛡️ Security
@@ -72,7 +69,3 @@ Want to contribute? Follow these steps:
 
 ## 📜 License
 This project is licensed under **GPL-2.0**.
-
----
-
-🚀 **Modern Image Manager** – The smartest way to manage your WordPress media!

@@ -5,7 +5,7 @@
 
 defined('ABSPATH') || exit;
 
-if (!current_user_can('manage_options')) {
+if (! current_user_can('manage_options')) {
     wp_die(esc_html__('Je hebt geen rechten om deze pagina te bekijken.', 'modern-image-manager'));
 }
 
@@ -14,8 +14,8 @@ if (!current_user_can('manage_options')) {
 
   <!-- Intro en startknop -->
   <?php if (
-    !isset($_POST['scan_duplicates']) ||
-    !check_admin_referer('scan_duplicates_action', 'scan_duplicates_nonce')
+    ! isset($_POST['scan_duplicates']) ||
+    ! check_admin_referer('scan_duplicates_action', 'scan_duplicates_nonce')
   ) : ?>
 
     <div id="mim-scan-intro">
@@ -57,7 +57,11 @@ if (!current_user_can('manage_options')) {
     <!-- Controls: summary, zoekveld, filter -->
     <div id="mim-enhanced-controls">
       <div id="mim-scan-summary" aria-live="polite"></div>
-      <input type="search" id="mim-search" placeholder="<?php esc_attr_e('Zoek op bestandsnaam...', 'modern-image-manager'); ?>">
+      <input
+        type="search"
+        id="mim-search"
+        placeholder="<?php esc_attr_e('Zoek op bestandsnaam...', 'modern-image-manager'); ?>"
+      >
       <select id="filter-type">
         <option value="all"><?php esc_html_e('Alle types', 'modern-image-manager'); ?></option>
         <option value="post_content"><?php esc_html_e('In content', 'modern-image-manager'); ?></option>
@@ -78,7 +82,7 @@ if (!current_user_can('manage_options')) {
       </div>
     </div>
 
-    <?php if ( ! empty( $results ) ) : ?>
+    <?php if (! empty($results)) : ?>
       <!-- Lightbox modal alleen bij resultaten -->
       <div id="mim-lightbox" class="mim-lightbox" hidden>
         <span class="mim-lightbox-close">&times;</span>

@@ -1,7 +1,6 @@
-/**
- * assets/js/import-media.js
- * Bevat drag-drop, validatie, samenvatting en loader voor importeren.
- */
+// import-media.js
+'use strict';
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('import-form');
   const fileInput = document.getElementById('csv-file-input');
@@ -31,9 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
       validateFile();
     }
   });
-  dragArea.addEventListener('click', function() {
-    fileInput.click();
-  });
+  dragArea.addEventListener('click', () => fileInput.click());
 
   fileInput.addEventListener('change', validateFile);
 
@@ -45,33 +42,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const file = fileInput.files[0];
     if (!file) {
-      fileError.innerText = "Geen bestand gekozen";
+      fileError.innerText = 'Geen bestand gekozen';
       fileError.hidden = false;
       fileError.focus();
       return false;
     }
-    if (file.type !== "text/csv" && !file.name.endsWith('.csv')) {
-      fileError.innerText = "Alleen .csv-bestanden zijn toegestaan.";
-      fileError.hidden = false;
-      fileInput.value = '';
-      fileError.focus();
-      return false;
-    }
-    if (file.size > 2 * 1024 * 1024) { // 2MB limit
-      fileError.innerText = "Bestand is te groot. Maximaal 2MB.";
+
+    if (file.type !== 'text/csv' && !file.name.endsWith('.csv')) {
+      fileError.innerText = 'Alleen .csv-bestanden zijn toegestaan.';
       fileError.hidden = false;
       fileInput.value = '';
       fileError.focus();
       return false;
     }
-    // Alleen bij een geldig bestand:
+
+    if (file.size > 2 * 1024 * 1024) {  // 2MB limiet
+      fileError.innerText = 'Bestand is te groot. Maximaal 2MB.';
+      fileError.hidden = false;
+      fileInput.value = '';
+      fileError.focus();
+      return false;
+    }
+
+    // Bij een geldig bestand:
     fileSelectedName.innerText = file.name;
     summary.hidden = false;
     summary.textContent = `Bestand: ${file.name}, Grootte: ${(file.size / 1024).toFixed(2)} KB`;
     return true;
   }
 
-  form.addEventListener('submit', function(e) {
+  form.addEventListener('submit', e => {
     if (!validateFile()) {
       e.preventDefault();
       return false;
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Toegankelijkheid: focus naar fouten
-  fileError.addEventListener('DOMSubtreeModified', function() {
+  fileError.addEventListener('DOMSubtreeModified', () => {
     if (!fileError.hidden) fileError.focus();
   });
 });
