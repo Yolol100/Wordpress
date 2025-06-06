@@ -54,6 +54,9 @@ if (! current_user_can('manage_options')) {
       $results = dius_scan_pages_for_duplicate_images();
     ?>
 
+    <!-- TITEL boven controls -->
+    <h2 class="mim-scan-page-title"><?php esc_html_e('Scan resultaten', 'modern-image-manager'); ?></h2>
+
     <!-- Controls: summary, zoekveld, filter -->
     <div id="mim-enhanced-controls">
       <div id="mim-scan-summary" aria-live="polite"></div>
@@ -73,7 +76,21 @@ if (! current_user_can('manage_options')) {
 
     <!-- Resultaten en scan-opnieuw -->
     <div class="scan-wrapper">
-      <?php dius_display_results($results); ?>
+
+      <?php
+      // Toon mooie melding als er geen dubbele afbeeldingen zijn gevonden
+      if (empty($results)) :
+      ?>
+        <div class="mim-no-duplicates">
+          <div class="mim-no-duplicates-icon">✔️</div>
+          <div class="mim-no-duplicates-title"><?php esc_html_e('Geen dubbele afbeeldingen gevonden!', 'modern-image-manager'); ?></div>
+          <div class="mim-no-duplicates-text"><?php esc_html_e('Je mediabibliotheek is helemaal schoon. 🎉', 'modern-image-manager'); ?></div>
+        </div>
+      <?php
+      else :
+        dius_display_results($results);
+      endif;
+      ?>
 
       <div style="text-align:center; margin-top:1.5rem;">
         <button id="mim-rescan-btn" class="mim-scan-page-button">
@@ -81,8 +98,6 @@ if (! current_user_can('manage_options')) {
         </button>
       </div>
     </div>
-
-    <!-- Lightbox volledig verwijderd -->
 
   <?php endif; ?>
 

@@ -100,8 +100,7 @@ function dius_display_results( $results ) {
         return;
     }
 
-    // Tabel header en summary
-    echo '<h2 class="mim-scan-page-title">' . esc_html__( 'Scan resultaten', 'modern-image-manager' ) . '</h2>';
+    // Tabel header en body (Zonder titel!)
     echo '<table class="wp-list-table widefat fixed striped dius-results-table" data-sort-asc="false">';
     echo '<thead><tr>';
       echo '<th onclick="sortTable(0)">' . esc_html__( 'Attachment', 'modern-image-manager' ) . ' <span class="sort-arrow"></span></th>';
