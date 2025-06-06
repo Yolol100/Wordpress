@@ -97,6 +97,12 @@ final class Modern_Image_Manager_Import
         try {
             foreach ($csvData as $i => $row) {
                 $rownum = $i + 2; // +2: headers + 1-based
+
+                if (count($row) !== count($headers)) {
+                    $skipped[$rownum] = __('Ongeldig rijformaat.', 'modern-image-manager');
+                    continue;
+                }
+
                 $data = array_combine($headers, $row);
 
                 // Validatie: verplichte velden niet leeg
