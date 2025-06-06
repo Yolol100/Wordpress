@@ -185,7 +185,7 @@ $media_items = modern_image_manager_get_media_items();
     <div class="nav-controls filter-bottom-nav-controls">
       <select id="pageFilterBottom" class="page-filter-select filter-bottom-page-filter">
         <option value="all"><?php echo esc_html__('Alle pagina\'s', 'modern-image-manager'); ?></option>
-        <option value="linked"><?php echo esc_html__('Gekoppelde pagina\'s', 'modern-image-manager'); ?></option?>
+        <option value="linked"><?php echo esc_html__('Gekoppelde pagina\'s', 'modern-image-manager'); ?></option>
         <option value="unlinked"><?php echo esc_html__('Niet gekoppelde pagina\'s', 'modern-image-manager'); ?></option>
       </select>
       <button id="applyFilterBottom" class="page-button filter-bottom-apply-button"><?php esc_html_e('Filter toepassen', 'modern-image-manager'); ?></button>
