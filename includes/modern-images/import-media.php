@@ -182,24 +182,21 @@ final class Modern_Image_Manager_Import
 
     private static function update_attachment_data(int $attachmentId, array $data): void
     {
-        $update_fields = [];
+        $update_fields = ['ID' => $attachmentId];
 
-        if (!empty($data['Titel'])) {
+        if (array_key_exists('Titel', $data)) {
             $update_fields['post_title'] = sanitize_text_field($data['Titel']);
         }
-        if (!empty($data['Caption'])) {
+        if (array_key_exists('Caption', $data)) {
             $update_fields['post_excerpt'] = sanitize_text_field($data['Caption']);
         }
-        if (!empty($data['Description'])) {
+        if (array_key_exists('Description', $data)) {
             $update_fields['post_content'] = wp_kses_post($data['Description']);
         }
 
-        if (!empty($update_fields)) {
-            $update_fields['ID'] = $attachmentId;
-            wp_update_post($update_fields);
-        }
+        wp_update_post($update_fields);
 
-        if (!empty($data['Alt-tag'])) {
+        if (array_key_exists('Alt-tag', $data)) {
             update_post_meta($attachmentId, '_wp_attachment_image_alt', sanitize_text_field($data['Alt-tag']));
         }
     }
