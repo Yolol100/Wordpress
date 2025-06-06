@@ -31,7 +31,7 @@ jQuery(($) => {
       title: $(`[data-attachment-id="${id}"].media-items-title-input`).val(),
       caption: $(`[data-attachment-id="${id}"].media-items-caption-input`).val(),
       description: $(`[data-attachment-id="${id}"].media-items-description-input`).val(),
-      alt: $(`[data-attachment-id="${id}"].media-items-alt-text-input`).val(),
+      alt_text: $(`[data-attachment-id="${id}"].media-items-alt-input`).val(),
     };
 
     postJSON(data).done((response) => {
@@ -48,7 +48,7 @@ jQuery(($) => {
   // Hernoemen bestand
   $(document).on('click', '.media-items-rename-file', ({ currentTarget }) => {
     const id = $(currentTarget).data('attachment-id');
-    const newFilename = $(`[data-attachment-id="${id}"].media-items-filename-input`).val();
+    const newFilename = $(`[data-attachment-id="${id}"].media-items-new-filename-input`).val();
 
     if (!newFilename) {
       showToast('Bestandsnaam mag niet leeg zijn.', 'error');
@@ -79,7 +79,7 @@ jQuery(($) => {
   });
 
   // Verwijderen media
-  $(document).on('click', '.media-items-delete', ({ currentTarget }) => {
+  $(document).on('click', '.media-items-delete-media', ({ currentTarget }) => {
     if (!confirm(translations.confirm_delete || 'Weet je zeker dat je dit item wilt verwijderen?')) {
       return;
     }
