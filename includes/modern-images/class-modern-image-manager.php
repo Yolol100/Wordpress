@@ -73,5 +73,3 @@ final class Modern_Image_Manager
         // Assets worden globaal ingeladen via een globale asset-functie.
     }
 }
-
-Modern_Image_Manager::init();
