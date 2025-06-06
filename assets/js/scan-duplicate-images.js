@@ -94,6 +94,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // if (count === 0) {
     //   showToast('Geen dubbele afbeeldingen gevonden.');
     // }
+
+    // Meld in container of er wel of geen duplicaten zijn gevonden
+    if (typeof mim_scan_progress_nonce !== 'undefined') {
+      if (count === 0) {
+        showToast(mim_scan_progress_nonce.no_duplicates_found);
+      } else {
+        showToast(`${mim_scan_progress_nonce.found_duplicates_text} ${count}`);
+      }
+    }
   }
 
   function filterScanResults() {
