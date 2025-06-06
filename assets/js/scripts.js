@@ -31,7 +31,7 @@ jQuery(($) => {
       title: $(`[data-attachment-id="${id}"].media-items-title-input`).val(),
       caption: $(`[data-attachment-id="${id}"].media-items-caption-input`).val(),
       description: $(`[data-attachment-id="${id}"].media-items-description-input`).val(),
-      alt_text: $(`[data-attachment-id="${id}"].media-items-alt-text-input`).val(),
+      alt: $(`[data-attachment-id="${id}"].media-items-alt-text-input`).val(),
     };
 
     postJSON(data).done((response) => {
