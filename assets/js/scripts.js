@@ -105,7 +105,7 @@ jQuery(($) => {
 
   // Bulk verwijderen
   $('#bulkDeleteTop, #bulkDeleteBottom').on('click', () => {
-    const selectedIds = $('.bulk-select:checked').map(function () {
+    const selectedIds = $('.bulk-delete-checkbox:checked').map(function () {
       return $(this).val();
     }).get();
 
@@ -129,7 +129,7 @@ jQuery(($) => {
           $(`[data-attachment-id="${id}"]`).closest('tr').remove();
         });
         showToast(translations.bulk_deleted_successfully || `${response.data.count} items succesvol verwijderd.`, 'success');
-        $('.bulk-select-all').prop('checked', false); // Deselecteer de 'alles selecteren' checkbox
+        $('#bulkSelectAll').prop('checked', false); // Deselecteer de 'alles selecteren' checkbox
         paginateAndFilter(); // Herfilter en herpaginatie na bulkverwijdering
       } else {
         showToast(response.data.message || 'Fout bij bulkverwijdering.', 'error');
@@ -140,8 +140,8 @@ jQuery(($) => {
   });
 
   // Selecteer/deselecteer alles
-  $('.bulk-select-all').on('change', function () {
-    $('.bulk-select').prop('checked', $(this).prop('checked'));
+  $('#bulkSelectAll').on('change', function () {
+    $('.bulk-delete-checkbox').prop('checked', $(this).prop('checked'));
   });
 
   // Filter en paginatie logica
