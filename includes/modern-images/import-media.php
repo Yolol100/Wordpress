@@ -82,7 +82,7 @@ final class Modern_Image_Manager_Import
         }
 
         // VERPLICHTE KOLOMMEN - pas aan naar je wensen (let op: exact zoals in CSV)
-        $required = ['Bestandsnaam', 'Titel', 'Alt-tag'];
+        $required = ['Bestandsnaam'];
 
         foreach ($required as $col) {
             if (!in_array($col, $headers)) {
@@ -100,11 +100,9 @@ final class Modern_Image_Manager_Import
                 $data = array_combine($headers, $row);
 
                 // Validatie: verplichte velden niet leeg
-                foreach ($required as $col) {
-                    if (empty($data[$col])) {
-                        $skipped[$rownum] = sprintf(__('Lege waarde voor verplichte kolom: %s', 'modern-image-manager'), $col);
-                        continue 2;
-                    }
+                if (empty($data['Bestandsnaam'])) {
+                    $skipped[$rownum] = sprintf(__('Lege waarde voor verplichte kolom: %s', 'modern-image-manager'), 'Bestandsnaam');
+                    continue;
                 }
 
                 $newFilenameInput = isset($data['Nieuwe bestandsnaam'])
