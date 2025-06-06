@@ -145,6 +145,7 @@ final class Modern_Image_Manager_Import
     {
         $file_path  = get_attached_file($attachmentId);
         $upload_dir = wp_upload_dir();
+        $directory  = dirname($file_path);
 
         if (!$file_path || !file_exists($file_path)) {
             return;
@@ -152,7 +153,7 @@ final class Modern_Image_Manager_Import
 
         $file_ext          = pathinfo($file_path, PATHINFO_EXTENSION);
         $new_filename_clean = sanitize_file_name($newFilename) . '.' . $file_ext;
-        $new_file_path      = $upload_dir['path'] . '/' . $new_filename_clean;
+        $new_file_path      = $directory . '/' . $new_filename_clean;
 
         if (file_exists($new_file_path)) {
             return;
