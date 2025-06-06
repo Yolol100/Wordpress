@@ -58,7 +58,6 @@
 }
 
 /* Loader */
-/* Pas deze two regels zodat loader standaard verborgen is en pas toont als [hidden] verwijderd */
 #mim-scan-loader {
   display: none;
 }
@@ -124,28 +123,7 @@
   font-size: var(--font-size-base);
 }
 
-/* Lightbox (only rendered when there are results) */
-.mim-lightbox {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-.mim-lightbox img {
-  max-width: 90%;
-  max-height: 90%;
-}
-.mim-lightbox-close {
-  position: absolute;
-  top: 20px; right: 30px;
-  font-size: 2rem;
-  color: #fff;
-  cursor: pointer;
-}
+/* Lightbox CSS volledig verwijderd */
 
 /* Duplicaten-tabel styling */
 .dius-results-table {
@@ -223,8 +201,15 @@
   transform: scale(1.1);
 }
 
-/* By default hide all controls & results except the no-results message */
 #mim-enhanced-controls,
-.scan-wrapper > *:not(.mim-scan-page-description) {
-  display: none;
+.scan-wrapper > * {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.scan-wrapper {
+  display: block !important;
+}
+.dius-results-table {
+  display: table !important;
 }

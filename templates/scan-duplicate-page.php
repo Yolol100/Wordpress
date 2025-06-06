@@ -35,8 +35,8 @@ if (! current_user_can('manage_options')) {
 
   <?php endif; ?>
 
-  <!-- Scan loader met animatie -->
-  <div id="mim-scan-loader" hidden>
+  <!-- Scan loader met animatie (altijd verborgen) -->
+  <div id="mim-scan-loader" hidden style="display:none;">
     <div class="spinner"></div>
     <em><?php esc_html_e('Afbeeldingen worden gescand... Een ogenblik geduld.', 'modern-image-manager'); ?></em>
   </div>
@@ -82,13 +82,7 @@ if (! current_user_can('manage_options')) {
       </div>
     </div>
 
-    <?php if (! empty($results)) : ?>
-      <!-- Lightbox modal alleen bij resultaten -->
-      <div id="mim-lightbox" class="mim-lightbox" hidden>
-        <span class="mim-lightbox-close">&times;</span>
-        <img src="" alt="">
-      </div>
-    <?php endif; ?>
+    <!-- Lightbox volledig verwijderd -->
 
   <?php endif; ?>
 

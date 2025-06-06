@@ -1,6 +1,6 @@
 /**
  * assets/js/scan-duplicate-images.js
- * Complete JS for scan page: loader, toast, search/filter, sort, lightbox, rescan, localStorage & “no results” logic.
+ * Complete JS for scan page: loader, toast, search/filter, sort, rescan, localStorage & “no results” logic.
  */
 'use strict';
 
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const filterType  = document.getElementById('filter-type');
   const rescanBtn   = document.getElementById('mim-rescan-btn');
   const toast       = document.getElementById('mim-toast');
-  const lightbox    = document.getElementById('mim-lightbox');
+  // const lightbox  = document.getElementById('mim-lightbox'); // volledig verwijderd
 
   // Restore last search/filter
   if (searchInput && localStorage.getItem('mim-search')) {
@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
     filterType.value = localStorage.getItem('mim-filter');
   }
 
-  // On submit: hide intro, show loader
+  // On submit: hide intro, show loader (loader tonen UITGEZET)
   if (form) {
     form.addEventListener('submit', () => {
-      if (intro)  intro.hidden  = true;
-      if (loader) loader.hidden = false;
+      if (intro)  intro.hidden = true;
+      // if (loader) loader.hidden = false; // UITGEZET: geen loader meer tonen
     });
   }
 
@@ -62,22 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Lightbox setup
-  if (lightbox) {
-    document.querySelectorAll('.dius-results-table td img').forEach(img => {
-      img.style.cursor = 'pointer';
-      img.addEventListener('click', () => {
-        lightbox.querySelector('img').src = img.src;
-        lightbox.hidden = false;
-      });
-    });
-    const lbClose = lightbox.querySelector('.mim-lightbox-close');
-    if (lbClose) {
-      lbClose.addEventListener('click', () => {
-        lightbox.hidden = true;
-      });
-    }
-  }
+  // Lightbox-functionaliteit volledig verwijderd
 
   // Functions
 
@@ -86,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .filter(r => r.style.display !== 'none');
     const count = rows.length;
 
-    // Show/hide controls & results
+    // Show/hide controls & resultaten
     const controls   = document.getElementById('mim-enhanced-controls');
     const wrapperEls = document.querySelectorAll('.scan-wrapper > *');
     if (count > 0) {
@@ -94,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
       wrapperEls.forEach(el => el.style.display = '');
     }
 
-    // Update summary text
+    // Update summary tekst
     const pages = new Set();
     rows.forEach(r => {
       r.querySelectorAll('td:nth-child(2) a').forEach(a => pages.add(a.href));
@@ -105,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `${count} dubbele afbeelding${count !== 1 ? 'en' : ''} gevonden in ${pages.size} pagina${pages.size !== 1 ? "'s" : ''}.`;
     }
 
-    // Show toast if no results – verwijderd zoals gevraagd
+    // “Geen resultaten” toast is uitgeschakeld
     // if (count === 0) {
     //   showToast('Geen dubbele afbeeldingen gevonden.');
     // }
