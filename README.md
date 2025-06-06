@@ -40,7 +40,7 @@
 
 ### 📥 Import Media
 1. Go to **Modern Image > Import Media**.
-2. Upload your CSV file with media data.
+2. Upload your CSV file with media data. **CSV files must be comma-delimited**; other delimiters are not supported.
 3. Click **Import** to update or add media.
 
 ### ✏️ Rename Files & Edit Metadata
