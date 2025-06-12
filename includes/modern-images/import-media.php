@@ -1,58 +1,59 @@
 <?php
-declare(strict_types=1);
+// File: import-media.php
+// Import functionaliteit
 
+declare(strict_types=1);
 defined('ABSPATH') || exit;
 
 final class Modern_Image_Manager_Import
 {
     public static function render_import_page(): void
     {
-        $errors = [];
+        $notice_type = null;
+        $notice_html = '';
         $imported_count = 0;
         $skipped_rows = [];
-        $success = '';
-        $import_summary = '';
 
         if (isset($_POST['import_csv'])) {
-            list($errors, $imported_count, $skipped_rows) = self::handle_import();
-            if ($imported_count > 0 && empty($errors)) {
-                $success = sprintf(__('%d rijen geïmporteerd.', 'modern-image-manager'), $imported_count);
-            }
+            if (empty($_FILES['import_file']['tmp_name'])) {
+                // Geen bestand gekozen
+                $notice_type = 'error';
+                $notice_html = esc_html__('Geen bestand geüpload.', 'modern-image-manager');
+            } else {
+                list($errors, $imported_count, $skipped_rows) = self::handle_import();
 
-            // Uitgebreide samenvatting tonen na import
-            $skipped_count = count($skipped_rows);
-            $import_summary = '<div class="import-summary">';
-            $import_summary .= '<strong>' . esc_html__('Import samenvatting', 'modern-image-manager') . '</strong><ul>';
-            $import_summary .= '<li>' . sprintf(esc_html__('%d rijen succesvol geïmporteerd.', 'modern-image-manager'), $imported_count) . '</li>';
-            $import_summary .= '<li>' . sprintf(esc_html__('%d rijen overgeslagen wegens fouten.', 'modern-image-manager'), $skipped_count) . '</li>';
-            if ($skipped_count > 0) {
-                $import_summary .= '<details><summary>' . esc_html__('Bekijk overgeslagen rijen', 'modern-image-manager') . '</summary><ul>';
-                foreach ($skipped_rows as $rownum => $reason) {
-                    $import_summary .= '<li>' . sprintf(esc_html__('Rij %d: %s', 'modern-image-manager'), $rownum, esc_html($reason)) . '</li>';
+                if (!empty($errors)) {
+                    // Fouten in upload of CSV headers
+                    $notice_type = 'error';
+                    $notice_html = '<ul>';
+                    foreach ($errors as $error) {
+                        $notice_html .= '<li>' . esc_html($error) . '</li>';
+                    }
+                    $notice_html .= '</ul>';
+                } elseif ($imported_count == 0 && count($skipped_rows) == 0) {
+                    // Wel bestand, niks geïmporteerd
+                    $notice_type = 'warning';
+                    $notice_html = esc_html__('Niks geïmporteerd.', 'modern-image-manager');
+                } else {
+                    // Toon import samenvatting
+                    $notice_type = 'success';
+                    $skipped_count = count($skipped_rows);
+                    $notice_html = '<strong>' . esc_html__('Import samenvatting', 'modern-image-manager') . '</strong><ul>';
+                    $notice_html .= '<li>' . sprintf(esc_html__('%d rijen succesvol geïmporteerd.', 'modern-image-manager'), $imported_count) . '</li>';
+                    $notice_html .= '<li>' . sprintf(esc_html__('%d rijen overgeslagen wegens fouten.', 'modern-image-manager'), $skipped_count) . '</li>';
+                    if ($skipped_count > 0) {
+                        $notice_html .= '<details><summary>' . esc_html__('Bekijk overgeslagen rijen', 'modern-image-manager') . '</summary><ul>';
+                        foreach ($skipped_rows as $rownum => $reason) {
+                            $notice_html .= '<li>' . sprintf(esc_html__('Rij %d: %s', 'modern-image-manager'), $rownum, esc_html($reason)) . '</li>';
+                        }
+                        $notice_html .= '</ul></details>';
+                    }
+                    $notice_html .= '</ul>';
                 }
-                $import_summary .= '</ul></details>';
             }
-            $import_summary .= '</ul></div>';
         }
 
         include MODERN_IMAGE_MANAGER_PATH . 'templates/import-page.php';
-
-        // Inline meldingen consistent boven het formulier tonen
-        if (!empty($errors)) {
-            echo '<div class="mim-notice mim-notice--error"><ul>';
-            foreach ($errors as $error) {
-                echo '<li>' . esc_html($error) . '</li>';
-            }
-            echo '</ul></div>';
-        }
-
-        if (!empty($success)) {
-            echo '<div class="mim-notice mim-notice--success"><p>' . esc_html($success) . '</p></div>';
-        }
-
-        if (!empty($import_summary)) {
-            echo $import_summary;
-        }
     }
 
     public static function handle_import(): array
@@ -81,34 +82,29 @@ final class Modern_Image_Manager_Import
             return [$errors, $imported, $skipped];
         }
 
-        // VERPLICHTE KOLOMMEN - pas aan naar je wensen (let op: exact zoals in CSV)
-        $required = ['Bestandsnaam'];
+        // Verplichte kolommen
+        $required = ['Bestandsnaam', 'Titel', 'Alt-tag'];
 
         foreach ($required as $col) {
-            if (!in_array($col, $headers)) {
+            if (!in_array($col, $headers, true)) {
                 $errors[] = sprintf(__('Verplichte kolom ontbreekt: %s', 'modern-image-manager'), $col);
                 return [$errors, $imported, $skipped];
             }
         }
 
-        // Begin transaction (rollback support)
+        // Start transaction
         $wpdb->query('START TRANSACTION');
-        $imported_ids = [];
         try {
             foreach ($csvData as $i => $row) {
-                $rownum = $i + 2; // +2: headers + 1-based
-
-                if (count($row) !== count($headers)) {
-                    $skipped[$rownum] = __('Ongeldig rijformaat.', 'modern-image-manager');
-                    continue;
-                }
-
+                $rownum = $i + 2;
                 $data = array_combine($headers, $row);
 
-                // Validatie: verplichte velden niet leeg
-                if (empty($data['Bestandsnaam'])) {
-                    $skipped[$rownum] = sprintf(__('Lege waarde voor verplichte kolom: %s', 'modern-image-manager'), 'Bestandsnaam');
-                    continue;
+                // Valideer verplichte velden
+                foreach ($required as $col) {
+                    if (empty($data[$col])) {
+                        $skipped[$rownum] = sprintf(__('Lege waarde voor verplichte kolom: %s', 'modern-image-manager'), $col);
+                        continue 2;
+                    }
                 }
 
                 $newFilenameInput = isset($data['Nieuwe bestandsnaam'])
@@ -125,22 +121,15 @@ final class Modern_Image_Manager_Import
                     }
 
                     self::update_attachment_data($attachmentId, $data);
-                    $imported_ids[] = $attachmentId;
                 } else {
-                    $created_id = self::create_new_attachment($data);
-                    if ($created_id) {
-                        $imported_ids[] = $created_id;
-                    }
+                    self::create_new_attachment($data);
                 }
                 $imported++;
             }
-            // Commit als alles lukt
             $wpdb->query('COMMIT');
         } catch (\Exception $e) {
-            // Rollback bij fout
             $wpdb->query('ROLLBACK');
             $errors[] = __('Import is teruggedraaid vanwege een fout: ', 'modern-image-manager') . $e->getMessage();
-            // Extra: verwijder aangemaakte bijlagen als die al zijn toegevoegd...
             return [$errors, 0, $skipped];
         }
 
@@ -151,7 +140,6 @@ final class Modern_Image_Manager_Import
     {
         $file_path  = get_attached_file($attachmentId);
         $upload_dir = wp_upload_dir();
-        $directory  = dirname($file_path);
 
         if (!$file_path || !file_exists($file_path)) {
             return;
@@ -159,7 +147,7 @@ final class Modern_Image_Manager_Import
 
         $file_ext          = pathinfo($file_path, PATHINFO_EXTENSION);
         $new_filename_clean = sanitize_file_name($newFilename) . '.' . $file_ext;
-        $new_file_path      = $directory . '/' . $new_filename_clean;
+        $new_file_path      = $upload_dir['path'] . '/' . $new_filename_clean;
 
         if (file_exists($new_file_path)) {
             return;
@@ -187,21 +175,24 @@ final class Modern_Image_Manager_Import
 
     private static function update_attachment_data(int $attachmentId, array $data): void
     {
-        $update_fields = ['ID' => $attachmentId];
+        $update_fields = [];
 
-        if (array_key_exists('Titel', $data)) {
+        if (!empty($data['Titel'])) {
             $update_fields['post_title'] = sanitize_text_field($data['Titel']);
         }
-        if (array_key_exists('Caption', $data)) {
+        if (!empty($data['Caption'])) {
             $update_fields['post_excerpt'] = sanitize_text_field($data['Caption']);
         }
-        if (array_key_exists('Description', $data)) {
+        if (!empty($data['Description'])) {
             $update_fields['post_content'] = wp_kses_post($data['Description']);
         }
 
-        wp_update_post($update_fields);
+        if (!empty($update_fields)) {
+            $update_fields['ID'] = $attachmentId;
+            wp_update_post($update_fields);
+        }
 
-        if (array_key_exists('Alt-tag', $data)) {
+        if (!empty($data['Alt-tag'])) {
             update_post_meta($attachmentId, '_wp_attachment_image_alt', sanitize_text_field($data['Alt-tag']));
         }
     }

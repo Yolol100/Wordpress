@@ -19,17 +19,33 @@
       <?php echo esc_html__('Selecteer een CSV-bestand om media te importeren.', 'modern-image-manager'); ?>
     </p>
 
-    <!-- Import-samenvatting (voor bevestiging) -->
-    <div id="import-summary" class="import-summary" hidden></div>
+    <!-- Meldingen boven formulier -->
+    <?php if (!empty($notice_type) && !empty($notice_html)): ?>
+      <div class="mim-notice mim-notice--<?php echo esc_attr($notice_type); ?>">
+        <?php echo $notice_html; ?>
+      </div>
+    <?php endif; ?>
 
     <!-- Loader tijdens import -->
     <div id="import-loader" class="import-loader" hidden>
-      🔄 <em><?php esc_html_e('Importeren bezig... Een ogenblik geduld.', 'modern-image-manager'); ?></em>
+      <em><?php esc_html_e('Importeren bezig... Een ogenblik geduld.', 'modern-image-manager'); ?></em>
     </div>
 
-    <form method="post" enctype="multipart/form-data" class="page-form import-page-form" id="import-form" novalidate autocomplete="off">
+    <form
+      method="post"
+      enctype="multipart/form-data"
+      class="page-form import-page-form"
+      id="import-form"
+      novalidate
+      autocomplete="off"
+    >
       <!-- Drag & drop zone -->
-      <div id="drag-drop-area" class="drag-drop-area" tabindex="0" aria-label="<?php esc_attr_e('Sleep een CSV-bestand hierheen of klik om te selecteren', 'modern-image-manager'); ?>">
+      <div
+        id="drag-drop-area"
+        class="drag-drop-area"
+        tabindex="0"
+        aria-label="<?php esc_attr_e('Sleep een CSV-bestand hierheen of klik om te selecteren', 'modern-image-manager'); ?>"
+      >
         <p><?php esc_html_e('Sleep hier je CSV-bestand naartoe of klik om te selecteren', 'modern-image-manager'); ?></p>
         <input
           type="file"
@@ -56,6 +72,7 @@
       </div>
     </form>
   </div>
-  <!-- Vergeet niet je JS-bestand te includen -->
+
+  <!-- Inclusie van JS bestand -->
   <script src="<?php echo esc_url( plugins_url( 'assets/js/import-media.js', __FILE__ ) ); ?>"></script>
 </body>

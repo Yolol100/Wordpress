@@ -1,4 +1,5 @@
 <?php
+// File: export-page.php
 declare(strict_types=1);
 defined('ABSPATH') || exit;
 
@@ -34,7 +35,8 @@ $column_tooltips = [
       </div>
     <?php endif; ?>
 
-    <form method="post" class="page-form export-page-form">
+    <form method="get" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="page-form export-page-form">
+      <input type="hidden" name="action" value="mim_export_csv">
 
       <!-- 1) Exportoptie dropdown -->
       <div class="form-group export-option-group">
@@ -60,18 +62,6 @@ $column_tooltips = [
         <label class="columns-select-label">
           <?php echo esc_html__('Selecteer kolommen', 'modern-image-manager'); ?>
         </label>
-
-        <!-- 3a) Knoppen voor selectiebeheer -->
-        <div class="checkbox-actions" style="margin-bottom: 10px;">
-          <button id="select-all-columns" type="button" class="button button-secondary">
-            <?php echo esc_html__('Alles selecteren', 'modern-image-manager'); ?>
-          </button>
-          <button id="deselect-all-columns" type="button" class="button button-secondary">
-            <?php echo esc_html__('Niets selecteren', 'modern-image-manager'); ?>
-          </button>
-        </div>
-
-        <!-- 3b) Checkboxgroep met tooltips -->
         <div class="checkbox-group">
           <?php
           $columns = [
@@ -84,7 +74,6 @@ $column_tooltips = [
             'alt_text'     => __('Alt-tag', 'modern-image-manager'),
             'file_url'     => __('Bestands-URL', 'modern-image-manager'),
           ];
-
           foreach ($columns as $value => $label) {
               $tooltip = isset($column_tooltips[$value]) ? esc_attr($column_tooltips[$value]) : '';
               printf(
@@ -101,12 +90,10 @@ $column_tooltips = [
       <!-- 4) Exporteerknop -->
       <button
         type="submit"
-        name="export_csv"
         class="page-button export-button"
       >
         <?php echo esc_html__('Exporteer naar CSV', 'modern-image-manager'); ?>
       </button>
-
     </form>
   </div>
 </body>

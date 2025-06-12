@@ -1,6 +1,6 @@
 /**
  * assets/js/scan-duplicate-images.js
- * Complete JS for scan page: loader, toast, search/filter, sort, rescan, localStorage & “no results” logic.
+ * Complete JS for scan page: loader, search/filter, sort, rescan, localStorage & “no results” logic.
  */
 'use strict';
 
@@ -11,10 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('mim-search');
   const filterType  = document.getElementById('filter-type');
   const rescanBtn   = document.getElementById('mim-rescan-btn');
-  const toast       = document.getElementById('mim-toast');
-  // const lightbox  = document.getElementById('mim-lightbox'); // volledig verwijderd
 
-  // Restore last search/filter
+  // Restore last search/filter from localStorage
   if (searchInput && localStorage.getItem('mim-search')) {
     searchInput.value = localStorage.getItem('mim-search');
   }
@@ -22,18 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
     filterType.value = localStorage.getItem('mim-filter');
   }
 
-  // On submit: hide intro, show loader (loader tonen UITGEZET)
+  // On form submit: hide intro, show loader
   if (form) {
     form.addEventListener('submit', () => {
-      if (intro)  intro.hidden = true;
-      // if (loader) loader.hidden = false; // UITGEZET: geen loader meer tonen
+      if (intro)  intro.hidden  = true;
+      if (loader) loader.hidden = false;
     });
   }
 
-  // Main logic: update summary, show/hide UI
+  // Initial UI update based on results
   fillSummary();
 
-  // Search input
+  // Search input: update localStorage and filter results live
   if (searchInput) {
     searchInput.addEventListener('input', () => {
       localStorage.setItem('mim-search', searchInput.value);
@@ -41,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Type filter
+  // Type filter: update localStorage and filter by type
   if (filterType) {
     filterType.addEventListener('change', () => {
       localStorage.setItem('mim-filter', filterType.value);
@@ -49,20 +47,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Sort columns
+  // Column sorting on header click
   document.querySelectorAll('.dius-results-table thead th').forEach((th, idx) => {
     th.addEventListener('click', () => sortTable(idx));
   });
 
-  // Rescan button
+  // Rescan button: reload page
   if (rescanBtn) {
     rescanBtn.addEventListener('click', () => {
-      showToast('Opnieuw scannen…');
-      setTimeout(() => location.reload(), 500);
+      location.reload();
     });
   }
-
-  // Lightbox-functionaliteit volledig verwijderd
 
   // Functions
 
@@ -71,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .filter(r => r.style.display !== 'none');
     const count = rows.length;
 
-    // Show/hide controls & resultaten
+    // Show/hide controls & results depending on rows count
     const controls   = document.getElementById('mim-enhanced-controls');
     const wrapperEls = document.querySelectorAll('.scan-wrapper > *');
     if (count > 0) {
@@ -79,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
       wrapperEls.forEach(el => el.style.display = '');
     }
 
-    // Update summary tekst
+    // Update summary text with count and unique pages
     const pages = new Set();
     rows.forEach(r => {
       r.querySelectorAll('td:nth-child(2) a').forEach(a => pages.add(a.href));
@@ -89,11 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
       summaryEl.textContent =
         `${count} dubbele afbeelding${count !== 1 ? 'en' : ''} gevonden in ${pages.size} pagina${pages.size !== 1 ? "'s" : ''}.`;
     }
-
-    // “Geen resultaten” toast is uitgeschakeld
-    // if (count === 0) {
-    //   showToast('Geen dubbele afbeeldingen gevonden.');
-    // }
   }
 
   function filterScanResults() {
@@ -133,16 +123,5 @@ document.addEventListener('DOMContentLoaded', () => {
     table.querySelectorAll('.sort-arrow').forEach(el => el.textContent = '');
     const arrow = table.querySelector(`thead th:nth-child(${colIndex+1}) .sort-arrow`);
     if (arrow) arrow.textContent = asc ? ' ▲' : ' ▼';
-  }
-
-  function showToast(message) {
-    if (!toast) return;
-    toast.textContent = message;
-    toast.hidden = false;
-    toast.style.opacity = '1';
-    setTimeout(() => {
-      toast.style.opacity = '0';
-      setTimeout(() => toast.hidden = true, 300);
-    }, 2000);
   }
 });

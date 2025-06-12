@@ -1,4 +1,5 @@
 <?php
+// File: admin-media-list.php
 declare(strict_types=1);
 defined('ABSPATH') || exit;
 
@@ -9,35 +10,36 @@ $media_items = modern_image_manager_get_media_items();
 <div class="wrap unique-wrap filter-top-container">
   <div class="filter-header filter-top-header">
     <div class="nav-controls filter-top-nav-controls">
-      <select id="pageFilter" class="page-filter-select filter-top-page-filter">
+      <select id="pageFilter" class="page-filter-select filter-top-page-filter" aria-label="<?php esc_attr_e('Pagina filter', 'modern-image-manager'); ?>">
         <option value="all"><?php echo esc_html__('Alle pagina\'s', 'modern-image-manager'); ?></option>
         <option value="linked"><?php echo esc_html__('Gekoppelde pagina\'s', 'modern-image-manager'); ?></option>
         <option value="unlinked"><?php echo esc_html__('Niet gekoppelde pagina\'s', 'modern-image-manager'); ?></option>
       </select>
-      <button id="applyFilter" class="page-button filter-top-apply-button">
+      <button id="applyFilter" class="page-button filter-top-apply-button" type="button">
         <?php echo esc_html__('Filter toepassen', 'modern-image-manager'); ?>
       </button>
-      <div class="pagination-navigation filter-top-pagination">
-        <button id="prevPage" class="page-button filter-top-prev-button"><?php echo esc_html__('Vorige', 'modern-image-manager'); ?></button>
-        <span id="currentPage" class="filter-top-current-page">1</span> /
+      <div class="pagination-navigation filter-top-pagination" role="navigation" aria-label="<?php esc_attr_e('Paginatie', 'modern-image-manager'); ?>">
+        <button id="prevPage" class="page-button filter-top-prev-button" type="button"><?php echo esc_html__('Vorige', 'modern-image-manager'); ?></button>
+        <span id="currentPage" class="filter-top-current-page" aria-live="polite" aria-atomic="true">1</span> /
         <span id="totalPages" class="filter-top-total-pages">50</span>
-        <button id="nextPage" class="page-button filter-top-next-button"><?php echo esc_html__('Volgende', 'modern-image-manager'); ?></button>
+        <button id="nextPage" class="page-button filter-top-next-button" type="button"><?php echo esc_html__('Volgende', 'modern-image-manager'); ?></button>
       </div>
     </div>
 
     <!-- Bulk-delete knop bovenaan -->
     <div class="bulk-delete-controls filter-top-bulk-delete">
-      <button id="bulkDeleteTop" class="page-button bulk-delete-button">
+      <button id="bulkDeleteTop" class="page-button bulk-delete-button" type="button">
         <?php echo esc_html__('Verwijder geselecteerde', 'modern-image-manager'); ?>
       </button>
     </div>
 
     <div class="search-container filter-top-search-container">
       <input
-        type="text"
+        type="search"
         id="search-input"
         class="search-box filter-top-search-box"
         placeholder="<?php echo esc_attr__('Zoeken...', 'modern-image-manager'); ?>"
+        aria-label="<?php esc_attr_e('Zoek media', 'modern-image-manager'); ?>"
       >
     </div>
 
@@ -45,7 +47,7 @@ $media_items = modern_image_manager_get_media_items();
       <label for="rowsPerPage" class="filter-top-rows-per-page-label">
         <?php echo esc_html__('Rijen per pagina:', 'modern-image-manager'); ?>
       </label>
-      <select id="rowsPerPage" class="rows-per-page-select filter-top-rows-per-page-select">
+      <select id="rowsPerPage" class="rows-per-page-select filter-top-rows-per-page-select" aria-label="<?php esc_attr_e('Aantal rijen per pagina', 'modern-image-manager'); ?>">
         <option value="10">10</option>
         <option value="20">20</option>
         <option value="30" selected>30</option>
@@ -56,10 +58,11 @@ $media_items = modern_image_manager_get_media_items();
   </div>
 </div>
 
-<table class="wp-list-table widefat fixed striped unique-table media-items-table">
+<table class="wp-list-table widefat fixed striped unique-table media-items-table" role="grid" aria-describedby="media-items-description">
+  <caption id="media-items-description" class="screen-reader-text"><?php esc_html_e('Lijst van media items', 'modern-image-manager'); ?></caption>
   <thead class="unique-thead media-items-thead">
     <tr class="unique-tr-head media-items-tr-head">
-      <th><input type="checkbox" id="bulkSelectAll" /></th>
+      <th scope="col"><input type="checkbox" id="bulkSelectAll" aria-label="<?php esc_attr_e('Selecteer alle media', 'modern-image-manager'); ?>" /></th>
       <?php
       $headers = [
         'Bestandsnaam', 'Nieuwe bestandsnaam', 'Pagina',
@@ -67,7 +70,7 @@ $media_items = modern_image_manager_get_media_items();
         'Opslaan', 'Verwijderen'
       ];
       foreach ($headers as $header) {
-        echo '<th>' . esc_html__($header, 'modern-image-manager') . '</th>';
+        echo '<th scope="col">' . esc_html__($header, 'modern-image-manager') . '</th>';
       }
       ?>
     </tr>
@@ -98,6 +101,7 @@ $media_items = modern_image_manager_get_media_items();
               type="checkbox"
               class="bulk-delete-checkbox"
               data-attachment-id="<?php echo esc_attr($id); ?>"
+              aria-label="<?php echo esc_attr(sprintf(__('Selecteer media %s', 'modern-image-manager'), $filename)); ?>"
             />
           </td>
           <td>
@@ -107,6 +111,8 @@ $media_items = modern_image_manager_get_media_items();
               data-attachment-id="<?php echo esc_attr($id); ?>"
               value="<?php echo esc_attr($filename); ?>"
               readonly
+              aria-readonly="true"
+              aria-label="<?php echo esc_attr(sprintf(__('Bestandsnaam: %s', 'modern-image-manager'), $filename)); ?>"
             >
           </td>
           <td>
@@ -115,6 +121,7 @@ $media_items = modern_image_manager_get_media_items();
               class="new-filename-input media-items-new-filename-input"
               data-attachment-id="<?php echo esc_attr($id); ?>"
               placeholder="<?php esc_attr_e('Voer nieuwe bestandsnaam in', 'modern-image-manager'); ?>"
+              aria-label="<?php esc_attr_e('Nieuwe bestandsnaam invoeren', 'modern-image-manager'); ?>"
             >
           </td>
           <td><?php echo esc_html($page); ?></td>
@@ -125,6 +132,7 @@ $media_items = modern_image_manager_get_media_items();
               data-attachment-id="<?php echo esc_attr($id); ?>"
               value="<?php echo esc_attr($title); ?>"
               placeholder="<?php esc_attr_e('Voer titel in', 'modern-image-manager'); ?>"
+              aria-label="<?php esc_attr_e('Titel invoeren', 'modern-image-manager'); ?>"
             >
           </td>
           <td>
@@ -134,6 +142,7 @@ $media_items = modern_image_manager_get_media_items();
               data-attachment-id="<?php echo esc_attr($id); ?>"
               value="<?php echo esc_attr($caption); ?>"
               placeholder="<?php esc_attr_e('Voer caption in', 'modern-image-manager'); ?>"
+              aria-label="<?php esc_attr_e('Caption invoeren', 'modern-image-manager'); ?>"
             >
           </td>
           <td>
@@ -141,6 +150,7 @@ $media_items = modern_image_manager_get_media_items();
               class="description-input media-items-description-input"
               data-attachment-id="<?php echo esc_attr($id); ?>"
               placeholder="<?php esc_attr_e('Voer description in', 'modern-image-manager'); ?>"
+              aria-label="<?php esc_attr_e('Description invoeren', 'modern-image-manager'); ?>"
             ><?php echo esc_textarea($desc); ?></textarea>
           </td>
           <td>
@@ -150,18 +160,21 @@ $media_items = modern_image_manager_get_media_items();
               data-attachment-id="<?php echo esc_attr($id); ?>"
               value="<?php echo esc_attr($alt); ?>"
               placeholder="<?php esc_attr_e('Voer alt-tag in', 'modern-image-manager'); ?>"
+              aria-label="<?php esc_attr_e('Alt-tag invoeren', 'modern-image-manager'); ?>"
             >
           </td>
           <td>
             <button
               class="save-meta page-button media-items-save-meta"
               data-attachment-id="<?php echo esc_attr($id); ?>"
+              aria-label="<?php esc_attr_e('Opslaan', 'modern-image-manager'); ?>"
             ><?php esc_html_e('Opslaan', 'modern-image-manager'); ?></button>
           </td>
           <td>
             <button
               class="delete-media page-button media-items-delete-media"
               data-attachment-id="<?php echo esc_attr($id); ?>"
+              aria-label="<?php esc_attr_e('Verwijderen', 'modern-image-manager'); ?>"
             ><?php esc_html_e('Verwijderen', 'modern-image-manager'); ?></button>
           </td>
         </tr>
@@ -183,32 +196,33 @@ $media_items = modern_image_manager_get_media_items();
 <div class="wrap unique-wrap filter-bottom-container">
   <div class="filter-footer filter-bottom-footer">
     <div class="nav-controls filter-bottom-nav-controls">
-      <select id="pageFilterBottom" class="page-filter-select filter-bottom-page-filter">
+      <select id="pageFilterBottom" class="page-filter-select filter-bottom-page-filter" aria-label="<?php esc_attr_e('Pagina filter onderaan', 'modern-image-manager'); ?>">
         <option value="all"><?php echo esc_html__('Alle pagina\'s', 'modern-image-manager'); ?></option>
         <option value="linked"><?php echo esc_html__('Gekoppelde pagina\'s', 'modern-image-manager'); ?></option>
         <option value="unlinked"><?php echo esc_html__('Niet gekoppelde pagina\'s', 'modern-image-manager'); ?></option>
       </select>
-      <button id="applyFilterBottom" class="page-button filter-bottom-apply-button"><?php esc_html_e('Filter toepassen', 'modern-image-manager'); ?></button>
-      <div class="pagination-navigation filter-bottom-pagination">
-        <button id="prevPageBottom" class="page-button filter-bottom-prev-button"><?php esc_html_e('Vorige', 'modern-image-manager'); ?></button>
-        <span id="currentPageBottom" class="filter-bottom-current-page">1</span> /
+      <button id="applyFilterBottom" class="page-button filter-bottom-apply-button" type="button"><?php esc_html_e('Filter toepassen', 'modern-image-manager'); ?></button>
+      <div class="pagination-navigation filter-bottom-pagination" role="navigation" aria-label="<?php esc_attr_e('Paginatie onderaan', 'modern-image-manager'); ?>">
+        <button id="prevPageBottom" class="page-button filter-bottom-prev-button" type="button"><?php esc_html_e('Vorige', 'modern-image-manager'); ?></button>
+        <span id="currentPageBottom" class="filter-bottom-current-page" aria-live="polite" aria-atomic="true">1</span> /
         <span id="totalPagesBottom" class="filter-bottom-total-pages">50</span>
-        <button id="nextPageBottom" class="page-button filter-bottom-next-button"><?php esc_html_e('Volgende', 'modern-image-manager'); ?></button>
+        <button id="nextPageBottom" class="page-button filter-bottom-next-button" type="button"><?php esc_html_e('Volgende', 'modern-image-manager'); ?></button>
       </div>
     </div>
 
     <div class="bulk-delete-controls filter-bottom-bulk-delete">
-      <button id="bulkDeleteBottom" class="page-button bulk-delete-button">
+      <button id="bulkDeleteBottom" class="page-button bulk-delete-button" type="button">
         <?php echo esc_html__('Verwijder geselecteerde', 'modern-image-manager'); ?>
       </button>
     </div>
 
     <div class="search-container filter-bottom-search-container">
       <input
-        type="text"
+        type="search"
         id="search-input-bottom"
         class="search-box filter-bottom-search-box"
         placeholder="<?php echo esc_attr__('Zoeken...', 'modern-image-manager'); ?>"
+        aria-label="<?php esc_attr_e('Zoek media onderaan', 'modern-image-manager'); ?>"
       >
     </div>
 
@@ -216,7 +230,7 @@ $media_items = modern_image_manager_get_media_items();
       <label for="rowsPerPageBottom" class="filter-bottom-rows-per-page-label">
         <?php esc_html_e('Rijen per pagina:', 'modern-image-manager'); ?>
       </label>
-      <select id="rowsPerPageBottom" class="rows-per-page-select filter-bottom-rows-per-page-select">
+      <select id="rowsPerPageBottom" class="rows-per-page-select filter-bottom-rows-per-page-select" aria-label="<?php esc_attr_e('Aantal rijen per pagina onderaan', 'modern-image-manager'); ?>">
         <option value="10">10</option>
         <option value="20">20</option>
         <option value="30" selected>30</option>

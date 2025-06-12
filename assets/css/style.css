@@ -111,7 +111,7 @@
   justify-content: center; /* verticaal centreren */
   align-items: center;     /* horizontaal centreren */
   text-align: center;
-  height: 175px;           /* vaste hoogte */
+  height: 100px;           /* vaste hoogte */
   border: 2px dashed var(--primary-color);
   border-radius: 1rem;
   background: var(--background-color);
@@ -176,11 +176,11 @@
 }
 .file-selected-name {
   margin-top: 0;
-  color: #007cba;
+  color: var(--primary-color);
   font-size: 1em;
   min-height: 1.3em;
   font-weight: 500;
-  word-break: break-all;
+  word-break: break-word;
   text-align: center;
 }
 
@@ -699,34 +699,6 @@
   border: 1px solid #ccc;
   border-radius: 3px;
   font-size: 14px;
-}
-.export-filename-group .description {
-  font-size: 12px;
-  color: #666;
-}
-
-/* CSV preview */
-#csv-preview {
-  margin-top: 20px;
-  border-top: 1px solid #ccc;
-  padding-top: 15px;
-  font-size: 14px;
-}
-#csv-preview table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-#csv-preview th,
-#csv-preview td {
-  padding: 6px 10px;
-  border: 1px solid #ddd;
-  text-align: left;
-  font-size: 13px;
-}
-#csv-preview th {
-  background-color: #f0f0f0;
-  font-weight: 600;
 }
 
 /* Responsief */

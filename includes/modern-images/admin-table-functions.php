@@ -1,10 +1,15 @@
 <?php
+
+// File: helpers.php (of functions.php)
+
+// Helperfuncties voor Modern Image Manager
+
 declare(strict_types=1);
 
 defined('ABSPATH') || exit;
 
-/**
- * Geeft de titel van de gekoppelde post (WordPress of ACF).
+/**  
+ * Haal gekoppelde posttitel op  
  */
 function modern_image_manager_get_attached_post_title(int $attachment_id): string
 {
@@ -20,6 +25,7 @@ function modern_image_manager_get_attached_post_title(int $attachment_id): strin
         return $parent?->post_title ?? __('Niet gekoppeld', 'modern-image-manager');
     }
 
+    // Zoek via ACF relatie
     $acf_data = $wpdb->get_row(
         $wpdb->prepare(
             "SELECT post_id FROM $wpdb->postmeta WHERE meta_value = %d AND meta_key LIKE 'field_%%' LIMIT 1",
@@ -35,8 +41,8 @@ function modern_image_manager_get_attached_post_title(int $attachment_id): strin
     return __('Niet gekoppeld', 'modern-image-manager');
 }
 
-/**
- * Haalt alle mediabestanden op.
+/**  
+ * Haal alle media items op  
  */
 function modern_image_manager_get_media_items(): WP_Query
 {

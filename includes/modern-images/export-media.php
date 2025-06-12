@@ -1,52 +1,44 @@
 <?php
-declare(strict_types=1);
+// File: class-export.php
+// Export functionaliteit
 
+declare(strict_types=1);
 defined('ABSPATH') || exit;
 
 final class Modern_Image_Manager_Export
 {
+    // Render export pagina
     public static function render_export_page(): void
     {
         $error_message = get_transient('media_export_error_message');
         if ($error_message) {
             delete_transient('media_export_error_message');
         }
-
-        if (isset($_POST['export_csv'])) {
-            $export_option    = $_POST['export_option'] ?? 'all';
-            $selected_columns = isset($_POST['export_columns'])
-                ? array_map('sanitize_text_field', $_POST['export_columns'])
-                : [];
-
-            // Validatie: minimaal 1 kolom moet geselecteerd zijn
-            if (empty($selected_columns)) {
-                set_transient('media_export_error_message', __('Selecteer minstens één kolom om te exporteren.', 'modern-image-manager'), 30);
-                wp_redirect(admin_url('admin.php?page=export-media'));
-                exit;
-            }
-
-            self::generate_csv($export_option, $selected_columns);
-            exit;
-        }
-
         include plugin_dir_path(__FILE__) . '../../templates/export-page.php';
     }
 
+    // Download-handler (registreer deze via admin_post_)
+    public static function handle_export_download(): void
+    {
+        // Opties ophalen uit $_GET, nooit uit sessie!
+        $export_option = sanitize_text_field($_GET['export_option'] ?? 'all');
+        $selected_columns = isset($_GET['export_columns']) ? array_map('sanitize_text_field', (array)$_GET['export_columns']) : [];
+
+        // Direct CSV genereren (zonder enige andere WP output!)
+        self::generate_csv($export_option, $selected_columns);
+    }
+
+    // Genereer CSV en output naar browser
     public static function generate_csv(string $export_option = 'all', array $selected_columns = []): void
     {
+        // Maak helemaal zeker dat er geen output is!
         if (ob_get_length()) {
             ob_end_clean();
         }
-
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename=media-export.csv');
         header('Cache-Control: no-store, no-cache, must-revalidate');
         header('Expires: 0');
-
-        $output = fopen('php://output', 'w');
-        if ($output === false) {
-            wp_die(__('Kon output stream niet openen.', 'modern-image-manager'));
-        }
 
         $column_headers = [
             'filename'     => __('Bestandsnaam', 'modern-image-manager'),
@@ -67,6 +59,10 @@ final class Modern_Image_Manager_Export
             static fn(string $column): string => $column_headers[$column] ?? '',
             $selected_columns
         );
+        $output = fopen('php://output', 'w');
+        if ($output === false) {
+            wp_die(__('Kon output stream niet openen.', 'modern-image-manager'));
+        }
         fputcsv($output, $csv_headers);
 
         $args = [
@@ -79,7 +75,6 @@ final class Modern_Image_Manager_Export
         $media_items = get_posts($args);
 
         if (empty($media_items)) {
-            // Geen rijen, alleen de headers worden geëxporteerd
             fclose($output);
             exit;
         }
@@ -108,7 +103,7 @@ final class Modern_Image_Manager_Export
                 }
             }
 
-            // Filteren op 'linked'/'unlinked' als gekozen
+            // Filter 'linked' / 'unlinked'
             if (
                 ($export_option === 'linked' && $pagina === __('Geen', 'modern-image-manager')) ||
                 ($export_option === 'unlinked' && $pagina !== __('Geen', 'modern-image-manager'))
@@ -120,7 +115,7 @@ final class Modern_Image_Manager_Export
             foreach ($selected_columns as $column) {
                 $data[] = match ($column) {
                     'filename'      => $filename,
-                    'new_filename'  => '', // Vul eventueel aan uit andere bron
+                    'new_filename'  => '',
                     'page'          => $pagina,
                     'title'         => $title,
                     'caption'       => $caption,
@@ -138,3 +133,6 @@ final class Modern_Image_Manager_Export
         exit;
     }
 }
+
+// Hook de download-handler aan admin_post_
+add_action('admin_post_mim_export_csv', [Modern_Image_Manager_Export::class, 'handle_export_download']);

@@ -73,11 +73,13 @@ add_action('admin_enqueue_scripts', function (string $hook): void {
         true
     );
 
+    // Nonce verwijderd uit localized script data
     wp_localize_script('modern-image-manager-scripts', 'ajax_object', [
         'ajax_url' => admin_url('admin-ajax.php'),
         'translations' => [
             'no_results' => esc_js(__('Geen resultaten gevonden.', 'modern-image-manager')),
         ],
+        // 'nonce' => ... verwijderd
     ]);
 
     wp_enqueue_style(
@@ -95,12 +97,12 @@ add_action('admin_enqueue_scripts', function (string $hook): void {
         true
     );
 
-    // Localizeer de nonce en vertalingen voor de scanpagina
+    // Nonce verwijderd ook hier
     wp_localize_script(
         'scan-duplicate-images-script',
         'mim_scan_progress_nonce',
         [
-            'nonce'                 => wp_create_nonce('mim_scan_progress_nonce'),
+            //'nonce'                 => wp_create_nonce('mim_scan_progress_nonce'), // verwijderd
             'no_duplicates_found'   => esc_js(__('Geen dubbele afbeeldingen gevonden.', 'modern-image-manager')),
             'found_duplicates_text' => esc_js(__('Duplicaten gevonden:', 'modern-image-manager')),
         ]

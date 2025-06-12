@@ -1,6 +1,8 @@
 <?php
-declare(strict_types=1);
+// File: class-main.php
+// Plugin hoofdklasse met admin menu en assets
 
+declare(strict_types=1);
 defined('ABSPATH') || exit;
 
 final class Modern_Image_Manager
@@ -11,12 +13,13 @@ final class Modern_Image_Manager
         add_action('admin_enqueue_scripts', [self::class, 'enqueue_assets']);
     }
 
+    // Voeg hoofd- en submenu's toe
     public static function add_admin_menu(): void
     {
         add_menu_page(
             __('Modern Image Manager', 'modern-image-manager'),
             __('Modern Image', 'modern-image-manager'),
-            'manage_options',
+            'upload_files', // Geldige capability voor mediabeheer
             'modern-image-manager',
             'mim_render_admin_table_page',
             'dashicons-media-document',
@@ -47,18 +50,20 @@ final class Modern_Image_Manager
         );
     }
 
+    // Helper submenu toevoegen
     private static function add_submenu_item(string $page_title, string $menu_title, string $slug, callable|string $callback): void
     {
         add_submenu_page(
             'modern-image-manager',
             $page_title,
             $menu_title,
-            'manage_options',
+            'upload_files', // Zelfde capability als hoofdmenu
             $slug,
             $callback
         );
     }
 
+    // Enqueue assets op juiste pagina's
     public static function enqueue_assets(string $hook): void
     {
         if (!in_array($hook, [
@@ -73,3 +78,5 @@ final class Modern_Image_Manager
         // Assets worden globaal ingeladen via een globale asset-functie.
     }
 }
+
+Modern_Image_Manager::init();

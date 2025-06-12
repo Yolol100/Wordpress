@@ -1,4 +1,3 @@
-// import-media.js
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const importButton = document.getElementById('import-button');
   const fileSelectedName = document.getElementById('file-selected-name');
 
-  // Drag & drop events
+  // Drag & drop events – visuele feedback bij drag-over
   ['dragenter', 'dragover'].forEach(evt =>
     dragArea.addEventListener(evt, e => {
       e.preventDefault();
@@ -24,17 +23,22 @@ document.addEventListener('DOMContentLoaded', () => {
       dragArea.classList.remove('drag-over');
     })
   );
+
+  // Drop event – bestanden plaatsen in file input
   dragArea.addEventListener('drop', e => {
     if (e.dataTransfer.files.length) {
       fileInput.files = e.dataTransfer.files;
-      validateFile();
+      showFileInfo();
     }
   });
+
+  // Klik op drag area opent file picker
   dragArea.addEventListener('click', () => fileInput.click());
 
-  fileInput.addEventListener('change', validateFile);
+  // Update UI met bestandsnaam en grootte (geen validatie)
+  fileInput.addEventListener('change', showFileInfo);
 
-  function validateFile() {
+  function showFileInfo() {
     fileError.hidden = true;
     fileError.innerText = '';
     fileSelectedName.innerText = '';
@@ -48,39 +52,26 @@ document.addEventListener('DOMContentLoaded', () => {
       return false;
     }
 
-    if (file.type !== 'text/csv' && !file.name.endsWith('.csv')) {
-      fileError.innerText = 'Alleen .csv-bestanden zijn toegestaan.';
-      fileError.hidden = false;
-      fileInput.value = '';
-      fileError.focus();
-      return false;
-    }
-
-    if (file.size > 2 * 1024 * 1024) {  // 2MB limiet
-      fileError.innerText = 'Bestand is te groot. Maximaal 2MB.';
-      fileError.hidden = false;
-      fileInput.value = '';
-      fileError.focus();
-      return false;
-    }
-
-    // Bij een geldig bestand:
     fileSelectedName.innerText = file.name;
     summary.hidden = false;
     summary.textContent = `Bestand: ${file.name}, Grootte: ${(file.size / 1024).toFixed(2)} KB`;
     return true;
   }
 
+  // Form submit event - toon loader en disable knop, geen validatie
   form.addEventListener('submit', e => {
-    if (!validateFile()) {
+    if (!fileInput.files.length) {
       e.preventDefault();
+      fileError.innerText = 'Geen bestand gekozen';
+      fileError.hidden = false;
+      fileError.focus();
       return false;
     }
     loader.hidden = false;
     importButton.disabled = true;
   });
 
-  // Toegankelijkheid: focus naar fouten
+  // Toegankelijkheid: focus op foutmelding als deze zichtbaar wordt
   fileError.addEventListener('DOMSubtreeModified', () => {
     if (!fileError.hidden) fileError.focus();
   });
