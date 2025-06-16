@@ -124,7 +124,6 @@
   position: relative;
   outline: none;
 }
-
 .drag-drop-area.drag-over,
 .drag-drop-area:focus-within {
   border-color: var(--primary-color-dark);
@@ -716,4 +715,44 @@
     max-width: 98vw;
     padding: 1.2rem 0.5rem;
   }
+}
+
+/* Highlight succes na opslaan */
+.highlight-success {
+  animation: highlightSuccess 2s ease forwards;
+}
+
+@keyframes highlightSuccess {
+  0% { background-color: #d4edda; }
+  100% { background-color: transparent; }
+}
+
+/* Custom toast styles */
+.custom-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(51, 51, 51, 0.9);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.custom-toast.toast-success {
+  background-color: #28a745;
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.7);
+}
+
+.custom-toast.toast-error {
+  background-color: #dc3545;
+  box-shadow: 0 0 10px rgba(220, 53, 69, 0.7);
+}
+
+.custom-toast.toast-info {
+  background-color: #17a2b8;
+  box-shadow: 0 0 10px rgba(23, 162, 184, 0.7);
 }

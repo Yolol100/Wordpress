@@ -2,9 +2,7 @@
 /**
  * Template: Scan Duplicate Images (zonder bulk-delete)
  */
-
 defined('ABSPATH') || exit;
-
 ?>
 <div class="wrap mim-scan-container mim-scan-page">
 

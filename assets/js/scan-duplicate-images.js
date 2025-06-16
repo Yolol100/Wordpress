@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('mim-search');
   const filterType  = document.getElementById('filter-type');
   const rescanBtn   = document.getElementById('mim-rescan-btn');
+  const controls    = document.getElementById('mim-enhanced-controls');
+  const summaryEl   = document.getElementById('mim-scan-summary');
+  const table       = document.querySelector('.dius-results-table');
+  const tbody       = table ? table.tBodies[0] : null;
 
   // Restore last search/filter from localStorage
   if (searchInput && localStorage.getItem('mim-search')) {
@@ -22,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // On form submit: hide intro, show loader
   if (form) {
-    form.addEventListener('submit', () => {
+    form.addEventListener('submit', (e) => {
       if (intro)  intro.hidden  = true;
       if (loader) loader.hidden = false;
     });
@@ -30,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initial UI update based on results
   fillSummary();
+  filterScanResults();
+  if (filterType) filterTableByType(filterType.value);
 
   // Search input: update localStorage and filter results live
   if (searchInput) {
@@ -47,81 +53,125 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Column sorting on header click
+  // Column sorting on header click, with aria-sort update
   document.querySelectorAll('.dius-results-table thead th').forEach((th, idx) => {
+    th.setAttribute('tabindex', '0');
+    th.setAttribute('role', 'button');
     th.addEventListener('click', () => sortTable(idx));
+    th.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        sortTable(idx);
+      }
+    });
   });
 
-  // Rescan button: reload page
+  // Rescan button: reload page + keyboard accessible
   if (rescanBtn) {
+    rescanBtn.setAttribute('tabindex', '0');
+    rescanBtn.setAttribute('role', 'button');
     rescanBtn.addEventListener('click', () => {
+      // Clear filters in localStorage on rescan
+      localStorage.removeItem('mim-search');
+      localStorage.removeItem('mim-filter');
       location.reload();
+    });
+    rescanBtn.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        localStorage.removeItem('mim-search');
+        localStorage.removeItem('mim-filter');
+        location.reload();
+      }
     });
   }
 
   // Functions
 
+  // Update summary text and toggle controls visibility
   function fillSummary() {
-    const rows = Array.from(document.querySelectorAll('.dius-results-table tbody tr'))
-      .filter(r => r.style.display !== 'none');
-    const count = rows.length;
+    if (!tbody) return;
+
+    const visibleRows = Array.from(tbody.rows).filter(r => r.style.display !== 'none');
+    const count = visibleRows.length;
 
     // Show/hide controls & results depending on rows count
-    const controls   = document.getElementById('mim-enhanced-controls');
-    const wrapperEls = document.querySelectorAll('.scan-wrapper > *');
-    if (count > 0) {
-      if (controls) controls.style.display = '';
-      wrapperEls.forEach(el => el.style.display = '');
-    }
+    if (controls) controls.style.display = count > 0 ? '' : 'none';
+
+    // Show/hide scan wrapper children except intro when no results
+    document.querySelectorAll('.scan-wrapper > *').forEach(el => {
+      if (count > 0) {
+        el.style.display = '';
+      } else if (!el.classList.contains('mim-scan-page-description')) {
+        el.style.display = 'none';
+      }
+    });
 
     // Update summary text with count and unique pages
     const pages = new Set();
-    rows.forEach(r => {
-      r.querySelectorAll('td:nth-child(2) a').forEach(a => pages.add(a.href));
+    visibleRows.forEach(row => {
+      row.querySelectorAll('td:nth-child(2) a').forEach(a => pages.add(a.href));
     });
-    const summaryEl = document.getElementById('mim-scan-summary');
     if (summaryEl) {
       summaryEl.textContent =
         `${count} dubbele afbeelding${count !== 1 ? 'en' : ''} gevonden in ${pages.size} pagina${pages.size !== 1 ? "'s" : ''}.`;
     }
   }
 
+  // Filter rows based on search input
   function filterScanResults() {
-    const term = searchInput.value.toLowerCase();
-    document.querySelectorAll('.dius-results-table tbody tr').forEach(row => {
-      row.style.display = row.innerText.toLowerCase().includes(term) ? '' : 'none';
+    if (!tbody) return;
+    const term = searchInput ? searchInput.value.toLowerCase() : '';
+    Array.from(tbody.rows).forEach(row => {
+      const rowText = row.innerText.toLowerCase();
+      row.style.display = rowText.includes(term) ? '' : 'none';
     });
     fillSummary();
   }
 
+  // Filter rows based on selected type
   function filterTableByType(type) {
-    document.querySelectorAll('.dius-results-table tbody tr').forEach(row => {
+    if (!tbody) return;
+    Array.from(tbody.rows).forEach(row => {
       const ctx = row.children[2]?.innerText.toLowerCase() || '';
       let show = type === 'all';
       if (type === 'post_content')        show = ctx.includes('in content');
-      if (type === 'featured_image')      show = ctx.includes('uitgelichte');
-      if (type === 'acf_field')           show = ctx.includes('acf veld');
-      if (type === 'elementor_template')  show = ctx.includes('elementor');
+      else if (type === 'featured_image') show = ctx.includes('uitgelichte');
+      else if (type === 'acf_field')       show = ctx.includes('acf veld');
+      else if (type === 'elementor_template') show = ctx.includes('elementor');
       row.style.display = show ? '' : 'none';
     });
     fillSummary();
   }
 
+  // Sort table column by index
   function sortTable(colIndex) {
-    const table = document.querySelector('.dius-results-table');
-    if (!table) return;
-    const tbody = table.tBodies[0];
-    const asc   = table.dataset.sortAsc === 'true' ? false : true;
-    const rows  = Array.from(tbody.rows);
+    if (!table || !tbody) return;
+
+    const currentTh = table.querySelectorAll('thead th')[colIndex];
+    const isAsc = currentTh.getAttribute('aria-sort') === 'ascending';
+    const rows = Array.from(tbody.rows);
+
     rows.sort((a, b) => {
       const aText = a.cells[colIndex].innerText.trim().toLowerCase();
       const bText = b.cells[colIndex].innerText.trim().toLowerCase();
-      return asc ? aText.localeCompare(bText) : bText.localeCompare(aText);
+      return isAsc ? bText.localeCompare(aText) : aText.localeCompare(bText);
     });
-    rows.forEach(r => tbody.appendChild(r));
-    table.dataset.sortAsc = asc;
+
+    rows.forEach(row => tbody.appendChild(row));
+
+    // Update aria-sort on all headers
+    table.querySelectorAll('thead th').forEach((th, i) => {
+      if (i === colIndex) {
+        th.setAttribute('aria-sort', isAsc ? 'descending' : 'ascending');
+      } else {
+        th.removeAttribute('aria-sort');
+      }
+    });
+
+    // Update sort arrow indicators
     table.querySelectorAll('.sort-arrow').forEach(el => el.textContent = '');
-    const arrow = table.querySelector(`thead th:nth-child(${colIndex+1}) .sort-arrow`);
-    if (arrow) arrow.textContent = asc ? ' ▲' : ' ▼';
+    const arrow = currentTh.querySelector('.sort-arrow');
+    if (arrow) arrow.textContent = isAsc ? ' ▼' : ' ▲';
   }
 });

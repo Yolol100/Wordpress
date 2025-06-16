@@ -10,16 +10,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const importButton = document.getElementById('import-button');
   const fileSelectedName = document.getElementById('file-selected-name');
 
+  // Add ARIA attributes for accessibility
+  fileError.setAttribute('role', 'alert');
+  fileError.setAttribute('aria-live', 'assertive');
+  dragArea.setAttribute('tabindex', '0');
+  dragArea.setAttribute('aria-label', 'Sleep hier je CSV-bestand naartoe of klik om te selecteren');
+
   // Drag & drop events – visuele feedback bij drag-over
   ['dragenter', 'dragover'].forEach(evt =>
     dragArea.addEventListener(evt, e => {
       e.preventDefault();
+      e.stopPropagation();
       dragArea.classList.add('drag-over');
     })
   );
   ['dragleave', 'drop'].forEach(evt =>
     dragArea.addEventListener(evt, e => {
       e.preventDefault();
+      e.stopPropagation();
       dragArea.classList.remove('drag-over');
     })
   );
@@ -35,18 +43,45 @@ document.addEventListener('DOMContentLoaded', () => {
   // Klik op drag area opent file picker
   dragArea.addEventListener('click', () => fileInput.click());
 
-  // Update UI met bestandsnaam en grootte (geen validatie)
+  // Ook keyboard toegankelijk maken: Enter en Space openen file picker
+  dragArea.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      fileInput.click();
+    }
+  });
+
+  // Update UI met bestandsnaam en grootte (en validatie)
   fileInput.addEventListener('change', showFileInfo);
 
+  // Toegankelijkheid: focus op foutmelding als deze zichtbaar wordt
+  fileError.addEventListener('DOMSubtreeModified', () => {
+    if (!fileError.hidden) fileError.focus();
+  });
+
+  /**
+   * Toon info over geselecteerd bestand en valideer
+   * @returns {boolean} true als bestand geldig is, anders false
+   */
   function showFileInfo() {
     fileError.hidden = true;
     fileError.innerText = '';
     fileSelectedName.innerText = '';
     summary.hidden = true;
+    importButton.disabled = false;
+    importButton.textContent = 'Importeren';
 
     const file = fileInput.files[0];
     if (!file) {
-      fileError.innerText = 'Geen bestand gekozen';
+      fileError.innerText = 'Geen bestand gekozen.';
+      fileError.hidden = false;
+      fileError.focus();
+      return false;
+    }
+
+    // Validatie: alleen CSV bestanden toegestaan
+    if (!file.name.toLowerCase().endsWith('.csv')) {
+      fileError.innerText = 'Alleen CSV-bestanden zijn toegestaan.';
       fileError.hidden = false;
       fileError.focus();
       return false;
@@ -58,21 +93,21 @@ document.addEventListener('DOMContentLoaded', () => {
     return true;
   }
 
-  // Form submit event - toon loader en disable knop, geen validatie
+  // Form submit event - toon loader en disable knop, progress feedback
   form.addEventListener('submit', e => {
     if (!fileInput.files.length) {
       e.preventDefault();
-      fileError.innerText = 'Geen bestand gekozen';
+      fileError.innerText = 'Geen bestand gekozen.';
       fileError.hidden = false;
       fileError.focus();
       return false;
     }
+    if (!showFileInfo()) {
+      e.preventDefault();
+      return false;
+    }
     loader.hidden = false;
     importButton.disabled = true;
-  });
-
-  // Toegankelijkheid: focus op foutmelding als deze zichtbaar wordt
-  fileError.addEventListener('DOMSubtreeModified', () => {
-    if (!fileError.hidden) fileError.focus();
+    importButton.textContent = 'Importeren...'; // Visuele progress feedback
   });
 });

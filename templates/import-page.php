@@ -21,13 +21,13 @@
 
     <!-- Meldingen boven formulier -->
     <?php if (!empty($notice_type) && !empty($notice_html)): ?>
-      <div class="mim-notice mim-notice--<?php echo esc_attr($notice_type); ?>">
+      <div class="mim-notice mim-notice--<?php echo esc_attr($notice_type); ?>" role="alert" aria-live="assertive">
         <?php echo $notice_html; ?>
       </div>
     <?php endif; ?>
 
     <!-- Loader tijdens import -->
-    <div id="import-loader" class="import-loader" hidden>
+    <div id="import-loader" class="import-loader" hidden role="status" aria-live="polite" aria-busy="true">
       <em><?php esc_html_e('Importeren bezig... Een ogenblik geduld.', 'modern-image-manager'); ?></em>
     </div>
 
@@ -66,6 +66,7 @@
           name="import_csv"
           class="page-button import-button"
           id="import-button"
+          aria-label="<?php esc_attr_e('Start importeren van CSV-bestand', 'modern-image-manager'); ?>"
         >
           <?php esc_html_e('Importeer', 'modern-image-manager'); ?>
         </button>

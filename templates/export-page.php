@@ -30,12 +30,12 @@ $column_tooltips = [
     </h1>
 
     <?php if (! empty($error_message)) : ?>
-      <div class="mim-notice mim-notice--error">
+      <div class="mim-notice mim-notice--error" role="alert" aria-live="assertive">
         <p><?php echo esc_html($error_message); ?></p>
       </div>
     <?php endif; ?>
 
-    <form method="get" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="page-form export-page-form">
+    <form method="get" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="page-form export-page-form" novalidate>
       <input type="hidden" name="action" value="mim_export_csv">
 
       <!-- 1) Exportoptie dropdown -->
@@ -59,10 +59,10 @@ $column_tooltips = [
 
       <!-- 3) Kolommen selectie -->
       <div class="form-group columns-select-group">
-        <label class="columns-select-label">
+        <label class="columns-select-label" id="export-columns-label">
           <?php echo esc_html__('Selecteer kolommen', 'modern-image-manager'); ?>
         </label>
-        <div class="checkbox-group">
+        <div class="checkbox-group" role="group" aria-labelledby="export-columns-label">
           <?php
           $columns = [
             'filename'     => __('Bestandsnaam', 'modern-image-manager'),
@@ -91,6 +91,7 @@ $column_tooltips = [
       <button
         type="submit"
         class="page-button export-button"
+        aria-label="<?php esc_attr_e('Exporteer geselecteerde kolommen naar CSV', 'modern-image-manager'); ?>"
       >
         <?php echo esc_html__('Exporteer naar CSV', 'modern-image-manager'); ?>
       </button>

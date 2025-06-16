@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Plugin Name:       Modern Image Manager
  * Plugin URI:        https://example.com/plugins/modern-image-manager/
  * Description:       Beheer en bewerk media-informatie in WordPress.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Webactueel
  * Author URI:        https://example.com
  * License:           GPL-2.0+
@@ -23,7 +23,7 @@ defined('ABSPATH') || exit;
 define('MODERN_IMAGE_MANAGER_PATH', plugin_dir_path(__FILE__));
 define('MODERN_IMAGE_MANAGER_URL', plugin_dir_url(__FILE__));
 
-// Tekstdomein
+// Tekstdomein laden
 add_action('plugins_loaded', function (): void {
     load_plugin_textdomain(
         'modern-image-manager',
@@ -56,76 +56,85 @@ add_action('plugins_loaded', function (): void {
     }
 });
 
-// Admin assets
+// Admin assets inladen
 add_action('admin_enqueue_scripts', function (string $hook): void {
+    // Basis stylesheet (light mode)
     wp_enqueue_style(
         'modern-image-manager-styles',
         MODERN_IMAGE_MANAGER_URL . 'assets/css/style.css',
         [],
-        '1.0.0'
+        '1.0.1'
     );
 
+    // Dark mode stylesheet, laadt altijd mee voor toggle via JS / media query
+    wp_enqueue_style(
+        'modern-image-manager-dark-mode',
+        MODERN_IMAGE_MANAGER_URL . 'assets/css/dark-mode.css',
+        ['modern-image-manager-styles'],
+        '1.0.1'
+    );
+
+    // Hoofd JS script
     wp_enqueue_script(
         'modern-image-manager-scripts',
         MODERN_IMAGE_MANAGER_URL . 'assets/js/scripts.js',
         ['jquery'],
-        '1.0.0',
+        '1.0.1',
         true
     );
 
-    // Nonce verwijderd uit localized script data
+    // Localize zonder nonce
     wp_localize_script('modern-image-manager-scripts', 'ajax_object', [
         'ajax_url' => admin_url('admin-ajax.php'),
         'translations' => [
             'no_results' => esc_js(__('Geen resultaten gevonden.', 'modern-image-manager')),
         ],
-        // 'nonce' => ... verwijderd
     ]);
 
+    // Scan duplicate images styles & scripts
     wp_enqueue_style(
         'scan-duplicate-images',
         MODERN_IMAGE_MANAGER_URL . 'assets/css/scan-duplicate-images.css',
         [],
-        '1.0.0'
+        '1.0.1'
     );
 
     wp_enqueue_script(
         'scan-duplicate-images-script',
         MODERN_IMAGE_MANAGER_URL . 'assets/js/scan-duplicate-images.js',
         ['jquery'],
-        '1.0.0',
+        '1.0.1',
         true
     );
 
-    // Nonce verwijderd ook hier
     wp_localize_script(
         'scan-duplicate-images-script',
         'mim_scan_progress_nonce',
         [
-            //'nonce'                 => wp_create_nonce('mim_scan_progress_nonce'), // verwijderd
+            // 'nonce' verwijderd voor veiligheid
             'no_duplicates_found'   => esc_js(__('Geen dubbele afbeeldingen gevonden.', 'modern-image-manager')),
             'found_duplicates_text' => esc_js(__('Duplicaten gevonden:', 'modern-image-manager')),
         ]
     );
 });
 
-// Frontend assets (optioneel)
+// Frontend assets (voor toekomstige ondersteuning)
 add_action('wp_enqueue_scripts', function (): void {
-    // Toekomstige ondersteuning
+    // Placeholder voor frontend styles/scripts
 });
 
-// Admin tabelpagina
+// Admin tabelpagina renderen
 function mim_render_admin_table_page(): void {
     require_once MODERN_IMAGE_MANAGER_PATH . 'includes/modern-images/admin-table-functions.php';
     include MODERN_IMAGE_MANAGER_PATH . 'templates/admin-table.php';
 }
 
-// Scannerpagina
+// Scannerpagina renderen
 function scan_duplicate_images_page(): void {
     include MODERN_IMAGE_MANAGER_PATH . 'templates/scan-duplicate-page.php';
 }
 
-// Scannerfunctionaliteit los
+// Scanner functionaliteit los inladen
 function include_scan_duplicate_images_functionality(): void {
     require_once MODERN_IMAGE_MANAGER_PATH . 'includes/scan-images/scanner.php';
 }
