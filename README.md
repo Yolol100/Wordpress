@@ -114,7 +114,3 @@ GPL-2.0 — vrij om te gebruiken, aan te passen en verspreiden.
 ---
 
 **Modern Image Manager** bespaart je tijd en moeite met geavanceerd mediabeheer, ongeacht de grootte van je WordPress-bibliotheek.
-
----
-
-Wil je dat ik ook voorbeeld CSV-sjablonen, FAQ of changelog toevoeg? Of een Engelse vertaling schrijf? Laat maar weten!
