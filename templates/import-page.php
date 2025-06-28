@@ -1,4 +1,5 @@
 <!-- import-page.php -->
+<!-- import-page.php -->
 <body class="data-page">
   <div class="page-container import-page-container">
 
@@ -59,6 +60,15 @@
         <div id="file-selected-name" style="margin-top: 0.6em; font-size: 0.95em; color: #007cba;"></div>
         <div id="file-error" class="file-error" role="alert" hidden tabindex="-1"></div>
       </div>
+
+      <!-- Nieuw: Checkbox voor overschrijven met leegte -->
+      <p style="text-align:center; margin:1em 0 0.5em 0;">
+        <label>
+          <input type="checkbox" name="overwrite_empty" value="1"
+            <?php echo !empty($GLOBALS['mim_overwrite_empty']) ? 'checked' : ''; ?> />
+          <?php esc_html_e('Lege waarden mogen bestaande data overschrijven', 'modern-image-manager'); ?>
+        </label>
+      </p>
 
       <div style="display: flex; justify-content: center; margin-top: 0.7rem;">
         <button

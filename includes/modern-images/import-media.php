@@ -13,17 +13,16 @@ final class Modern_Image_Manager_Import
         $notice_html = '';
         $imported_count = 0;
         $skipped_rows = [];
+        $overwrite_empty = !empty($_POST['overwrite_empty']);
 
         if (isset($_POST['import_csv'])) {
             if (empty($_FILES['import_file']['tmp_name'])) {
-                // Geen bestand gekozen
                 $notice_type = 'error';
                 $notice_html = esc_html__('Geen bestand geüpload.', 'modern-image-manager');
             } else {
-                list($errors, $imported_count, $skipped_rows) = self::handle_import();
+                list($errors, $imported_count, $skipped_rows) = self::handle_import($overwrite_empty);
 
                 if (!empty($errors)) {
-                    // Fouten in upload of CSV headers
                     $notice_type = 'error';
                     $notice_html = '<ul>';
                     foreach ($errors as $error) {
@@ -31,11 +30,9 @@ final class Modern_Image_Manager_Import
                     }
                     $notice_html .= '</ul>';
                 } elseif ($imported_count == 0 && count($skipped_rows) == 0) {
-                    // Wel bestand, niks geïmporteerd
                     $notice_type = 'warning';
                     $notice_html = esc_html__('Niks geïmporteerd.', 'modern-image-manager');
                 } else {
-                    // Toon import samenvatting
                     $notice_type = 'success';
                     $skipped_count = count($skipped_rows);
                     $notice_html = '<strong>' . esc_html__('Import samenvatting', 'modern-image-manager') . '</strong><ul>';
@@ -53,10 +50,13 @@ final class Modern_Image_Manager_Import
             }
         }
 
+        // Zet variabele zodat template het vinkje kan onthouden
+        $GLOBALS['mim_overwrite_empty'] = $overwrite_empty;
+
         include MODERN_IMAGE_MANAGER_PATH . 'templates/import-page.php';
     }
 
-    public static function handle_import(): array
+    public static function handle_import(bool $overwrite_empty = false): array
     {
         global $wpdb;
         $errors = [];
@@ -92,16 +92,22 @@ final class Modern_Image_Manager_Import
             }
         }
 
-        // Start transaction
         $wpdb->query('START TRANSACTION');
         try {
             foreach ($csvData as $i => $row) {
                 $rownum = $i + 2;
+
+                // Controleer eerst het aantal kolommen vóór array_combine!
+                if (count($headers) !== count($row)) {
+                    $skipped[$rownum] = __('Aantal kolommen in deze rij komt niet overeen met de header.', 'modern-image-manager');
+                    continue;
+                }
+
                 $data = array_combine($headers, $row);
 
                 // Valideer verplichte velden
                 foreach ($required as $col) {
-                    if (empty($data[$col])) {
+                    if (!isset($data[$col]) || $data[$col] === '') {
                         $skipped[$rownum] = sprintf(__('Lege waarde voor verplichte kolom: %s', 'modern-image-manager'), $col);
                         continue 2;
                     }
@@ -111,16 +117,19 @@ final class Modern_Image_Manager_Import
                     ? pathinfo(trim($data['Nieuwe bestandsnaam']), PATHINFO_FILENAME)
                     : '';
 
-                $existingAttachment = self::get_attachment_by_filename($data['Bestandsnaam']);
+                // Geavanceerd: zoek ALLE varianten (origineel én alle scaled versies)
+                $attachments = self::get_all_scaled_attachments($data['Bestandsnaam']);
 
-                if ($existingAttachment) {
-                    $attachmentId = (int) $existingAttachment->ID;
+                if (!empty($attachments)) {
+                    foreach ($attachments as $attachment) {
+                        $attachmentId = (int)$attachment->ID;
 
-                    if (!empty($newFilenameInput)) {
-                        self::rename_media_file($attachmentId, $newFilenameInput);
+                        if (!empty($newFilenameInput)) {
+                            self::rename_media_file($attachmentId, $newFilenameInput);
+                        }
+
+                        self::update_attachment_data($attachmentId, $data, $overwrite_empty);
                     }
-
-                    self::update_attachment_data($attachmentId, $data);
                 } else {
                     self::create_new_attachment($data);
                 }
@@ -173,17 +182,17 @@ final class Modern_Image_Manager_Import
         ]);
     }
 
-    private static function update_attachment_data(int $attachmentId, array $data): void
+    private static function update_attachment_data(int $attachmentId, array $data, bool $overwrite_empty = false): void
     {
         $update_fields = [];
 
-        if (!empty($data['Titel'])) {
+        if (array_key_exists('Titel', $data) && ($overwrite_empty || $data['Titel'] !== '')) {
             $update_fields['post_title'] = sanitize_text_field($data['Titel']);
         }
-        if (!empty($data['Caption'])) {
+        if (array_key_exists('Caption', $data) && ($overwrite_empty || $data['Caption'] !== '')) {
             $update_fields['post_excerpt'] = sanitize_text_field($data['Caption']);
         }
-        if (!empty($data['Description'])) {
+        if (array_key_exists('Description', $data) && ($overwrite_empty || $data['Description'] !== '')) {
             $update_fields['post_content'] = wp_kses_post($data['Description']);
         }
 
@@ -192,27 +201,45 @@ final class Modern_Image_Manager_Import
             wp_update_post($update_fields);
         }
 
-        if (!empty($data['Alt-tag'])) {
+        if (array_key_exists('Alt-tag', $data) && ($overwrite_empty || $data['Alt-tag'] !== '')) {
             update_post_meta($attachmentId, '_wp_attachment_image_alt', sanitize_text_field($data['Alt-tag']));
+        }
+
+        if (array_key_exists('SEO Titel', $data) && ($overwrite_empty || $data['SEO Titel'] !== '')) {
+            update_post_meta($attachmentId, '_yoast_wpseo_title', sanitize_text_field($data['SEO Titel']));
+        }
+        if (array_key_exists('SEO Omschrijving', $data) && ($overwrite_empty || $data['SEO Omschrijving'] !== '')) {
+            update_post_meta($attachmentId, '_yoast_wpseo_metadesc', sanitize_text_field($data['SEO Omschrijving']));
         }
     }
 
-    private static function get_attachment_by_filename(string $filename): ?WP_Post
+    // Geavanceerd: vind alle bijlagen met originele én ALLE geschaalde varianten
+    private static function get_all_scaled_attachments(string $filename): array
     {
         global $wpdb;
 
-        $like       = '%' . $wpdb->esc_like($filename);
-        $attachment = $wpdb->get_row(
+        $ext      = pathinfo($filename, PATHINFO_EXTENSION);
+        $basename = basename($filename, '.' . $ext);
+
+        // SQL LIKE: zoek alles dat begint met basename en eindigt op .ext, ook -scaled, -scaled-1, -scaled-2 etc.
+        $pattern  = $wpdb->esc_like($basename) . '%.' . $ext;
+
+        $results = $wpdb->get_results(
             $wpdb->prepare(
                 "SELECT ID FROM $wpdb->posts 
                  WHERE post_type = 'attachment' 
-                 AND guid LIKE %s 
-                 LIMIT 1",
-                $like
+                 AND guid LIKE %s",
+                '%' . $pattern
             )
         );
-
-        return $attachment ? get_post($attachment->ID) : null;
+        $attachments = [];
+        foreach ($results as $result) {
+            $post = get_post($result->ID);
+            if ($post) {
+                $attachments[] = $post;
+            }
+        }
+        return $attachments;
     }
 
     private static function create_new_attachment(array $data): ?int
@@ -246,8 +273,14 @@ final class Modern_Image_Manager_Import
             $attachData = wp_generate_attachment_metadata($newAttachmentId, $filePath);
             wp_update_attachment_metadata($newAttachmentId, $attachData);
 
-            if (!empty($data['Alt-tag'])) {
+            if (isset($data['Alt-tag'])) {
                 update_post_meta($newAttachmentId, '_wp_attachment_image_alt', sanitize_text_field($data['Alt-tag']));
+            }
+            if (isset($data['SEO Titel'])) {
+                update_post_meta($newAttachmentId, '_yoast_wpseo_title', sanitize_text_field($data['SEO Titel']));
+            }
+            if (isset($data['SEO Omschrijving'])) {
+                update_post_meta($newAttachmentId, '_yoast_wpseo_metadesc', sanitize_text_field($data['SEO Omschrijving']));
             }
         }
 

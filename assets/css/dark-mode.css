@@ -1,44 +1,17 @@
-/* DARK MODE VARIABELEN VIA CLASS */
-.dark-mode {
-  --primary-color: #3399ff;
-  --primary-color-dark: #267acc;
-  --background-color: #121212;
-  --table-background: #1e1e1e;
-  --border-color: #333333;
-  --text-color: #e0e0e0;
-  --header-text-color: #ffffff;
-  --even-row-bg-color: #2a2a2a;
-  --hover-bg-color: #333a44;
-  --disabled-button-bg-color: #444444;
-  --button-hover-bg-color: #267acc;
-  --box-shadow-light: 0 0.25rem 0.625rem rgba(255, 255, 255, 0.1);
-  --box-shadow-medium: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
-}
+/* Alleen extra stijlen voor dark mode */
+/* Je variabelen staan centraal in je root.css */
 
-/* DARK MODE VARIABELEN VIA MEDIA QUERY (optioneel) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary-color: #3399ff;
-    --primary-color-dark: #267acc;
-    --background-color: #121212;
-    --table-background: #1e1e1e;
-    --border-color: #333333;
-    --text-color: #e0e0e0;
-    --header-text-color: #ffffff;
-    --even-row-bg-color: #2a2a2a;
-    --hover-bg-color: #333a44;
-    --disabled-button-bg-color: #444444;
-    --button-hover-bg-color: #267acc;
-    --box-shadow-light: 0 0.25rem 0.625rem rgba(255, 255, 255, 0.1);
-    --box-shadow-medium: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
-  }
-}
-
-/* Optioneel: hier kan je dark-mode specifieke extra stijlen toevoegen */
-/* Bijvoorbeeld: */
-/*
 .dark-mode .media-items-thead th,
 .dark-mode .media-items-tr-head th {
   border-bottom-color: #1a5bb8;
+}
+
+/* Voeg hier eventueel andere dark-only component styles toe */
+
+/* Bijvoorbeeld: */
+/*
+.dark-mode .export-page-title,
+.dark-mode .import-page-title {
+  color: var(--text-color);
 }
 */
