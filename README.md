@@ -1,8 +1,6 @@
 # Modern Image Manager
 
-[![WordPress](https://img.shields.io/badge/WordPress-6.4%2B-blue.svg)](https://wordpress.org)  
-[![PHP](https://img.shields.io/badge/PHP-8.2%2B-green.svg)](https://www.php.net/)  
-[![License](https://img.shields.io/badge/license-GPL--2.0-orange.svg)](https://www.gnu.org/licenses/gpl-2.0.html)  
+[![WordPress](https://img.shields.io/badge/WordPress-6.4%2B-blue.svg)](https://wordpress.org)  [![PHP](https://img.shields.io/badge/PHP-8.2%2B-green.svg)](https://www.php.net/)  [![License] https://img.shields.io/badge/license-GPL--2.0-orange.svg)](https://www.gnu.org/licenses/gpl-2.0.html)  
 
 **Modern Image Manager** is een krachtige en gebruiksvriendelijke WordPress-plugin voor professioneel mediabeheer. Organiseer en beheer media-items, bewerk metadata in bulk, importeer en exporteer media via CSV, detecteer dubbele media en archiveer media in ZIP-bestanden — alles zonder pagina-herlaad dankzij een moderne AJAX-interface.
 
