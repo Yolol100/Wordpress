@@ -99,13 +99,20 @@
   transition: background-color var(--transition-speed) var(--transition-ease),
               transform 0.2s var(--transition-ease);
   min-width: 180px;
-  display: inline-block;
+  display: block;
   text-align: center;
   line-height: 1.2;
   margin: 0 auto;
-  display: block;
 }
 
+/* Kleinere breedte voor Opslaan en Verwijderen knoppen */
+.media-items-save-meta,
+.media-items-delete-media {
+  min-width: 110px;
+  padding: 0.5rem 1rem;
+}
+
+/* Hover en focus styling blijft ongewijzigd */
 .button-primary:hover:enabled,
 .import-button:hover:enabled,
 .export-button:hover:enabled,
@@ -129,16 +136,6 @@
   background-color: var(--button-hover-bg-color);
   transform: translateY(-0.125rem);
   outline: none;
-}
-
-.button-primary:disabled,
-.import-button:disabled,
-.export-button:disabled,
-.mim-zip-button:disabled,
-.mim-scan-page-button:disabled {
-  background-color: var(--disabled-button-bg-color);
-  cursor: not-allowed;
-  color: #888;
 }
 
 /* Algemene input styling */

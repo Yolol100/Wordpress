@@ -1,6 +1,6 @@
 /**
  * assets/js/scan-duplicate-images.js
- * Complete JS for scan page: loader, search/filter, sort, rescan, localStorage & “no results” logic.
+ * Volledig vernieuwd voor scanpagina: ondersteunt WordPress, Elementor, ACF en WooCommerce.
  */
 'use strict';
 
@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
     rescanBtn.setAttribute('tabindex', '0');
     rescanBtn.setAttribute('role', 'button');
     rescanBtn.addEventListener('click', () => {
-      // Clear filters in localStorage on rescan
       localStorage.removeItem('mim-search');
       localStorage.removeItem('mim-filter');
       location.reload();
@@ -107,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Update summary text with count and unique pages
+    // Verzamel unieke pagina's/producten/post types
     const pages = new Set();
     visibleRows.forEach(row => {
       row.querySelectorAll('td:nth-child(2) a').forEach(a => pages.add(a.href));
@@ -129,16 +128,17 @@ document.addEventListener('DOMContentLoaded', () => {
     fillSummary();
   }
 
-  // Filter rows based on selected type
+  // Filter rows based on selected type, nu inclusief WooCommerce, ACF, Elementor, en standaard WP
   function filterTableByType(type) {
     if (!tbody) return;
     Array.from(tbody.rows).forEach(row => {
       const ctx = row.children[2]?.innerText.toLowerCase() || '';
       let show = type === 'all';
-      if (type === 'post_content')        show = ctx.includes('in content');
-      else if (type === 'featured_image') show = ctx.includes('uitgelichte');
-      else if (type === 'acf_field')       show = ctx.includes('acf veld');
+      if (type === 'post_content')           show = ctx.includes('in content');
+      else if (type === 'featured_image')    show = ctx.includes('uitgelichte');
+      else if (type === 'acf_field')         show = ctx.includes('acf veld');
       else if (type === 'elementor_template') show = ctx.includes('elementor');
+      else if (type === 'woocommerce')       show = ctx.includes('woocommerce');
       row.style.display = show ? '' : 'none';
     });
     fillSummary();

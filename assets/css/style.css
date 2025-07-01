@@ -1,5 +1,8 @@
 /* Algemene centrering voor importpagina */
-.import-page-container {
+.import-page-container,
+.export-page-container,
+.container,
+.mim-scan-container {
   margin: 1.25rem auto;
   max-width: 50rem;
   padding: 1.875rem;
@@ -10,6 +13,9 @@
   font-family: var(--font-family-alt);
   font-size: var(--font-size-base);
   color: var(--text-color);
+}
+
+.import-page-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,14 +23,28 @@
 }
 
 /* Titel en uitleg centreren */
+.import-page-title,
+.export-page-title,
+.title-large,
+.mim-zip-title,
+.mim-scan-page-title {
+  margin-bottom: 1.25rem !important;
+  text-align: center !important;
+  font-weight: 600 !important;
+  color: var(--text-color) !important;
+  font-size: 1.7rem !important;
+}
+
 .import-page-title {
   margin-bottom: 0;
-  text-align: center;
   font-size: 2rem;
-  font-weight: 600;
-  color: var(--text-color);
 }
-.import-page-description {
+
+.import-page-description,
+.export-page-description,
+.description,
+.mim-zip-description,
+.mim-scan-page-description {
   margin-bottom: 1.25rem;
   font-size: 1.2rem;
   line-height: 1.6;
@@ -84,10 +104,10 @@
 .drag-drop-area {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* verticaal centreren */
-  align-items: center;     /* horizontaal centreren */
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  height: 100px;           /* vaste hoogte */
+  height: 100px;
   border: 2px dashed var(--primary-color);
   border-radius: 1rem;
   background: var(--background-color);
@@ -244,38 +264,6 @@
   display: none;
 }
 
-/* Export page container */
-.export-page-container {
-  margin: 1.25rem auto;
-  max-width: 50rem;
-  padding: 1.875rem;
-  background: var(--table-background);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow-light);
-  font-family: var(--font-family-alt);
-  font-size: var(--font-size-base);
-  color: var(--text-color);
-}
-
-/* Export page title */
-.export-page-title {
-  margin-bottom: 1.25rem;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--text-color);
-}
-
-/* Export page description */
-.export-page-description {
-  margin-bottom: 1.875rem;
-  text-align: center;
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: #555;
-}
-
 /* Export form */
 .export-page-form {
   text-align: center;
@@ -373,74 +361,77 @@
   font-family: var(--font-family-main);
   font-size: var(--font-size-base);
 }
+
+/* Bovenste filter header centreren horizontaal en items verticaal middellen */
 .filter-top-header,
 .filter-bottom-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 1rem;
 }
+
+/* Nav controls filter (select, buttons, paginatie) en bulk/zoek/rijen controls horizontaal naast elkaar en verticaal middellen */
 .filter-top-nav-controls,
-.filter-bottom-nav-controls {
-  display: flex;
-  gap: 0.625rem;
-}
-.filter-top-page-filter,
-.filter-bottom-page-filter {
-  padding: 0 0.75rem;
-  font-size: var(--font-size-base);
-  border: 1px solid var(--border-color);
-  border-radius: 0.25rem;
-  background-color: var(--table-background);
-  cursor: pointer;
-}
-:is(.filter-top-apply-button,
-    .filter-bottom-apply-button,
-    .filter-top-prev-button,
-    .filter-bottom-prev-button,
-    .filter-top-next-button,
-    .filter-bottom-next-button,
-    .bulk-delete-button) {
-  padding: 0.625rem 1.25rem;
-  font-size: var(--font-size-base);
-  background-color: var(--primary-color);
-  color: var(--header-text-color);
-  border: none;
-  border-radius: 0.375rem;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: var(--box-shadow-medium);
-  transition: background-color var(--transition-speed) var(--transition-ease),
-              transform 0.2s var(--transition-ease);
-}
-:is(.filter-top-apply-button:hover,
-    .filter-bottom-apply-button:hover,
-    .filter-top-prev-button:hover,
-    .filter-bottom-prev-button:hover,
-    .filter-top-next-button:hover,
-    .filter-bottom-next-button:hover,
-    .bulk-delete-button:hover) {
-  background-color: var(--button-hover-bg-color);
-  transform: translateY(-0.125rem);
-}
+.filter-bottom-nav-controls,
+.filter-top-bulk-delete,
+.filter-bottom-bulk-delete,
 .filter-top-search-container,
-.filter-bottom-search-container {
-  text-align: right;
+.filter-bottom-search-container,
+.filter-top-rows-controls,
+.filter-bottom-rows-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0;
 }
+
+/* Rijen per pagina label en select naast elkaar centreren */
+.filter-top-rows-controls,
+.filter-bottom-rows-controls {
+  gap: 0.3rem;
+}
+
+/* Zoekvelden */
 .filter-top-search-box,
 .filter-bottom-search-box {
-  width: 100%;
-  max-width: 18.75rem;
-  padding: 0.625rem;
-  font-size: 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  background: var(--table-background);
-  color: var(--text-color);
-  transition: all var(--transition-speed) var(--transition-ease);
+  height: 2.5rem;
+  min-width: 220px;
+  margin: 0;
 }
-.search-box:focus {
-  border-color: var(--primary-color);
-  box-shadow: var(--box-shadow-light);
-  outline: none;
+
+/* Rijen per pagina select */
+.filter-top-rows-per-page-select,
+.filter-bottom-rows-per-page-select {
+  height: 2.5rem;
+  min-width: 70px;
+  margin: 0;
+}
+
+/* Buttons verwijderen geselecteerde, filter toepassen, vorige, volgende gelijk in hoogte en min-width */
+.bulk-delete-button,
+.filter-top-apply-button,
+.filter-bottom-apply-button,
+.filter-top-prev-button,
+.filter-bottom-prev-button,
+.filter-top-next-button,
+.filter-bottom-next-button {
+  min-height: 2.5rem;
+  min-width: 180px;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  margin: 0;
+}
+
+/* Zorg dat knoppen en inputs visueel goed uitgelijnd zijn */
+.filter-top-container select,
+.filter-bottom-container select,
+.filter-top-container input[type="search"],
+.filter-bottom-container input[type="search"],
+.filter-top-container button,
+.filter-bottom-container button {
+  vertical-align: middle;
 }
 
 /* Media items table */
@@ -453,6 +444,7 @@
   overflow: hidden;
   font-size: var(--font-size-base);
 }
+
 .media-items-thead th,
 .media-items-tr-head th {
   padding: 0.75rem 0.9375rem;
@@ -465,18 +457,21 @@
   letter-spacing: 0.05em;
   border-bottom: 2px solid var(--primary-color-dark);
 }
+
 .media-items-tbody tr:nth-child(even) {
   background-color: var(--even-row-bg-color);
 }
+
 .media-items-tbody tr:hover {
   background-color: var(--hover-bg-color);
   transition: background-color var(--transition-speed) var(--transition-ease);
 }
+
 .media-items-tbody td {
   padding: 0.75rem 0.9375rem;
   color: var(--text-color);
   border-bottom: 1px solid var(--border-color);
-  vertical-align: middle;  
+  vertical-align: middle;
   font-size: 1rem !important;
 }
 
@@ -521,6 +516,7 @@
   box-shadow: var(--box-shadow-medium);
   transition: background-color var(--transition-speed) var(--transition-ease),
               transform 0.2s var(--transition-ease);
+  min-width: 110px;
 }
 :is(.media-items-save-meta:hover,
     .media-items-delete-media:hover) {
@@ -546,6 +542,7 @@
   box-shadow: var(--box-shadow-medium);
   transition: background-color var(--transition-speed) var(--transition-ease),
               transform 0.2s var(--transition-ease);
+  min-width: 180px;
 }
 .pagination-navigation button:hover {
   background-color: var(--button-hover-bg-color);
@@ -592,9 +589,21 @@
   padding: 12px 16px;
   font-size: 15px;
 }
-.mim-notice--error { background: #ffebe9; color: #cf222e; border: 1px solid #cf222e; }
-.mim-notice--success { background: #dafbe1; color: #116329; border: 1px solid #116329; }
-.mim-notice--warning { background: #fff8c5; color: #9a6700; border: 1px solid #9a6700; }
+.mim-notice--error {
+  background: #ffebe9;
+  color: #cf222e;
+  border: 1px solid #cf222e;
+}
+.mim-notice--success {
+  background: #dafbe1;
+  color: #116329;
+  border: 1px solid #116329;
+}
+.mim-notice--warning {
+  background: #fff8c5;
+  color: #9a6700;
+  border: 1px solid #9a6700;
+}
 
 /* Export spinner */
 #export-spinner {
@@ -635,7 +644,7 @@
 @media (max-width: 600px) {
   .import-page-form p label {
     font-size: 1em;
-    padding: 0.5em 0.6em;
+    padding: 0.5rem 0.6rem;
   }
   .import-page-form input[type="checkbox"][name="overwrite_empty"] {
     width: 17px;
@@ -722,7 +731,8 @@
     max-width: 98vw;
     padding: 0.8rem;
   }
-  .import-summary, .import-loader {
+  .import-summary,
+  .import-loader {
     max-width: 98vw;
     padding: 0.75rem 0.5rem;
   }
@@ -738,8 +748,13 @@
 }
 
 @keyframes highlightSuccess {
-  0% { background-color: #d4edda; }
-  100% { background-color: transparent; }
+  0% {
+    background-color: #d4edda;
+  }
+
+  100% {
+    background-color: transparent;
+  }
 }
 
 /* Custom toast styles */

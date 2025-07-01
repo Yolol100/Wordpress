@@ -1,6 +1,5 @@
 <?php
 // File: includes/modern-images/class-ajax-handler.php
-// AJAX handlers voor media acties - Modern Image Manager
 
 declare(strict_types=1);
 defined('ABSPATH') || exit;
@@ -16,6 +15,133 @@ final class ModernImageManagerAjaxHandler
         add_action('wp_ajax_get_export_row_count',    [self::class, 'getExportRowCountCallback']);
         add_action('wp_ajax_get_export_preview_data', [self::class, 'getExportPreviewDataCallback']);
         add_action('wp_ajax_filter_media',            [self::class, 'filterMediaCallback']);
+        // Nieuw: scan alles uit alle bronnen
+        add_action('wp_ajax_scan_all_duplicates',     [self::class, 'scanAllDuplicatesCallback']);
+    }
+
+    /**
+     * Scan alle dubbele afbeeldingen in media, Elementor, ACF en WooCommerce
+     */
+    public static function scanAllDuplicatesCallback(): void
+    {
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(['message' => __('Geen rechten om te scannen.', 'modern-image-manager')]);
+        }
+
+        require_once __DIR__ . '/helpers.php';
+
+        // Haal ALLE attachment-IDs uit media, ACF, Elementor, WooCommerce, enz.
+        $media_query = modern_image_manager_get_media_items();
+        $media_ids   = wp_list_pluck($media_query->posts, 'ID');
+
+        $referenced_ids = modern_image_manager_get_all_referenced_attachment_ids();
+
+        // Combineer en tel
+        $all_ids = array_merge($media_ids, $referenced_ids);
+
+        // Tel dubbele IDs
+        $count_ids = array_count_values($all_ids);
+
+        // Dubbele: alle ID's die meer dan 1x voorkomen
+        $duplicates = [];
+        foreach ($count_ids as $id => $count) {
+            if ($count > 1) {
+                $duplicates[] = (int)$id;
+            }
+        }
+
+        // Resultaat ophalen: bestandsinfo, context etc.
+        $results = [];
+        foreach ($duplicates as $id) {
+            $post = get_post($id);
+            if (!$post) {
+                continue;
+            }
+
+            // Herkomst bepalen
+            $context_types = [];
+            // Media
+            if (in_array($id, $media_ids)) {
+                $context_types[] = 'media_bibliotheek';
+            }
+            // Elementor/ACF/Woo via meta
+            if (in_array($id, $referenced_ids)) {
+                $meta_context = self::getContextTypeForAttachment($id);
+                if ($meta_context) {
+                    $context_types = array_merge($context_types, $meta_context);
+                }
+            }
+            $context_types = array_unique($context_types);
+
+            $results[] = [
+                'ID'       => $id,
+                'title'    => get_the_title($id),
+                'url'      => wp_get_attachment_url($id),
+                'type'     => implode(', ', $context_types) ?: 'onbekend',
+            ];
+        }
+
+        wp_send_json_success([
+            'duplicates' => $results,
+            'total'      => count($results),
+        ]);
+    }
+
+    /**
+     * Herken context/type van een attachment (Elementor, ACF, WooCommerce)
+     * @return string[]
+     */
+    private static function getContextTypeForAttachment(int $attachment_id): array
+    {
+        global $wpdb;
+        $types = [];
+
+        // Elementor
+        $elementor = $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key LIKE %s AND meta_value LIKE %s",
+                '%elementor%',
+                '%' . $attachment_id . '%'
+            )
+        );
+        if ($elementor > 0) {
+            $types[] = 'elementor';
+        }
+
+        // ACF
+        $acf = $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key LIKE %s AND meta_value = %d",
+                'field_%',
+                $attachment_id
+            )
+        );
+        if ($acf > 0) {
+            $types[] = 'acf_field';
+        }
+
+        // WooCommerce
+        $woo = $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key LIKE %s AND meta_value LIKE %s",
+                '%woo%',
+                '%' . $attachment_id . '%'
+            )
+        );
+        // Ook op veelvoorkomende Woo keys
+        $gallery = $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT COUNT(*) FROM $wpdb->postmeta WHERE (meta_key LIKE %s OR meta_key LIKE %s) AND meta_value LIKE %s",
+                '%gallery%',
+                '%product_image%',
+                '%' . $attachment_id . '%'
+            )
+        );
+        if ($woo > 0 || $gallery > 0) {
+            $types[] = 'woocommerce';
+        }
+
+        return $types;
     }
 
     /**
@@ -344,8 +470,9 @@ final class ModernImageManagerAjaxHandler
 
     /**
      * Valideer integer waarde of retourneer null
+     * (nu PHP 8.2: typehint 'mixed $value')
      */
-    private static function sanitizeInt($value): ?int
+    private static function sanitizeInt(mixed $value): ?int
     {
         return filter_var($value, FILTER_VALIDATE_INT, ['options' => ['default' => null]]);
     }
@@ -361,5 +488,4 @@ final class ModernImageManagerAjaxHandler
     }
 }
 
-// Init de AJAX handler
 ModernImageManagerAjaxHandler::init();

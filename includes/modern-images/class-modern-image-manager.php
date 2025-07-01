@@ -49,7 +49,6 @@ final class Modern_Image_Manager
             'scan_duplicate_images_page'
         );
 
-        // Nieuw submenu "Zip" toegevoegd
         self::add_submenu_item(
             __('Maak ZIP van media', 'modern-image-manager'),
             __('Zip', 'modern-image-manager'),
@@ -71,7 +70,7 @@ final class Modern_Image_Manager
         );
     }
 
-    // Enqueue assets op juiste pagina's, inclusief nieuwe zip-media pagina
+    // Enqueue assets op juiste pagina's
     public static function enqueue_assets(string $hook): void
     {
         $allowed_pages = [
@@ -79,15 +78,17 @@ final class Modern_Image_Manager
             'modern-image-manager_page_export-media',
             'modern-image-manager_page_import-media',
             'modern-image-manager_page_scan-duplicate-images',
-            'modern-image-manager_page_zip-media', // Toegevoegd voor ZIP pagina
+            'modern-image-manager_page_zip-media',
         ];
 
         if (!in_array($hook, $allowed_pages, true)) {
             return;
         }
 
-        // Assets worden globaal ingeladen via een globale asset-functie.
-        // Hier eventueel specifieke scripts/styles toevoegen voor de pagina's.
+        // Voeg hier je specifieke scripts en styles toe voor de adminpagina's indien nodig
+        // Bijvoorbeeld:
+        // wp_enqueue_script('modern-image-manager-admin', plugins_url('assets/js/admin.js', __FILE__), ['jquery'], '1.0.0', true);
+        // wp_enqueue_style('modern-image-manager-style', plugins_url('assets/css/style.css', __FILE__), [], '1.0.0');
     }
 }
 
