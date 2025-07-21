@@ -20,11 +20,11 @@ final class Modern_Image_Manager_Zip
 
         check_admin_referer('mim_zip_export_nonce', 'mim_zip_export_nonce_field');
 
-        // Haal ALLE attachments op van type afbeelding
+        // Haal ALLE attachments op van type afbeelding (met limiet voor performance)
         $args = [
             'post_type'      => 'attachment',
             'post_status'    => 'inherit',
-            'posts_per_page' => -1,
+            'posts_per_page' => 500, // Limiet toegevoegd ivm performance en veiligheid
             'post_mime_type' => 'image', // Alleen afbeeldingen!
             'fields'         => 'ids',   // Alleen IDs voor performance
         ];
@@ -52,6 +52,14 @@ final class Modern_Image_Manager_Zip
             $file_path = get_attached_file($attachment_id);
             if ($file_path && file_exists($file_path)) {
                 $filename = basename($file_path);
+
+                // Beveiliging: controleer extensie strikt (alleen afbeeldingen)
+                $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg'];
+                $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+                if (!in_array($ext, $allowed_extensions, true)) {
+                    continue; // Sla bestand over met onveilige extensie
+                }
+
                 // Voeg toe aan ZIP in subfolder 'Plaatjes'
                 $zip->addFile($file_path, 'Plaatjes/' . $filename);
                 $found++;

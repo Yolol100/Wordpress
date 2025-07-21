@@ -30,7 +30,6 @@ jQuery(($) => {
     }
   }
   detectDarkMode();
-  // Optioneel: monitor veranderingen
   if (window.matchMedia) {
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
       if (e.matches) {
@@ -78,8 +77,6 @@ jQuery(($) => {
     postJSON(data).done((response) => {
       if (response.success) {
         showToast(translations.saved_successfully || 'Opgeslagen!', 'success');
-
-        // Rij highlight als visuele feedback
         const $row = $(`[data-attachment-id="${id}"]`).closest('tr');
         $row.addClass('highlight-success');
         setTimeout(() => $row.removeClass('highlight-success'), 2000);
@@ -99,7 +96,7 @@ jQuery(($) => {
 
     const id = $(currentTarget).data('attachment-id');
     const $row = $(`[data-attachment-id="${id}"]`).closest('tr');
-    const deletedHtml = $row.prop('outerHTML'); // Bewaar rij HTML
+    const deletedHtml = $row.prop('outerHTML');
 
     const data = {
       action: 'delete_media',
@@ -113,8 +110,6 @@ jQuery(($) => {
           paginateAndFilter();
         });
         showToast(translations.deleted_successfully || 'Item verwijderd!', 'success');
-
-        // Bewaar undo data en toon toast
         undoData = { type: 'delete', id: id, html: deletedHtml };
         showUndoToast(() => undoDelete(undoData));
       } else {
@@ -171,7 +166,6 @@ jQuery(($) => {
     });
   });
 
-  // Undo functies
   function undoDelete(data) {
     if (!data || data.type !== 'delete') return;
     $tbody.prepend(data.html);
@@ -188,17 +182,15 @@ jQuery(($) => {
     showToast('Bulk verwijdering ongedaan gemaakt.', 'success');
   }
 
-  // Selecteer/deselecteer alles checkbox
   $('#bulkSelectAll').on('change', function () {
     $('.bulk-delete-checkbox').prop('checked', $(this).prop('checked'));
   });
 
-  // Filter en paginatie logica
   function paginateAndFilter() {
     const filterTop = $pageFilter.val();
     const filterBottom = $pageFilterB.val();
-    const searchTop = $searchTop.val().toLowerCase().trim();
-    const searchBottom = $searchBot.val().toLowerCase().trim();
+    const searchTop = typeof $searchTop.val() === 'string' ? $searchTop.val().toLowerCase().trim() : '';
+    const searchBottom = typeof $searchBot.val() === 'string' ? $searchBot.val().toLowerCase().trim() : '';
     const perPage = Number($perPageTop.val());
 
     const $allRows = $tbody.find('.media-items-tr-item');
@@ -206,7 +198,8 @@ jQuery(($) => {
 
     $allRows.each(function () {
       const $r = $(this);
-      const rowText = $r.text().toLowerCase();
+      const rowRawText = $r.text();
+      const rowText = typeof rowRawText === 'string' ? rowRawText.toLowerCase() : '';
       const status = $r.data('status');
 
       const matchesFilterTop = (filterTop === 'all' || status === filterTop);
@@ -242,7 +235,6 @@ jQuery(($) => {
     $(matchedRows).slice((currentPage - 1) * perPage, currentPage * perPage).show();
   }
 
-  // Event bindings voor filter, zoek en paginatie
   $('#applyFilter, #applyFilterBottom').on('click', () => {
     currentPage = 1;
     paginateAndFilter();
@@ -275,10 +267,8 @@ jQuery(($) => {
     paginateAndFilter();
   });
 
-  // Initial call om de tabel te laden en te filteren bij het laden van de pagina
   paginateAndFilter();
 
-  // Toast notificaties (inline, fadeout, ipv alert)
   function showToast(message, type = 'info') {
     const $toast = $('<div class="custom-toast" role="alert" aria-live="assertive"></div>').text(message).appendTo('body');
     $toast.addClass(`toast-${type}`);

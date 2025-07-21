@@ -2,7 +2,6 @@
 
 // File: includes/modern-images/helpers.php
 
-// Helperfuncties voor Modern Image Manager
 declare(strict_types=1);
 
 defined('ABSPATH') || exit;
@@ -62,11 +61,11 @@ function modern_image_manager_get_attached_post_title(int $attachment_id): strin
  */
 function modern_image_manager_get_media_items(): WP_Query
 {
-    // Haal alle attachments op, zonder limiet
+    // Haal alle attachments op, met limiet voor performance
     $query = new WP_Query([
         'post_type'      => 'attachment',
         'post_status'    => 'inherit',
-        'posts_per_page' => -1,
+        'posts_per_page' => 1000, // Limiet toegevoegd voor performance
     ]);
 
     // Logging voor debugging (optioneel, uitzetten in productie)
