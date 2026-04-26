@@ -105,4 +105,3 @@ final class Modern_Image_Manager
     }
 }
 
-Modern_Image_Manager::init();

@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     // AJAX call
-    fetch(mimAjaxData.ajax_url + '?action=mim_scan_duplicates&_wpnonce=' + mimAjaxData.nonce, {
+    fetch(mimAjaxData.ajax_url + '?action=mim_scan_duplicates&mim_scan_duplicates_nonce=' + mimAjaxData.nonce, {
       method: 'GET',
       credentials: 'same-origin',
       headers: {

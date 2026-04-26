@@ -8,6 +8,9 @@ final class Modern_Image_Manager_Zip
     // Render de adminpagina met de ZIP-export interface
     public static function render_zip_page(): void
     {
+        if (!current_user_can('upload_files')) {
+            wp_die(__('Je hebt geen toegang tot deze pagina.', 'modern-image-manager'));
+        }
         include MODERN_IMAGE_MANAGER_PATH . 'templates/zip-page.php';
     }
 
@@ -35,13 +38,11 @@ final class Modern_Image_Manager_Zip
         }
 
         $upload_dir = wp_upload_dir();
-        $zip_file_path = $upload_dir['basedir'] . '/modern-image-manager-export.zip';
-
-        // Verwijder eerder gemaakte ZIP
-        if (file_exists($zip_file_path)) {
-            @unlink($zip_file_path);
+        $tmp_dir = trailingslashit($upload_dir['basedir']) . 'modern-image-manager-tmp';
+        if (!wp_mkdir_p($tmp_dir)) {
+            wp_die(__('Kon tijdelijke exportmap niet aanmaken.', 'modern-image-manager'));
         }
-
+        $zip_file_path = trailingslashit($tmp_dir) . 'media-export-' . wp_generate_uuid4() . '.zip';
         $zip = new ZipArchive();
         if ($zip->open($zip_file_path, ZipArchive::CREATE) !== true) {
             wp_die(__('Kon het ZIP-bestand niet aanmaken.', 'modern-image-manager'));
@@ -60,8 +61,8 @@ final class Modern_Image_Manager_Zip
                     continue; // Sla bestand over met onveilige extensie
                 }
 
-                // Voeg toe aan ZIP in subfolder 'Plaatjes'
-                $zip->addFile($file_path, 'Plaatjes/' . $filename);
+                $archive_name = 'Plaatjes/' . (int) $attachment_id . '-' . sanitize_file_name($filename);
+                $zip->addFile($file_path, $archive_name);
                 $found++;
             }
         }

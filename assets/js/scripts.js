@@ -1,10 +1,8 @@
 'use strict';
 
 jQuery(($) => {
-  const { ajax_url: ajaxUrl, translations } = ajax_object; // nonce verwijderd uit destructuring
+  const { ajax_url: ajaxUrl, nonce, translations } = ajax_object;
   let currentPage = 1;
-  let undoTimeout = null;
-  let undoData = null; // Data voor undo acties
 
   const $tbody        = $('.media-items-tbody');
   const $noResults    = $('#noResults');
@@ -21,7 +19,6 @@ jQuery(($) => {
   const $curPage      = $('#currentPage, #currentPageBottom');
   const $totPage      = $('#totalPages, #totalPagesBottom');
 
-  // Voeg dark mode class toe op basis van user preference
   function detectDarkMode() {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       $('body').addClass('dark-mode');
@@ -29,43 +26,19 @@ jQuery(($) => {
       $('body').removeClass('dark-mode');
     }
   }
+
   detectDarkMode();
   if (window.matchMedia) {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-      if (e.matches) {
-        $('body').addClass('dark-mode');
-      } else {
-        $('body').removeClass('dark-mode');
-      }
-    });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', detectDarkMode);
   }
 
-  // Undo-toast element wordt dynamisch toegevoegd
-  const $undoToast = $('<div id="undoToast" role="alert" aria-live="assertive" tabindex="0" style="position:fixed;bottom:20px;right:20px;background:#333;color:#fff;padding:15px 25px;border-radius:6px;display:none;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:9999;">Actie ongedaan maken</div>').appendTo('body');
-
-  // Helper voor POST
   const postJSON = (data) => $.post(ajaxUrl, data, null, 'json');
 
-  // Functie om undo-toast te tonen
-  function showUndoToast(onUndo) {
-    $undoToast.show().focus();
-    $undoToast.off('click').on('click', () => {
-      onUndo();
-      clearTimeout(undoTimeout);
-      $undoToast.hide();
-    });
-
-    undoTimeout = setTimeout(() => {
-      $undoToast.hide();
-      undoData = null;
-    }, 10000); // toast zichtbaar 10 seconden
-  }
-
-  // Metadata opslaan
   $(document).on('click', '.media-items-save-meta', ({ currentTarget }) => {
     const id = $(currentTarget).data('attachment-id');
     const data = {
-      action: 'update_media_meta',
+      action: 'mim_update_media_meta',
+      nonce: nonce,
       attachment_id: id,
       title: $(`[data-attachment-id="${id}"].media-items-title-input`).val(),
       caption: $(`[data-attachment-id="${id}"].media-items-caption-input`).val(),
@@ -88,18 +61,16 @@ jQuery(($) => {
     });
   });
 
-  // Media verwijderen met undo optie
   $(document).on('click', '.media-items-delete-media', ({ currentTarget }) => {
-    if (!confirm(translations.confirm_delete || 'Weet je zeker dat je dit item wilt verwijderen?')) {
+    if (!confirm(translations.confirm_delete || 'Weet je zeker dat je dit item definitief wilt verwijderen?')) {
       return;
     }
 
     const id = $(currentTarget).data('attachment-id');
     const $row = $(`[data-attachment-id="${id}"]`).closest('tr');
-    const deletedHtml = $row.prop('outerHTML');
-
     const data = {
-      action: 'delete_media',
+      action: 'mim_delete_media',
+      nonce: nonce,
       attachment_id: id,
     };
 
@@ -110,8 +81,6 @@ jQuery(($) => {
           paginateAndFilter();
         });
         showToast(translations.deleted_successfully || 'Item verwijderd!', 'success');
-        undoData = { type: 'delete', id: id, html: deletedHtml };
-        showUndoToast(() => undoDelete(undoData));
       } else {
         showToast(response.data.message || 'Fout bij verwijderen.', 'error');
       }
@@ -120,7 +89,6 @@ jQuery(($) => {
     });
   });
 
-  // Bulk verwijderen met undo
   $('#bulkDeleteTop, #bulkDeleteBottom').on('click', () => {
     const selectedIds = $('.bulk-delete-checkbox:checked').map(function () {
       return $(this).data('attachment-id');
@@ -131,17 +99,13 @@ jQuery(($) => {
       return;
     }
 
-    if (!confirm(translations.confirm_bulk_delete || `Weet je zeker dat je ${selectedIds.length} geselecteerde items wilt verwijderen?`)) {
+    if (!confirm(translations.confirm_bulk_delete || `Weet je zeker dat je ${selectedIds.length} geselecteerde items definitief wilt verwijderen?`)) {
       return;
     }
 
-    const deletedHtmlMap = {};
-    selectedIds.forEach(id => {
-      deletedHtmlMap[id] = $(`[data-attachment-id="${id}"]`).closest('tr').prop('outerHTML');
-    });
-
     const data = {
-      action: 'bulk_delete_media',
+      action: 'mim_bulk_delete_media',
+      nonce: nonce,
       attachment_ids: selectedIds,
     };
 
@@ -155,9 +119,6 @@ jQuery(($) => {
         showToast(translations.bulk_deleted_successfully || `${response.data.count} items succesvol verwijderd.`, 'success');
         $('#bulkSelectAll').prop('checked', false);
         paginateAndFilter();
-
-        undoData = { type: 'bulk-delete', items: deletedHtmlMap };
-        showUndoToast(() => undoBulkDelete(undoData));
       } else {
         showToast(response.data.message || 'Fout bij bulkverwijdering.', 'error');
       }
@@ -165,22 +126,6 @@ jQuery(($) => {
       showToast('Netwerkfout bij bulkverwijdering.', 'error');
     });
   });
-
-  function undoDelete(data) {
-    if (!data || data.type !== 'delete') return;
-    $tbody.prepend(data.html);
-    paginateAndFilter();
-    showToast('Verwijdering ongedaan gemaakt.', 'success');
-  }
-
-  function undoBulkDelete(data) {
-    if (!data || data.type !== 'bulk-delete') return;
-    for (const id in data.items) {
-      $tbody.prepend(data.items[id]);
-    }
-    paginateAndFilter();
-    showToast('Bulk verwijdering ongedaan gemaakt.', 'success');
-  }
 
   $('#bulkSelectAll').on('change', function () {
     $('.bulk-delete-checkbox').prop('checked', $(this).prop('checked'));
@@ -192,7 +137,6 @@ jQuery(($) => {
     const searchTop = typeof $searchTop.val() === 'string' ? $searchTop.val().toLowerCase().trim() : '';
     const searchBottom = typeof $searchBot.val() === 'string' ? $searchBot.val().toLowerCase().trim() : '';
     const perPage = Number($perPageTop.val());
-
     const $allRows = $tbody.find('.media-items-tr-item');
     let matchedRows = [];
 
@@ -201,14 +145,11 @@ jQuery(($) => {
       const rowRawText = $r.text();
       const rowText = typeof rowRawText === 'string' ? rowRawText.toLowerCase() : '';
       const status = $r.data('status');
-
-      const matchesFilterTop = (filterTop === 'all' || status === filterTop);
-      const matchesFilterBottom = (filterBottom === 'all' || status === filterBottom);
-
       const activeSearchTerm = searchTop || searchBottom;
-      const matchesSearch = rowText.includes(activeSearchTerm);
 
-      if (matchesFilterTop && matchesFilterBottom && matchesSearch) {
+      if ((filterTop === 'all' || status === filterTop) &&
+          (filterBottom === 'all' || status === filterBottom) &&
+          rowText.includes(activeSearchTerm)) {
         matchedRows.push(this);
       }
     });
@@ -230,7 +171,6 @@ jQuery(($) => {
 
     $curPage.text(currentPage);
     $totPage.text(totalPages);
-
     $allRows.hide();
     $(matchedRows).slice((currentPage - 1) * perPage, currentPage * perPage).show();
   }
@@ -240,7 +180,7 @@ jQuery(($) => {
     paginateAndFilter();
   });
 
-  $('#search-input, #search-input-bottom').on('input', function() {
+  $('#search-input, #search-input-bottom').on('input', () => {
     currentPage = 1;
     paginateAndFilter();
   });

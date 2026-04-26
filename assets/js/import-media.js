@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const importButton = document.getElementById('import-button');
   const fileSelectedName = document.getElementById('file-selected-name');
 
+  if (!form || !fileInput || !summary || !loader || !dragArea || !fileError || !importButton || !fileSelectedName) {
+    return;
+  }
+
   // Add ARIA attributes for accessibility
   fileError.setAttribute('role', 'alert');
   fileError.setAttribute('aria-live', 'assertive');
@@ -55,9 +59,10 @@ document.addEventListener('DOMContentLoaded', () => {
   fileInput.addEventListener('change', showFileInfo);
 
   // Toegankelijkheid: focus op foutmelding als deze zichtbaar wordt
-  fileError.addEventListener('DOMSubtreeModified', () => {
+  const fileErrorObserver = new MutationObserver(() => {
     if (!fileError.hidden) fileError.focus();
   });
+  fileErrorObserver.observe(fileError, { attributes: true, childList: true, characterData: true });
 
   /**
    * Toon info over geselecteerd bestand en valideer

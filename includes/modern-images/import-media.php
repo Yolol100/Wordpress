@@ -9,6 +9,10 @@ final class Modern_Image_Manager_Import
 {
     public static function render_import_page(): void
     {
+        if (!current_user_can('upload_files')) {
+            wp_die(__('Je hebt geen toegang tot deze pagina.', 'modern-image-manager'));
+        }
+
         $notice_type = null;
         $notice_html = '';
         $imported_count = 0;
@@ -16,6 +20,8 @@ final class Modern_Image_Manager_Import
         $overwrite_empty = !empty($_POST['overwrite_empty']);
 
         if (isset($_POST['import_csv'])) {
+            check_admin_referer('mim_import_csv', 'mim_import_nonce');
+
             if (empty($_FILES['import_file']['tmp_name'])) {
                 $notice_type = 'error';
                 $notice_html = esc_html__('Geen bestand geüpload.', 'modern-image-manager');
@@ -29,7 +35,7 @@ final class Modern_Image_Manager_Import
                         $notice_html .= '<li>' . esc_html($error) . '</li>';
                     }
                     $notice_html .= '</ul>';
-                } elseif ($imported_count == 0 && count($skipped_rows) == 0) {
+                } elseif ($imported_count === 0 && count($skipped_rows) === 0) {
                     $notice_type = 'warning';
                     $notice_html = esc_html__('Niks geïmporteerd.', 'modern-image-manager');
                 } else {
@@ -50,9 +56,7 @@ final class Modern_Image_Manager_Import
             }
         }
 
-        // Zet variabele zodat template het vinkje kan onthouden
         $GLOBALS['mim_overwrite_empty'] = $overwrite_empty;
-
         include MODERN_IMAGE_MANAGER_PATH . 'templates/import-page.php';
     }
 
@@ -68,9 +72,41 @@ final class Modern_Image_Manager_Import
             return [$errors, $imported, $skipped];
         }
 
-        $file    = $_FILES['import_file']['tmp_name'];
-        $csvData = array_map('str_getcsv', file($file));
+        $uploaded_file = $_FILES['import_file'];
+        $original_name = isset($uploaded_file['name']) ? sanitize_file_name(wp_unslash($uploaded_file['name'])) : '';
 
+        if (($uploaded_file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
+            $errors[] = __('Uploaden van CSV-bestand is mislukt.', 'modern-image-manager');
+            return [$errors, $imported, $skipped];
+        }
+
+        if (strtolower(pathinfo($original_name, PATHINFO_EXTENSION)) !== 'csv') {
+            $errors[] = __('Alleen CSV-bestanden zijn toegestaan.', 'modern-image-manager');
+            return [$errors, $imported, $skipped];
+        }
+
+        if (!empty($uploaded_file['size']) && (int) $uploaded_file['size'] > 5 * MB_IN_BYTES) {
+            $errors[] = __('Het CSV-bestand is groter dan 5 MB.', 'modern-image-manager');
+            return [$errors, $imported, $skipped];
+        }
+
+        $file = (string) $uploaded_file['tmp_name'];
+        if (!is_uploaded_file($file)) {
+            $errors[] = __('Ongeldig uploadbestand.', 'modern-image-manager');
+            return [$errors, $imported, $skipped];
+        }
+        $filetype = wp_check_filetype($original_name, ['csv' => 'text/csv']);
+        if (($filetype['ext'] ?? '') !== 'csv') {
+            $errors[] = __('Alleen CSV-bestanden zijn toegestaan.', 'modern-image-manager');
+            return [$errors, $imported, $skipped];
+        }
+        $raw_rows = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        if ($raw_rows === false) {
+            $errors[] = __('CSV-bestand kon niet worden gelezen.', 'modern-image-manager');
+            return [$errors, $imported, $skipped];
+        }
+
+        $csvData = array_map('str_getcsv', $raw_rows);
         if (empty($csvData) || !is_array($csvData)) {
             $errors[] = __('Ongeldig CSV-bestand.', 'modern-image-manager');
             return [$errors, $imported, $skipped];
@@ -82,7 +118,7 @@ final class Modern_Image_Manager_Import
             return [$errors, $imported, $skipped];
         }
 
-        // Verplichte kolommen
+        $headers = array_map('trim', $headers);
         $required = ['Bestandsnaam', 'Titel', 'Alt-tag'];
 
         foreach ($required as $col) {
@@ -96,16 +132,18 @@ final class Modern_Image_Manager_Import
         try {
             foreach ($csvData as $i => $row) {
                 $rownum = $i + 2;
-
-                // Controleer eerst het aantal kolommen vóór array_combine!
                 if (count($headers) !== count($row)) {
                     $skipped[$rownum] = __('Aantal kolommen in deze rij komt niet overeen met de header.', 'modern-image-manager');
                     continue;
                 }
 
                 $data = array_combine($headers, $row);
+                if (!is_array($data)) {
+                    $skipped[$rownum] = __('Rij kon niet worden gelezen.', 'modern-image-manager');
+                    continue;
+                }
 
-                // Valideer verplichte velden
+                $data = array_map('trim', $data);
                 foreach ($required as $col) {
                     if (!isset($data[$col]) || $data[$col] === '') {
                         $skipped[$rownum] = sprintf(__('Lege waarde voor verplichte kolom: %s', 'modern-image-manager'), $col);
@@ -113,30 +151,32 @@ final class Modern_Image_Manager_Import
                     }
                 }
 
-                $newFilenameInput = isset($data['Nieuwe bestandsnaam'])
-                    ? pathinfo(trim($data['Nieuwe bestandsnaam']), PATHINFO_FILENAME)
-                    : '';
-
-                // Geavanceerd: zoek ALLE varianten (origineel én alle scaled versies)
+                $newFilenameInput = isset($data['Nieuwe bestandsnaam']) ? pathinfo(trim($data['Nieuwe bestandsnaam']), PATHINFO_FILENAME) : '';
                 $attachments = self::get_all_scaled_attachments($data['Bestandsnaam']);
 
                 if (!empty($attachments)) {
                     foreach ($attachments as $attachment) {
-                        $attachmentId = (int)$attachment->ID;
-
+                        $attachmentId = (int) $attachment->ID;
+                        if (!current_user_can('edit_post', $attachmentId)) {
+                            $skipped[$rownum] = __('Onvoldoende rechten om deze bijlage te bewerken.', 'modern-image-manager');
+                            continue 2;
+                        }
                         if (!empty($newFilenameInput)) {
                             self::rename_media_file($attachmentId, $newFilenameInput);
                         }
-
                         self::update_attachment_data($attachmentId, $data, $overwrite_empty);
                     }
                 } else {
+                    if (!current_user_can('upload_files')) {
+                        $skipped[$rownum] = __('Onvoldoende rechten om nieuwe media aan te maken.', 'modern-image-manager');
+                        continue;
+                    }
                     self::create_new_attachment($data);
                 }
                 $imported++;
             }
             $wpdb->query('COMMIT');
-        } catch (\Exception $e) {
+        } catch (Throwable $e) {
             $wpdb->query('ROLLBACK');
             $errors[] = __('Import is teruggedraaid vanwege een fout: ', 'modern-image-manager') . $e->getMessage();
             return [$errors, 0, $skipped];
@@ -154,10 +194,13 @@ final class Modern_Image_Manager_Import
             return;
         }
 
-        $file_ext          = pathinfo($file_path, PATHINFO_EXTENSION);
-        $new_filename_clean = sanitize_file_name($newFilename) . '.' . $file_ext;
-        $new_file_path      = $upload_dir['path'] . '/' . $new_filename_clean;
-
+        $file_ext           = pathinfo($file_path, PATHINFO_EXTENSION);
+        $new_filename_base  = sanitize_file_name(pathinfo($newFilename, PATHINFO_FILENAME));
+        if ($new_filename_base === '') {
+            return;
+        }
+        $new_filename_clean = $new_filename_base . '.' . $file_ext;
+        $new_file_path      = trailingslashit(dirname($file_path)) . $new_filename_clean;
         if (file_exists($new_file_path)) {
             return;
         }
@@ -168,17 +211,17 @@ final class Modern_Image_Manager_Import
 
         update_attached_file($attachmentId, $new_file_path);
 
-        $metadata        = wp_get_attachment_metadata($attachmentId);
-        $metadata['file'] = str_replace($upload_dir['basedir'] . '/', '', $new_file_path);
+        $metadata = wp_get_attachment_metadata($attachmentId);
+        if (!is_array($metadata)) {
+            $metadata = [];
+        }
+        $metadata['file'] = ltrim(str_replace(trailingslashit($upload_dir['basedir']), '', $new_file_path), '/');
         wp_update_attachment_metadata($attachmentId, $metadata);
-
-        $new_url = $upload_dir['baseurl'] . '/' . $new_filename_clean;
 
         wp_update_post([
             'ID'         => $attachmentId,
-            'guid'       => $new_url,
-            'post_name'  => sanitize_title($new_filename_clean),
-            'post_title' => sanitize_text_field($newFilename),
+            'post_name'  => sanitize_title($new_filename_base),
+            'post_title' => sanitize_text_field($new_filename_base),
         ]);
     }
 
@@ -244,20 +287,21 @@ final class Modern_Image_Manager_Import
 
     private static function create_new_attachment(array $data): ?int
     {
-        $mimeType = self::get_mime_type($data['Bestandsnaam'] ?? '');
+        $safeFilename = sanitize_file_name(basename((string) ($data['Bestandsnaam'] ?? '')));
+        $mimeType = self::get_mime_type($safeFilename);
         if (!$mimeType) {
             return null;
         }
-
         $uploadDir = wp_upload_dir();
-        $filePath  = $uploadDir['basedir'] . '/' . $data['Bestandsnaam'];
+
+        $filePath  = trailingslashit($uploadDir['basedir']) . $safeFilename;
 
         if (!file_exists($filePath)) {
             return null;
         }
 
         $attachment = [
-            'guid'           => $uploadDir['baseurl'] . '/' . $data['Bestandsnaam'],
+            'guid'           => trailingslashit($uploadDir['baseurl']) . $safeFilename,
             'post_mime_type' => $mimeType,
             'post_title'     => $data['Titel'] ?? '',
             'post_content'   => $data['Description'] ?? '',

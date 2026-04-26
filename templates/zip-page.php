@@ -4,7 +4,7 @@ defined('ABSPATH') || exit;
 <div class="wrap mim-zip-container">
     <h1 class="mim-zip-title"><?php esc_html_e('Media ZIP Export', 'modern-image-manager'); ?></h1>
 
-    <form id="mim-zip-form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+    <form id="mim-zip-export-form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
         <?php wp_nonce_field('mim_zip_export_nonce', 'mim_zip_export_nonce_field'); ?>
         <input type="hidden" name="action" value="modern_image_manager_zip_export">
 

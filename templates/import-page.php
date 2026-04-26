@@ -1,6 +1,6 @@
 <!-- import-page.php -->
 <!-- import-page.php -->
-<body class="data-page">
+<div class="data-page">
   <div class="page-container import-page-container">
 
     <!-- Stap-indicator -->
@@ -40,6 +40,7 @@
       novalidate
       autocomplete="off"
     >
+      <?php wp_nonce_field('mim_import_csv', 'mim_import_nonce'); ?>
       <!-- Drag & drop zone -->
       <div
         id="drag-drop-area"
@@ -84,6 +85,4 @@
     </form>
   </div>
 
-  <!-- Inclusie van JS bestand -->
-  <script src="<?php echo esc_url( plugins_url( 'assets/js/import-media.js', __FILE__ ) ); ?>"></script>
-</body>
+</div>

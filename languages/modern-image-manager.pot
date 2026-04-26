@@ -18,12 +18,12 @@ msgid "Beheer en bewerk media-informatie direct vanuit WordPress."
 msgstr "Manage and edit media information directly from WordPress."
 
 #. Author URI of the plugin
-msgid "https://example.com"
-msgstr "https://example.com"
+msgid "https://webactueel.nl"
+msgstr "https://webactueel.nl"
 
 #. URI of the plugin
-msgid "https://example.com/plugins/modern-image-manager/"
-msgstr "https://example.com/plugins/modern-image-manager/"
+msgid "https://webactueel.nl/"
+msgstr "https://webactueel.nl/"
 
 #. Name of the plugin
 msgid "Modern Image Manager"

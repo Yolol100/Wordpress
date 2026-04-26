@@ -6,37 +6,6 @@ if (! defined('ABSPATH')) {
 }
 
 /**
- * Enqueue styles en scripts voor de scan-pagina in de admin.
- */
-function mim_enqueue_admin_assets_for_scan_page($hook) {
-    if ($hook !== 'modern-image-manager_page_scan-duplicate-images') {
-        return;
-    }
-    wp_enqueue_style(
-        'scan-duplicate-images',
-        MODERN_IMAGE_MANAGER_URL . 'assets/css/scan-duplicate-images.css',
-        [],
-        '1.0.0'
-    );
-    wp_add_inline_style(
-        'scan-duplicate-images',
-        "
-        .scan-wrapper:not(:has(table.dius-results-table tbody tr)) #mim-enhanced-controls {
-            display: none;
-        }
-        "
-    );
-    wp_enqueue_script(
-        'scan-duplicate-images-js',
-        MODERN_IMAGE_MANAGER_URL . 'assets/js/scan-duplicate-images.js',
-        [],
-        '1.0.0',
-        true
-    );
-}
-add_action('admin_enqueue_scripts', 'mim_enqueue_admin_assets_for_scan_page');
-
-/**
  * Hoofdscan: combineert alle bronnen en geeft enkel dubbele afbeeldingen terug.
  *
  * @return array<int,array> Attachment ID => usage info
@@ -337,7 +306,7 @@ function mim_get_elementor_template_images(): array {
     }
     $templates = get_posts([
         'post_type'      => \Elementor\Plugin::instance()->post_type,
-        'posts_per_page' => -1,
+        'posts_per_page' => 500,
         'post_status'    => 'publish',
     ]);
     $images = [];

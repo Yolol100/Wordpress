@@ -22,7 +22,7 @@ $column_tooltips = [
 ];
 ?>
 
-<body class="data-page">
+<div class="data-page">
   <div class="page-container export-page-container">
 
     <h1 class="page-title export-page-title">
@@ -37,6 +37,7 @@ $column_tooltips = [
 
     <form method="get" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="page-form export-page-form" novalidate>
       <input type="hidden" name="action" value="mim_export_csv">
+      <?php wp_nonce_field('mim_export_csv', 'mim_export_nonce'); ?>
 
       <!-- 1) Exportoptie dropdown -->
       <div class="form-group export-option-group">
@@ -97,4 +98,4 @@ $column_tooltips = [
       </button>
     </form>
   </div>
-</body>
+</div>

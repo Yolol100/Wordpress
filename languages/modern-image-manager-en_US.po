@@ -96,12 +96,12 @@ msgid "Geen toestemming."
 msgstr "No permission."
 
 #. Author URI of the plugin
-msgid "https://example.com"
-msgstr "https://example.com"
+msgid "https://webactueel.nl"
+msgstr "https://webactueel.nl"
 
 #. URI of the plugin
-msgid "https://example.com/plugins/modern-image-manager/"
-msgstr "https://example.com/plugins/modern-image-manager/"
+msgid "https://webactueel.nl/"
+msgstr "https://webactueel.nl/"
 
 msgid "Import voltooid en alle waarden overschreven!"
 msgstr "Import completed and all values overwritten!"

@@ -10,6 +10,9 @@ final class Modern_Image_Manager_Export
     // Render export pagina
     public static function render_export_page(): void
     {
+        if (!current_user_can('upload_files')) {
+            wp_die(__('Je hebt geen toegang tot deze pagina.', 'modern-image-manager'));
+        }
         $error_message = get_transient('media_export_error_message');
         if ($error_message) {
             delete_transient('media_export_error_message');
@@ -21,9 +24,13 @@ final class Modern_Image_Manager_Export
     public static function handle_export_download(): void
     {
         // Opties ophalen uit $_GET, nooit uit sessie!
-        $export_option = sanitize_text_field($_GET['export_option'] ?? 'all');
-        $selected_columns = isset($_GET['export_columns']) ? array_map('sanitize_text_field', (array)$_GET['export_columns']) : [];
+        $export_option = sanitize_key(wp_unslash($_GET['export_option'] ?? 'all'));
+        $selected_columns = isset($_GET['export_columns']) ? array_map('sanitize_key', (array) wp_unslash($_GET['export_columns'])) : [];
 
+        if (!current_user_can('upload_files')) {
+            wp_die(__('Je hebt geen toestemming om deze export te downloaden.', 'modern-image-manager'));
+        }
+        check_admin_referer('mim_export_csv', 'mim_export_nonce');
         // Direct CSV genereren (zonder enige andere WP output!)
         self::generate_csv($export_option, $selected_columns);
     }
@@ -51,6 +58,8 @@ final class Modern_Image_Manager_Export
             'file_url'     => __('Bestands-URL', 'modern-image-manager'),
         ];
 
+        $selected_columns = array_values(array_intersect(array_keys($column_headers), $selected_columns));
+
         if (empty($selected_columns)) {
             $selected_columns = array_keys($column_headers);
         }
@@ -69,7 +78,8 @@ final class Modern_Image_Manager_Export
             'post_type'      => 'attachment',
             'post_mime_type' => ['image/jpeg', 'image/png', 'image/webp'],
             'post_status'    => 'inherit',
-            'posts_per_page' => -1,
+            'posts_per_page' => 500,
+            'no_found_rows'  => true,
         ];
 
         $media_items = get_posts($args);

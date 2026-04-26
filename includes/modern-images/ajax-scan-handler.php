@@ -5,6 +5,9 @@ add_action('wp_ajax_mim_scan_duplicates', 'mim_ajax_scan_duplicates');
 
 function mim_ajax_scan_duplicates() {
   check_ajax_referer('mim_scan_duplicates', 'mim_scan_duplicates_nonce');
+  if (!current_user_can('upload_files')) {
+    wp_send_json_error(['message' => __('Je hebt geen rechten om deze scan uit te voeren.', 'modern-image-manager')], 403);
+  }
 
   $results = function_exists('dius_scan_pages_for_duplicate_images')
     ? dius_scan_pages_for_duplicate_images()
