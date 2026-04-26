@@ -1,0 +1,17 @@
+/* Alleen extra stijlen voor dark mode */
+/* Je variabelen staan centraal in je root.css */
+
+.dark-mode .media-items-thead th,
+.dark-mode .media-items-tr-head th {
+  border-bottom-color: #1a5bb8;
+}
+
+/* Voeg hier eventueel andere dark-only component styles toe */
+
+/* Bijvoorbeeld: */
+/*
+.dark-mode .export-page-title,
+.dark-mode .import-page-title {
+  color: var(--text-color);
+}
+*/
