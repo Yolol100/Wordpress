@@ -31,6 +31,7 @@ function mim_ajax_scan_duplicates() {
         <option value="featured_image"><?php esc_html_e( 'Uitgelichte afbeelding', 'modern-image-manager' ); ?></option>
         <option value="acf_field"><?php esc_html_e( 'ACF veld', 'modern-image-manager' ); ?></option>
         <option value="elementor"><?php esc_html_e( 'Elementor', 'modern-image-manager' ); ?></option>
+        <option value="woocommerce"><?php esc_html_e( 'WooCommerce', 'modern-image-manager' ); ?></option>
       </select>
       <small id="filter-type-help" class="screen-reader-text"><?php esc_html_e( 'Filter op type afbeeldinggebruik', 'modern-image-manager' ); ?></small>
     </section>
