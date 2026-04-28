@@ -1,4 +1,5 @@
 <?php
+// File: export-page.php
 declare(strict_types=1);
 defined('ABSPATH') || exit;
 
@@ -21,7 +22,7 @@ $column_tooltips = [
 ];
 ?>
 
-<body class="data-page">
+<div class="data-page">
   <div class="page-container export-page-container">
 
     <h1 class="page-title export-page-title">
@@ -29,12 +30,14 @@ $column_tooltips = [
     </h1>
 
     <?php if (! empty($error_message)) : ?>
-      <div class="mim-notice mim-notice--error">
+      <div class="mim-notice mim-notice--error" role="alert" aria-live="assertive">
         <p><?php echo esc_html($error_message); ?></p>
       </div>
     <?php endif; ?>
 
-    <form method="post" class="page-form export-page-form">
+    <form method="get" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="page-form export-page-form" novalidate>
+      <input type="hidden" name="action" value="mim_export_csv">
+      <?php wp_nonce_field('mim_export_csv', 'mim_export_nonce'); ?>
 
       <!-- 1) Exportoptie dropdown -->
       <div class="form-group export-option-group">
@@ -57,22 +60,10 @@ $column_tooltips = [
 
       <!-- 3) Kolommen selectie -->
       <div class="form-group columns-select-group">
-        <label class="columns-select-label">
+        <label class="columns-select-label" id="export-columns-label">
           <?php echo esc_html__('Selecteer kolommen', 'modern-image-manager'); ?>
         </label>
-
-        <!-- 3a) Knoppen voor selectiebeheer -->
-        <div class="checkbox-actions" style="margin-bottom: 10px;">
-          <button id="select-all-columns" type="button" class="button button-secondary">
-            <?php echo esc_html__('Alles selecteren', 'modern-image-manager'); ?>
-          </button>
-          <button id="deselect-all-columns" type="button" class="button button-secondary">
-            <?php echo esc_html__('Niets selecteren', 'modern-image-manager'); ?>
-          </button>
-        </div>
-
-        <!-- 3b) Checkboxgroep met tooltips -->
-        <div class="checkbox-group">
+        <div class="checkbox-group" role="group" aria-labelledby="export-columns-label">
           <?php
           $columns = [
             'filename'     => __('Bestandsnaam', 'modern-image-manager'),
@@ -84,7 +75,6 @@ $column_tooltips = [
             'alt_text'     => __('Alt-tag', 'modern-image-manager'),
             'file_url'     => __('Bestands-URL', 'modern-image-manager'),
           ];
-
           foreach ($columns as $value => $label) {
               $tooltip = isset($column_tooltips[$value]) ? esc_attr($column_tooltips[$value]) : '';
               printf(
@@ -101,12 +91,11 @@ $column_tooltips = [
       <!-- 4) Exporteerknop -->
       <button
         type="submit"
-        name="export_csv"
         class="page-button export-button"
+        aria-label="<?php esc_attr_e('Exporteer geselecteerde kolommen naar CSV', 'modern-image-manager'); ?>"
       >
         <?php echo esc_html__('Exporteer naar CSV', 'modern-image-manager'); ?>
       </button>
-
     </form>
   </div>
-</body>
+</div>

@@ -150,10 +150,13 @@ final class Modern_Image_Manager_Import
             return;
         }
 
-        $file_ext          = pathinfo($file_path, PATHINFO_EXTENSION);
-        $new_filename_clean = sanitize_file_name($newFilename) . '.' . $file_ext;
-        $new_file_path      = $upload_dir['path'] . '/' . $new_filename_clean;
-
+        $file_ext           = pathinfo($file_path, PATHINFO_EXTENSION);
+        $new_filename_base  = sanitize_file_name(pathinfo($newFilename, PATHINFO_FILENAME));
+        if ($new_filename_base === '') {
+            return;
+        }
+        $new_filename_clean = $new_filename_base . '.' . $file_ext;
+        $new_file_path      = trailingslashit(dirname($file_path)) . $new_filename_clean;
         if (file_exists($new_file_path)) {
             return;
         }
@@ -164,21 +167,21 @@ final class Modern_Image_Manager_Import
 
         update_attached_file($attachmentId, $new_file_path);
 
-        $metadata        = wp_get_attachment_metadata($attachmentId);
-        $metadata['file'] = str_replace($upload_dir['basedir'] . '/', '', $new_file_path);
+        $metadata = wp_get_attachment_metadata($attachmentId);
+        if (!is_array($metadata)) {
+            $metadata = [];
+        }
+        $metadata['file'] = ltrim(str_replace(trailingslashit($upload_dir['basedir']), '', $new_file_path), '/');
         wp_update_attachment_metadata($attachmentId, $metadata);
-
-        $new_url = $upload_dir['baseurl'] . '/' . $new_filename_clean;
 
         wp_update_post([
             'ID'         => $attachmentId,
-            'guid'       => $new_url,
-            'post_name'  => sanitize_title($new_filename_clean),
-            'post_title' => sanitize_text_field($newFilename),
+            'post_name'  => sanitize_title($new_filename_base),
+            'post_title' => sanitize_text_field($new_filename_base),
         ]);
     }
 
-    private static function update_attachment_data(int $attachmentId, array $data): void
+    private static function update_attachment_data(int $attachmentId, array $data, bool $overwrite_empty = false): void
     {
         $update_fields = ['ID' => $attachmentId];
 
@@ -199,40 +202,52 @@ final class Modern_Image_Manager_Import
         }
     }
 
-    private static function get_attachment_by_filename(string $filename): ?WP_Post
+    // Geavanceerd: vind alle bijlagen met originele én ALLE geschaalde varianten
+    private static function get_all_scaled_attachments(string $filename): array
     {
         global $wpdb;
 
-        $like       = '%' . $wpdb->esc_like($filename);
-        $attachment = $wpdb->get_row(
+        $ext      = pathinfo($filename, PATHINFO_EXTENSION);
+        $basename = basename($filename, '.' . $ext);
+
+        // SQL LIKE: zoek alles dat begint met basename en eindigt op .ext, ook -scaled, -scaled-1, -scaled-2 etc.
+        $pattern  = $wpdb->esc_like($basename) . '%.' . $ext;
+
+        $results = $wpdb->get_results(
             $wpdb->prepare(
                 "SELECT ID FROM $wpdb->posts 
                  WHERE post_type = 'attachment' 
-                 AND guid LIKE %s 
-                 LIMIT 1",
-                $like
+                 AND guid LIKE %s",
+                '%' . $pattern
             )
         );
-
-        return $attachment ? get_post($attachment->ID) : null;
+        $attachments = [];
+        foreach ($results as $result) {
+            $post = get_post($result->ID);
+            if ($post) {
+                $attachments[] = $post;
+            }
+        }
+        return $attachments;
     }
 
     private static function create_new_attachment(array $data): ?int
     {
-        $mimeType = self::get_mime_type($data['Bestandsnaam'] ?? '');
+        $safeFilename = sanitize_file_name(basename((string) ($data['Bestandsnaam'] ?? '')));
+        $mimeType = self::get_mime_type($safeFilename);
         if (!$mimeType) {
             return null;
         }
-
         $uploadDir = wp_upload_dir();
-        $filePath  = $uploadDir['basedir'] . '/' . $data['Bestandsnaam'];
+
+        $filePath  = trailingslashit($uploadDir['basedir']) . $safeFilename;
 
         if (!file_exists($filePath)) {
             return null;
         }
 
         $attachment = [
-            'guid'           => $uploadDir['baseurl'] . '/' . $data['Bestandsnaam'],
+            'guid'           => trailingslashit($uploadDir['baseurl']) . $safeFilename,
             'post_mime_type' => $mimeType,
             'post_title'     => $data['Titel'] ?? '',
             'post_content'   => $data['Description'] ?? '',
@@ -248,8 +263,14 @@ final class Modern_Image_Manager_Import
             $attachData = wp_generate_attachment_metadata($newAttachmentId, $filePath);
             wp_update_attachment_metadata($newAttachmentId, $attachData);
 
-            if (!empty($data['Alt-tag'])) {
+            if (isset($data['Alt-tag'])) {
                 update_post_meta($newAttachmentId, '_wp_attachment_image_alt', sanitize_text_field($data['Alt-tag']));
+            }
+            if (isset($data['SEO Titel'])) {
+                update_post_meta($newAttachmentId, '_yoast_wpseo_title', sanitize_text_field($data['SEO Titel']));
+            }
+            if (isset($data['SEO Omschrijving'])) {
+                update_post_meta($newAttachmentId, '_yoast_wpseo_metadesc', sanitize_text_field($data['SEO Omschrijving']));
             }
         }
 
