@@ -1,0 +1,510 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Modern Image Manager 1.5.50\\n"
+"Report-Msgid-Bugs-To: \\n"
+"POT-Creation-Date: 2026-06-29 10:30+0000\\n"
+"PO-Revision-Date: 2026-06-29 10:30+0000\\n"
+"Language: nl_NL\\n"
+"Language-Team: Dutch (Netherlands)\\n"
+"MIME-Version: 1.0\\n"
+"Content-Type: text/plain; charset=UTF-8\\n"
+"Content-Transfer-Encoding: 8bit\\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\\n"
+
+msgid " geladen"
+msgstr " geladen"
+
+msgid " geselecteerd"
+msgstr " geselecteerd"
+
+msgid "%d items verwijderd."
+msgstr "%d items verwijderd."
+
+msgid "%d keer gevonden"
+msgstr "%d keer gevonden"
+
+msgid "%d kolommen geselecteerd"
+msgstr "%d kolommen geselecteerd"
+
+msgid "%d rijen geïmporteerd."
+msgstr "%d rijen geïmporteerd."
+
+msgid "Aantal kolommen komt niet overeen met de header."
+msgstr "Aantal kolommen komt niet overeen met de header."
+
+msgid "ACF-veld"
+msgstr "ACF-veld"
+
+msgid "Afbeelding"
+msgstr "Afbeelding"
+
+msgid "Afbeelding niet gevonden."
+msgstr "Afbeelding niet gevonden."
+
+msgid "Media beheren"
+msgstr "Media beheren"
+
+msgid "Alle afbeeldingen"
+msgstr "Alle afbeeldingen"
+
+msgid "Alle afbeeldingen in de mediabibliotheek worden meegenomen."
+msgstr "Alle afbeeldingen in de mediabibliotheek worden meegenomen."
+
+msgid "Alle pagina’s"
+msgstr "Alle pagina’s"
+
+msgid "Alleen CSV-bestanden zijn toegestaan."
+msgstr "Alleen CSV-bestanden zijn toegestaan."
+
+msgid "Alleen gekoppelde afbeeldingen"
+msgstr "Alleen gekoppelde afbeeldingen"
+
+msgid "Alleen niet gekoppelde afbeeldingen"
+msgstr "Alleen niet gekoppelde afbeeldingen"
+
+msgid "Alles selecteren"
+msgstr "Alles selecteren"
+
+msgid "Alt-tag"
+msgstr "Alt-tag"
+
+msgid "Analyse"
+msgstr "Analyse"
+
+msgid "Archief"
+msgstr "Archief"
+
+msgid "Beheer bestandsnamen, metadata, gebruiksscans en exports vanuit één mediawerkruimte."
+msgstr "Beheer bestandsnamen, metadata, gebruiksscans en exports vanuit één mediawerkruimte."
+
+msgid "Beheren"
+msgstr "Beheren"
+
+msgid "Bereik"
+msgstr "Bereik"
+
+msgid "Beschrijving"
+msgstr "Beschrijving"
+
+msgid "Bestaande media blijven behouden."
+msgstr "Bestaande media blijven behouden."
+
+msgid "Bestand kon niet worden hernoemd."
+msgstr "Bestand kon niet worden hernoemd."
+
+msgid "Bestand uploaden is mislukt."
+msgstr "Bestand uploaden is mislukt."
+
+msgid "Bestands-URL"
+msgstr "Bestands-URL"
+
+msgid "Bestandsnaam"
+msgstr "Bestandsnaam"
+
+msgid "Bestandspad"
+msgstr "Bestandspad"
+
+msgid "Beveiligingscontrole mislukt."
+msgstr "Beveiligingscontrole mislukt."
+
+msgid "Bewerk %s"
+msgstr "Bewerk %s"
+
+msgid "Bijlage niet gevonden en kon niet worden aangemaakt."
+msgstr "Bijlage niet gevonden en kon niet worden aangemaakt."
+
+msgid "Bijlage-ID is geen geldige afbeelding."
+msgstr "Bijlage-ID is geen geldige afbeelding."
+
+msgid "Bijlagegegevens konden niet worden bijgewerkt."
+msgstr "Bijlagegegevens konden niet worden bijgewerkt."
+
+msgid "Bijschrift"
+msgstr "Bijschrift"
+
+msgid "Bulk verwijderen"
+msgstr "Bulk verwijderen"
+
+msgid "Content"
+msgstr "Content"
+
+msgid "Controleert waar afbeeldingen meerdere keren gebruikt worden, inclusief Elementor, ACF en WooCommerce-context."
+msgstr "Controleert waar afbeeldingen meerdere keren gebruikt worden, inclusief Elementor, ACF en WooCommerce-context."
+
+msgid "CSV"
+msgstr "CSV"
+
+msgid "CSV-bestand"
+msgstr "CSV-bestand"
+
+msgid "CSV-bestand is te groot. Maximum is %d MB."
+msgstr "CSV-bestand is te groot. Maximum is %d MB."
+
+msgid "CSV-bestand kon niet worden gelezen."
+msgstr "CSV-bestand kon niet worden gelezen."
+
+msgid "CSV-header bevat dubbele kolommen na normalisatie."
+msgstr "CSV-header bevat dubbele kolommen na normalisatie."
+
+msgid "CSV-voorbeeld"
+msgstr "CSV-voorbeeld"
+
+msgid "De metadata verschijnt hier zodra je een item kiest."
+msgstr "De metadata verschijnt hier zodra je een item kiest."
+
+msgid "De scan heeft geen afbeeldingen met meerdere plaatsingen gevonden."
+msgstr "De scan heeft geen afbeeldingen met meerdere plaatsingen gevonden."
+
+msgid "Dit is een lokale preview. De server valideert opnieuw en slaat rijen met dubbele bestandsnamen zonder ID of Bestandspad over."
+msgstr "Dit is een lokale preview. De server valideert opnieuw en slaat rijen met dubbele bestandsnamen zonder ID of Bestandspad over."
+
+msgid "Dit zoekt geen identieke bestanden, maar afbeeldingen die op meerdere plekken in content of metadata voorkomen."
+msgstr "Dit zoekt geen identieke bestanden, maar afbeeldingen die op meerdere plekken in content of metadata voorkomen."
+
+msgid "Download alle afbeeldingen uit de mediabibliotheek als één ZIP-bestand."
+msgstr "Download alle afbeeldingen uit de mediabibliotheek als één ZIP-bestand."
+
+msgid "Eerste overgeslagen rijen"
+msgstr "Eerste overgeslagen rijen"
+
+msgid "Elementor-instelling"
+msgstr "Elementor-instelling"
+
+msgid "Elementor-widget"
+msgstr "Elementor-widget"
+
+msgid "Er is iets misgegaan."
+msgstr "Er is iets misgegaan."
+
+msgid "Exporteer CSV"
+msgstr "Exporteer CSV"
+
+msgid "Exporteren"
+msgstr "Exporteren"
+
+msgid "Exportinstellingen"
+msgstr "Exportinstellingen"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Fout bij hernoemen bestand. Metadata is niet aangepast."
+msgstr "Fout bij hernoemen bestand. Metadata is niet aangepast."
+
+msgid "Fout bij verwijderen media."
+msgstr "Fout bij verwijderen media."
+
+msgid "Gebruiksscan"
+msgstr "Gebruiksscan"
+
+msgid "Geen afbeeldingen gevonden om te zippen."
+msgstr "Geen afbeeldingen gevonden om te zippen."
+
+msgid "Geen afbeeldingen gevonden."
+msgstr "Geen afbeeldingen gevonden."
+
+msgid "Geen bestand geüpload."
+msgstr "Geen bestand geüpload."
+
+msgid "Geen duplicaten gevonden."
+msgstr "Geen duplicaten gevonden."
+
+msgid "Geen items geselecteerd."
+msgstr "Geen items geselecteerd."
+
+msgid "Geen rechten om deze bijlage bij te werken."
+msgstr "Geen rechten om deze bijlage bij te werken."
+
+msgid "Geen slug"
+msgstr "Geen slug"
+
+msgid "Gekoppeld"
+msgstr "Gekoppeld"
+
+msgid "Geïmporteerd: %d. Overgeslagen: %d."
+msgstr "Geïmporteerd: %d. Overgeslagen: %d."
+
+msgid "Herstellen"
+msgstr "Herstellen"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Import gestopt na maximaal %d rijen."
+msgstr "Import gestopt na maximaal %d rijen."
+
+msgid "Importbestand"
+msgstr "Importbestand"
+
+msgid "Importeer CSV"
+msgstr "Importeer CSV"
+
+msgid "Importeren"
+msgstr "Importeren"
+
+msgid "Je hebt geen rechten om deze import uit te voeren."
+msgstr "Je hebt geen rechten om deze import uit te voeren."
+
+msgid "Je hebt geen toegang tot deze pagina."
+msgstr "Je hebt geen toegang tot deze pagina."
+
+msgid "Je hebt geen toestemming om deze actie uit te voeren."
+msgstr "Je hebt geen toestemming om deze actie uit te voeren."
+
+msgid "Je hebt geen toestemming om deze export te downloaden."
+msgstr "Je hebt geen toestemming om deze export te downloaden."
+
+msgid "Kan langer duren bij grote bibliotheken."
+msgstr "Kan langer duren bij grote bibliotheken."
+
+msgid "Kies bereik en metadata-kolommen."
+msgstr "Kies bereik en metadata-kolommen."
+
+msgid "Kies eerst een CSV-bestand."
+msgstr "Kies eerst een CSV-bestand."
+
+msgid "Klaar"
+msgstr "Klaar"
+
+msgid "Kolommen"
+msgstr "Kolommen"
+
+msgid "Kolommen: %s. Geschatte datarijen: %d."
+msgstr "Kolommen: %s. Geschatte datarijen: %d."
+
+msgid "Kon het ZIP-bestand niet aanmaken."
+msgstr "Kon het ZIP-bestand niet aanmaken."
+
+msgid "Kon output stream niet openen."
+msgstr "Kon output stream niet openen."
+
+msgid "Kon tijdelijk exportbestand niet aanmaken."
+msgstr "Kon tijdelijk exportbestand niet aanmaken."
+
+msgid "Laden..."
+msgstr "Laden..."
+
+msgid "Lege waarden mogen bestaande data overschrijven"
+msgstr "Lege waarden mogen bestaande data overschrijven"
+
+msgid "Let op: hernoemen wijzigt de bestands-URL. Controleer bestaande contentverwijzingen op staging."
+msgstr "Let op: hernoemen wijzigt de bestands-URL. Controleer bestaande contentverwijzingen op staging."
+
+msgid "Maak een schone CSV-export met alleen de kolommen die je nodig hebt."
+msgstr "Maak een schone CSV-export met alleen de kolommen die je nodig hebt."
+
+msgid "Media importeren"
+msgstr "Media importeren"
+
+msgid "Media informatie succesvol bijgewerkt."
+msgstr "Media informatie succesvol bijgewerkt."
+
+msgid "Media succesvol verwijderd."
+msgstr "Media succesvol verwijderd."
+
+msgid "Media-archief"
+msgstr "Media-archief"
+
+msgid "Media-zip"
+msgstr "Media-zip"
+
+msgid "Meerdere bijlagen met deze bestandsnaam gevonden. Voeg ID of Bestandspad toe aan de CSV."
+msgstr "Meerdere bijlagen met deze bestandsnaam gevonden. Voeg ID of Bestandspad toe aan de CSV."
+
+msgid "Meervoudig gebruik controleren"
+msgstr "Meervoudig gebruik controleren"
+
+msgid "Metadata bewerken"
+msgstr "Metadata bewerken"
+
+msgid "Mediatools"
+msgstr "Mediatools"
+
+msgid "Naamloos bestand"
+msgstr "Naamloos bestand"
+
+msgid "Niet gekoppeld"
+msgstr "Niet gekoppeld"
+
+msgid "Niet opgeslagen wijzigingen"
+msgstr "Niet opgeslagen wijzigingen"
+
+msgid "Nieuwe bestandsnaam"
+msgstr "Nieuwe bestandsnaam"
+
+msgid "Nieuwe naam"
+msgstr "Nieuwe naam"
+
+msgid "Nog geen scan uitgevoerd."
+msgstr "Nog geen scan uitgevoerd."
+
+msgid "Onbekend"
+msgstr "Onbekend"
+
+msgid "Opgeslagen."
+msgstr "Opgeslagen."
+
+msgid "Opslaan"
+msgstr "Opslaan"
+
+msgid "Pagina"
+msgstr "Pagina"
+
+msgid "Pas je zoekterm of filter aan."
+msgstr "Pas je zoekterm of filter aan."
+
+msgid "Resultaten: %d"
+msgstr "Resultaten: %d"
+
+msgid "Rij %d: %s"
+msgstr "Rij %d: %s"
+
+msgid "Rij kon niet worden gelezen."
+msgstr "Rij kon niet worden gelezen."
+
+msgid "Scan starten"
+msgstr "Scan starten"
+
+msgid "Scannen..."
+msgstr "Scannen..."
+
+msgid "Selecteer %s"
+msgstr "Selecteer %s"
+
+msgid "Selecteer een afbeelding."
+msgstr "Selecteer een afbeelding."
+
+msgid "Slug"
+msgstr "Slug"
+
+msgid "Start de scan om resultaten in deze kaart te tonen."
+msgstr "Start de scan om resultaten in deze kaart te tonen."
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Titel"
+msgstr "Titel"
+
+msgid "Uitgelichte afbeelding"
+msgstr "Uitgelichte afbeelding"
+
+msgid "Upload een CSV-bestand en bepaal hoe lege waarden worden verwerkt."
+msgstr "Upload een CSV-bestand en bepaal hoe lege waarden worden verwerkt."
+
+msgid "Uploadbestand is ongeldig."
+msgstr "Uploadbestand is ongeldig."
+
+msgid "Verplichte kolom ontbreekt: ID, Bestandsnaam, Bestands-URL of Bestandspad."
+msgstr "Verplichte kolom ontbreekt: ID, Bestandsnaam, Bestands-URL of Bestandspad."
+
+msgid "Verwijderd."
+msgstr "Verwijderd."
+
+msgid "Verwijderen"
+msgstr "Verwijderen"
+
+msgid "Volgende"
+msgstr "Volgende"
+
+msgid "Vorige"
+msgstr "Vorige"
+
+msgid "Vraag de host om de PHP ZipArchive-extensie te activeren."
+msgstr "Vraag de host om de PHP ZipArchive-extensie te activeren."
+
+msgid "Weet je zeker dat je %d geselecteerde items wilt verwijderen? Afhankelijk van je WordPress-instellingen gaan ze naar de prullenbak of worden ze verwijderd."
+msgstr "Weet je zeker dat je %d geselecteerde items wilt verwijderen? Afhankelijk van je WordPress-instellingen gaan ze naar de prullenbak of worden ze verwijderd."
+
+msgid "Weet je zeker dat je dit item wilt verwijderen? Afhankelijk van je WordPress-instellingen gaat het naar de prullenbak of wordt het verwijderd."
+msgstr "Weet je zeker dat je dit item wilt verwijderen? Afhankelijk van je WordPress-instellingen gaat het naar de prullenbak of wordt het verwijderd."
+
+msgid "Werk bestaande metadata bij via een CSV-bestand. Gebruik bij voorkeur ID of Bestandspad uit de export om dubbele bestandsnamen veilig te verwerken."
+msgstr "Werk bestaande metadata bij via een CSV-bestand. Gebruik bij voorkeur ID of Bestandspad uit de export om dubbele bestandsnamen veilig te verwerken."
+
+msgid "ZIP downloaden"
+msgstr "ZIP downloaden"
+
+msgid "ZIP-export is niet beschikbaar omdat ZipArchive ontbreekt op deze server."
+msgstr "ZIP-export is niet beschikbaar omdat ZipArchive ontbreekt op deze server."
+
+msgid "ZipArchive is niet beschikbaar op deze server."
+msgstr "ZipArchive is niet beschikbaar op deze server."
+
+msgid "Zoek afbeeldingen"
+msgstr "Zoek afbeeldingen"
+
+msgid "Zoeken"
+msgstr "Zoeken"
+
+msgid "%d resultaat gevonden"
+msgstr "%d resultaat gevonden"
+
+msgid "%d gebruiksmomenten gevonden"
+msgstr "%d gebruiksmomenten gevonden"
+
+msgid "Klaar om te scannen"
+msgstr "Klaar om te scannen"
+
+msgid "Controleer content, ACF, Elementor en uitgelichte afbeeldingen."
+msgstr "Controleer content, ACF, Elementor en uitgelichte afbeeldingen."
+
+msgid "Opnieuw scannen"
+msgstr "Opnieuw scannen"
+
+msgid "%d keer gebruikt"
+msgstr "%d keer gebruikt"
+
+msgid "Gekoppelde content:"
+msgstr "Gekoppelde content:"
+
+msgid "Geen meervoudig gebruik gevonden."
+msgstr "Geen meervoudig gebruik gevonden."
+
+msgid "De scan heeft geen afbeeldingen gevonden die op meerdere plekken voorkomen."
+msgstr "De scan heeft geen afbeeldingen gevonden die op meerdere plekken voorkomen."
+
+msgid "Start de scan om resultaten overzichtelijk in deze kaart te tonen."
+msgstr "Start de scan om resultaten overzichtelijk in deze kaart te tonen."
+
+msgid "Bepaal welke media in de CSV terechtkomen."
+msgstr "Bepaal welke media in de CSV terechtkomen."
+
+msgid "Bestand"
+msgstr "Bestand"
+
+msgid "Exportbereik"
+msgstr "Exportbereik"
+
+msgid "Grote bibliotheken kunnen langer duren."
+msgstr "Grote bibliotheken kunnen langer duren."
+
+msgid "Kies welke afbeeldingen en metadata je wilt exporteren."
+msgstr "Kies welke afbeeldingen en metadata je wilt exporteren."
+
+msgid "Klaar om het media-archief te maken."
+msgstr "Klaar om het media-archief te maken."
+
+msgid "Let op"
+msgstr "Let op"
+
+msgid "SEO metadata"
+msgstr "SEO metadata"
+
+msgid "Scan voltooid"
+msgstr "Scan voltooid"
+
+msgid "ZIP-export is niet beschikbaar op deze server."
+msgstr "ZIP-export is niet beschikbaar op deze server."
+
+msgid "ZIP-module beschikbaar"
+msgstr "ZIP-module beschikbaar"
+
+msgid "ZIP-module ontbreekt"
+msgstr "ZIP-module ontbreekt"
+
+msgid "Bestand kiezen"
+msgstr "Bestand kiezen"
+
+msgid "Geen bestand gekozen"
+msgstr "Geen bestand gekozen"
