@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace ModernImageManager\Services;
 
+use ModernImageManager\Support\Capabilities;
 use ModernImageManager\Support\FileSecurity;
 use WP_Post;
 
@@ -20,7 +21,7 @@ final class ImportService
 
     public function renderPage(): void
     {
-        if (! current_user_can('upload_files')) {
+        if (! current_user_can(Capabilities::manage())) {
             wp_die(esc_html__('Je hebt geen toegang tot deze pagina.', 'modern-image-manager'));
         }
 
@@ -35,8 +36,11 @@ final class ImportService
         $resultPayload = ['errors' => [], 'success' => '', 'summary' => null];
 
         if (isset($_POST['import_csv'])) {
-            if (! isset($_POST['mim_import_nonce']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['mim_import_nonce'])), 'mim_import_csv')) {
+            $nonce = sanitize_text_field($this->scalarRequestValue($_POST['mim_import_nonce'] ?? ''));
+            if ($nonce === '' || ! wp_verify_nonce($nonce, 'mim_import_csv')) {
                 $resultPayload['errors'][] = __('Beveiligingscontrole mislukt.', 'modern-image-manager');
+            } elseif (! current_user_can(Capabilities::manage())) {
+                $resultPayload['errors'][] = __('Je hebt geen rechten om deze import uit te voeren.', 'modern-image-manager');
             } else {
                 [$errors, $importedCount, $skippedRows] = $this->handleImport();
                 $resultPayload = [
@@ -68,24 +72,31 @@ final class ImportService
         $imported = 0;
         $skipped = [];
 
-        if (! current_user_can('upload_files')) {
+        if (! current_user_can(Capabilities::manage())) {
             return [[__('Je hebt geen rechten om deze import uit te voeren.', 'modern-image-manager')], 0, []];
         }
 
         $uploadedFile = $_FILES['import_file'] ?? null;
-        if (! is_array($uploadedFile) || empty($uploadedFile['tmp_name'])) {
+        if (! is_array($uploadedFile)) {
             return [[__('Geen bestand geüpload.', 'modern-image-manager')], 0, []];
         }
 
-        if (! empty($uploadedFile['error'])) {
+        $file = $this->scalarValue($uploadedFile['tmp_name'] ?? '');
+        $filename = sanitize_file_name($this->scalarValue($uploadedFile['name'] ?? ''));
+        $uploadError = $this->intValue($uploadedFile['error'] ?? UPLOAD_ERR_OK);
+        $uploadSize = $this->intValue($uploadedFile['size'] ?? 0);
+
+        if ($file === '') {
+            return [[__('Geen bestand geüpload.', 'modern-image-manager')], 0, []];
+        }
+
+        if ($uploadError !== UPLOAD_ERR_OK) {
             return [[__('Bestand uploaden is mislukt.', 'modern-image-manager')], 0, []];
         }
-        if (! empty($uploadedFile['size']) && (int) $uploadedFile['size'] > self::MAX_FILE_SIZE) {
+        if ($uploadSize > self::MAX_FILE_SIZE) {
             return [[sprintf(__('CSV-bestand is te groot. Maximum is %d MB.', 'modern-image-manager'), (int) (self::MAX_FILE_SIZE / 1048576))], 0, []];
         }
 
-        $filename = sanitize_file_name((string) ($uploadedFile['name'] ?? ''));
-        $file = (string) $uploadedFile['tmp_name'];
         if (! is_uploaded_file($file) || ! is_readable($file)) {
             return [[__('Uploadbestand is ongeldig.', 'modern-image-manager')], 0, []];
         }
@@ -111,7 +122,7 @@ final class ImportService
             return [[__('CSV-header bevat dubbele kolommen na normalisatie.', 'modern-image-manager')], 0, []];
         }
 
-        $overwriteEmpty = isset($_POST['overwrite_empty']) && (bool) absint(wp_unslash($_POST['overwrite_empty']));
+        $overwriteEmpty = isset($_POST['overwrite_empty']) && $this->intRequestValue($_POST['overwrite_empty']) > 0;
         $rowNumber = 1;
 
         while (($row = fgetcsv($handle)) !== false) {
@@ -142,7 +153,7 @@ final class ImportService
                     continue;
                 }
 
-                $newFilename = isset($data['new_filename']) ? pathinfo(sanitize_file_name(trim((string) $data['new_filename'])), PATHINFO_FILENAME) : '';
+                $newFilename = isset($data['new_filename']) ? $this->normalizeFilenameBase((string) $data['new_filename']) : '';
                 if ($newFilename !== '' && ! $this->renameMediaFile($attachmentId, $newFilename)) {
                     $skipped[$rowNumber] = __('Bestand kon niet worden hernoemd.', 'modern-image-manager');
                     continue;
@@ -261,6 +272,17 @@ final class ImportService
         return $post instanceof WP_Post && $post->post_type === 'attachment' && str_starts_with((string) get_post_mime_type($attachmentId), 'image/');
     }
 
+
+    private function normalizeFilenameBase(string $filename): string
+    {
+        $filename = sanitize_file_name(basename(trim($filename)));
+        if ($filename === '') {
+            return '';
+        }
+
+        return sanitize_file_name(pathinfo($filename, PATHINFO_FILENAME));
+    }
+
     private function renameMediaFile(int $attachmentId, string $newFilename): bool
     {
         $filePath = get_attached_file($attachmentId);
@@ -270,7 +292,7 @@ final class ImportService
 
         $fileExt = pathinfo($filePath, PATHINFO_EXTENSION);
         $currentBase = pathinfo($filePath, PATHINFO_FILENAME);
-        $newFilenameBase = sanitize_file_name(pathinfo($newFilename, PATHINFO_FILENAME));
+        $newFilenameBase = $this->normalizeFilenameBase($newFilename);
         if ($newFilenameBase === '' || $fileExt === '') {
             return false;
         }
@@ -346,7 +368,7 @@ final class ImportService
 
     private function createNewAttachment(array $data): ?int
     {
-        if (! current_user_can('upload_files')) {
+        if (! current_user_can(Capabilities::manage())) {
             return null;
         }
 
@@ -378,8 +400,13 @@ final class ImportService
             return null;
         }
 
+        update_attached_file((int) $attachmentId, $filePath);
+
         require_once ABSPATH . 'wp-admin/includes/image.php';
-        wp_update_attachment_metadata((int) $attachmentId, wp_generate_attachment_metadata((int) $attachmentId, $filePath));
+        $metadata = wp_generate_attachment_metadata((int) $attachmentId, $filePath);
+        if (is_array($metadata)) {
+            wp_update_attachment_metadata((int) $attachmentId, $metadata);
+        }
 
         if (isset($data['alt_text'])) {
             update_post_meta((int) $attachmentId, '_wp_attachment_image_alt', sanitize_text_field((string) $data['alt_text']));
@@ -455,8 +482,9 @@ final class ImportService
         return basename($filePath);
     }
 
-    private function normalizeHeader(string $header): string
+    private function normalizeHeader(mixed $header): string
     {
+        $header = $this->scalarValue($header);
         $header = trim(preg_replace('/^\xEF\xBB\xBF/', '', $header) ?? $header);
         $key = strtolower(trim($header));
         $key = str_replace([' ', '-', '.'], '_', $key);
@@ -491,6 +519,26 @@ final class ImportService
         ];
 
         return $map[$key] ?? sanitize_key($key);
+    }
+
+    private function scalarRequestValue(mixed $value, string $default = ''): string
+    {
+        return $this->scalarValue(wp_unslash($value), $default);
+    }
+
+    private function intRequestValue(mixed $value): int
+    {
+        return $this->intValue(wp_unslash($value));
+    }
+
+    private function scalarValue(mixed $value, string $default = ''): string
+    {
+        return is_scalar($value) ? (string) $value : $default;
+    }
+
+    private function intValue(mixed $value): int
+    {
+        return is_numeric($value) ? absint($value) : 0;
     }
 
     private function getMimeType(string $filename): ?string

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Modern Image Manager 1.5.50\\n"
+"Project-Id-Version: Modern Image Manager 1.5.55\\n"
 "Report-Msgid-Bugs-To: \\n"
 "POT-Creation-Date: 2026-06-29 10:30+0000\\n"
 "PO-Revision-Date: 2026-06-29 10:30+0000\\n"
@@ -506,3 +506,7 @@ msgstr "Bestand kiezen"
 
 msgid "Geen bestand gekozen"
 msgstr "Geen bestand gekozen"
+
+#: src/Assets/AdminAssets.php:82
+msgid "Je hebt beheerdersrechten nodig voor import, export en ZIP-downloads."
+msgstr ""

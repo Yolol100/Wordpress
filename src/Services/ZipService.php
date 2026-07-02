@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace ModernImageManager\Services;
 
 use ModernImageManager\Repositories\AttachmentRepository;
+use ModernImageManager\Support\Capabilities;
 use ModernImageManager\Support\FileSecurity;
 use ZipArchive;
 
@@ -23,7 +24,7 @@ final class ZipService
 
     public function renderPage(): void
     {
-        if (! current_user_can('upload_files')) {
+        if (! current_user_can(Capabilities::manage())) {
             wp_die(esc_html__('Je hebt geen toegang tot deze pagina.', 'modern-image-manager'));
         }
 
@@ -33,7 +34,7 @@ final class ZipService
 
     public function handleDownload(): void
     {
-        if (! current_user_can('upload_files')) {
+        if (! current_user_can(Capabilities::manage())) {
             wp_die(esc_html__('Je hebt geen toestemming om deze actie uit te voeren.', 'modern-image-manager'));
         }
 
@@ -93,6 +94,11 @@ final class ZipService
             wp_die(esc_html__('Geen afbeeldingen gevonden om te zippen.', 'modern-image-manager'));
         }
 
+        if (! is_readable($zipFilePath)) {
+            unlink($zipFilePath);
+            wp_die(esc_html__('Het ZIP-bestand kon niet worden gelezen.', 'modern-image-manager'));
+        }
+
         while (ob_get_level() > 0) {
             ob_end_clean();
         }
@@ -106,9 +112,7 @@ final class ZipService
         }
         header('X-Content-Type-Options: nosniff');
 
-        if (is_readable($zipFilePath)) {
-            readfile($zipFilePath);
-        }
+        readfile($zipFilePath);
         unlink($zipFilePath);
         exit;
     }

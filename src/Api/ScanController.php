@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace ModernImageManager\Api;
 
 use ModernImageManager\Services\ScanService;
+use ModernImageManager\Support\Capabilities;
 use WP_REST_Response;
 use WP_REST_Server;
 
@@ -26,7 +27,7 @@ final class ScanController
         register_rest_route('modern-image-manager/v1', '/scan-duplicates', [[
             'methods' => WP_REST_Server::READABLE,
             'callback' => [$this, 'scanDuplicates'],
-            'permission_callback' => static fn(): bool => current_user_can('upload_files'),
+            'permission_callback' => static fn(): bool => current_user_can(Capabilities::read()),
         ]]);
     }
 

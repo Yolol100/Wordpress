@@ -10,6 +10,7 @@ final class MediaItem
     public function __construct(
         public readonly int $id,
         public readonly string $filename,
+        public readonly string $fileExtension,
         public readonly string $slug,
         public readonly string $page,
         public readonly string $title,
@@ -27,6 +28,8 @@ final class MediaItem
         return [
             'id' => $this->id,
             'filename' => $this->filename,
+            'file_extension' => $this->fileExtension,
+            'filename_extension' => $this->fileExtension,
             'new_filename' => '',
             'slug' => $this->slug,
             'page' => $this->page,

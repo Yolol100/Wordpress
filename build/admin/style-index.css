@@ -858,6 +858,33 @@
   letter-spacing: .04em;
 }
 
+
+.mim-filename-control {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 8px;
+}
+
+.mim-filename-control .components-base-control {
+  min-width: 0;
+}
+
+.mim-extension-badge {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  margin-top: 23px;
+  padding: 0 11px;
+  border: 1px solid var(--mim-border-soft);
+  border-radius: 10px;
+  background: var(--mim-surface-muted);
+  color: var(--mim-muted);
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+
 .mim-detail-actions {
   position: sticky;
   bottom: 0;

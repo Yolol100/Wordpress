@@ -6,6 +6,7 @@ namespace ModernImageManager\Admin;
 use ModernImageManager\Services\ExportService;
 use ModernImageManager\Services\ImportService;
 use ModernImageManager\Services\ZipService;
+use ModernImageManager\Support\Capabilities;
 
 defined('ABSPATH') || exit;
 
@@ -28,7 +29,7 @@ final class Menu
         add_menu_page(
             __('Media beheren', 'modern-image-manager'),
             __('Mediatools', 'modern-image-manager'),
-            'upload_files',
+            Capabilities::read(),
             'modern-image-manager',
             [$this, 'renderMediaPage'],
             'dashicons-admin-tools',
@@ -42,7 +43,7 @@ final class Menu
     {
         $this->import->maybeAddResultScript();
         $screen = isset($_POST['import_csv']) ? 'import' : 'media';
-        $this->renderRoot($screen, 'upload_files');
+        $this->renderRoot($screen, Capabilities::read());
     }
 
     private function renderRoot(string $screen, string $capability): void

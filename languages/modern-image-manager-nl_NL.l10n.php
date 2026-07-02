@@ -1,6 +1,6 @@
 <?php
 return [
-    'project-id-version' => 'Modern Image Manager 1.5.50',
+    'project-id-version' => 'Modern Image Manager 1.5.55',
     'report-msgid-bugs-to' => '',
     'pot-creation-date' => '2026-06-29 10:30+0000',
     'po-revision-date' => '2026-06-29 10:30+0000',
@@ -90,6 +90,7 @@ return [
         'Importeren' => 'Importeren',
         'Je hebt geen rechten om deze import uit te voeren.' => 'Je hebt geen rechten om deze import uit te voeren.',
         'Je hebt geen toegang tot deze pagina.' => 'Je hebt geen toegang tot deze pagina.',
+        'Je hebt beheerdersrechten nodig voor import, export en ZIP-downloads.' => 'Je hebt beheerdersrechten nodig voor import, export en ZIP-downloads.',
         'Je hebt geen toestemming om deze actie uit te voeren.' => 'Je hebt geen toestemming om deze actie uit te voeren.',
         'Je hebt geen toestemming om deze export te downloaden.' => 'Je hebt geen toestemming om deze export te downloaden.',
         'Kan langer duren bij grote bibliotheken.' => 'Kan langer duren bij grote bibliotheken.',

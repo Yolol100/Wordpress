@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace ModernImageManager\Api;
 
 use ModernImageManager\Services\MediaService;
+use ModernImageManager\Support\Capabilities;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -30,7 +31,7 @@ final class MediaController
         register_rest_route($this->namespace, '/media', [[
             'methods' => WP_REST_Server::READABLE,
             'callback' => [$this, 'getMedia'],
-            'permission_callback' => static fn(): bool => current_user_can('upload_files'),
+            'permission_callback' => static fn(): bool => current_user_can(Capabilities::read()),
             'args' => [
                 'search' => [
                     'type' => 'string',
@@ -154,7 +155,7 @@ final class MediaController
 
     public function canBulkDeleteMedia(WP_REST_Request $request): bool
     {
-        if (! current_user_can('upload_files')) {
+        if (! current_user_can(Capabilities::read())) {
             return false;
         }
 

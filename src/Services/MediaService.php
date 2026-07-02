@@ -34,34 +34,26 @@ final class MediaService
         $perPage = max(10, min(100, (int) ($args['per_page'] ?? 30)));
         $search = sanitize_text_field((string) ($args['search'] ?? ''));
 
-        $queryArgs = [
-            'post_type' => 'attachment',
-            'post_status' => 'inherit',
-            'post_mime_type' => 'image',
-            'posts_per_page' => $filter === 'all' ? $perPage : -1,
-            'paged' => $filter === 'all' ? $page : 1,
-            'fields' => 'ids',
-            'no_found_rows' => $filter !== 'all',
-        ];
-
-        if ($search !== '') {
-            $queryArgs['s'] = $search;
-        }
-
-        $query = $this->attachments->queryImageIds($queryArgs);
-        $ids = array_map('intval', (array) $query->posts);
-
         if ($filter !== 'all') {
-            $ids = array_values(array_filter($ids, function (int $id) use ($filter): bool {
-                $isLinked = $this->attachments->hasAttachmentContext($id);
-                return $filter === 'linked' ? $isLinked : ! $isLinked;
-            }));
-            $total = count($ids);
-            $pagedIds = array_slice($ids, ($page - 1) * $perPage, $perPage);
+            [$total, $pagedIds] = $this->filteredIds($filter, $search, $page, $perPage);
             $pages = max(1, (int) ceil($total / $perPage));
         } else {
+            $queryArgs = [
+                'post_type' => 'attachment',
+                'post_status' => 'inherit',
+                'post_mime_type' => 'image',
+                'posts_per_page' => $perPage,
+                'paged' => $page,
+                'fields' => 'ids',
+            ];
+
+            if ($search !== '') {
+                $queryArgs['s'] = $search;
+            }
+
+            $query = $this->attachments->queryImageIds($queryArgs);
+            $pagedIds = array_map('intval', (array) $query->posts);
             $total = (int) $query->found_posts;
-            $pagedIds = $ids;
             $pages = max(1, (int) $query->max_num_pages);
         }
 
@@ -77,6 +69,7 @@ final class MediaService
             $items[] = (new MediaItem(
                 $id,
                 pathinfo($file, PATHINFO_FILENAME),
+                strtolower(pathinfo($file, PATHINFO_EXTENSION)),
                 (string) $post->post_name,
                 $this->helper->getAttachedPostTitle($id),
                 $post->post_title,
@@ -98,15 +91,60 @@ final class MediaService
         ];
     }
 
-    public function update(int $id, array $params): true|WP_Error
+
+    private function filteredIds(string $filter, string $search, int $page, int $perPage): array
+    {
+        $batchSize = 250;
+        $queryPage = 1;
+        $total = 0;
+        $pagedIds = [];
+        $offsetStart = ($page - 1) * $perPage;
+
+        do {
+            $queryArgs = [
+                'post_type' => 'attachment',
+                'post_status' => 'inherit',
+                'post_mime_type' => 'image',
+                'posts_per_page' => $batchSize,
+                'paged' => $queryPage,
+                'fields' => 'ids',
+                'no_found_rows' => true,
+            ];
+
+            if ($search !== '') {
+                $queryArgs['s'] = $search;
+            }
+
+            $query = $this->attachments->queryImageIds($queryArgs);
+            $ids = array_map('intval', (array) $query->posts);
+
+            foreach ($ids as $id) {
+                $isLinked = $this->attachments->hasAttachmentContext($id);
+                if (($filter === 'linked' && ! $isLinked) || ($filter === 'unlinked' && $isLinked)) {
+                    continue;
+                }
+
+                if ($total >= $offsetStart && count($pagedIds) < $perPage) {
+                    $pagedIds[] = $id;
+                }
+
+                $total++;
+            }
+
+            $queryPage++;
+        } while (count($ids) === $batchSize);
+
+        return [$total, $pagedIds];
+    }
+
+    public function update(int $id, array $params): bool|WP_Error
     {
         $post = $this->attachments->find($id);
         if (! $post || ! str_starts_with((string) get_post_mime_type($id), 'image/')) {
             return new WP_Error('mim_not_found', __('Afbeelding niet gevonden.', 'modern-image-manager'), ['status' => 404]);
         }
 
-        $newFilename = sanitize_file_name((string) ($params['new_filename'] ?? ''));
-        $newFilename = preg_replace('/\.[^.\s]{2,5}$/', '', $newFilename) ?: $newFilename;
+        $newFilename = $this->normalizeFilenameBase((string) ($params['new_filename'] ?? ''));
         if ($newFilename !== '' && ! $this->renameAttachmentFile($id, $newFilename)) {
             return new WP_Error('mim_rename_failed', __('Fout bij hernoemen bestand. Metadata is niet aangepast.', 'modern-image-manager'), ['status' => 400]);
         }
@@ -164,6 +202,17 @@ final class MediaService
         return $deleted;
     }
 
+
+    private function normalizeFilenameBase(string $filename): string
+    {
+        $filename = sanitize_file_name(basename(trim($filename)));
+        if ($filename === '') {
+            return '';
+        }
+
+        return sanitize_file_name(pathinfo($filename, PATHINFO_FILENAME));
+    }
+
     private function renameAttachmentFile(int $attachmentId, string $newFilename): bool
     {
         $file = $this->attachments->attachedFile($attachmentId);
@@ -174,7 +223,7 @@ final class MediaService
         $dir = pathinfo($file, PATHINFO_DIRNAME);
         $ext = pathinfo($file, PATHINFO_EXTENSION);
         $currentBase = pathinfo($file, PATHINFO_FILENAME);
-        $newFilename = sanitize_file_name(pathinfo($newFilename, PATHINFO_FILENAME));
+        $newFilename = $this->normalizeFilenameBase($newFilename);
         if ($newFilename === '' || str_contains($newFilename, '..') || $ext === '') {
             return false;
         }

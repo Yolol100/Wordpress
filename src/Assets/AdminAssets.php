@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace ModernImageManager\Assets;
 
+use ModernImageManager\Support\Capabilities;
+
 defined('ABSPATH') || exit;
 
 final class AdminAssets
@@ -36,16 +38,23 @@ final class AdminAssets
         }
 
         $assetFile = MODERN_IMAGE_MANAGER_PATH . 'build/admin/index.asset.php';
-        $asset = is_file($assetFile) ? require $assetFile : ['dependencies' => ['wp-element', 'wp-api-fetch', 'wp-i18n'], 'version' => MODERN_IMAGE_MANAGER_VERSION];
+        $asset = is_file($assetFile) ? require $assetFile : [];
+        $asset = is_array($asset) ? $asset : [];
+        $assetDependencies = isset($asset['dependencies']) && is_array($asset['dependencies'])
+            ? $asset['dependencies']
+            : ['wp-element', 'wp-api-fetch', 'wp-i18n', 'wp-components'];
+        $assetVersion = isset($asset['version']) && is_scalar($asset['version'])
+            ? (string) $asset['version']
+            : MODERN_IMAGE_MANAGER_VERSION;
 
         $styleFile = MODERN_IMAGE_MANAGER_PATH . 'build/admin/style-index.css';
         $scriptFile = MODERN_IMAGE_MANAGER_PATH . 'build/admin/index.js';
-        $styleVersion = is_file($styleFile) ? MODERN_IMAGE_MANAGER_VERSION . '-' . (string) filemtime($styleFile) : (string) $asset['version'];
-        $scriptVersion = is_file($scriptFile) ? MODERN_IMAGE_MANAGER_VERSION . '-' . (string) filemtime($scriptFile) : (string) $asset['version'];
+        $styleVersion = is_file($styleFile) ? MODERN_IMAGE_MANAGER_VERSION . '-' . (string) filemtime($styleFile) : $assetVersion;
+        $scriptVersion = is_file($scriptFile) ? MODERN_IMAGE_MANAGER_VERSION . '-' . (string) filemtime($scriptFile) : $assetVersion;
         $styleDependencies = wp_style_is('wp-components', 'registered') ? ['wp-components'] : [];
 
         wp_enqueue_style('modern-image-manager-admin', MODERN_IMAGE_MANAGER_URL . 'build/admin/style-index.css', $styleDependencies, $styleVersion);
-        wp_enqueue_script('modern-image-manager-admin', MODERN_IMAGE_MANAGER_URL . 'build/admin/index.js', (array) $asset['dependencies'], $scriptVersion, true);
+        wp_enqueue_script('modern-image-manager-admin', MODERN_IMAGE_MANAGER_URL . 'build/admin/index.js', $assetDependencies, $scriptVersion, true);
         wp_script_add_data('modern-image-manager-admin', 'strategy', 'defer');
 
         wp_set_script_translations('modern-image-manager-admin', 'modern-image-manager', MODERN_IMAGE_MANAGER_PATH . 'languages');
@@ -61,6 +70,7 @@ final class AdminAssets
             'pluginUrl' => MODERN_IMAGE_MANAGER_URL,
             'version' => MODERN_IMAGE_MANAGER_VERSION,
             'zipAvailable' => class_exists(\ZipArchive::class),
+            'canManage' => current_user_can(Capabilities::manage()),
             'translations' => [
                 'confirmDelete' => __('Weet je zeker dat je dit item wilt verwijderen? Afhankelijk van je WordPress-instellingen gaat het naar de prullenbak of wordt het verwijderd.', 'modern-image-manager'),
                 'confirmBulkDelete' => __('Weet je zeker dat je %d geselecteerde items wilt verwijderen? Afhankelijk van je WordPress-instellingen gaan ze naar de prullenbak of worden ze verwijderd.', 'modern-image-manager'),
@@ -69,6 +79,7 @@ final class AdminAssets
                 'loading' => __('Laden...', 'modern-image-manager'),
                 'error' => __('Er is iets misgegaan.', 'modern-image-manager'),
                 'missingFile' => __('Kies eerst een CSV-bestand.', 'modern-image-manager'),
+                'managePermissionRequired' => __('Je hebt beheerdersrechten nodig voor import, export en ZIP-downloads.', 'modern-image-manager'),
             ],
         ];
 
@@ -84,7 +95,12 @@ final class AdminAssets
             return null;
         }
 
-        $page = sanitize_key(wp_unslash($_GET['page']));
+        $page = wp_unslash($_GET['page']);
+        if (! is_scalar($page)) {
+            return null;
+        }
+
+        $page = sanitize_key((string) $page);
 
         return self::PAGE_SCREENS[$page] ?? null;
     }

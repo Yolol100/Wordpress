@@ -5,6 +5,7 @@ namespace ModernImageManager\Services;
 
 use ModernImageManager\Repositories\AttachmentRepository;
 use ModernImageManager\Support\AttachmentHelper;
+use ModernImageManager\Support\Capabilities;
 
 defined('ABSPATH') || exit;
 
@@ -20,7 +21,7 @@ final class ExportService
 
     public function renderPage(): void
     {
-        if (! current_user_can('upload_files')) {
+        if (! current_user_can(Capabilities::manage())) {
             wp_die(esc_html__('Je hebt geen toegang tot deze pagina.', 'modern-image-manager'));
         }
 
@@ -30,17 +31,17 @@ final class ExportService
 
     public function handleDownload(): void
     {
-        if (! current_user_can('upload_files')) {
+        if (! current_user_can(Capabilities::manage())) {
             wp_die(esc_html__('Je hebt geen toestemming om deze export te downloaden.', 'modern-image-manager'));
         }
 
         check_admin_referer('mim_export_csv', 'mim_export_nonce');
 
-        $exportOption = sanitize_key(wp_unslash($_GET['export_option'] ?? 'all'));
+        $exportOption = sanitize_key($this->scalarRequestValue($_GET['export_option'] ?? 'all', 'all'));
         if (! in_array($exportOption, ['all', 'linked', 'unlinked'], true)) {
             $exportOption = 'all';
         }
-        $selectedColumns = isset($_GET['export_columns']) ? array_map('sanitize_key', (array) wp_unslash($_GET['export_columns'])) : [];
+        $selectedColumns = $this->selectedColumnsFromRequest($_GET['export_columns'] ?? []);
 
         $this->generateCsv($exportOption, $selectedColumns);
     }
@@ -102,7 +103,7 @@ final class ExportService
                     'file_url' => $this->attachments->url((int) $attachment->ID),
                 ];
 
-                fputcsv($output, array_map(static fn(string $column): string => (string) ($rowData[$column] ?? ''), $selectedColumns));
+                fputcsv($output, array_map(fn(string $column): string => $this->escapeCsvCell((string) ($rowData[$column] ?? '')), $selectedColumns));
             }
 
             $page++;
@@ -112,6 +113,16 @@ final class ExportService
         exit;
     }
 
+    private function escapeCsvCell(string $value): string
+    {
+        $value = str_replace(["\r\n", "\r"], "\n", $value);
+
+        if ($value !== '' && preg_match('/^[=+\-@\t\r]/', $value) === 1) {
+            return "'" . $value;
+        }
+
+        return $value;
+    }
 
     private function relativeUploadPath(string $filePath): string
     {
@@ -124,6 +135,33 @@ final class ExportService
         }
 
         return '';
+    }
+
+    private function scalarRequestValue(mixed $value, string $default = ''): string
+    {
+        $value = wp_unslash($value);
+
+        return is_scalar($value) ? (string) $value : $default;
+    }
+
+    private function selectedColumnsFromRequest(mixed $value): array
+    {
+        $value = wp_unslash($value);
+        $values = is_array($value) ? $value : [$value];
+        $columns = [];
+
+        foreach ($values as $column) {
+            if (! is_scalar($column)) {
+                continue;
+            }
+
+            $column = sanitize_key((string) $column);
+            if ($column !== '') {
+                $columns[] = $column;
+            }
+        }
+
+        return array_values(array_unique($columns));
     }
 
     private function columnHeaders(): array

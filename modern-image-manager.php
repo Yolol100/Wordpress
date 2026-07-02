@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Plugin Name:       Modern Image Manager
  * Plugin URI:        https://webactueel.nl/
  * Description:       Beheer en bewerk media-informatie in WordPress met CSV-import/export, gebruiksscan en media-zip.
- * Version:           1.5.50
+ * Version:           1.5.55
  * Author:            Webactueel
  * Author URI:        https://webactueel.nl
  * License:           GPL-2.0+
@@ -19,7 +19,7 @@ declare(strict_types=1);
 
 defined('ABSPATH') || exit;
 
-define('MODERN_IMAGE_MANAGER_VERSION', '1.5.50');
+define('MODERN_IMAGE_MANAGER_VERSION', '1.5.55');
 define('MODERN_IMAGE_MANAGER_FILE', __FILE__);
 define('MODERN_IMAGE_MANAGER_PATH', plugin_dir_path(__FILE__));
 define('MODERN_IMAGE_MANAGER_URL', plugin_dir_url(__FILE__));

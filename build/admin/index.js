@@ -50,6 +50,21 @@
     return map[screen] || 'media';
   }
 
+  function fixedExtension(item) {
+    return item && item.file_extension ? String(item.file_extension).replace(/^\./, '').toLowerCase() : '';
+  }
+
+  function displayFilename(item) {
+    if (!item) return '';
+    const base = String(item.filename || '');
+    const ext = fixedExtension(item);
+    return ext ? base + '.' + ext : base;
+  }
+
+  function filenameBase(value) {
+    return String(value || '').trim().replace(/[\/\\]/g, '').replace(/\.[^.\s]{1,10}$/, '');
+  }
+
   function ScreenTitle({ title, description, actions, eyebrow }) {
     return h('div', { className: 'mim-screen-title' },
       h('div', null,
@@ -270,7 +285,7 @@
           description: item.description,
           alt: item.alt,
           slug: item.slug || '',
-          new_filename: item.new_filename || '',
+          new_filename: filenameBase(item.new_filename || ''),
         },
       })
         .then(() => { setNotice({ type: 'success', text: cfg.translations.saved }); load(page); })
@@ -301,6 +316,8 @@
 
     const activeItem = items.find((item) => item.id === activeId) || null;
     const originalActiveItem = originalItems.find((item) => item.id === activeId) || null;
+    const activeFilename = activeItem ? displayFilename(activeItem) : '';
+    const activeExtension = activeItem && fixedExtension(activeItem) ? '.' + fixedExtension(activeItem) : '';
     const hasChanges = !!activeItem && !!originalActiveItem && ['new_filename', 'title', 'alt', 'slug', 'caption', 'description'].some((key) => String(activeItem[key] || '') !== String(originalActiveItem[key] || ''));
     const allChecked = items.length > 0 && items.every((item) => selected.includes(item.id));
 
@@ -371,7 +388,7 @@
                     h('input', {
                       className: 'mim-check-input',
                       type: 'checkbox',
-                      'aria-label': sprintf(__('Selecteer %s', 'modern-image-manager'), item.filename || item.id),
+                      'aria-label': sprintf(__('Selecteer %s', 'modern-image-manager'), displayFilename(item) || item.id),
                       checked: selected.includes(item.id),
                       onChange: (event) => toggleSelected(item.id, event.target.checked)
                     })
@@ -380,13 +397,13 @@
                     type: 'button',
                     className: 'mim-row-select',
                     'aria-pressed': item.id === activeId,
-                    'aria-label': sprintf(__('Bewerk %s', 'modern-image-manager'), item.filename || item.id),
+                    'aria-label': sprintf(__('Bewerk %s', 'modern-image-manager'), displayFilename(item) || item.id),
                     onClick: () => setActiveId(item.id)
                   },
                     h('span', { className: 'mim-row-file' },
                       item.thumb ? h('img', { className: 'mim-thumb', src: item.thumb, alt: '' }) : h('span', { className: 'mim-thumb mim-thumb--empty' }),
                       h('span', { className: 'mim-row-file-copy' },
-                        h('strong', { title: item.filename || '' }, item.filename || __('Naamloos bestand', 'modern-image-manager')),
+                        h('strong', { title: displayFilename(item) || '' }, displayFilename(item) || __('Naamloos bestand', 'modern-image-manager')),
                         h('small', null, item.slug || __('Geen slug', 'modern-image-manager')),
                         h('span', { className: item.status === 'linked' ? 'mim-status' : 'mim-status mim-status--muted' }, item.page || __('Niet gekoppeld', 'modern-image-manager'))
                       )
@@ -401,13 +418,16 @@
                   activeItem.thumb ? h('img', { className: 'mim-detail-thumb', src: activeItem.thumb, alt: '' }) : h('span', { className: 'mim-detail-thumb mim-thumb--empty' }),
                   h('div', null,
                     h('h3', null, __('Metadata bewerken', 'modern-image-manager')),
-                    h('p', { title: activeItem.filename || '' }, activeItem.filename || ''),
+                    h('p', { title: activeFilename }, activeFilename),
                   hasChanges ? h('span', { className: 'mim-unsaved-pill' }, __('Niet opgeslagen wijzigingen', 'modern-image-manager')) : null
                   )
                 ),
                 h('div', { className: 'mim-detail-form' },
                   h(DetailSection, { title: __('Bestand', 'modern-image-manager') },
-                    h(TextControl, { label: __('Nieuwe bestandsnaam', 'modern-image-manager'), help: __('Let op: hernoemen wijzigt de bestands-URL. Controleer bestaande contentverwijzingen op staging.', 'modern-image-manager'), value: activeItem.new_filename || '', placeholder: __('Nieuwe naam', 'modern-image-manager'), onChange: (value) => updateItem(activeItem.id, { new_filename: value }) }),
+                    h('div', { className: 'mim-filename-control' },
+                      h(TextControl, { label: __('Nieuwe bestandsnaam zonder extensie', 'modern-image-manager'), help: activeExtension ? sprintf(__('Pas alleen de naam vóór %s aan. De extensie blijft automatisch behouden.', 'modern-image-manager'), activeExtension) : __('Pas alleen de naam aan. De bestaande extensie blijft automatisch behouden.', 'modern-image-manager'), value: activeItem.new_filename || '', placeholder: activeItem.filename || __('Nieuwe naam', 'modern-image-manager'), onChange: (value) => updateItem(activeItem.id, { new_filename: filenameBase(value) }) }),
+                      activeExtension ? h('span', { className: 'mim-extension-badge', 'aria-label': sprintf(__('Vaste extensie: %s', 'modern-image-manager'), activeExtension) }, activeExtension) : null
+                    ),
                     h(TextControl, { label: __('Slug', 'modern-image-manager'), value: activeItem.slug || '', onChange: (value) => updateItem(activeItem.id, { slug: value }) })
                   ),
                   h(DetailSection, { title: __('SEO metadata', 'modern-image-manager') },
@@ -435,6 +455,12 @@
   function ExportScreen() {
     const [option, setOption] = useState('all');
     const [selected, setSelected] = useState(exportColumns.map(([key]) => key));
+
+    if (!cfg.canManage) {
+      return h(Workspace, { single: true },
+        h(Notice, { status: 'warning', isDismissible: false }, cfg.translations.managePermissionRequired)
+      );
+    }
 
     function toggle(key, value) {
       setSelected((current) => value ? Array.from(new Set(current.concat(key))) : current.filter((item) => item !== key));
@@ -493,6 +519,12 @@
     const [preview, setPreview] = useState(null);
     const [fileSelected, setFileSelected] = useState(false);
     const [selectedFileName, setSelectedFileName] = useState('');
+
+    if (!cfg.canManage) {
+      return h(Workspace, { single: true },
+        h(Notice, { status: 'warning', isDismissible: false }, cfg.translations.managePermissionRequired)
+      );
+    }
 
     function parseCsvLine(line) {
       const cells = [];
@@ -625,7 +657,7 @@
               h('div', { className: 'mim-scan-result-media' }, item.thumb ? h('img', { src: item.thumb, alt: '' }) : h('span', null, 'M')),
               h('div', { className: 'mim-scan-result-content' },
                 h('div', { className: 'mim-scan-result-head' },
-                  h('strong', { title: item.filename || item.id }, item.filename || item.id),
+                  h('strong', { title: displayFilename(item) || item.id }, displayFilename(item) || item.id),
                   h('span', { className: 'mim-usage-badge' }, sprintf(__('%d keer gebruikt', 'modern-image-manager'), item.usageCount || 0))
                 ),
                 item.sourceLabels && item.sourceLabels.length ? h('div', { className: 'mim-source-chip-list' }, item.sourceLabels.map((label) => h('span', { className: 'mim-source-chip', key: label }, label))) : null,
@@ -659,10 +691,11 @@
               h('div', null, h('span', null, __('Bereik', 'modern-image-manager')), h('strong', null, __('Alle afbeeldingen', 'modern-image-manager'))),
               h('div', null, h('span', null, __('Let op', 'modern-image-manager')), h('strong', null, __('Grote bibliotheken kunnen langer duren.', 'modern-image-manager')))
             ),
+            !cfg.canManage ? h(Notice, { status: 'warning', isDismissible: false }, cfg.translations.managePermissionRequired) : null,
             !cfg.zipAvailable ? h(Notice, { status: 'warning', isDismissible: false }, __('Vraag de host om de PHP ZipArchive-extensie te activeren.', 'modern-image-manager')) : null,
             h('div', { className: 'mim-export-footer' },
-              h(Button, { variant: 'primary', type: 'submit', disabled: !cfg.zipAvailable }, __('ZIP downloaden', 'modern-image-manager')),
-              h('span', null, cfg.zipAvailable ? __('Klaar om het media-archief te maken.', 'modern-image-manager') : __('ZIP-export is niet beschikbaar op deze server.', 'modern-image-manager'))
+              h(Button, { variant: 'primary', type: 'submit', disabled: !cfg.zipAvailable || !cfg.canManage }, __('ZIP downloaden', 'modern-image-manager')),
+              h('span', null, cfg.canManage ? (cfg.zipAvailable ? __('Klaar om het media-archief te maken.', 'modern-image-manager') : __('ZIP-export is niet beschikbaar op deze server.', 'modern-image-manager')) : cfg.translations.managePermissionRequired)
             )
           )
         )
@@ -698,7 +731,7 @@
           )
         ),
         h('div', { className: 'mim-header-meta' },
-          h('span', { className: 'mim-version-pill' }, 'v' + (cfg.version || '1.5.50')),
+          h('span', { className: 'mim-version-pill' }, 'v' + (cfg.version || '1.5.55')),
           h('span', { className: 'mim-health-pill' }, __('Klaar', 'modern-image-manager'))
         )
       ),

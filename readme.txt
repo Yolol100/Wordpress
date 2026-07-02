@@ -4,7 +4,7 @@ Tags: media, images, export, import, accessibility
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.1
-Stable tag: 1.5.50
+Stable tag: 1.5.55
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,29 @@ Verwijderen en bulkverwijderen gebruiken WordPress attachment deletion zonder pe
 De plugin exporteert en importeert mediametadata zoals titels, bijschriften, beschrijvingen, alt-tekst en bestands-URL’s. Site-eigenaren moeten beoordelen of die velden persoonsgegevens bevatten.
 
 == Changelog ==
+
+= 1.5.55 =
+* Merge-release: behoudt capability-hardening, CSV-exporthardening, batch-filtering en extensie-lock bij hernoemen.
+* CSV-import van nieuwe attachments zet nu expliciet het gekoppelde uploadbestand voor betrouwbaardere media-URL's en metadata.
+* REST-response behoudt naast `file_extension` ook `filename_extension` als backward-compatible extensieveld.
+
+= 1.5.54 =
+* Bestandshernoeming beperkt tot de naam vóór de extensie; de bestaande extensie blijft zichtbaar in de interface en server-side afgedwongen.
+* REST-update en CSV-import normaliseren nieuwe bestandsnamen zodat extensiewijzigingen niet worden toegepast.
+
+= 1.5.53 =
+* Import, export en ZIP-downloads aangescherpt naar een filterbare beheer-capability met veilige UI-fallback.
+* CSV-export gehard tegen spreadsheet formula injection.
+* Linked/unlinked mediafilters verwerkt nu in batches in plaats van één volledige mediabibliotheek in geheugen te laden.
+* Adminconfig uitgebreid met capabilitystatus voor veiliger clientgedrag.
+
+= 1.5.52 =
+* Activatie-fatal op PHP 8.1 opgelost door het PHP 8.2-only return type `true|WP_Error` te vervangen door `bool|WP_Error`.
+
+= 1.5.51 =
+* PHP 8.1 request-hardening voor admin asset routing, CSV-export en CSV-import.
+* Asset-fallback dependencies aangescherpt zodat de React-admin UI ook bij ontbrekende assetmetadata de juiste WordPress packages vraagt.
+* Gerepareerd pakket opnieuw opgebouwd met de canonieke pluginmap `modern-image-manager`.
 
 = 1.5.50 =
 * Versie opgehoogd en release-metadata gelijkgetrokken.
