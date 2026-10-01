@@ -26,8 +26,6 @@ jobs:
     steps:
       - name: Resolve private mailbox transport command
         id: request
-        env:
-          EVENT_PATH: ${{ github.event_path }}
         shell: bash
         run: |
           set -euo pipefail
@@ -42,7 +40,7 @@ jobs:
           import re
           from pathlib import Path
 
-          event = json.loads(Path(os.environ["EVENT_PATH"]).read_text(encoding="utf-8"))
+          event = json.loads(Path(os.environ["GITHUB_EVENT_PATH"]).read_text(encoding="utf-8"))
           repository = event.get("repository") or {}
           if repository.get("private") is not True:
               raise SystemExit("mailbox private transport requires a private repository")
