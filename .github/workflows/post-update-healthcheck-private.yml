@@ -1,0 +1,29 @@
+name: Private Post-update Website Healthcheck
+
+run-name: Private post-update website healthcheck
+
+on:
+  workflow_dispatch:
+    inputs:
+      targets_json:
+        description: 'JSON array with public domains/URLs or objects containing domain/url (max 150)'
+        required: true
+        type: string
+  pull_request:
+    paths:
+      - '.github/workflows/post-update-healthcheck-private.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: private-post-update-healthcheck
+  cancel-in-progress: false
+
+jobs:
+  healthcheck:
+    uses: Yolol100/Designchecker/.github/workflows/post-update-healthcheck.yml@dcd85060a62fe598756f2eb3378ac3432c9bd928
+    with:
+      targets_json: ${{ github.event_name == 'pull_request' && '["https://example.com"]' || inputs.targets_json }}
+      designchecker_ref: dcd85060a62fe598756f2eb3378ac3432c9bd928
+      concurrency: 4
