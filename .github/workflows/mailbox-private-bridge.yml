@@ -216,7 +216,10 @@ jobs:
             --header "X-Webactueel-GitHub-OIDC: ${token}" \
             "$base/state/$REQUEST_ID")
           unset token
-          [[ "$code" == 200 ]]
+          if [[ "$code" != 200 ]]; then
+            echo "MAILBOX_PRIVATE_CLEAR=failed http_status=$code" >&2
+            exit 1
+          fi
 
           python3 - "$response" <<'PY'
           import json,sys
