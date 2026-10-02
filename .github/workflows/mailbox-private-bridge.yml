@@ -243,6 +243,17 @@ jobs:
           gh issue comment "$ISSUE_NUMBER" --body "$message"
           gh issue close "$ISSUE_NUMBER" --reason completed
 
+      - name: Close failed private mailbox command
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh issue comment "$ISSUE_NUMBER" --body "Mailbox transport command failed closed. No mailbox payload was published."
+          gh issue close "$ISSUE_NUMBER" --reason completed
+
       - name: Remove private mailbox residue
         if: always()
         shell: bash
