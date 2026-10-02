@@ -22,8 +22,8 @@ concurrency:
 
 jobs:
   healthcheck:
-    uses: Yolol100/Designchecker/.github/workflows/post-update-healthcheck.yml@dcd85060a62fe598756f2eb3378ac3432c9bd928
+    uses: Yolol100/Designchecker/.github/workflows/post-update-healthcheck.yml@d0ee5ae1a56c3b5db386c302366240ef5c801c0a
     with:
       targets_json: ${{ github.event_name == 'pull_request' && '["https://example.com"]' || inputs.targets_json }}
-      designchecker_ref: dcd85060a62fe598756f2eb3378ac3432c9bd928
+      designchecker_ref: d0ee5ae1a56c3b5db386c302366240ef5c801c0a
       concurrency: 4
