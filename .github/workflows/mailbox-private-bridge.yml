@@ -161,18 +161,34 @@ jobs:
           root="$RUNNER_TEMP/mailbox-private"
           base="${SITE_URL%/}/wp-json/webactueel-mailbox-bridge/v1"
           audience=$(python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1], safe=""))' "$base")
-          token_json=$(curl --silent --show-error --header "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${audience}")
-          token=$(TOKEN_JSON="$token_json" python3 -c 'import json,os; print(json.loads(os.environ["TOKEN_JSON"])["value"])')
-          unset token_json
-          echo "::add-mask::$token"
-
           result="$root/result.json"
-          code=$(curl --silent --show-error --output "$result" --write-out '%{http_code}' \
-            --connect-timeout 10 --max-time 60 \
-            --header 'Accept: application/json' \
-            --header "X-Webactueel-GitHub-OIDC: ${token}" \
-            "$base/results/$REQUEST_ID")
-          unset token
+          code=""
+          for attempt in {1..12}; do
+            token_json=$(curl --silent --show-error --header "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${audience}")
+            token=$(TOKEN_JSON="$token_json" python3 -c 'import json,os; print(json.loads(os.environ["TOKEN_JSON"])["value"])')
+            unset token_json
+            echo "::add-mask::$token"
+
+            code=$(curl --silent --show-error --output "$result" --write-out '%{http_code}' \
+              --connect-timeout 10 --max-time 60 \
+              --header 'Accept: application/json' \
+              --header "X-Webactueel-GitHub-OIDC: ${token}" \
+              "$base/results/$REQUEST_ID")
+            unset token
+            if [[ "$code" == 200 ]]; then
+              break
+            fi
+            rm -f "$result"
+            if [[ "$code" != 404 && "$code" != 409 && "$code" != 425 && "$code" != 503 ]]; then
+              echo "MAILBOX_PRIVATE_RESULT=failed http_status=$code" >&2
+              exit 1
+            fi
+            if [[ "$attempt" == 12 ]]; then
+              echo "MAILBOX_PRIVATE_RESULT=failed http_status=$code attempts=$attempt" >&2
+              exit 1
+            fi
+            sleep 5
+          done
           [[ "$code" == 200 ]]
 
           python3 - "$result" <<'PY'
