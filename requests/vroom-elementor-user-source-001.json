@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-elementor-user-source-001",
+  "action": "filesystem.read_text",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "path": "wp-content/plugins/elementor/includes/user.php"
+  }
+}
