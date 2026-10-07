@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-hf-inspect-header-001",
+  "action": "elementor.inspect",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "id": 60
+  }
+}
