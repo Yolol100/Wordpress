@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-header-menu-items-001",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 7,
+          "title": "Home",
+          "url": "https://vroomrijscholen.nl/",
+          "status": "publish",
+          "type": "custom",
+          "object": "custom",
+          "position": 1
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 7,
+          "title": "Rijlessen",
+          "url": "https://vroomrijscholen.nl/#route-cards",
+          "status": "publish",
+          "type": "custom",
+          "object": "custom",
+          "position": 2
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 7,
+          "title": "Theorie",
+          "url": "https://vroomrijscholen.nl/#theorie",
+          "status": "publish",
+          "type": "custom",
+          "object": "custom",
+          "position": 3
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 7,
+          "title": "Help",
+          "url": "https://vroomrijscholen.nl/help/",
+          "status": "publish",
+          "type": "custom",
+          "object": "custom",
+          "position": 4
+        }
+      },
+      {
+        "action": "menu.location_set",
+        "payload": {
+          "location": "menu-1",
+          "menu_id": 7
+        }
+      }
+    ]
+  }
+}
