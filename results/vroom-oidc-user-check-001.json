@@ -1,0 +1,1 @@
+{"version":1,"ok":false,"request_id":"vroom-oidc-user-check-001","action":"wordpress.ability.read","dry_run":true,"completed_at_gmt":"2026-10-07T22:49:14+00:00","error":"Sensitive actions require confirm=true for the current request.","meta":{"exception":"RuntimeException"}}
