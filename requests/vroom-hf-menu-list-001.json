@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-hf-menu-list-001",
+  "action": "menu.list",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {}
+}
