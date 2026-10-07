@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-header-menu-children-001",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 7,
+          "title": "Over Vroom & lesauto’s",
+          "url": "https://vroomrijscholen.nl/over-vroom/",
+          "status": "publish",
+          "type": "custom",
+          "object": "custom",
+          "parent": 68,
+          "position": 5
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 7,
+          "title": "Veelgestelde vragen",
+          "url": "https://vroomrijscholen.nl/meest-gestelde-vragen/",
+          "status": "publish",
+          "type": "custom",
+          "object": "custom",
+          "parent": 68,
+          "position": 6
+        }
+      }
+    ]
+  }
+}
