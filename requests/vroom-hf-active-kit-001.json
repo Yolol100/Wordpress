@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-hf-active-kit-001",
+  "action": "option.get",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "name": "elementor_active_kit"
+  }
+}
