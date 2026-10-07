@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-oidc-user-check-001",
+  "action": "wordpress.ability.read",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "name": "core/get-user-info",
+    "input": {
+      "fields": [
+        "id",
+        "user_login",
+        "roles",
+        "display_name"
+      ]
+    }
+  }
+}
