@@ -1,0 +1,1 @@
+{"version":1,"ok":false,"request_id":"vroom-header-replace-live-001","action":"elementor.replace_document","dry_run":false,"completed_at_gmt":"2026-10-07T22:41:53+00:00","error":"Elementor mutation failed and automatic rollback also failed: Elementor rejected the document save. | rollback: Elementor rejected the document save.","meta":{"exception":"RuntimeException"}}
