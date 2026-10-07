@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-hf-capabilities-001",
+  "action": "elementor.capabilities",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {}
+}
