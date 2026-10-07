@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-hf-media-all-001",
+  "action": "media.list",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "per_page": 100,
+    "page": 1
+  }
+}
