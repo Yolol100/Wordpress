@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-elementor-pro-abilities-001",
+  "action": "wordpress.abilities",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "namespace": "elementor-pro",
+    "per_page": 10,
+    "page": 1
+  }
+}
