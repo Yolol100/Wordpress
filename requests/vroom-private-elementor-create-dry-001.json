@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-private-elementor-create-dry-001",
+  "action": "elementor.create_document",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "post_type": "page",
+    "status": "draft",
+    "title": "Connector private write route test",
+    "data": [],
+    "page_settings": {}
+  }
+}
