@@ -1,0 +1,1 @@
+{"version":1,"ok":true,"request_id":"vroom-header-menu-live-001","action":"menu.create","dry_run":false,"completed_at_gmt":"2026-10-07T22:35:00+00:00","data":{"menu_id":7,"rollback_request_id":"vroom-header-menu-live-001"},"meta":{"request_fingerprint":"3303c3d78c00cba86b59658f1f3d870d93721911b76c6257707469b64c8ee8c8"}}
