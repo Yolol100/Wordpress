@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-hf-pages-001",
+  "action": "post.list",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "post_type": "page",
+    "status": "any",
+    "per_page": 100,
+    "page": 1,
+    "orderby": "ID",
+    "order": "ASC"
+  }
+}
