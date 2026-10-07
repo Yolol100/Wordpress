@@ -1,0 +1,1 @@
+{"version":1,"ok":true,"request_id":"vroom-header-menu-dry-001","action":"menu.create","dry_run":true,"completed_at_gmt":"2026-10-07T22:33:53+00:00","data":{"would_create":"Vroom Header","current_state_token":"[redacted]"},"meta":{"request_fingerprint":"3303c3d78c00cba86b59658f1f3d870d93721911b76c6257707469b64c8ee8c8"}}
