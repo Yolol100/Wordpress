@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-rocket-rucss-apply-20261009-01",
+  "action": "plugin.settings.update",
+  "dry_run": false,
+  "confirm": true,
+  "expected_fingerprint": "2ec9d9aa7e04b649e86db417be0e9267613ff37b01d9b5188ee10ccf7456ff5a",
+  "payload": {
+    "plugin": "wp_rocket",
+    "fields": {
+      "remove_unused_css": false
+    }
+  }
+}
