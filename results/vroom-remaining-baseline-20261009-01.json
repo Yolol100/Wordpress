@@ -1,0 +1,1 @@
+{"version":1,"ok":false,"request_id":"vroom-remaining-baseline-20261009-01","action":"connector.batch","dry_run":true,"completed_at_gmt":"2026-10-08T22:27:02+00:00","error":"Batch failed at operation 7: Filesystem path does not exist.","meta":{"exception":"RuntimeException"}}
