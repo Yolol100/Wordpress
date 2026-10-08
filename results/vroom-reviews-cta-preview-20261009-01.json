@@ -1,0 +1,1 @@
+{"version":1,"ok":false,"request_id":"vroom-reviews-cta-preview-20261009-01","action":"filesystem.write_text","dry_run":true,"completed_at_gmt":"2026-10-08T22:11:08+00:00","error":"Current user lacks the required filesystem capability: edit_themes.","meta":{"exception":"RuntimeException"}}
