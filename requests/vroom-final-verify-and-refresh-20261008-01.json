@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-final-verify-and-refresh-20261008-01",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "maintenance.cache_flush",
+        "payload": {
+          "layer": "asset_cleanup"
+        },
+        "expected_fingerprint": "92baccfedca65f2a7831e188e07095ad0f660a2dc90e2c30b8e0e5515e3189b0"
+      },
+      {
+        "action": "maintenance.cache_flush",
+        "payload": {
+          "layer": "wp_rocket"
+        },
+        "expected_fingerprint": "3af01dfa0b1a6d432605e3b5851408d10a7bf67692ba5ea26f6809b0e8837282"
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "joinchat"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blogname"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpseo_titles"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpassetcleanup_settings"
+        }
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "wp_rocket"
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 84
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 86
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 41
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 39
+        }
+      }
+    ]
+  }
+}
