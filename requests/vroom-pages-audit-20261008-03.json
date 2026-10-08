@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-pages-audit-20261008-03",
+  "action": "post.list",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "post_type": "page",
+    "per_page": 100
+  }
+}
