@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-final-deeper-audit-20261008-01",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "theme_mod.get",
+        "payload": {
+          "name": "custom_logo"
+        }
+      },
+      {
+        "action": "theme_mod.get",
+        "payload": {
+          "name": "vroom_phone"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "site_icon"
+        }
+      },
+      {
+        "action": "filesystem.list",
+        "payload": {
+          "path": "wp-content/themes/vroom-wordpress-theme/assets/images"
+        }
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "elementor_library",
+          "per_page": 100
+        }
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "e-floating-buttons",
+          "per_page": 100
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpseo_titles"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "joinchat"
+        }
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "wp_rocket"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpassetcleanup_settings"
+        }
+      }
+    ]
+  }
+}
