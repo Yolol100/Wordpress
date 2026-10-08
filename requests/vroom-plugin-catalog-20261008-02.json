@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-plugin-catalog-20261008-02",
+  "action": "plugin.settings.catalog",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {}
+}
