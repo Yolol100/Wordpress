@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-safe-fixes-20261008-01",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "joinchat",
+          "value": {
+            "telephone": "31617389000",
+            "mobile_only": "no",
+            "button_ico": "app",
+            "button_tip": "Stel je vraag via WhatsApp",
+            "button_delay": 3,
+            "whatsapp_web": "no",
+            "qr": "no",
+            "message_text": "Heb je vragen over rijlessen, theorie of een gratis proefles? Stuur ons gerust een WhatsApp-bericht.",
+            "message_views": 2,
+            "message_delay": -1,
+            "message_badge": "no",
+            "message_send": "Hallo, ik heb een vraag over rijlessen bij Vroom Rijscholen.",
+            "message_start": "Open WhatsApp",
+            "position": "right",
+            "visibility": {
+              "all": "yes"
+            },
+            "color": "#ff6600/1",
+            "dark_mode": "no",
+            "header": "Vroom Rijscholen",
+            "optin_text": "",
+            "optin_check": "no",
+            "tracking": "yes",
+            "show_brand": "no"
+          }
+        },
+        "expected_fingerprint": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 84,
+          "fields": {
+            "description": "Meer weten over ervaringen met Vroom? Bekijk hoe je jouw beoordeling kunt delen of plan een gratis proefles om zelf kennis te maken."
+          }
+        },
+        "expected_fingerprint": "667dbb95c4ea406beaaac981c9a7a2a2057be1468ad520c3e1f70b3e99033077"
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 86,
+          "fields": {
+            "robots_noindex": "1"
+          }
+        },
+        "expected_fingerprint": "183c1214b7aa57fb26efec862f1743387c96a2dc9d0fb7cf1ab94dda2dfbad63"
+      }
+    ]
+  }
+}
