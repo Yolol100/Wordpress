@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-settings-inspection-20261008-01",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "plugin.settings.catalog",
+        "payload": {}
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "wp_rocket"
+        }
+      },
+      {
+        "action": "auto_image_attributes.inspect",
+        "payload": {}
+      },
+      {
+        "action": "media.list",
+        "payload": {
+          "per_page": 100
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "joinchat"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "whatsappme"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpacu_settings"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blc_options"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpseo_titles"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpseo"
+        }
+      }
+    ]
+  }
+}
