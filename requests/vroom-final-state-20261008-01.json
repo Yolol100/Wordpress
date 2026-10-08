@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-final-state-20261008-01",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpassetcleanup_settings"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "joinchat"
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 84
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 86
+        }
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "wp_rocket"
+        }
+      },
+      {
+        "action": "maintenance.cache_capabilities",
+        "payload": {}
+      }
+    ]
+  }
+}
