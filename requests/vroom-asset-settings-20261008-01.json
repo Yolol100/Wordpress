@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-asset-settings-20261008-01",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/plugins/wp-asset-clean-up/classes/Settings.php"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/plugins/wp-asset-clean-up/classes/OptimiseAssets/OptimizeCommon.php"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpassetcleanup_settings"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpassetcleanup_global_data"
+        }
+      }
+    ]
+  }
+}
