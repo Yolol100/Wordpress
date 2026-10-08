@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-privacy-template-20261008-01",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/vroom-wordpress-theme/template-parts/content-page.php"
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 3
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 84
+        }
+      }
+    ]
+  }
+}
