@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-remaining-baseline-20261009-01",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "connector.discover",
+        "payload": {}
+      },
+      {
+        "action": "connector.update.check",
+        "payload": {}
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 3
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 85
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 18
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 7
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpseo_titles"
+        }
+      },
+      {
+        "action": "filesystem.list",
+        "payload": {
+          "path": "wp-content/themes/vroom-wordpress-theme/languages"
+        }
+      },
+      {
+        "action": "filesystem.list",
+        "payload": {
+          "path": "wp-content/languages/themes"
+        }
+      },
+      {
+        "action": "filesystem.list",
+        "payload": {
+          "path": "wp-content/plugins/wordpressconnector"
+        }
+      },
+      {
+        "action": "plugin.list",
+        "payload": {}
+      }
+    ]
+  }
+}
