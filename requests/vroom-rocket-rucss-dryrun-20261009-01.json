@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-rocket-rucss-dryrun-20261009-01",
+  "action": "plugin.settings.update",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "plugin": "wp_rocket",
+    "fields": {
+      "remove_unused_css": false
+    }
+  }
+}
