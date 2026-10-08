@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-media-kit-fix-preview-20261009-01",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 7,
+          "title": "Vroom Rijscholen - logo",
+          "alt": "Logo van Vroom Rijscholen"
+        }
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 8,
+          "title": "Vroom Rijscholen - zwart logo",
+          "alt": "Zwart logo van Vroom Rijscholen"
+        }
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 9,
+          "title": "Vroom Rijscholen - wit logo",
+          "alt": "Wit logo van Vroom Rijscholen"
+        }
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 10,
+          "title": "Vroom Rijscholen - oranje logo",
+          "alt": "Oranje logo van Vroom Rijscholen"
+        }
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 53,
+          "title": "Tijdelijke voorbeeldafbeelding - niet publiceren",
+          "alt": "",
+          "caption": "",
+          "description": ""
+        }
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 56,
+          "title": "Tijdelijke voorbeeldafbeelding - niet publiceren",
+          "alt": "",
+          "caption": "",
+          "description": ""
+        }
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 37,
+          "fields": {
+            "robots_noindex": "1"
+          }
+        }
+      }
+    ]
+  }
+}
