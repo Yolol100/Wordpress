@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-contents-inspection-20261008-01",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "post",
+          "per_page": 100
+        }
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "vroom_vehicle",
+          "per_page": 100
+        }
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "vroom_review",
+          "per_page": 100
+        }
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "vroom_faq",
+          "per_page": 100
+        }
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "vroom_package",
+          "per_page": 100
+        }
+      }
+    ]
+  }
+}
