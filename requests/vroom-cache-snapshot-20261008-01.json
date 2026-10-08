@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-cache-snapshot-20261008-01",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "maintenance.cache_capabilities",
+        "payload": {}
+      },
+      {
+        "action": "maintenance.cache_flush",
+        "payload": {
+          "layer": "wp_rocket"
+        }
+      },
+      {
+        "action": "maintenance.cache_flush",
+        "payload": {
+          "layer": "asset_cleanup"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpacu_global_data"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpacu_plugin_settings"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpacu_settings"
+        }
+      }
+    ]
+  }
+}
