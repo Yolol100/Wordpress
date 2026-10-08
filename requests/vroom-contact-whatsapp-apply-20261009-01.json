@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-contact-whatsapp-apply-20261009-01",
+  "action": "post.update",
+  "dry_run": false,
+  "confirm": true,
+  "expected_fingerprint": "27dabf22592487cc4bb9d6674fa23830011e5c317c4c0f351c80f5435a8a60ef",
+  "payload": {
+    "id": 85,
+    "content": "<p>Een vraag over rijlessen, een pakket of samenwerken? Stuur je bericht. Voor een gratis proefles kun je direct het proeflesformulier gebruiken.</p><p>Een persoonlijk antwoord</p><h2>Stuur ons je vraag</h2><p>Vertel kort waar je hulp bij wilt. Deel geen medische gegevens of andere gevoelige informatie via dit formulier.</p><strong>Liever direct contact?</strong><a href=\"https://wa.me/31617389000\">Stuur een WhatsApp-bericht</a><a href=\"https://vroomrijscholen.nl/#proefles\">Gratis proefles aanvragen</a><p>Persoonlijk contact</p><h3>Waar kunnen we je mee helpen?</h3>\n\n"
+  }
+}
