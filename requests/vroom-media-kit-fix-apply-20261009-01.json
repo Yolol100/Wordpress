@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-media-kit-fix-apply-20261009-01",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 7,
+          "title": "Vroom Rijscholen - logo",
+          "alt": "Logo van Vroom Rijscholen"
+        },
+        "expected_fingerprint": "ac403f0162a4e276daa241d643b8e265cb42fe95b52d837e10757350a251bd4c"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 8,
+          "title": "Vroom Rijscholen - zwart logo",
+          "alt": "Zwart logo van Vroom Rijscholen"
+        },
+        "expected_fingerprint": "e12ec12f0600c9988387bdbd515389a6819398fd6d24c539b7036717aecbe91a"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 9,
+          "title": "Vroom Rijscholen - wit logo",
+          "alt": "Wit logo van Vroom Rijscholen"
+        },
+        "expected_fingerprint": "845daf5dcd19ca7369c3fd57ee18d932edbae3848d7df1e34ed2611a75b5dc49"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 10,
+          "title": "Vroom Rijscholen - oranje logo",
+          "alt": "Oranje logo van Vroom Rijscholen"
+        },
+        "expected_fingerprint": "7a5f92a8cc557288c63277c0da35373574e54c3fa66ede6fde3e51b39a9d07ab"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 53,
+          "title": "Tijdelijke voorbeeldafbeelding - niet publiceren",
+          "alt": "",
+          "caption": "",
+          "description": ""
+        },
+        "expected_fingerprint": "341cdb7bc9413f24c388ed77de185973bb95e9761b26a51a8dc316c9d5aa6a79"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 56,
+          "title": "Tijdelijke voorbeeldafbeelding - niet publiceren",
+          "alt": "",
+          "caption": "",
+          "description": ""
+        },
+        "expected_fingerprint": "11cbee1b91358b750723f365264313b5559a911da8a410b22a49a1bf997c0e09"
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 37,
+          "fields": {
+            "robots_noindex": "1"
+          }
+        },
+        "expected_fingerprint": "135b1486dace2e87e95759ecd76cff80fe74eb961e7db28ef353a4b6aaa52dfd"
+      }
+    ]
+  }
+}
