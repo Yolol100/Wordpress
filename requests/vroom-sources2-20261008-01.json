@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-sources2-20261008-01",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/plugins/creame-whatsapp-me/includes/class-joinchat-common.php"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/plugins/creame-whatsapp-me/admin/class-joinchat-admin.php"
+        }
+      },
+      {
+        "action": "filesystem.list",
+        "payload": {
+          "path": "wp-content/plugins/wp-asset-clean-up/lite"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/vroom-wordpress-theme/header.php"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/vroom-wordpress-theme/footer.php"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/vroom-wordpress-theme/front-page.php"
+        }
+      }
+    ]
+  }
+}
