@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-media-kit-baseline-20261009-01",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 7
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 8
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 9
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 10
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 53
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 56
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 37
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 37
+        }
+      }
+    ]
+  }
+}
