@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-rijlessen-postfix-verify-20261009",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 83
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 11
+        }
+      },
+      {
+        "action": "post.revisions",
+        "payload": {
+          "id": 83
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 83
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 11
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "page_on_front"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blog_public"
+        }
+      },
+      {
+        "action": "maintenance.cache_capabilities",
+        "payload": {}
+      }
+    ]
+  }
+}
