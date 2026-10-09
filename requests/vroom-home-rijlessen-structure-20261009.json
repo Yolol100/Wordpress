@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-home-rijlessen-structure-20261009",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 11
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 83
+        }
+      },
+      {
+        "action": "elementor.inspect",
+        "payload": {
+          "id": 11
+        }
+      },
+      {
+        "action": "elementor.inspect",
+        "payload": {
+          "id": 83
+        }
+      },
+      {
+        "action": "meta.get",
+        "payload": {
+          "object_type": "post",
+          "object_id": 11,
+          "key": "_elementor_edit_mode"
+        }
+      },
+      {
+        "action": "meta.get",
+        "payload": {
+          "object_type": "post",
+          "object_id": 83,
+          "key": "_elementor_edit_mode"
+        }
+      },
+      {
+        "action": "meta.get",
+        "payload": {
+          "object_type": "post",
+          "object_id": 11,
+          "key": "_wp_page_template"
+        }
+      },
+      {
+        "action": "meta.get",
+        "payload": {
+          "object_type": "post",
+          "object_id": 83,
+          "key": "_wp_page_template"
+        }
+      },
+      {
+        "action": "post.revisions",
+        "payload": {
+          "id": 83
+        }
+      },
+      {
+        "action": "filesystem.list",
+        "payload": {
+          "path": "wp-content/themes/vroom-wordpress-theme"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "page_on_front"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blog_public"
+        }
+      }
+    ]
+  }
+}
