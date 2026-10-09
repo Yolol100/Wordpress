@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-final-gap-check-20261009-01",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "site_icon"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wp_page_for_privacy_policy"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "show_on_front"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "page_on_front"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blog_public"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpseo_social"
+        }
+      },
+      {
+        "action": "media.list",
+        "payload": {}
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 3
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 84
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 85
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 18
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 3
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 18
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 85
+        }
+      },
+      {
+        "action": "yoast.site_representation.inspect",
+        "payload": {}
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "wp_rocket"
+        }
+      },
+      {
+        "action": "maintenance.cache_capabilities",
+        "payload": {}
+      }
+    ]
+  }
+}
