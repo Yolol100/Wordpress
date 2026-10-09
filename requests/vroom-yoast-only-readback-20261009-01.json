@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-yoast-only-readback-20261009-01",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "yoast.site_representation.inspect",
+        "payload": {}
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "wp_rocket"
+        }
+      }
+    ]
+  }
+}
