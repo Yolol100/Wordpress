@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-yoast-org-apply-20261009-01",
+  "action": "yoast.site_representation.update",
+  "dry_run": false,
+  "confirm": true,
+  "expected_fingerprint": "5765333b24cd43894bb3528acfe126d68795a038ed52fbba7d86544c6fb0602c",
+  "payload": {
+    "fields": {
+      "logo_attachment_id": 7,
+      "org_description": "Vroom Rijscholen biedt rijlessen en theorie met een vaste rijinstructeur, flexibele lespakketten en een vrijblijvende gratis proefles."
+    }
+  }
+}
