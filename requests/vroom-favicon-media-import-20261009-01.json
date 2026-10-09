@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-favicon-media-import-20261009-01",
+  "action": "media.import",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "source_path": "vroom-favicon-512.png",
+    "title": "Vroom Rijscholen favicon",
+    "alt": "Oranje V met stip - Vroom Rijscholen"
+  }
+}
