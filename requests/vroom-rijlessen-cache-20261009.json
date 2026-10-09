@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-rijlessen-cache-20261009",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "maintenance.cache_flush",
+        "payload": {
+          "layer": "wp_rocket"
+        },
+        "expected_fingerprint": "3af01dfa0b1a6d432605e3b5851408d10a7bf67692ba5ea26f6809b0e8837282"
+      },
+      {
+        "action": "cache.flush",
+        "payload": {},
+        "expected_fingerprint": "3a9e7b654f48b5cf873c6dfbb11f0d07350102c6fe06a42ac027f140410a5bf2"
+      }
+    ]
+  }
+}
