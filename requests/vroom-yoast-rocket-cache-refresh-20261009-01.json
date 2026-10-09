@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-yoast-rocket-cache-refresh-20261009-01",
+  "action": "maintenance.cache_flush",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "layer": "wp_rocket"
+  }
+}
