@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-favicon-final-readback-20261009-01",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "site_icon"
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 131
+        }
+      },
+      {
+        "action": "yoast.site_representation.inspect",
+        "payload": {}
+      }
+    ]
+  }
+}
