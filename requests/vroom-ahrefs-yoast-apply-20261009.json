@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-ahrefs-yoast-apply-20261009",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 14,
+          "fields": {
+            "title": "Spoedcursus rijbewijs | Intensieve rijlessen | Vroom",
+            "description": "Versneld je rijbewijs halen? Bekijk hoe intensieve rijlessen bij Vroom werken. Bespreek jouw niveau, planning en examenmogelijkheden tijdens een gratis proefles.",
+            "focus_keyphrase": "spoedcursus rijbewijs"
+          }
+        },
+        "expected_fingerprint": "4dd5d1eaf3e09ae608a1010ffb46415449297ecb79ceb7a4b385bead19d5d980"
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 18,
+          "fields": {
+            "title": "Rijles kosten en lespakketten | Vroom Rijscholen",
+            "description": "Wat kost rijles? Bekijk Vrooms pakketten van 15 tot 40 lessen en bespreek de lesduur, inbegrepen onderdelen en betalen in termijnen tijdens een gratis proefles.",
+            "focus_keyphrase": "rijles kosten"
+          }
+        },
+        "expected_fingerprint": "76be44e342341a135af0f9bc38ac753fcb91d92019e9ccaf1b44e531f3c46086"
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 83,
+          "fields": {
+            "title": "Rijlessen met vaste instructeur | Vroom Rijscholen",
+            "description": "Rijlessen volgen? Leer met een vaste instructeur in jouw tempo. Ontdek jouw lestraject, vergelijk pakketten en maak kennis tijdens een gratis proefles bij Vroom.",
+            "focus_keyphrase": "rijlessen"
+          }
+        },
+        "expected_fingerprint": "ab1b9687eb00ee48ce5378e6dd3d77db3c147f1fe7a3c0444ef3ff7c95bd8b1f"
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 112,
+          "fields": {
+            "title": "Gratis proefles autorijden | Rijschool Vroom",
+            "description": "Gratis proefles autorijden bij Vroom. Maak kennis met een instructeur, bespreek jouw rijervaring en ontdek welk lesritme en pakket bij jou passen.",
+            "focus_keyphrase": "proefles autorijden"
+          }
+        },
+        "expected_fingerprint": "255b94e1cff9a2101297ed5cbb3f04fd505cec3900a681c22f0c2ee161a803a3"
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 16,
+          "fields": {
+            "description": "Auto theorie leren bij Vroom? Kies voor online theorie (€49) of een eendaagse theoriecursus (€99). Bekijk de mogelijkheden en bereid je voor op het CBR-examen.",
+            "focus_keyphrase": "theoriecursus auto"
+          }
+        },
+        "expected_fingerprint": "8618b3d2aef349ccae8a12df5a8d81b5271dd08a79e3a368b472be0ec2b8a920"
+      }
+    ]
+  }
+}
