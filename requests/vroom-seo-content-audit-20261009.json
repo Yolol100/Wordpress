@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-seo-content-audit-20261009",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 11
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 14
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 16
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 18
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 83
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 112
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 27
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 25
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 23
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 85
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 84
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 3
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 43
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 47
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 21
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 39
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 41
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 86
+        }
+      }
+    ]
+  }
+}
