@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-1177-live-compatibility-20261009-01",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "connector.discover",
+        "payload": {}
+      },
+      {
+        "action": "plugin.settings.catalog",
+        "payload": {}
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "wp_rocket"
+        }
+      },
+      {
+        "action": "maintenance.cache_capabilities",
+        "payload": {}
+      },
+      {
+        "action": "yoast.site_representation.inspect",
+        "payload": {}
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "joinchat"
+        }
+      },
+      {
+        "action": "auto_image_attributes.inspect",
+        "payload": {}
+      }
+    ]
+  }
+}
