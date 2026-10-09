@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-yoast-tech-options-20261009-01",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpseo"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpseo_xml"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpseo_llmstxt"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpseo_taxonomy_meta"
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 37
+        }
+      },
+      {
+        "action": "term.list",
+        "payload": {
+          "taxonomy": "category",
+          "hide_empty": false
+        }
+      },
+      {
+        "action": "term.list",
+        "payload": {
+          "taxonomy": "post_tag",
+          "hide_empty": false
+        }
+      },
+      {
+        "action": "connector.discover",
+        "payload": {}
+      }
+    ]
+  }
+}
