@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-yoast-qa-recheck-20261009",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 14
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 18
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 83
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 112
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 16
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 14
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 18
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 83
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 112
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 16
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 11
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 11
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 86
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 39
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 41
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blog_public"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "site_icon"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpseo"
+        }
+      },
+      {
+        "action": "yoast.site_representation.inspect",
+        "payload": {}
+      },
+      {
+        "action": "connector.discover",
+        "payload": {}
+      }
+    ]
+  }
+}
