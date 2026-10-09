@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-yoast-page-fields-20261009-01",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 112
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 86
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 85
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 84
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 83
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 47
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 43
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 41
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 39
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 27
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 25
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 23
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 21
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 18
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 16
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 14
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 11
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 3
+        }
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "elementor_library",
+          "per_page": 100,
+          "page": 1
+        }
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "vroom_vehicle",
+          "per_page": 100,
+          "page": 1
+        }
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "vroom_review",
+          "per_page": 100,
+          "page": 1
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 11
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 86
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 84
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 83
+        }
+      }
+    ]
+  }
+}
