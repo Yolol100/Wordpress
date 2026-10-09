@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "site_url": "https://vroomrijscholen.nl",
+  "request_id": "vroom-cache-preflight-20261009-01",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "maintenance.cache_capabilities",
+        "payload": {}
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blogname"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "site_icon"
+        }
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "wp_rocket"
+        }
+      },
+      {
+        "action": "system.doctor",
+        "payload": {}
+      }
+    ]
+  }
+}
