@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-product-sample-apply-20261010",
+  "action": "woocommerce.product.create",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "type": "variable",
+    "name": "Aluminiumtape Cold Weather",
+    "slug": "aluminiumtape-cold-weather",
+    "status": "draft",
+    "category_ids": [
+      16
+    ],
+    "description": "Aluminiumtape met sterke kleefkracht voor koude en warme toepassingen. Bron TPS Pack webshop. Verpakkingsopties: 50 mm x 45 m (24 rollen) 87 euro; 50 mm x 50 m (24 rollen), 75 mm x 50 m (16 rollen), 100 mm x 50 m (16 rollen) elk 96 euro per verpakking, inclusief btw volgens bron.",
+    "short_description": "Sterk hechtende aluminiumtape voor isolatie en afdichting.",
+    "attributes": [
+      {
+        "name": "Formaat en verpakking",
+        "options": [
+          "50 mm x 45 m (24 rollen)",
+          "50 mm x 50 m (24 rollen)",
+          "75 mm x 50 m (16 rollen)",
+          "100 mm x 50 m (16 rollen)"
+        ],
+        "visible": true,
+        "variation": true
+      }
+    ]
+  }
+}
