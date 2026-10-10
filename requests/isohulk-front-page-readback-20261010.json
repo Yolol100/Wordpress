@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-front-page-readback-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "show_on_front"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "page_on_front"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blog_public"
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 13
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 13
+        }
+      },
+      {
+        "action": "menu.list",
+        "payload": {}
+      },
+      {
+        "action": "connector.update.check",
+        "payload": {}
+      }
+    ]
+  }
+}
