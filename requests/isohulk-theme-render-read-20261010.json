@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-theme-render-read-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/hostinger-ai-theme/parts/header.html"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/hostinger-ai-theme/templates/front-page.html"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/hostinger-ai-theme/templates/index.html"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/hostinger-ai-theme/functions.php"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/hostinger-ai-theme/parts/footer.html"
+        }
+      }
+    ]
+  }
+}
