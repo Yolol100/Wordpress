@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-hostinger-readiness-live-values-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "hostinger_ai_template_parts_ready"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "hostinger_ai_generation_state"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "hostinger_ai_site_generated_once"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "hostinger_ai_created_pages"
+        }
+      }
+    ]
+  }
+}
