@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-11716-nav-repair-verify-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 4
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/hostinger-ai-theme/parts/header.html"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/hostinger-ai-theme/parts/footer.html"
+        }
+      },
+      {
+        "action": "gtranslate.settings.inspect",
+        "payload": {}
+      },
+      {
+        "action": "woocommerce.settings.inspect",
+        "payload": {
+          "group": "general",
+          "limit": 50
+        }
+      }
+    ]
+  }
+}
