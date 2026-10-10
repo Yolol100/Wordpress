@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-11716-vat-shipping-preview-20261010",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.settings.update",
+        "payload": {
+          "group": "general",
+          "id": "woocommerce_calc_taxes",
+          "value": "yes"
+        }
+      },
+      {
+        "action": "woocommerce.fulfillment.create",
+        "payload": {
+          "type": "tax_rate",
+          "fields": {
+            "country": "NL",
+            "rate": "21.0000",
+            "name": "BTW 21%",
+            "shipping": true,
+            "compound": false,
+            "priority": 1
+          }
+        }
+      },
+      {
+        "action": "woocommerce.fulfillment.create",
+        "payload": {
+          "type": "shipping_zone",
+          "fields": {
+            "name": "Nederland - standaardpakketten",
+            "order": 1
+          }
+        }
+      }
+    ]
+  }
+}
