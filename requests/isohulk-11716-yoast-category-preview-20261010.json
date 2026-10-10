@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-11716-yoast-category-preview-20261010",
+  "action": "yoast.templates.update",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "fields": {
+      "product_category_title": "%%term_title%% %%page%% %%sep%% %%sitename%%"
+    },
+    "expected_before_fingerprint": "5bd94b66ad2aedefa16cf3f922acc28b33b8a95eb08459da38956577da6d16d8"
+  }
+}
