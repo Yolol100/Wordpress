@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-11716-plugins-preflight-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "wp_rocket"
+        }
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "joinchat"
+        }
+      },
+      {
+        "action": "optimizer.settings.inspect",
+        "payload": {
+          "provider": "ewww"
+        }
+      },
+      {
+        "action": "optimizer.settings.inspect",
+        "payload": {
+          "provider": "asset_cleanup"
+        }
+      },
+      {
+        "action": "gtranslate.settings.inspect",
+        "payload": {}
+      },
+      {
+        "action": "auto_image_attributes.inspect",
+        "payload": {}
+      }
+    ]
+  }
+}
