@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-11716-safe-settings-apply-20261010",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "gtranslate.settings.update",
+        "payload": {
+          "fields": {
+            "default_language": "nl",
+            "incl_langs": [
+              "nl",
+              "en"
+            ],
+            "fincl_langs": [
+              "nl",
+              "en"
+            ],
+            "detect_browser_language": 0
+          },
+          "expected_before_fingerprint": "a3873cfea43dd07ce64626db89ed41fb785ea74c3eafdf7d69b485bea7ccf67e"
+        }
+      },
+      {
+        "action": "woocommerce.settings.update",
+        "payload": {
+          "group": "general",
+          "id": "woocommerce_price_decimal_sep",
+          "value": ","
+        }
+      },
+      {
+        "action": "woocommerce.settings.update",
+        "payload": {
+          "group": "general",
+          "id": "woocommerce_price_thousand_sep",
+          "value": "."
+        }
+      }
+    ]
+  }
+}
