@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-wp-rocket-lazyload-preview-20261010",
+  "action": "plugin.settings.update",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "plugin": "wp_rocket",
+    "fields": {
+      "lazyload": 0
+    }
+  }
+}
