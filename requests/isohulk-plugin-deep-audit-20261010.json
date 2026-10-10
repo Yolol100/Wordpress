@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-plugin-deep-audit-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "system.doctor",
+        "payload": {}
+      },
+      {
+        "action": "plugin.list",
+        "payload": {}
+      },
+      {
+        "action": "plugin.settings.catalog",
+        "payload": {}
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "wp_rocket"
+        }
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "joinchat"
+        }
+      },
+      {
+        "action": "yoast.site_representation.inspect",
+        "payload": {}
+      },
+      {
+        "action": "auto_image_attributes.inspect",
+        "payload": {}
+      },
+      {
+        "action": "maintenance.cache_capabilities",
+        "payload": {}
+      },
+      {
+        "action": "wordpress.abilities",
+        "payload": {
+          "per_page": 50,
+          "page": 1
+        }
+      },
+      {
+        "action": "theme.list",
+        "payload": {}
+      },
+      {
+        "action": "menu.list",
+        "payload": {}
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blog_public"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "WPLANG"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "timezone_string"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "users_can_register"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "default_role"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "permalink_structure"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_enable_guest_checkout"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_enable_myaccount_registration"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_enable_signup_and_login_from_checkout"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_enable_reviews"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_enable_review_rating"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_enable_verified_owner_reviews"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_enable_coupons"
+        }
+      }
+    ]
+  }
+}
