@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-11716-active-theme-object-preflight-20261010",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "theme.list",
+        "payload": {}
+      },
+      {
+        "action": "cache.flush",
+        "payload": {}
+      }
+    ]
+  }
+}
