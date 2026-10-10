@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "tpspack-post-lazyload-audit-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_lazy_load"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_ll_autoscale"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_add_missing_dims"
+        }
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "wp_rocket"
+        }
+      },
+      {
+        "action": "menu.get",
+        "payload": {
+          "id": 23
+        }
+      },
+      {
+        "action": "woocommerce.tax_rate.list",
+        "payload": {
+          "per_page": 50
+        }
+      },
+      {
+        "action": "connector.update.check",
+        "payload": {}
+      }
+    ]
+  }
+}
