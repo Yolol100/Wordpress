@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "tpspack-foil-carton-preview-20261010",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Machinewikkelfolie Power 250% 50 cm x 2000 m x 17 my",
+          "slug": "machinewikkelfolie-power-250-17my",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            19
+          ],
+          "short_description": "Transparante machinewikkelfolie met 250% rek, geschikt voor palletverpakking.",
+          "description": "Transparante machinewikkelfolie met 250% rek, geschikt voor palletverpakking.\n\nHistorische webshopstaffels incl. btw, nog te verifiëren: 1 rol €39,50; 6 rollen €75,00; 15 rollen €540,00; 30 rollen €1.050,00; 45 rollen €1.462,50.\nBron: tpspack.nl/webshop/. Verzendkosten en BTW eerst verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Machinewikkelfolie Power 300% 50 cm x 1800 m x 20 my",
+          "slug": "machinewikkelfolie-power-300-20my",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            19
+          ],
+          "short_description": "Transparante machinewikkelfolie met 300% rek, geschikt voor palletverpakking.",
+          "description": "Transparante machinewikkelfolie met 300% rek, geschikt voor palletverpakking.\n\nHistorische webshopstaffels incl. btw, nog te verifiëren: 1 rol €42,50; 6 rollen €243,00; 15 rollen €592,50; 30 rollen €1.125,00; 45 rollen €1.597,50.\nBron: tpspack.nl/webshop/. Verzendkosten en BTW eerst verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Machinewikkelfolie Power 300% 50 cm x 1500 m x 23 my",
+          "slug": "machinewikkelfolie-power-300-23my",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            19
+          ],
+          "short_description": "Transparante machinewikkelfolie met 300% rek en folie van 23 micron.",
+          "description": "Transparante machinewikkelfolie met 300% rek en folie van 23 micron.\n\nHistorische webshopstaffels incl. btw, nog te verifiëren: 1 rol €40,50; 6 rollen €231,00; 15 rollen €562,50; 30 rollen €1.065,00; 45 rollen €1.507,50.\nBron: tpspack.nl/webshop/. Verzendkosten en BTW eerst verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Kartonnen hoekprofielen (bundel 50)",
+          "slug": "kartonnen-hoekprofielen-bundel-50",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            21
+          ],
+          "short_description": "Kartonnen hoekprofielen ter bescherming en stabilisatie van pallets; bundel van 50 stuks.",
+          "description": "Kartonnen hoekprofielen ter bescherming en stabilisatie van pallets; bundel van 50 stuks.\n\nHistorische webshopvermelding €0,25 incl. btw; prijseenheid niet duidelijk, dus nog niet verkoopklaar.\nBron: tpspack.nl/webshop/. Verzendkosten en BTW eerst verifiëren.",
+          "reviews_allowed": false
+        }
+      }
+    ]
+  }
+}
