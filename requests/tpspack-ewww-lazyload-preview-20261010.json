@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "tpspack-ewww-lazyload-preview-20261010",
+  "action": "option.update",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "name": "ewww_image_optimizer_lazy_load",
+    "value": "1"
+  }
+}
