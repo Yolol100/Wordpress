@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "tpspack-catalogue-b-preview-20261010",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Washi Masking Tape Gold 3 Months UV",
+          "slug": "washi-masking-gold-3-months-uv",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            17
+          ],
+          "short_description": "Washi masking tape Gold, 3 maanden UV-bestendig volgens TPS Pack.",
+          "description": "Washi masking tape Gold, 3 maanden UV-bestendig volgens TPS Pack. Bron: tpspack.nl/bouwtapes/, /folie/ of /rekfolie/. Actuele prijs en specificaties voor publicatie verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Washi Masking Tape Lila Low Tack",
+          "slug": "washi-masking-lila-low-tack",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            17
+          ],
+          "short_description": "Washi masking tape met lage kleefkracht voor kwetsbare oppervlakken.",
+          "description": "Washi masking tape met lage kleefkracht voor kwetsbare oppervlakken. Bron: tpspack.nl/bouwtapes/, /folie/ of /rekfolie/. Actuele prijs en specificaties voor publicatie verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "PVC Pipe Wrapping Tape Shiny No Adhesive",
+          "slug": "pvc-pipe-wrapping-shiny-no-adhesive",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            17
+          ],
+          "short_description": "Glanzende PVC tape zonder kleeflaag voor het wikkelen van buizen.",
+          "description": "Glanzende PVC tape zonder kleeflaag voor het wikkelen van buizen. Bron: tpspack.nl/bouwtapes/, /folie/ of /rekfolie/. Actuele prijs en specificaties voor publicatie verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Pure Aluminum Foil",
+          "slug": "pure-aluminum-foil",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            18
+          ],
+          "short_description": "Jumborollen 100% pure aluminiumfolie, beschikbaar in verschillende afmetingen en dikten.",
+          "description": "Jumborollen 100% pure aluminiumfolie, beschikbaar in verschillende afmetingen en dikten. Bron: tpspack.nl/bouwtapes/, /folie/ of /rekfolie/. Actuele prijs en specificaties voor publicatie verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Aluminium Foil Scrim Reinforced",
+          "slug": "aluminium-foil-scrim-reinforced",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            18
+          ],
+          "short_description": "Jumborollen aluminiumfolie met glasvezeldraden.",
+          "description": "Jumborollen aluminiumfolie met glasvezeldraden. Bron: tpspack.nl/bouwtapes/, /folie/ of /rekfolie/. Actuele prijs en specificaties voor publicatie verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Aluminum Foil Reinforced",
+          "slug": "aluminum-foil-reinforced",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            18
+          ],
+          "short_description": "Jumborollen ruitversterkte aluminiumfolie met glasvezeldraden.",
+          "description": "Jumborollen ruitversterkte aluminiumfolie met glasvezeldraden. Bron: tpspack.nl/bouwtapes/, /folie/ of /rekfolie/. Actuele prijs en specificaties voor publicatie verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Fibre Glass Cloth Foil 430/m2",
+          "slug": "fibre-glass-cloth-foil-430-m2",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            18
+          ],
+          "short_description": "Kwalitatieve glasvliesfolie op jumborollen.",
+          "description": "Kwalitatieve glasvliesfolie op jumborollen. Bron: tpspack.nl/bouwtapes/, /folie/ of /rekfolie/. Actuele prijs en specificaties voor publicatie verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Premium Weatherproof Thermal Jacketing Film",
+          "slug": "weatherproof-thermal-jacketing-film",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            18
+          ],
+          "short_description": "Cladding-materiaal voor afwerking van isolatieprojecten.",
+          "description": "Cladding-materiaal voor afwerking van isolatieprojecten. Bron: tpspack.nl/bouwtapes/, /folie/ of /rekfolie/. Actuele prijs en specificaties voor publicatie verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Rekfolie PLUS 500 mm x 300 m x 20 my",
+          "slug": "rekfolie-plus-500-300-20my",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            19
+          ],
+          "short_description": "Transparante handrekfolie voor zware ladingen, verkrijgbaar in aantallen per doos.",
+          "description": "Transparante handrekfolie voor zware ladingen, verkrijgbaar in aantallen per doos. Bron: tpspack.nl/bouwtapes/, /folie/ of /rekfolie/. Actuele prijs en specificaties voor publicatie verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Rekfolie PLUS 500 mm x 300 m x 17 my",
+          "slug": "rekfolie-plus-500-300-17my",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            19
+          ],
+          "short_description": "Transparante handrekfolie met hoge rek voor stabiele palletladingen.",
+          "description": "Transparante handrekfolie met hoge rek voor stabiele palletladingen. Bron: tpspack.nl/bouwtapes/, /folie/ of /rekfolie/. Actuele prijs en specificaties voor publicatie verifiëren.",
+          "reviews_allowed": false
+        }
+      }
+    ]
+  }
+}
