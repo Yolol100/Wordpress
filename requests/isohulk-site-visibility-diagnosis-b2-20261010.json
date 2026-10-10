@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-site-visibility-diagnosis-b2-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_coming_soon"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_store_pages_only"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blog_public"
+        }
+      },
+      {
+        "action": "woocommerce.settings.inspect",
+        "payload": {
+          "group": "site-visibility",
+          "limit": 50
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 13
+        }
+      },
+      {
+        "action": "system.doctor",
+        "payload": {}
+      }
+    ]
+  }
+}
