@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-woo-content-audit-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.tax_class.list",
+        "payload": {}
+      },
+      {
+        "action": "woocommerce.tax_rate.list",
+        "payload": {
+          "per_page": 50
+        }
+      },
+      {
+        "action": "woocommerce.shipping_zone.list",
+        "payload": {
+          "per_page": 30
+        }
+      },
+      {
+        "action": "woocommerce.product.list",
+        "payload": {
+          "per_page": 50
+        }
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "page",
+          "per_page": 50
+        }
+      },
+      {
+        "action": "menu.get",
+        "payload": {
+          "id": 23
+        }
+      },
+      {
+        "action": "woocommerce.coupon.list",
+        "payload": {
+          "per_page": 3
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_shop_page_id"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_cart_page_id"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_checkout_page_id"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_myaccount_page_id"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_registration_generate_password"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_erasure_request_removes_order_data"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_erasure_request_removes_download_data"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_downloads_grant_access_after_payment"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_file_download_method"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_downloads_require_login"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_shipping_calculator_enable"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_shipping_destination"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_shipping_debug_mode"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_email_from_name"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_coming_soon"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_store_address"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_default_country"
+        }
+      }
+    ]
+  }
+}
