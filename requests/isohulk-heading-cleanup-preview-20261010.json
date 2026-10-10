@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-heading-cleanup-preview-20261010",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "post.update",
+        "payload": {
+          "id": 14,
+          "content": "<h2>Ons assortiment</h2><p>Bekijk professionele aluminiumtapes, bouwtapes, folie, rekfolie, omsnoeringsband, kartonnen hoekprofielen en spuitlijm. Je kunt ook contact opnemen voor afwijkende formaten of grotere afnames.</p>"
+        },
+        "expected_fingerprint": "040adab6273d2222d96b1f1c3898208e3b876f189e4f9fff675c9d90a3e0364f"
+      },
+      {
+        "action": "post.update",
+        "payload": {
+          "id": 15,
+          "content": "<h2>Productie op maat en private label</h2><p>Tape Solutions ondersteunt maatwerkproductie en converting van zelfklevende tapes en verpakkingsmateriaal. Informeer naar mogelijkheden voor eigen formaten, kleuren en private label.</p>"
+        },
+        "expected_fingerprint": "5f9e2593af6df112517df90c3ed8133485a114543ee892148950482422510996"
+      },
+      {
+        "action": "post.update",
+        "payload": {
+          "id": 16,
+          "content": "<h2>Over Tape Solutions</h2><p>Tape Solutions is specialist in zelfklevende tapes en verpakkingsmaterialen, actief in de industrie, food- en verpakkingsbranche, doe-het-zelf en bouwsector. We hechten waarde aan persoonlijk contact en langdurige samenwerking.</p>"
+        },
+        "expected_fingerprint": "5c25314c4eb88fa69bbd9b02034f091a261c7f6ea7ab116802b732220fec2c67"
+      },
+      {
+        "action": "post.update",
+        "payload": {
+          "id": 17,
+          "content": "<h2>Contact met Tape Solutions</h2><p>Vraag naar productadvies, maatwerk of een offerte.</p><p><strong>Tape Solutions</strong><br>Hoofdweg 310<br>2908 LC Capelle aan den IJssel</p><p>KvK: 65070186<br>Btw: NL002196471B46</p>"
+        },
+        "expected_fingerprint": "2b64e9126463b67637881b8d846fb0b0eb6e613c23c636ee29ce89db613ae058"
+      }
+    ]
+  }
+}
