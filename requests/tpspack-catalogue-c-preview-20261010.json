@@ -1,0 +1,156 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "tpspack-catalogue-c-preview-20261010",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Rekfolie PLUS 500 mm x 300 m x 23 my",
+          "slug": "rekfolie-plus-500-300-23my",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            19
+          ],
+          "short_description": "Transparante handrekfolie van 23 micron voor palletstabilisatie.",
+          "description": "Transparante handrekfolie van 23 micron voor palletstabilisatie. Bron: tpspack.nl/rekfolie/, /omsnoeringsband/ of /spuitlijm/. Specificaties en prijs nog te verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Machinewikkelfolie 500 mm x 1500 m x 23 my 350%",
+          "slug": "machinewikkelfolie-350-23my",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            19
+          ],
+          "short_description": "Transparante machinewikkelfolie met 350% rek, 23 micron.",
+          "description": "Transparante machinewikkelfolie met 350% rek, 23 micron. Bron: tpspack.nl/rekfolie/, /omsnoeringsband/ of /spuitlijm/. Specificaties en prijs nog te verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Luchtkussenfolie (Noppenfolie)",
+          "slug": "luchtkussenfolie-noppenfolie",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            19
+          ],
+          "short_description": "Drielaagse schokabsorberende noppenfolie van 100 micron voor bescherming.",
+          "description": "Drielaagse schokabsorberende noppenfolie van 100 micron voor bescherming. Bron: tpspack.nl/rekfolie/, /omsnoeringsband/ of /spuitlijm/. Specificaties en prijs nog te verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Topvellen voor pallets",
+          "slug": "topvellen-pallets",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            19
+          ],
+          "short_description": "Topvellen voor bescherming van palletladingen, leverbaar in verschillende kleuren en dikten.",
+          "description": "Topvellen voor bescherming van palletladingen, leverbaar in verschillende kleuren en dikten. Bron: tpspack.nl/rekfolie/, /omsnoeringsband/ of /spuitlijm/. Specificaties en prijs nog te verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "PP Omsnoeringsband",
+          "slug": "pp-omsnoeringsband",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            20
+          ],
+          "short_description": "PP-band voor omsnoeren en bundelen, vermeld in het TPS Pack-assortiment.",
+          "description": "PP-band voor omsnoeren en bundelen, vermeld in het TPS Pack-assortiment. Bron: tpspack.nl/rekfolie/, /omsnoeringsband/ of /spuitlijm/. Specificaties en prijs nog te verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Papieren Omsnoeringsband",
+          "slug": "papieren-omsnoeringsband",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            20
+          ],
+          "short_description": "Papieren omsnoeringsband uit het TPS Pack-assortiment.",
+          "description": "Papieren omsnoeringsband uit het TPS Pack-assortiment. Bron: tpspack.nl/rekfolie/, /omsnoeringsband/ of /spuitlijm/. Specificaties en prijs nog te verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Polyester Omsnoeringsband",
+          "slug": "polyester-omsnoeringsband",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            20
+          ],
+          "short_description": "Polyesterband uit het TPS Pack-assortiment.",
+          "description": "Polyesterband uit het TPS Pack-assortiment. Bron: tpspack.nl/rekfolie/, /omsnoeringsband/ of /spuitlijm/. Specificaties en prijs nog te verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "PET Omsnoeringsband",
+          "slug": "pet-omsnoeringsband",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            20
+          ],
+          "short_description": "PET-band voor omsnoering uit het TPS Pack-assortiment.",
+          "description": "PET-band voor omsnoering uit het TPS Pack-assortiment. Bron: tpspack.nl/rekfolie/, /omsnoeringsband/ of /spuitlijm/. Specificaties en prijs nog te verifiëren.",
+          "reviews_allowed": false
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Spray Adhesive 500 ml",
+          "slug": "spray-adhesive-500ml",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "category_ids": [
+            22
+          ],
+          "short_description": "Spuitlijm van 500 ml met sterke tack en snelle permanente hechting.",
+          "description": "Spuitlijm van 500 ml met sterke tack en snelle permanente hechting. Bron: tpspack.nl/rekfolie/, /omsnoeringsband/ of /spuitlijm/. Specificaties en prijs nog te verifiëren.",
+          "reviews_allowed": false
+        }
+      }
+    ]
+  }
+}
