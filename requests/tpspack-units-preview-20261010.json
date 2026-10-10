@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "tpspack-units-preview-20261010",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_weight_unit",
+          "value": "kg"
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_dimension_unit",
+          "value": "cm"
+        }
+      }
+    ]
+  }
+}
