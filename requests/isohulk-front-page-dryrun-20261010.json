@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-front-page-dryrun-20261010",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "page_on_front",
+          "value": 13
+        },
+        "expected_fingerprint": "98089e6d36f78e9766c9ea34d5acb3611f3a92cd81c5eb102095d924ffc7d08b"
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "show_on_front",
+          "value": "page"
+        },
+        "expected_fingerprint": "5c9006ecdf5452cbac1c613b9859f49f6e268b83f7e37a15f617a2ceb0897b55"
+      }
+    ]
+  }
+}
