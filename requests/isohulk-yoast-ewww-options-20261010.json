@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-yoast-ewww-options-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 13
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 14
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 15
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 16
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 17
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_lazy_load"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_ll_autoscale"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_ll_abovethefold"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_add_missing_dims"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_maxmediawidth"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_maxmediaheight"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_metadata_remove"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_webp"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_backup_files"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_webp_conversion_method"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blog_public"
+        }
+      }
+    ]
+  }
+}
