@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-hostinger-header-footer-restore-preview-20261010",
+  "action": "option.update",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "name": "hostinger_ai_template_parts_ready",
+    "value": 1
+  }
+}
