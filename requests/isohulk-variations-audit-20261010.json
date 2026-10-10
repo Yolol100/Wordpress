@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-variations-audit-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 19
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 20
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 21
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 22
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 23
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 24
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 25
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 19,
+          "per_page": 100
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 20,
+          "per_page": 100
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 21,
+          "per_page": 100
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 22,
+          "per_page": 100
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 23,
+          "per_page": 100
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 24,
+          "per_page": 100
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 25,
+          "per_page": 100
+        }
+      }
+    ]
+  }
+}
