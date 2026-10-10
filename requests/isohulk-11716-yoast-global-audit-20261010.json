@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-11716-yoast-global-audit-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "yoast.site_representation.inspect",
+        "payload": {}
+      },
+      {
+        "action": "yoast.templates.inspect",
+        "payload": {}
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 13
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 14
+        }
+      }
+    ]
+  }
+}
