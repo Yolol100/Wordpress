@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-menu-level1-preview-20261010",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Home",
+          "type": "post_type",
+          "object": "page",
+          "object_id": 13,
+          "status": "publish",
+          "position": 1
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Producten",
+          "type": "post_type",
+          "object": "page",
+          "object_id": 14,
+          "status": "publish",
+          "position": 2
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Maatwerk",
+          "type": "post_type",
+          "object": "page",
+          "object_id": 15,
+          "status": "publish",
+          "position": 3
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Webshop",
+          "type": "post_type",
+          "object": "page",
+          "object_id": 8,
+          "status": "publish",
+          "position": 4
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Over ons",
+          "type": "post_type",
+          "object": "page",
+          "object_id": 16,
+          "status": "publish",
+          "position": 5
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Contact",
+          "type": "post_type",
+          "object": "page",
+          "object_id": 17,
+          "status": "publish",
+          "position": 6
+        }
+      }
+    ]
+  }
+}
