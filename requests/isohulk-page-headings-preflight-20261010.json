@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-page-headings-preflight-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 14
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 15
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 16
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 17
+        }
+      }
+    ]
+  }
+}
