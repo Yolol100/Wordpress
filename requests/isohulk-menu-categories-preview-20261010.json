@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-menu-categories-preview-20261010",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Aluminiumtapes",
+          "type": "taxonomy",
+          "object": "product_cat",
+          "object_id": 16,
+          "status": "publish",
+          "parent": 97,
+          "position": 7
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Bouwtapes",
+          "type": "taxonomy",
+          "object": "product_cat",
+          "object_id": 17,
+          "status": "publish",
+          "parent": 97,
+          "position": 8
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Folie & Jacketing",
+          "type": "taxonomy",
+          "object": "product_cat",
+          "object_id": 18,
+          "status": "publish",
+          "parent": 97,
+          "position": 9
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Rekfolie & Wikkelfolie",
+          "type": "taxonomy",
+          "object": "product_cat",
+          "object_id": 19,
+          "status": "publish",
+          "parent": 97,
+          "position": 10
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Omsnoeringsband",
+          "type": "taxonomy",
+          "object": "product_cat",
+          "object_id": 20,
+          "status": "publish",
+          "parent": 97,
+          "position": 11
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Kartonnen hoekprofielen",
+          "type": "taxonomy",
+          "object": "product_cat",
+          "object_id": 21,
+          "status": "publish",
+          "parent": 97,
+          "position": 12
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Spuitlijm",
+          "type": "taxonomy",
+          "object": "product_cat",
+          "object_id": 22,
+          "status": "publish",
+          "parent": 97,
+          "position": 13
+        }
+      }
+    ]
+  }
+}
