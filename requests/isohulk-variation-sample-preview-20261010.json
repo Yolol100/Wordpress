@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-variation-sample-preview-20261010",
+  "action": "woocommerce.variation.create",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "product_id": 19,
+    "attributes": {
+      "Formaat en verpakking": "50 mm x 45 m (24 rollen)"
+    },
+    "stock_status": "outofstock",
+    "description": "Formaat en verpakking volgens TPS Pack; actuele verkoopprijs en voorraad nog te bevestigen."
+  }
+}
