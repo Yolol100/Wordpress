@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-11716-cache-refresh-apply-20261010",
+  "action": "maintenance.cache_flush",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "layer": "wp_rocket"
+  }
+}
