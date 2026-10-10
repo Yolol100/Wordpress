@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-11716-postchange-and-nav-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "gtranslate.settings.inspect",
+        "payload": {}
+      },
+      {
+        "action": "woocommerce.settings.inspect",
+        "payload": {
+          "group": "general",
+          "limit": 50
+        }
+      },
+      {
+        "action": "woocommerce.settings.inspect",
+        "payload": {
+          "group": "tax",
+          "limit": 50
+        }
+      },
+      {
+        "action": "woocommerce.tax_rate.list",
+        "payload": {
+          "per_page": 30
+        }
+      },
+      {
+        "action": "woocommerce.shipping_zone.list",
+        "payload": {}
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 4
+        }
+      },
+      {
+        "action": "menu.get",
+        "payload": {
+          "id": 23
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/hostinger-ai-theme/parts/header.html"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/hostinger-ai-theme/parts/footer.html"
+        }
+      }
+    ]
+  }
+}
