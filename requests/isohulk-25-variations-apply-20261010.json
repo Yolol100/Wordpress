@@ -1,0 +1,287 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-25-variations-apply-20261010",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 19,
+          "attributes": {
+            "Formaat en verpakking": "50 mm x 45 m (24 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 19,
+          "attributes": {
+            "Formaat en verpakking": "50 mm x 50 m (24 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 19,
+          "attributes": {
+            "Formaat en verpakking": "75 mm x 50 m (16 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 19,
+          "attributes": {
+            "Formaat en verpakking": "100 mm x 50 m (16 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 20,
+          "attributes": {
+            "Formaat en verpakking": "50 x 50 m (24 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 20,
+          "attributes": {
+            "Formaat en verpakking": "75 x 50 m (16 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 20,
+          "attributes": {
+            "Formaat en verpakking": "100 x 50 m (12 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 21,
+          "attributes": {
+            "Formaat en verpakking": "50 x 50 m"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 21,
+          "attributes": {
+            "Formaat en verpakking": "75 x 50 m"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 21,
+          "attributes": {
+            "Formaat en verpakking": "100 x 50 m"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 22,
+          "attributes": {
+            "Formaat en verpakking": "50 x 15 m (24 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 22,
+          "attributes": {
+            "Formaat en verpakking": "75 x 15 m (16 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 22,
+          "attributes": {
+            "Formaat en verpakking": "100 x 15 m (12 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 23,
+          "attributes": {
+            "Formaat en verpakking": "50 x 100 m (24 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 23,
+          "attributes": {
+            "Formaat en verpakking": "75 x 100 m (16 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 23,
+          "attributes": {
+            "Formaat en verpakking": "100 x 100 m (12 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 24,
+          "attributes": {
+            "Formaat en verpakking": "50 x 50 m"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 24,
+          "attributes": {
+            "Formaat en verpakking": "75 x 50 m"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 24,
+          "attributes": {
+            "Formaat en verpakking": "100 x 50 m"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 25,
+          "attributes": {
+            "Formaat en verpakking": "19 x 50 m (64 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 25,
+          "attributes": {
+            "Formaat en verpakking": "25 x 50 m (48 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 25,
+          "attributes": {
+            "Formaat en verpakking": "38 x 50 m (36 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 25,
+          "attributes": {
+            "Formaat en verpakking": "50 x 50 m (24 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 25,
+          "attributes": {
+            "Formaat en verpakking": "75 x 50 m (16 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      },
+      {
+        "action": "woocommerce.variation.create",
+        "payload": {
+          "product_id": 25,
+          "attributes": {
+            "Formaat en verpakking": "100 x 50 m (12 rollen)"
+          },
+          "stock_status": "outofstock",
+          "description": "Verpakking volgens TPS Pack. Actuele prijs en voorraad nog te bevestigen."
+        }
+      }
+    ]
+  }
+}
