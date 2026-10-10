@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "tpspack-units-apply-20261010",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_weight_unit",
+          "value": "kg"
+        },
+        "expected_fingerprint": "206e85dfe8c42db9c3633207130427b248d0c5c8c7ed6cc529070d968f445376"
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_dimension_unit",
+          "value": "cm"
+        },
+        "expected_fingerprint": "ab1248c823ce0850bd9b3d7267aca98325a29e2d7650c515bbd92d6ce5336e1e"
+      }
+    ]
+  }
+}
