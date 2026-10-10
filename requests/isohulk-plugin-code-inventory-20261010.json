@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-plugin-code-inventory-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "filesystem.list",
+        "payload": {
+          "path": "wp-content/plugins/wp-asset-clean-up"
+        }
+      },
+      {
+        "action": "filesystem.list",
+        "payload": {
+          "path": "wp-content/plugins/ewww-image-optimizer"
+        }
+      },
+      {
+        "action": "filesystem.list",
+        "payload": {
+          "path": "wp-content/plugins/gtranslate"
+        }
+      }
+    ]
+  }
+}
