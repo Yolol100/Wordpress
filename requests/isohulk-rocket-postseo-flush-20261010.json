@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-rocket-postseo-flush-20261010",
+  "action": "maintenance.cache_flush",
+  "dry_run": false,
+  "confirm": true,
+  "expected_fingerprint": "3af01dfa0b1a6d432605e3b5851408d10a7bf67692ba5ea26f6809b0e8837282",
+  "payload": {
+    "layer": "wp_rocket"
+  }
+}
