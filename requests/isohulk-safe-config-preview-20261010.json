@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-safe-config-preview-20261010",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "plugin.settings.update",
+        "payload": {
+          "plugin": "wp_rocket",
+          "fields": {
+            "remove_unused_css": 1,
+            "image_dimensions": 1
+          }
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_store_address",
+          "value": "Hoofdweg 310"
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_store_city",
+          "value": "Capelle aan den IJssel"
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_store_postcode",
+          "value": "2908 LC"
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_default_country",
+          "value": "NL"
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_currency",
+          "value": "EUR"
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "blogname",
+          "value": "Tape Solutions"
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "blogdescription",
+          "value": "Zelfklevende tapes en verpakkingsmaterialen"
+        }
+      },
+      {
+        "action": "yoast.site_representation.update",
+        "payload": {
+          "fields": {
+            "company_name": "Tape Solutions",
+            "org_description": "Specialist in zelfklevende tapes en verpakkingsmaterialen voor industrie, food, verpakkingen en bouw."
+          }
+        }
+      },
+      {
+        "action": "auto_image_attributes.update",
+        "payload": {
+          "fields": {
+            "image_caption": 0,
+            "image_description": 0,
+            "image_title_to_html": 0,
+            "bu_image_title": 0,
+            "bu_image_caption": 0,
+            "bu_image_description": 0,
+            "bu_image_alttext": 0
+          }
+        }
+      },
+      {
+        "action": "plugin.settings.update",
+        "payload": {
+          "plugin": "joinchat",
+          "fields": {
+            "button_tip": "Vraag ons om advies",
+            "message_text": "Hallo! Waarmee kunnen we je helpen?",
+            "message_send": "Hallo Tape Solutions, ik heb een vraag over jullie producten.",
+            "tracking": "no"
+          }
+        }
+      }
+    ]
+  }
+}
