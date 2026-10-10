@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "tpspack-catalog-6-preview-20261010",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "name": "ISOHULK Aluminiumtape AW IMO",
+          "slug": "isohulk-aluminiumtape-aw-imo",
+          "type": "variable",
+          "status": "draft",
+          "catalog_visibility": "visible",
+          "description": "Premium aluminiumtape met IMO-stuurwielcertificaat, sterke kleefkracht en koudweerbestendige belijming. Maten en verpakkingsaantallen afkomstig van tpspack.nl/webshop/. Actuele prijzen en bestelbaarheid nog te controleren.",
+          "short_description": "Premium aluminiumtape met IMO-stuurwielcertificaat, sterke kleefkracht en koudweerbestendige belijming.",
+          "category_ids": [
+            16
+          ],
+          "stock_status": "outofstock",
+          "reviews_allowed": false,
+          "attributes": [
+            {
+              "name": "Formaat en verpakking",
+              "options": [
+                "50 x 50 m (24 rollen)",
+                "75 x 50 m (16 rollen)",
+                "100 x 50 m (12 rollen)"
+              ],
+              "visible": true,
+              "variation": true
+            }
+          ]
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "name": "ISOHULK Aluminium Tracing Tape IMO",
+          "slug": "isohulk-aluminium-tracing-tape-imo",
+          "type": "variable",
+          "status": "draft",
+          "catalog_visibility": "visible",
+          "description": "Glasvezelversterkte aluminiumtape met IMO-stuurwielcertificaat en krachtige kleeflaag. Maten en verpakkingsaantallen afkomstig van tpspack.nl/webshop/. Actuele prijzen en bestelbaarheid nog te controleren.",
+          "short_description": "Glasvezelversterkte aluminiumtape met IMO-stuurwielcertificaat en krachtige kleeflaag.",
+          "category_ids": [
+            16
+          ],
+          "stock_status": "outofstock",
+          "reviews_allowed": false,
+          "attributes": [
+            {
+              "name": "Formaat en verpakking",
+              "options": [
+                "50 x 50 m",
+                "75 x 50 m",
+                "100 x 50 m"
+              ],
+              "visible": true,
+              "variation": true
+            }
+          ]
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "name": "Aluminium Butyl Reparatietape",
+          "slug": "aluminium-butyl-reparatietape",
+          "type": "variable",
+          "status": "draft",
+          "catalog_visibility": "visible",
+          "description": "Waterbestendige butyltape voor afdichten van naden, aansluitingen en voegen. Maten en verpakkingsaantallen afkomstig van tpspack.nl/webshop/. Actuele prijzen en bestelbaarheid nog te controleren.",
+          "short_description": "Waterbestendige butyltape voor afdichten van naden, aansluitingen en voegen.",
+          "category_ids": [
+            16
+          ],
+          "stock_status": "outofstock",
+          "reviews_allowed": false,
+          "attributes": [
+            {
+              "name": "Formaat en verpakking",
+              "options": [
+                "50 x 15 m (24 rollen)",
+                "75 x 15 m (16 rollen)",
+                "100 x 15 m (12 rollen)"
+              ],
+              "visible": true,
+              "variation": true
+            }
+          ]
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "name": "PP-Aluminiumtape Opgedampt",
+          "slug": "pp-aluminiumtape-opgedampt",
+          "type": "variable",
+          "status": "draft",
+          "catalog_visibility": "visible",
+          "description": "PP-aluminiumtape voor laminaatfolie en afdichten van isolatiematerialen. Maten en verpakkingsaantallen afkomstig van tpspack.nl/webshop/. Actuele prijzen en bestelbaarheid nog te controleren.",
+          "short_description": "PP-aluminiumtape voor laminaatfolie en afdichten van isolatiematerialen.",
+          "category_ids": [
+            16
+          ],
+          "stock_status": "outofstock",
+          "reviews_allowed": false,
+          "attributes": [
+            {
+              "name": "Formaat en verpakking",
+              "options": [
+                "50 x 100 m (24 rollen)",
+                "75 x 100 m (16 rollen)",
+                "100 x 100 m (12 rollen)"
+              ],
+              "visible": true,
+              "variation": true
+            }
+          ]
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "name": "Aluminiumtape Zwart AW",
+          "slug": "aluminiumtape-zwart-aw",
+          "type": "variable",
+          "status": "draft",
+          "catalog_visibility": "visible",
+          "description": "Zwarte aluminiumtape met sterke kleefkracht voor warme en koude omstandigheden. Maten en verpakkingsaantallen afkomstig van tpspack.nl/webshop/. Actuele prijzen en bestelbaarheid nog te controleren.",
+          "short_description": "Zwarte aluminiumtape met sterke kleefkracht voor warme en koude omstandigheden.",
+          "category_ids": [
+            16
+          ],
+          "stock_status": "outofstock",
+          "reviews_allowed": false,
+          "attributes": [
+            {
+              "name": "Formaat en verpakking",
+              "options": [
+                "50 x 50 m",
+                "75 x 50 m",
+                "100 x 50 m"
+              ],
+              "visible": true,
+              "variation": true
+            }
+          ]
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "name": "Filament Tape Lengteversterkt",
+          "slug": "filament-tape-lengteversterkt",
+          "type": "variable",
+          "status": "draft",
+          "catalog_visibility": "visible",
+          "description": "Sterke lengteversterkte filamenttape met glasvezeldraden voor verpakkingen. Maten en verpakkingsaantallen afkomstig van tpspack.nl/webshop/. Actuele prijzen en bestelbaarheid nog te controleren.",
+          "short_description": "Sterke lengteversterkte filamenttape met glasvezeldraden voor verpakkingen.",
+          "category_ids": [
+            17
+          ],
+          "stock_status": "outofstock",
+          "reviews_allowed": false,
+          "attributes": [
+            {
+              "name": "Formaat en verpakking",
+              "options": [
+                "19 x 50 m (64 rollen)",
+                "25 x 50 m (48 rollen)",
+                "38 x 50 m (36 rollen)",
+                "50 x 50 m (24 rollen)",
+                "75 x 50 m (16 rollen)",
+                "100 x 50 m (12 rollen)"
+              ],
+              "visible": true,
+              "variation": true
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
