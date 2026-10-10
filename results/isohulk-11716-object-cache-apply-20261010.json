@@ -1,0 +1,1 @@
+{"version":1,"ok":true,"request_id":"isohulk-11716-object-cache-apply-20261010","action":"cache.flush","dry_run":false,"completed_at_gmt":"2026-10-10T16:38:57+00:00","data":{"flushed":true,"rollback_supported":false},"meta":{"request_fingerprint":"38e325c87a69d822f2b884c39f874c3af6e1ab398c94329a19f453464ddb502a"}}
