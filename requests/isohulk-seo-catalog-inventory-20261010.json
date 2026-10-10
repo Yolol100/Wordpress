@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-seo-catalog-inventory-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpseo_titles"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpseo"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wpseo_social"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "page_on_front"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "show_on_front"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "page_for_posts"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "permalink_structure"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_tax_based_on"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_tax_display_shop"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_enable_reviews"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_manage_stock"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_weight_unit"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_dimension_unit"
+        }
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "page",
+          "per_page": 100
+        }
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "post",
+          "per_page": 50
+        }
+      },
+      {
+        "action": "term.list",
+        "payload": {
+          "taxonomy": "product_cat",
+          "per_page": 100
+        }
+      },
+      {
+        "action": "term.list",
+        "payload": {
+          "taxonomy": "product_brand",
+          "per_page": 50
+        }
+      },
+      {
+        "action": "menu.list",
+        "payload": {}
+      },
+      {
+        "action": "woocommerce.product.list",
+        "payload": {
+          "per_page": 50
+        }
+      },
+      {
+        "action": "system.doctor",
+        "payload": {}
+      }
+    ]
+  }
+}
