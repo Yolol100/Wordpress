@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "tpspack-catalogue-a-preview-20261010",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "ISOHULK Aluminium FSK Tape IMO",
+          "slug": "isohulk-aluminium-fsk-tape-imo",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "reviews_allowed": false,
+          "category_ids": [
+            16
+          ],
+          "short_description": "Premium glasvezelversterkte aluminiumtape met IMO MED-certificering en extra koudweerbelijming.",
+          "description": "Premium glasvezelversterkte aluminiumtape met IMO MED-certificering en extra koudweerbelijming. Bron: tpspack.nl/aluminium-tapes/ of /bouwtapes/. Specificaties en prijs voor publicatie controleren."
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Aluminiumtape Hittebestendig 300 graden",
+          "slug": "aluminiumtape-hittebestendig-300-graden",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "reviews_allowed": false,
+          "category_ids": [
+            16
+          ],
+          "short_description": "Dampdichte aluminiumtape met hittebestendige kleeflaag voor temperaturen tot 300 graden.",
+          "description": "Dampdichte aluminiumtape met hittebestendige kleeflaag voor temperaturen tot 300 graden. Bron: tpspack.nl/aluminium-tapes/ of /bouwtapes/. Specificaties en prijs voor publicatie controleren."
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Aluminiumtape Reinforced",
+          "slug": "aluminiumtape-reinforced",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "reviews_allowed": false,
+          "category_ids": [
+            16
+          ],
+          "short_description": "Aluminiumtape met lengte- en kruisversterking voor isolatietoepassingen.",
+          "description": "Aluminiumtape met lengte- en kruisversterking voor isolatietoepassingen. Bron: tpspack.nl/aluminium-tapes/ of /bouwtapes/. Specificaties en prijs voor publicatie controleren."
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Elastomeer Arma Foam Tape",
+          "slug": "elastomeer-arma-foam-tape",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "reviews_allowed": false,
+          "category_ids": [
+            17
+          ],
+          "short_description": "Zelfklevende isolatietape voor kanaalisolatie, formaat 3 x 50 mm x 15 meter.",
+          "description": "Zelfklevende isolatietape voor kanaalisolatie, formaat 3 x 50 mm x 15 meter. Bron: tpspack.nl/aluminium-tapes/ of /bouwtapes/. Specificaties en prijs voor publicatie controleren."
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Glass Cloth Tape Marine GM3",
+          "slug": "glass-cloth-tape-marine-gm3",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "reviews_allowed": false,
+          "category_ids": [
+            17
+          ],
+          "short_description": "Glasvlies tape met marine IMO-certificaat, gebruikt voor scheepsisolatie.",
+          "description": "Glasvlies tape met marine IMO-certificaat, gebruikt voor scheepsisolatie. Bron: tpspack.nl/aluminium-tapes/ of /bouwtapes/. Specificaties en prijs voor publicatie controleren."
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Dubbelzijdig Foam Tape",
+          "slug": "dubbelzijdig-foam-tape",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "reviews_allowed": false,
+          "category_ids": [
+            17
+          ],
+          "short_description": "Dubbelzijdige foamtape met sterke kleefkracht en waterbestendigheid.",
+          "description": "Dubbelzijdige foamtape met sterke kleefkracht en waterbestendigheid. Bron: tpspack.nl/aluminium-tapes/ of /bouwtapes/. Specificaties en prijs voor publicatie controleren."
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Blue Masking Marine Tape 14 Days UV",
+          "slug": "blue-masking-marine-tape-14-days-uv",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "reviews_allowed": false,
+          "category_ids": [
+            17
+          ],
+          "short_description": "Blauwe schilderstape, oplosmiddel- en waterbestendig, 14 dagen UV-bestendig.",
+          "description": "Blauwe schilderstape, oplosmiddel- en waterbestendig, 14 dagen UV-bestendig. Bron: tpspack.nl/aluminium-tapes/ of /bouwtapes/. Specificaties en prijs voor publicatie controleren."
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Dubbelzijdige Tape",
+          "slug": "dubbelzijdige-tape",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "reviews_allowed": false,
+          "category_ids": [
+            17
+          ],
+          "short_description": "Sterk klevende dubbelzijdige tape voor permanent bevestigen van materialen.",
+          "description": "Sterk klevende dubbelzijdige tape voor permanent bevestigen van materialen. Bron: tpspack.nl/aluminium-tapes/ of /bouwtapes/. Specificaties en prijs voor publicatie controleren."
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Duct Tape Waterproof",
+          "slug": "duct-tape-waterproof",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "reviews_allowed": false,
+          "category_ids": [
+            17
+          ],
+          "short_description": "Waterbestendige ducttape met sterke kleefkracht, in verschillende kleuren en maten.",
+          "description": "Waterbestendige ducttape met sterke kleefkracht, in verschillende kleuren en maten. Bron: tpspack.nl/aluminium-tapes/ of /bouwtapes/. Specificaties en prijs voor publicatie controleren."
+        }
+      },
+      {
+        "action": "woocommerce.product.create",
+        "payload": {
+          "type": "simple",
+          "name": "Washi Masking Tape Gold + Foil",
+          "slug": "washi-masking-tape-gold-foil",
+          "status": "draft",
+          "stock_status": "outofstock",
+          "reviews_allowed": false,
+          "category_ids": [
+            17
+          ],
+          "short_description": "Washi masking tape Gold + Foil, zoals vermeld in het TPS Pack-bouwtape-assortiment.",
+          "description": "Washi masking tape Gold + Foil, zoals vermeld in het TPS Pack-bouwtape-assortiment. Bron: tpspack.nl/aluminium-tapes/ of /bouwtapes/. Specificaties en prijs voor publicatie controleren."
+        }
+      }
+    ]
+  }
+}
