@@ -1,0 +1,1 @@
+{"version":1,"ok":true,"request_id":"tpspack-main-menu-apply-20261010","action":"menu.create","dry_run":false,"completed_at_gmt":"2026-10-10T13:08:03+00:00","data":{"menu_id":23,"rollback_request_id":"tpspack-main-menu-apply-20261010"},"meta":{"request_fingerprint":"7dec4bf1cd32e88ea743c929e451ac1d5bbc33b59f369f8b32b53f0a185478b9"}}
