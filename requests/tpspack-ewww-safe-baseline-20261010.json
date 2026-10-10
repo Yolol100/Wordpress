@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "tpspack-ewww-safe-baseline-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_lazy_load"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_ll_autoscale"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_ll_abovethefold"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_add_missing_dims"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_maxmediawidth"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_maxmediaheight"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_metadata_remove"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_backup_files"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_preserve_originals"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_webp_conversion_method"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_webp"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_image_detective"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_jpg_level"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_png_level"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_gif_level"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_pdf_level"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_webp_level"
+        }
+      }
+    ]
+  }
+}
