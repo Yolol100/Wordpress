@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-yoast-canonical-preview-20261010",
+  "action": "yoast.update",
+  "dry_run": true,
+  "confirm": false,
+  "expected_fingerprint": "e517c8f51fdf0cbc1f8468cb1493ef7530d3ba5ea54dcce1006879eab349f6c0",
+  "payload": {
+    "id": 13,
+    "fields": {
+      "canonical": "https://isohulk.conceptwebactueel-6.nl/"
+    }
+  }
+}
