@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-11716-object-cache-apply-20261010",
+  "action": "cache.flush",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {}
+}
