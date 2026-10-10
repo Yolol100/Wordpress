@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-final-check-20261010",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 19,
+          "per_page": 50
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 20,
+          "per_page": 50
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 21,
+          "per_page": 50
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 22,
+          "per_page": 50
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 23,
+          "per_page": 50
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 24,
+          "per_page": 50
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 25,
+          "per_page": 50
+        }
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "wp_rocket"
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 13
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 14
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 15
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 16
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 17
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 18
+        }
+      },
+      {
+        "action": "menu.get",
+        "payload": {
+          "id": 23
+        }
+      }
+    ]
+  }
+}
