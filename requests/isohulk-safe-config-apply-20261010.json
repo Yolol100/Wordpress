@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-safe-config-apply-20261010",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "plugin.settings.update",
+        "payload": {
+          "plugin": "wp_rocket",
+          "fields": {
+            "remove_unused_css": 1,
+            "image_dimensions": 1
+          }
+        },
+        "expected_fingerprint": "b1a92fd50e2be49a5611de7cf61bcbb1a65d8675b015929849e591ee9b7cc7a5"
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_store_address",
+          "value": "Hoofdweg 310"
+        },
+        "expected_fingerprint": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_store_city",
+          "value": "Capelle aan den IJssel"
+        },
+        "expected_fingerprint": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_store_postcode",
+          "value": "2908 LC"
+        },
+        "expected_fingerprint": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_default_country",
+          "value": "NL"
+        },
+        "expected_fingerprint": "f41a8d72b0f646bfaf55bb8821edfdbc0ea45f6fb09789f3c93632d31141344a"
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_currency",
+          "value": "EUR"
+        },
+        "expected_fingerprint": "82bb059ec10744f31e0406b8ef7a7a0f3c30c9b18435120fa859b2c0b9627888"
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "blogname",
+          "value": "Tape Solutions"
+        },
+        "expected_fingerprint": "38c193297cf5bb36b30607c887cca2c439f143d72fa98d34c4348306b12c702e"
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "blogdescription",
+          "value": "Zelfklevende tapes en verpakkingsmaterialen"
+        },
+        "expected_fingerprint": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+      },
+      {
+        "action": "yoast.site_representation.update",
+        "payload": {
+          "fields": {
+            "company_name": "Tape Solutions",
+            "org_description": "Specialist in zelfklevende tapes en verpakkingsmaterialen voor industrie, food, verpakkingen en bouw."
+          }
+        },
+        "expected_fingerprint": "4e538ec2dc1113bc19b8af06782af5693d8512a4f02ddf61e0e6a80f548c49a1"
+      },
+      {
+        "action": "auto_image_attributes.update",
+        "payload": {
+          "fields": {
+            "image_caption": 0,
+            "image_description": 0,
+            "image_title_to_html": 0,
+            "bu_image_title": 0,
+            "bu_image_caption": 0,
+            "bu_image_description": 0,
+            "bu_image_alttext": 0
+          }
+        },
+        "expected_fingerprint": "b643fa8fa1c0e75f5154e3e230f59674127ab2b32801af179c9790353649b3e9"
+      },
+      {
+        "action": "plugin.settings.update",
+        "payload": {
+          "plugin": "joinchat",
+          "fields": {
+            "button_tip": "Vraag ons om advies",
+            "message_text": "Hallo! Waarmee kunnen we je helpen?",
+            "message_send": "Hallo Tape Solutions, ik heb een vraag over jullie producten.",
+            "tracking": "no"
+          }
+        },
+        "expected_fingerprint": "9322235c553eee632db4f7520a9207e295ac1bf78247711907bc4ed1b3149076"
+      }
+    ]
+  }
+}
