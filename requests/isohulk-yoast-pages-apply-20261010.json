@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-yoast-pages-apply-20261010",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 13,
+          "fields": {
+            "title": "Tapes & verpakkingsmaterialen | Tape Solutions",
+            "description": "Professionele aluminiumtapes, bouwtapes, folie en verpakkingsmaterialen. Ontdek het assortiment van Tape Solutions en vraag advies op maat.",
+            "focus_keyphrase": "tapes en verpakkingsmaterialen"
+          }
+        }
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 14,
+          "fields": {
+            "title": "Producten: tapes, folie & omsnoeringsband | Tape Solutions",
+            "description": "Bekijk aluminiumtapes, bouwtapes, rekfolie, omsnoeringsband, spuitlijm en meer. Vind de juiste verpakkingsmaterialen bij Tape Solutions.",
+            "focus_keyphrase": "tapes en verpakkingsmaterialen kopen"
+          }
+        }
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 15,
+          "fields": {
+            "title": "Maatwerk tapes & private label | Tape Solutions",
+            "description": "Zoek je tapes of verpakkingsmaterialen op maat? Tape Solutions helpt met converting, aangepaste formaten en private-labeloplossingen.",
+            "focus_keyphrase": "tapes op maat"
+          }
+        }
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 16,
+          "fields": {
+            "title": "Over ons: specialist in tapes | Tape Solutions",
+            "description": "Leer Tape Solutions kennen: specialist in zelfklevende tapes en verpakkingsmaterialen voor industrie, verpakking, food en bouw.",
+            "focus_keyphrase": "Tape Solutions"
+          }
+        }
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 17,
+          "fields": {
+            "title": "Contact & productadvies | Tape Solutions",
+            "description": "Vragen over aluminiumtape, folie, omsnoeringsband of maatwerk? Neem contact op met Tape Solutions in Capelle aan den IJssel.",
+            "focus_keyphrase": "contact Tape Solutions"
+          }
+        }
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 18,
+          "fields": {
+            "title": "Levering en betaling | Tape Solutions",
+            "description": "Lees hoe je informatie krijgt over levering, verzendkosten en betaalmogelijkheden bij Tape Solutions. Vraag naar de voorwaarden voor jouw bestelling.",
+            "focus_keyphrase": "levering en betaling Tape Solutions"
+          }
+        }
+      }
+    ]
+  }
+}
