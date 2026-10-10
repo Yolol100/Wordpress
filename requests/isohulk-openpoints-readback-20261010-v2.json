@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-openpoints-readback-20261010-v2",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "connector.update.check",
+        "payload": {}
+      },
+      {
+        "action": "plugin.settings.catalog",
+        "payload": {}
+      },
+      {
+        "action": "woocommerce.tax_rate.list",
+        "payload": {
+          "per_page": 50
+        }
+      },
+      {
+        "action": "woocommerce.shipping_zone.list",
+        "payload": {}
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_calc_taxes"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_prices_include_tax"
+        }
+      },
+      {
+        "action": "menu.list",
+        "payload": {}
+      },
+      {
+        "action": "menu.get",
+        "payload": {
+          "id": 23
+        }
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "wp_rocket"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_lazy_load"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "ewww_image_optimizer_ll_autoscale"
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 13
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 14
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 15
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 16
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 17
+        }
+      },
+      {
+        "action": "woocommerce.product.list",
+        "payload": {
+          "per_page": 5
+        }
+      }
+    ]
+  }
+}
