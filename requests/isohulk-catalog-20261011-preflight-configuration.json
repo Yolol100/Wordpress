@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-catalog-20261011-preflight-configuration",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "plugin.list",
+        "payload": {}
+      },
+      {
+        "action": "plugin.settings.catalog",
+        "payload": {}
+      },
+      {
+        "action": "woocommerce.settings.catalog",
+        "payload": {}
+      },
+      {
+        "action": "woocommerce.settings.inspect",
+        "payload": {
+          "group": "tax",
+          "offset": 0,
+          "limit": 50
+        }
+      },
+      {
+        "action": "woocommerce.settings.inspect",
+        "payload": {
+          "group": "general",
+          "offset": 0,
+          "limit": 50
+        }
+      },
+      {
+        "action": "woocommerce.operations.list",
+        "payload": {
+          "area": "tax_rates",
+          "page": 1,
+          "per_page": 50
+        }
+      },
+      {
+        "action": "woocommerce.tax_rate.list",
+        "payload": {
+          "per_page": 50
+        }
+      },
+      {
+        "action": "woocommerce.tax_class.list",
+        "payload": {}
+      },
+      {
+        "action": "system.doctor",
+        "payload": {}
+      },
+      {
+        "action": "filesystem.inspect",
+        "payload": {}
+      }
+    ]
+  }
+}
