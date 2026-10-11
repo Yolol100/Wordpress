@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-vat21-command-preview-20261011",
+  "action": "option.update",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "name": "isohulk_catalog_tax_command",
+    "value": "provision-nl-vat21-20261011"
+  }
+}
