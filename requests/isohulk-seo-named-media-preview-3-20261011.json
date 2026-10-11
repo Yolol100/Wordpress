@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-seo-named-media-preview-3-20261011",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/double-sided-foam-tape.jpg",
+          "title": "Double-Sided Foam Tape",
+          "alt": "Double-Sided Foam Tape",
+          "caption": "Strong, water-resistant double-sided foam tape for mounting and sealing",
+          "description": "White foam tape with pressure-sensitive adhesive on both sides. TPS Pack states operating temperature suitability from −30°C to +80°C, strong adhesion and good water resistance. Available in multiple thicknesses.",
+          "parent": 35
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/blue-marine-masking-tape-14-day-uv.jpg",
+          "title": "Blue Marine Masking Tape – 14-Day UV",
+          "alt": "Blue Marine Masking Tape – 14-Day UV",
+          "caption": "Flexible blue masking tape with 14-day UV resistance",
+          "description": "Blue crepe-paper masking tape with resistance to water and solvents, intended for modern paint systems. TPS Pack specifies UV resistance for up to 14 days and temperature resistance up to 110°C.",
+          "parent": 36
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/double-sided-adhesive-tape.png",
+          "title": "Double-Sided Adhesive Tape",
+          "alt": "Double-Sided Adhesive Tape",
+          "caption": "Strong tape for permanent attachment of materials such as carpets and carpet tiles",
+          "description": "Strong tape for permanent attachment of materials such as carpets and carpet tiles.",
+          "parent": 37
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/waterproof-duct-tape.jpg",
+          "title": "Waterproof Duct Tape",
+          "alt": "Waterproof Duct Tape",
+          "caption": "Water-resistant duct tape with strong adhesion; available in different colours, sizes and thicknesses",
+          "description": "Water-resistant duct tape with strong adhesion; available in different colours, sizes and thicknesses.",
+          "parent": 38
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/washi-masking-tape-gold-plus-foil.jpg",
+          "title": "Washi Masking Tape – Gold + Foil",
+          "alt": "Washi Masking Tape – Gold + Foil",
+          "caption": "Gold + Foil washi masking tape from the TPS Pack construction tape range",
+          "description": "Gold + Foil washi masking tape from the TPS Pack construction tape range.",
+          "parent": 39
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/washi-masking-tape-gold-3-month-uv.jpg",
+          "title": "Washi Masking Tape – Gold, 3-Month UV",
+          "alt": "Washi Masking Tape – Gold, 3-Month UV",
+          "caption": "Gold washi masking tape listed with three-month UV resistance",
+          "description": "Gold washi masking tape listed with three-month UV resistance.",
+          "parent": 40
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/washi-masking-tape-lilac-low-tack.jpg",
+          "title": "Washi Masking Tape – Lilac Low Tack",
+          "alt": "Washi Masking Tape – Lilac Low Tack",
+          "caption": "Low-tack lilac washi masking tape for delicate surfaces",
+          "description": "Low-tack lilac washi masking tape for delicate surfaces.",
+          "parent": 41
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/glossy-non-adhesive-pvc-pipe-wrapping-tape.jpg",
+          "title": "Glossy Non-Adhesive PVC Pipe Wrapping Tape",
+          "alt": "Glossy Non-Adhesive PVC Pipe Wrapping Tape",
+          "caption": "Glossy PVC pipe-wrapping tape without an adhesive layer",
+          "description": "Glossy PVC pipe-wrapping tape without an adhesive layer.",
+          "parent": 42
+        }
+      }
+    ]
+  }
+}
