@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-variant19-after-compensation-20261011",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 19
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 71
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 72
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 73
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 74
+        }
+      },
+      {
+        "action": "term.get",
+        "payload": {
+          "taxonomy": "product_cat",
+          "id": 15
+        }
+      }
+    ]
+  }
+}
