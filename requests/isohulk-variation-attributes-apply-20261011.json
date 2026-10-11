@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-variation-attributes-apply-20261011",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 71,
+          "attributes": {
+            "formaat-en-verpakking": "50 mm x 45 m (24 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 72,
+          "attributes": {
+            "formaat-en-verpakking": "50 mm x 50 m (24 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 73,
+          "attributes": {
+            "formaat-en-verpakking": "75 mm x 50 m (16 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 74,
+          "attributes": {
+            "formaat-en-verpakking": "100 mm x 50 m (16 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 75,
+          "attributes": {
+            "formaat-en-verpakking": "50 x 50 m (24 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 76,
+          "attributes": {
+            "formaat-en-verpakking": "75 x 50 m (16 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 77,
+          "attributes": {
+            "formaat-en-verpakking": "100 x 50 m (12 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 78,
+          "attributes": {
+            "formaat-en-verpakking": "50 x 50 m"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 79,
+          "attributes": {
+            "formaat-en-verpakking": "75 x 50 m"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 80,
+          "attributes": {
+            "formaat-en-verpakking": "100 x 50 m"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 81,
+          "attributes": {
+            "formaat-en-verpakking": "50 x 15 m (24 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 82,
+          "attributes": {
+            "formaat-en-verpakking": "75 x 15 m (16 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 83,
+          "attributes": {
+            "formaat-en-verpakking": "100 x 15 m (12 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 84,
+          "attributes": {
+            "formaat-en-verpakking": "50 x 100 m (24 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 85,
+          "attributes": {
+            "formaat-en-verpakking": "75 x 100 m (16 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 86,
+          "attributes": {
+            "formaat-en-verpakking": "100 x 100 m (12 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 87,
+          "attributes": {
+            "formaat-en-verpakking": "50 x 50 m"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 88,
+          "attributes": {
+            "formaat-en-verpakking": "75 x 50 m"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 89,
+          "attributes": {
+            "formaat-en-verpakking": "100 x 50 m"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 90,
+          "attributes": {
+            "formaat-en-verpakking": "19 x 50 m (64 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 91,
+          "attributes": {
+            "formaat-en-verpakking": "25 x 50 m (48 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 92,
+          "attributes": {
+            "formaat-en-verpakking": "38 x 50 m (36 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 93,
+          "attributes": {
+            "formaat-en-verpakking": "50 x 50 m (24 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 94,
+          "attributes": {
+            "formaat-en-verpakking": "75 x 50 m (16 rollen)"
+          }
+        }
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 95,
+          "attributes": {
+            "formaat-en-verpakking": "100 x 50 m (12 rollen)"
+          }
+        }
+      }
+    ]
+  }
+}
