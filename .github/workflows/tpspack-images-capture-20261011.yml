@@ -20,6 +20,7 @@ jobs:
       - name: Download and verify original TPS Pack images
         shell: bash
         run: |
+          python3 - <<'PY'
           import hashlib,io,json,os,urllib.parse,urllib.request,time,pathlib
           from PIL import Image, ImageDraw, ImageFont
           base="https://image.jimcdn.com/app/cms/image/transf/none/path/s3984600fb751a347/image/{image}/version/{version}/image.{ext}"
@@ -89,9 +90,9 @@ jobs:
                           data=response.read(6000001)
                           if not (1024<len(data)<=6000000):
                               raise ValueError("invalid image byte count "+str(len(data)))
-                      if ext=="jpg" and data[:3]!=b"\\xff\\xd8\\xff":
+                      if ext=="jpg" and list(data[:3])!=[255,216,255]:
                           raise ValueError("not a JPEG image")
-                      if ext=="png" and data[:8]!=b"\\x89PNG\\r\\n\\x1a\\n":
+                      if ext=="png" and list(data[:8])!=[137,80,78,71,13,10,26,10]:
                           raise ValueError("not a PNG image")
                       with Image.open(io.BytesIO(data)) as im:
                           im.verify()
@@ -115,7 +116,7 @@ jobs:
                   print("FAILED",product_id,problem,flush=True)
           audit=pathlib.Path("audits/tpspack-media-20261011")
           audit.mkdir(parents=True,exist_ok=True)
-          (audit/"manifest.json").write_text(json.dumps(records,indent=2)+"\\n")
+          (audit/"manifest.json").write_text(json.dumps(records,indent=2))
           for batch in range(4):
               subset=images[batch*10:batch*10+10]
               sheet=Image.new("RGB",(1600,920),"white")
@@ -132,6 +133,7 @@ jobs:
           errors=[r for r in records if "error" in r]
           print("SUMMARY",len(images),"images",len(errors),"errors","bytes",sum(x.get("bytes",0) for x in records),flush=True)
           if errors:raise SystemExit("Failed to acquire all images; manifest contains diagnostics")
+          PY
       - name: Commit source image binaries on isolated runtime branch
         shell: bash
         run: |
