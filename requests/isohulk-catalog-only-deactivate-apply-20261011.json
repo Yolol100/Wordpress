@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-catalog-only-deactivate-apply-20261011",
+  "action": "plugin.deactivate",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "file": "isohulk-catalog-only/isohulk-catalog-only.php"
+  }
+}
