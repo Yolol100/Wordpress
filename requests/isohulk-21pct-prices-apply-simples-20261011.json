@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-21pct-prices-apply-simples-20261011",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 26,
+          "regular_price": "32.64"
+        },
+        "expected_fingerprint": "0a913352b014f81af1711a2c31b78766740c71512ab5093f063fe9eef5d0eb10"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 27,
+          "regular_price": "35.12"
+        },
+        "expected_fingerprint": "735698955511746b535e7fe066e629b7277e67609e328b2f89859eadf3ce620b"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 28,
+          "regular_price": "33.47"
+        },
+        "expected_fingerprint": "b36b02d6039c1c374b375f5adc840124e97774b2d541147a6930177baae7414f"
+      }
+    ]
+  }
+}
