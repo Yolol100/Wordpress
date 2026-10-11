@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-seo-featured-preview-1-20261011",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 19,
+          "image_id": 155
+        },
+        "expected_fingerprint": "c69d134cb3284e2fd857f6de97bf09532c7f6c99e288715cbeacd1013e5cddb2"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 20,
+          "image_id": 156
+        },
+        "expected_fingerprint": "2ff6fb2d61f094a018ab443af3770a8bbc967bf8cf1e6153e8058f935eb33e5a"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 21,
+          "image_id": 157
+        },
+        "expected_fingerprint": "82645d81c31b8715918d38937e16c5012e8bb52c0b44e7245541e61161e4b6e2"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 22,
+          "image_id": 158
+        },
+        "expected_fingerprint": "faa7095547984f8b1dd1f41a4633820800e0eceb88fe2701cafca6071e564a27"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 23,
+          "image_id": 159
+        },
+        "expected_fingerprint": "37ef5564aea562aa359f442f56cf1a13f440051c02f9e7d624cfb9189d39aaf8"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 24,
+          "image_id": 160
+        },
+        "expected_fingerprint": "a06615bbcb307cbb4b06d9f8b6c900f8199f341c2979c810eb40834f7c487b36"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 25,
+          "image_id": 161
+        },
+        "expected_fingerprint": "68971591e5eb29136da98d946970373e731f6b4997b0a25eb32deb0cdf69a69b"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 26,
+          "image_id": 162
+        },
+        "expected_fingerprint": "b3e260b1a0f8948614828ea6f2cee2c6a7e0ac3a4da36ee8a62d9f9990fd6758"
+      }
+    ]
+  }
+}
