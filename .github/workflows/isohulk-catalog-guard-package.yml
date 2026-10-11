@@ -24,7 +24,7 @@ jobs:
           python3 - <<'PY'
           import hashlib, json, pathlib, zipfile
           source=pathlib.Path('site-packages/isohulk-catalog-only/isohulk-catalog-only.php')
-          pkg=pathlib.Path('assets/inbox/plugin-packages/isohulk-catalog-only-0.1.1.zip')
+          pkg=pathlib.Path('assets/inbox/plugin-packages/isohulk-catalog-only-0.1.2.zip')
           pkg.parent.mkdir(parents=True,exist_ok=True)
           info=zipfile.ZipInfo('isohulk-catalog-only/isohulk-catalog-only.php',date_time=(2026,10,11,0,0,0))
           info.external_attr=0o644<<16
@@ -44,6 +44,6 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/inbox/plugin-packages/isohulk-catalog-only-0.1.1.zip audits/isohulk-catalog-guard-package-20261011.json
+          git add assets/inbox/plugin-packages/isohulk-catalog-only-0.1.2.zip audits/isohulk-catalog-guard-package-20261011.json
           git commit -m "Package QA-verified ISOHULK catalog-only plugin"
           git push origin "HEAD:runtime/isohulk-catalog-guard-plugin-20261011"
