@@ -1,0 +1,252 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-seo-media-apply-2-20261011",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 135,
+          "title": "Washi Masking Tape – Gold + Foil",
+          "alt": "Washi Masking Tape – Gold + Foil",
+          "caption": "Gold + Foil washi masking tape from the TPS Pack construction tape range",
+          "description": "Gold + Foil washi masking tape from the TPS Pack construction tape range.",
+          "parent": 39
+        },
+        "expected_fingerprint": "2c4fffdd05a200169a4bcb76082b07447ff5bcc28a2933650f9c21a727f2c61f"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 136,
+          "title": "Washi Masking Tape – Gold, 3-Month UV",
+          "alt": "Washi Masking Tape – Gold, 3-Month UV",
+          "caption": "Gold washi masking tape listed with three-month UV resistance",
+          "description": "Gold washi masking tape listed with three-month UV resistance.",
+          "parent": 40
+        },
+        "expected_fingerprint": "d28bf74c4fc633ad412eb4cd155867da7adf7dd627e4daff536c752d93c861e7"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 137,
+          "title": "Washi Masking Tape – Lilac Low Tack",
+          "alt": "Washi Masking Tape – Lilac Low Tack",
+          "caption": "Low-tack lilac washi masking tape for delicate surfaces",
+          "description": "Low-tack lilac washi masking tape for delicate surfaces.",
+          "parent": 41
+        },
+        "expected_fingerprint": "483691a3d1b06ec60ed842bbab4954b3af4d814179d2146061c4c70bfbf24899"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 138,
+          "title": "Glossy Non-Adhesive PVC Pipe Wrapping Tape",
+          "alt": "Glossy Non-Adhesive PVC Pipe Wrapping Tape",
+          "caption": "Glossy PVC pipe-wrapping tape without an adhesive layer",
+          "description": "Glossy PVC pipe-wrapping tape without an adhesive layer.",
+          "parent": 42
+        },
+        "expected_fingerprint": "54c265a4cdb14816be565aac33d3c78717fb59ba93d7b8c7fc4a2cd7837fd45e"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 139,
+          "title": "Pure Aluminium Foil",
+          "alt": "Pure Aluminium Foil",
+          "caption": "100% pure aluminium foil supplied in jumbo rolls in different sizes and thicknesses",
+          "description": "100% pure aluminium foil supplied in jumbo rolls in different sizes and thicknesses.",
+          "parent": 43
+        },
+        "expected_fingerprint": "6438aa7e1032c276940bba259df58732c7da9a814c3a2e3eee2bc6c3202866c1"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 140,
+          "title": "Scrim-Reinforced Aluminium Foil",
+          "alt": "Scrim-Reinforced Aluminium Foil",
+          "caption": "Jumbo-roll aluminium foil reinforced with glass-fibre scrim, available in different dimensions and thicknesses",
+          "description": "Jumbo-roll aluminium foil reinforced with glass-fibre scrim, available in different dimensions and thicknesses.",
+          "parent": 44
+        },
+        "expected_fingerprint": "40d18d7d56054ef291044a4b7fa25da08c706561fc7492818ab5e8c04030ede3"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 141,
+          "title": "Diamond-Reinforced Aluminium Foil",
+          "alt": "Diamond-Reinforced Aluminium Foil",
+          "caption": "Jumbo-roll aluminium foil reinforced with diamond-pattern glass fibres",
+          "description": "Jumbo-roll aluminium foil reinforced with diamond-pattern glass fibres.",
+          "parent": 45
+        },
+        "expected_fingerprint": "8b6823085d11cc8ec81330fc2678c392f21b2fae0185e60f387adc6dc1f6891e"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 142,
+          "title": "Fibreglass Cloth Foil – 430/m²",
+          "alt": "Fibreglass Cloth Foil – 430/m²",
+          "caption": "Fibreglass cloth foil supplied on jumbo rolls in different sizes and thicknesses; verify the 430/m² unit before ordering",
+          "description": "Fibreglass cloth foil supplied on jumbo rolls in different sizes and thicknesses; verify the 430/m² unit before ordering.",
+          "parent": 46
+        },
+        "expected_fingerprint": "d4edd505c871e924db2d0c3423eea9168bda8b6d3ee115743c572c8c0661e22f"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 143,
+          "title": "Premium Weatherproof Thermal Jacketing Film",
+          "alt": "Premium Weatherproof Thermal Jacketing Film",
+          "caption": "Weatherproof cladding film for finishing insulation projects, available in different types, colours and sizes",
+          "description": "Weatherproof cladding film for finishing insulation projects, available in different types, colours and sizes.",
+          "parent": 47
+        },
+        "expected_fingerprint": "61fd3e7a6c80230babbceb1fde3899167cfb18a65b1033e7f4a8378b24345f6e"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 144,
+          "title": "PLUS Hand Stretch Film – 500 mm × 300 m × 20 µm",
+          "alt": "PLUS Hand Stretch Film – 500 mm × 300 m × 20 µm",
+          "caption": "Transparent hand stretch wrap, 500 mm × 300 m × 20 µm, for stabilising pallet loads",
+          "description": "Transparent hand stretch wrap, 500 mm × 300 m × 20 µm, for stabilising pallet loads.",
+          "parent": 48
+        },
+        "expected_fingerprint": "ab766ed12aaf4edde63ecc33dac10d4c4f78bc0aef417280762a2e719e0c1a18"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 145,
+          "title": "PLUS Hand Stretch Film – 500 mm × 300 m × 17 µm",
+          "alt": "PLUS Hand Stretch Film – 500 mm × 300 m × 17 µm",
+          "caption": "Transparent hand stretch wrap, 500 mm × 300 m × 17 µm, for securing pallets",
+          "description": "Transparent hand stretch wrap, 500 mm × 300 m × 17 µm, for securing pallets.",
+          "parent": 49
+        },
+        "expected_fingerprint": "d76effc96da9361bb6eb9fb98c2ad4ad977d7b7d054455a088de1d0db5537a3f"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 146,
+          "title": "PLUS Hand Stretch Film – 500 mm × 300 m × 23 µm",
+          "alt": "PLUS Hand Stretch Film – 500 mm × 300 m × 23 µm",
+          "caption": "Transparent hand stretch wrap, 500 mm × 300 m × 23 µm, for securing pallet loads",
+          "description": "Transparent hand stretch wrap, 500 mm × 300 m × 23 µm, for securing pallet loads.",
+          "parent": 50
+        },
+        "expected_fingerprint": "28474f764688495a03964c19e931f9f0dc28f2c5739b316a6839d9d5b134cc7a"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 147,
+          "title": "Machine Stretch Film – 500 mm × 1500 m × 23 µm (350%)",
+          "alt": "Machine Stretch Film – 500 mm × 1500 m × 23 µm (350%)",
+          "caption": "Transparent machine stretch film, 500 mm × 1500 m × 23 µm, with 350% stretch",
+          "description": "Transparent machine stretch film, 500 mm × 1500 m × 23 µm, with 350% stretch.",
+          "parent": 51
+        },
+        "expected_fingerprint": "73bf24cf8c91d9933c5ea186d6a883d90aca1f4ed3d3c0c37eacc74eaca1067d"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 148,
+          "title": "Three-Layer Bubble Wrap – 100 µm",
+          "alt": "Three-Layer Bubble Wrap – 100 µm",
+          "caption": "Three-layer, 100 µm bubble wrap for cushioning and protecting goods; various sizes available",
+          "description": "Three-layer, 100 µm bubble wrap for cushioning and protecting goods; various sizes available.",
+          "parent": 52
+        },
+        "expected_fingerprint": "5b27d5b019031aec92b589f8061b100f110f386c72892dfc3fe56450a1bec406"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 149,
+          "title": "Pallet Top Sheets",
+          "alt": "Pallet Top Sheets",
+          "caption": "Protective pallet top sheets supplied on rolls, available in clear or black and in various sizes and thicknesses",
+          "description": "Protective pallet top sheets supplied on rolls, available in clear or black and in various sizes and thicknesses.",
+          "parent": 53
+        },
+        "expected_fingerprint": "4a31056d8066a6b74feee37b536af7ba5dd04ddecb2241ab2f98ec23af40a8c3"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 150,
+          "title": "PP Strapping Band",
+          "alt": "PP Strapping Band",
+          "caption": "Polypropylene strapping for bundling and securing packages. Check the required width and strength",
+          "description": "Polypropylene strapping for bundling and securing packages. Check the required width and strength.",
+          "parent": 54
+        },
+        "expected_fingerprint": "e01f5b7d3113c5bc5b9e9a47e53aa9261acc2768cccd536df172fa219eb9dcaa"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 151,
+          "title": "Paper Strapping Band",
+          "alt": "Paper Strapping Band",
+          "caption": "Paper strapping material for bundling packages; dimensions to be confirmed",
+          "description": "Paper strapping material for bundling packages; dimensions to be confirmed.",
+          "parent": 55
+        },
+        "expected_fingerprint": "7e7a1b4f336146e015d6272f1e069dd97ff90f2850011edfc8a693ad46b7c465"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 152,
+          "title": "Polyester Strapping Band",
+          "alt": "Polyester Strapping Band",
+          "caption": "Polyester strapping for packaging and bundling; confirm dimensions and tensile strength",
+          "description": "Polyester strapping for packaging and bundling; confirm dimensions and tensile strength.",
+          "parent": 56
+        },
+        "expected_fingerprint": "cb177a411a7b0909f2649243082cc3b78137bbe93cd847671990ab5a1da316e4"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 153,
+          "title": "PET Strapping Band",
+          "alt": "PET Strapping Band",
+          "caption": "PET strapping for securing loads and packaging; confirm dimensions and strength",
+          "description": "PET strapping for securing loads and packaging; confirm dimensions and strength.",
+          "parent": 57
+        },
+        "expected_fingerprint": "8d2828ac8d12980a4902c33b253c1707c65e9ef6aa7c60c62e5688c97790716a"
+      },
+      {
+        "action": "media.update",
+        "payload": {
+          "id": 154,
+          "title": "Spray Adhesive – 500 ml",
+          "alt": "Spray Adhesive – 500 ml",
+          "caption": "Fast-acting 500 ml spray adhesive with high initial tack and quick permanent bonding",
+          "description": "Fast-acting 500 ml spray adhesive with high initial tack and quick permanent bonding.",
+          "parent": 58
+        },
+        "expected_fingerprint": "e6644d93d1384e7c71a351ae6750e1f40ae2d6d0e60734dd52da287b5d1be34f"
+      }
+    ]
+  }
+}
