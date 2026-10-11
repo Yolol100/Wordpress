@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-draft-unlimited-stock-preview-a-20261011",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 26,
+          "manage_stock": false,
+          "stock_status": "instock"
+        },
+        "expected_fingerprint": "c19d2600eb27a8b846535a3cb60ac9a9cbcec126f9411811cd912b98a52c676f"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 27,
+          "manage_stock": false,
+          "stock_status": "instock"
+        },
+        "expected_fingerprint": "a3871f85e6524eb87794e294b477c9b6e3e86fa4d3de85c1b7e327296e2302a5"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 28,
+          "manage_stock": false,
+          "stock_status": "instock"
+        },
+        "expected_fingerprint": "1280de0cc47be92165af4a8baeede67a44571361c6868936747c3891a7277684"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 29,
+          "manage_stock": false,
+          "stock_status": "instock"
+        },
+        "expected_fingerprint": "5d410a375840b5b3668baaf1576665a315d849f0601f0df206f2456dbf935ed2"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 30,
+          "manage_stock": false,
+          "stock_status": "instock"
+        },
+        "expected_fingerprint": "e9f25c07d15455f0d16a40216c7fa75b40d3d1c37a893badf3bacef8069fe3bb"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 31,
+          "manage_stock": false,
+          "stock_status": "instock"
+        },
+        "expected_fingerprint": "e90345c0ace9cfc0c04982d2608f126c3d83f5c94a69b1cfaf7ae2d190e03304"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 32,
+          "manage_stock": false,
+          "stock_status": "instock"
+        },
+        "expected_fingerprint": "23ea4505da2ef08d0ce54cd261e201172d63029d4089211c1ccc59d1ae6b3c73"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 33,
+          "manage_stock": false,
+          "stock_status": "instock"
+        },
+        "expected_fingerprint": "8f8412311a5f56021ebc11f8053c1d7ce5a0e1f95421a0f3344afeef970aec1c"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 34,
+          "manage_stock": false,
+          "stock_status": "instock"
+        },
+        "expected_fingerprint": "a96a19004b0f0ea8ee40a8ef0f0d8fa1c73c729d848a194eaea1fc3377ba0ed9"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 35,
+          "manage_stock": false,
+          "stock_status": "instock"
+        },
+        "expected_fingerprint": "8780a7022c3fcb48e111f29fc4a9357cdf8ee401684a1359889da3af8b430b18"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 36,
+          "manage_stock": false,
+          "stock_status": "instock"
+        },
+        "expected_fingerprint": "d0964ea7e6c84cae7e6369bc1e39e39148cddbf8a9a0a58f12aeb03566783bf6"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 37,
+          "manage_stock": false,
+          "stock_status": "instock"
+        },
+        "expected_fingerprint": "0a03b4994ca4d5e7bbe78debb5073c97ae5c656863c1d430d321e944be32e95b"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 38,
+          "manage_stock": false,
+          "stock_status": "instock"
+        },
+        "expected_fingerprint": "e96315beee3d58fc7d72504325965f22618241c5e5f0e79987ea19e4b2f877b1"
+      }
+    ]
+  }
+}
