@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-21pct-prices-preview-variations-20261011",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 71,
+          "regular_price": "71.90"
+        },
+        "expected_fingerprint": "65e28122b3c05cf3ee1432391a2001ed2b7c1ace595e0b38887511e7f092fcba"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 72,
+          "regular_price": "79.34"
+        },
+        "expected_fingerprint": "75b446e7650d3419a591094c1dc7a5f1afb424af9080bb59351fd0f7bc4a1ff8"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 73,
+          "regular_price": "79.34"
+        },
+        "expected_fingerprint": "419c989e9b15e70fecc9dd5184d1eed9c90c781cc582d9a59bf9e7feaf5cec43"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 74,
+          "regular_price": "79.34"
+        },
+        "expected_fingerprint": "bad4caf8bb19b6c9f1947feb110c7347124db7b22a4a669142c47881a7044fa7"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 75,
+          "regular_price": "99.17"
+        },
+        "expected_fingerprint": "bcd001881258584c781937e4291fdd100e2bb748ebba55f236f82a5066a50922"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 76,
+          "regular_price": "99.17"
+        },
+        "expected_fingerprint": "295d7b694777d2ccc07bfc4f7993f72390c10f9378304291965f762672df1a10"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 77,
+          "regular_price": "99.17"
+        },
+        "expected_fingerprint": "94c343f43cb11705b38b7ba940889c322d7933941e20195f7f90adafc1414446"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 78,
+          "regular_price": "104.13"
+        },
+        "expected_fingerprint": "d1365d05de31f2a119dbcf3a1a2f18f598aef3f1614135891a536075d233eb5c"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 79,
+          "regular_price": "104.13"
+        },
+        "expected_fingerprint": "a66f63e95ec02ea6e609be05ac60a8508e33c69e36b2cb8ddae7c58649ee6cee"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 80,
+          "regular_price": "104.13"
+        },
+        "expected_fingerprint": "e77fb77724a76a1b4ec847e4ceb10e6f5e505376bbe3ac30a22cfa93c6439c32"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 81,
+          "regular_price": "99.17"
+        },
+        "expected_fingerprint": "2949ab1ea06a8f10a5675d77f654a51ace5c349042e5bf411c3b397a55654011"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 82,
+          "regular_price": "99.17"
+        },
+        "expected_fingerprint": "4d45d5ce3cb9526fa6513edf8133da48114b103d8e46787e684e484529aaf1ba"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 83,
+          "regular_price": "99.17"
+        },
+        "expected_fingerprint": "f15b7c6630d054efc1ea99cb59647740f4d7309c12d9f47876dfb1a77a9920dc"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 84,
+          "regular_price": "89.26"
+        },
+        "expected_fingerprint": "ea3191e402ac285523f4e7cc96abdd56c9c350113bd5e8dadab84d16cd75d799"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 85,
+          "regular_price": "89.26"
+        },
+        "expected_fingerprint": "b32831932edcd3ba279d8d31c0639442bb5525a609c82c9d64cf979e0395befb"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 86,
+          "regular_price": "89.26"
+        },
+        "expected_fingerprint": "06897900e1ab47bb9646cce74c4d1bcd4577013f069fe64898a17b8547f19549"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 87,
+          "regular_price": "109.09"
+        },
+        "expected_fingerprint": "d85b395bef5999f47abcda08a59668432e532ac546aeaa02cb2142d1c303e676"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 88,
+          "regular_price": "109.09"
+        },
+        "expected_fingerprint": "1e36b5c10bef1b26bcd589e493e2e93b244423a08f9b88c1c5abf652cd66b0a5"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 89,
+          "regular_price": "109.09"
+        },
+        "expected_fingerprint": "440b235a26bcc70d28e35f3f8195bd3847e5c7054f4c16d09ad50a4607d1fbaf"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 90,
+          "regular_price": "61.98"
+        },
+        "expected_fingerprint": "8f2729c9dfc33135a838b4c6140e5397b3215d3e95675c3f0f0ab280bcdf5cb5"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 91,
+          "regular_price": "61.98"
+        },
+        "expected_fingerprint": "358a81d081ebbef15c3a24ed52596af1b99cfe14f05cf85d514fca5c3ef01314"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 92,
+          "regular_price": "61.98"
+        },
+        "expected_fingerprint": "42bdce579da4e0b0a9ea2eb0cd72318089f08f8b880fcb1e960eee317cb0dd3f"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 93,
+          "regular_price": "61.98"
+        },
+        "expected_fingerprint": "f76cbb60d6526c6e66511cd6d00fd9577f9c12ed9ea0d3dc55348ca350d8e5a7"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 94,
+          "regular_price": "61.98"
+        },
+        "expected_fingerprint": "43962483bde9d87ac047001b877e050104c2831b077dbf548af640a305c601f1"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 95,
+          "regular_price": "61.98"
+        },
+        "expected_fingerprint": "443e6151dfca8d6498ab56255b0e93406674b063b100a9bd271840fd9bf52ecd"
+      }
+    ]
+  }
+}
