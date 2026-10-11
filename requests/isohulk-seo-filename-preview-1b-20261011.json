@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-seo-filename-preview-1b-20261011",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/aluminium-tape-cold-weather.jpg",
+          "title": "Aluminium Tape – Cold Weather",
+          "alt": "Aluminium Tape – Cold Weather",
+          "caption": "Vapour-tight aluminium tape with cold-weather acrylic adhesive for insulation and sealing",
+          "description": "Suitable for sealing insulation blankets, spiral ducts and flue gas ducts. Features strong adhesion, a cold-weather acrylic adhesive and DIN 4102 B1 classification. Available pack sizes: 50 mm × 45 m (24 rolls), 50 mm × 50 m (24 rolls), 75 mm × 50 m (16 rolls) and 100 mm × 50 m (16 rolls).",
+          "parent": 19
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/isohulk-aluminium-tape-aw-imo.jpg",
+          "title": "ISOHULK Aluminium Tape AW IMO",
+          "alt": "ISOHULK Aluminium Tape AW IMO",
+          "caption": "IMO/MED-certified premium aluminium tape with strong cold-weather adhesion",
+          "description": "Designed for demanding marine insulation and sealing applications. Flame-retardant aluminium tape with aggressive cold-weather adhesive; TPS Pack states temperature resistance from −40°C to +140°C. Available in 50 mm × 50 m (24 rolls), 75 mm × 50 m (16 rolls) and 100 mm × 50 m (12 rolls).",
+          "parent": 20
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/isohulk-aluminium-tracing-tape-imo.jpg",
+          "title": "ISOHULK Aluminium Tracing Tape IMO",
+          "alt": "ISOHULK Aluminium Tracing Tape IMO",
+          "caption": "Marine-grade, glass-fibre-reinforced aluminium tracing tape with strong adhesion",
+          "description": "Glass-fibre-reinforced aluminium tape described by TPS Pack as IMO/MED-certified for marine use. Available in 50 mm × 50 m, 75 mm × 50 m and 100 mm × 50 m formats. Confirm current pack quantities before ordering.",
+          "parent": 21
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/aluminium-butyl-waterproof-repair-tape.jpg",
+          "title": "Aluminium Butyl Waterproof Repair Tape",
+          "alt": "Aluminium Butyl Waterproof Repair Tape",
+          "caption": "Water-resistant and vapour-tight butyl repair tape for sealing joints and connections",
+          "description": "Heavy-adhesive butyl tape for sealing seams, closures, frames, roofs and façades. Designed for waterproof repair and sealing applications. Available in 50 mm × 15 m (24 rolls), 75 mm × 15 m (16 rolls) and 100 mm × 15 m (12 rolls).",
+          "parent": 22
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/pp-coated-aluminium-tape.png",
+          "title": "PP-Coated Aluminium Tape",
+          "alt": "PP-Coated Aluminium Tape",
+          "caption": "PP-aluminium tape for joining laminate foil and sealing insulation materials",
+          "description": "Premium polypropylene-aluminium tape with an aluminium coating, suitable for use in both cool and warm conditions. Intended for joining laminate foils and sealing insulation materials. Available as 50, 75 and 100 mm wide × 100 m rolls in webshop pack formats; TPS Pack also lists 50 m lengths elsewhere.",
+          "parent": 23
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/black-aluminium-tape-aw.jpg",
+          "title": "Black Aluminium Tape AW",
+          "alt": "Black Aluminium Tape AW",
+          "caption": "Black cold-weather aluminium tape for a neat finish on dark insulation",
+          "description": "Strong-adhesion black aluminium tape for sealing and finishing insulation materials. TPS Pack lists cold-weather acrylic adhesive and DIN 4102 B1 classification. Available as 50, 75 and 100 mm wide × 50 m rolls.",
+          "parent": 24
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/length-reinforced-filament-tape.jpg",
+          "title": "Length-Reinforced Filament Tape",
+          "alt": "Length-Reinforced Filament Tape",
+          "caption": "Glass-fibre-reinforced filament tape for securing and sealing heavy packaging",
+          "description": "Length-reinforced filament tape designed for strong packaging and bundling applications. The glass fibres increase tear resistance. Available in widths of 19, 25, 38, 50, 75 and 100 mm, each on 50 m rolls, with pack quantities listed per option.",
+          "parent": 25
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/machine-stretch-film-power-250-percent-500-mm-x-2000-m-x-17-micron.jpg",
+          "title": "Machine Stretch Film Power 250% – 500 mm × 2000 m × 17 µm",
+          "alt": "Machine Stretch Film Power 250% – 500 mm × 2000 m × 17 µm",
+          "caption": "Clear machine stretch film, 17 µm thick, with 250% stretch",
+          "description": "Machine-grade clear pallet wrapping film. Roll dimensions: 500 mm width × 2000 m length; thickness 17 µm and a stated stretch level of 250%. Packaging and order quantities vary.",
+          "parent": 26
+        }
+      }
+    ]
+  }
+}
