@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-delete-catalog-plugin-files-check-20261011",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "filesystem.list",
+        "payload": {
+          "path": "wp-content/plugins/isohulk-catalog-only"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/plugins/isohulk-catalog-only/isohulk-catalog-only.php"
+        }
+      },
+      {
+        "action": "filesystem.list",
+        "payload": {
+          "path": "wp-content/themes/hostinger-ai-theme"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/hostinger-ai-theme/functions.php"
+        }
+      },
+      {
+        "action": "plugin.list",
+        "payload": {}
+      }
+    ]
+  }
+}
