@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-commerce-guard-a-20261011",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 19
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 20
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 21
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 22
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 23
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 24
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 25
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 71
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 72
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 73
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 74
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 75
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 76
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 77
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 78
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 79
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 80
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 81
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 82
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 83
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 84
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 85
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 86
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 87
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 88
+        }
+      }
+    ]
+  }
+}
