@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-catalog-only-package-preview-b-20261011",
+  "action": "plugin.install_package",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "source_path": "plugin-packages/isohulk-catalog-only-0.1.0.zip",
+    "sha256": "ed16fa62c9be6b3546b9ed184780be0263e6e94b8420bed7dc2a8467d8a99d55",
+    "expected_plugin": "isohulk-catalog-only/isohulk-catalog-only.php",
+    "overwrite": false,
+    "activate": true,
+    "network_wide": false
+  }
+}
