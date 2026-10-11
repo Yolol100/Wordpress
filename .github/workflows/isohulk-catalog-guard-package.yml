@@ -1,0 +1,49 @@
+name: Verify and package ISOHULK catalog guard
+on:
+  push:
+    branches:
+      - runtime/isohulk-catalog-guard-plugin-20261011
+    paths:
+      - site-packages/isohulk-catalog-only/**
+      - .github/workflows/isohulk-catalog-guard-package.yml
+permissions:
+  contents: write
+jobs:
+  verify-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP syntax verification
+        run: php -l site-packages/isohulk-catalog-only/isohulk-catalog-only.php
+      - name: PHP catalog security contract tests
+        run: php site-packages/isohulk-catalog-only/tests/catalog-contract.php
+      - name: Build reproducible package and hash
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, pathlib, zipfile
+          source=pathlib.Path('site-packages/isohulk-catalog-only/isohulk-catalog-only.php')
+          pkg=pathlib.Path('assets/inbox/plugin-packages/isohulk-catalog-only-0.1.0.zip')
+          pkg.parent.mkdir(parents=True,exist_ok=True)
+          info=zipfile.ZipInfo('isohulk-catalog-only/isohulk-catalog-only.php',date_time=(2026,10,11,0,0,0))
+          info.external_attr=0o644<<16
+          info.compress_type=zipfile.ZIP_DEFLATED
+          with zipfile.ZipFile(pkg,'w',compression=zipfile.ZIP_DEFLATED) as zf:
+              zf.writestr(info,source.read_bytes())
+          sha=hashlib.sha256(pkg.read_bytes()).hexdigest()
+          records={'plugin_file':'isohulk-catalog-only/isohulk-catalog-only.php','sha256':sha,'size':pkg.stat().st_size,'source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'tests':'PHP syntax; 7 catalog and VAT contract checks'}
+          report=pathlib.Path('audits/isohulk-catalog-guard-package-20261011.json')
+          report.parent.mkdir(parents=True,exist_ok=True)
+          report.write_text(json.dumps(records,indent=2)+'\n')
+          print(json.dumps(records,indent=2))
+          PY
+      - name: Persist verified ZIP only on isolated runtime branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/inbox/plugin-packages/isohulk-catalog-only-0.1.0.zip audits/isohulk-catalog-guard-package-20261011.json
+          git commit -m "Package QA-verified ISOHULK catalog-only plugin"
+          git push origin "HEAD:runtime/isohulk-catalog-guard-plugin-20261011"
