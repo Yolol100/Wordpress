@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-commerce-guard-b-20261011",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 89
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 90
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 91
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 92
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 93
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 94
+        }
+      },
+      {
+        "action": "woocommerce.variation.get",
+        "payload": {
+          "id": 95
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_calc_taxes"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_prices_include_tax"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_tax_display_shop"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_currency"
+        }
+      },
+      {
+        "action": "term.get",
+        "payload": {
+          "taxonomy": "product_cat",
+          "id": 15
+        }
+      },
+      {
+        "action": "woocommerce.tax_rate.list",
+        "payload": {
+          "per_page": 50
+        }
+      },
+      {
+        "action": "media.list",
+        "payload": {
+          "per_page": 50
+        }
+      }
+    ]
+  }
+}
