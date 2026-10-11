@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-seo-named-media-preview-5-20261011",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/machine-stretch-film-500-mm-x-1500-m-x-23-micron-350-percent.jpg",
+          "title": "Machine Stretch Film – 500 mm × 1500 m × 23 µm (350%)",
+          "alt": "Machine Stretch Film – 500 mm × 1500 m × 23 µm (350%)",
+          "caption": "Transparent machine stretch film, 500 mm × 1500 m × 23 µm, with 350% stretch",
+          "description": "Transparent machine stretch film, 500 mm × 1500 m × 23 µm, with 350% stretch.",
+          "parent": 51
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/three-layer-bubble-wrap-100-micron.jpg",
+          "title": "Three-Layer Bubble Wrap – 100 µm",
+          "alt": "Three-Layer Bubble Wrap – 100 µm",
+          "caption": "Three-layer, 100 µm bubble wrap for cushioning and protecting goods; various sizes available",
+          "description": "Three-layer, 100 µm bubble wrap for cushioning and protecting goods; various sizes available.",
+          "parent": 52
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/pallet-top-sheets.jpg",
+          "title": "Pallet Top Sheets",
+          "alt": "Pallet Top Sheets",
+          "caption": "Protective pallet top sheets supplied on rolls, available in clear or black and in various sizes and thicknesses",
+          "description": "Protective pallet top sheets supplied on rolls, available in clear or black and in various sizes and thicknesses.",
+          "parent": 53
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/pp-strapping-band.jpg",
+          "title": "PP Strapping Band",
+          "alt": "PP Strapping Band",
+          "caption": "Polypropylene strapping for bundling and securing packages. Check the required width and strength",
+          "description": "Polypropylene strapping for bundling and securing packages. Check the required width and strength.",
+          "parent": 54
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/paper-strapping-band.jpg",
+          "title": "Paper Strapping Band",
+          "alt": "Paper Strapping Band",
+          "caption": "Paper strapping material for bundling packages; dimensions to be confirmed",
+          "description": "Paper strapping material for bundling packages; dimensions to be confirmed.",
+          "parent": 55
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/polyester-strapping-band.jpg",
+          "title": "Polyester Strapping Band",
+          "alt": "Polyester Strapping Band",
+          "caption": "Polyester strapping for packaging and bundling; confirm dimensions and tensile strength",
+          "description": "Polyester strapping for packaging and bundling; confirm dimensions and tensile strength.",
+          "parent": 56
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/pet-strapping-band.jpg",
+          "title": "PET Strapping Band",
+          "alt": "PET Strapping Band",
+          "caption": "PET strapping for securing loads and packaging; confirm dimensions and strength",
+          "description": "PET strapping for securing loads and packaging; confirm dimensions and strength.",
+          "parent": 57
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack-seo/spray-adhesive-500-ml.jpg",
+          "title": "Spray Adhesive – 500 ml",
+          "alt": "Spray Adhesive – 500 ml",
+          "caption": "Fast-acting 500 ml spray adhesive with high initial tack and quick permanent bonding",
+          "description": "Fast-acting 500 ml spray adhesive with high initial tack and quick permanent bonding.",
+          "parent": 58
+        }
+      }
+    ]
+  }
+}
