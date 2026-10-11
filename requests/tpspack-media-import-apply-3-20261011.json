@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "tpspack-media-import-apply-3-20261011",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-35.jpg",
+          "title": "Double-Sided Foam Tape",
+          "alt": "Double-Sided Foam Tape – product photo",
+          "parent": 35
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-36.jpg",
+          "title": "Blue Marine Masking Tape – 14-Day UV",
+          "alt": "Blue Marine Masking Tape – 14-Day UV – product photo",
+          "parent": 36
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-37.png",
+          "title": "Double-Sided Adhesive Tape",
+          "alt": "Double-Sided Adhesive Tape – product photo",
+          "parent": 37
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-38.jpg",
+          "title": "Waterproof Duct Tape",
+          "alt": "Waterproof Duct Tape – product photo",
+          "parent": 38
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-39.jpg",
+          "title": "Washi Masking Tape – Gold + Foil",
+          "alt": "Washi Masking Tape – Gold + Foil – product photo",
+          "parent": 39
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-40.jpg",
+          "title": "Washi Masking Tape – Gold, 3-Month UV",
+          "alt": "Washi Masking Tape – Gold, 3-Month UV – product photo",
+          "parent": 40
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-41.jpg",
+          "title": "Washi Masking Tape – Lilac Low Tack",
+          "alt": "Washi Masking Tape – Lilac Low Tack – product photo",
+          "parent": 41
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-42.jpg",
+          "title": "Glossy Non-Adhesive PVC Pipe Wrapping Tape",
+          "alt": "Glossy Non-Adhesive PVC Pipe Wrapping Tape – product photo",
+          "parent": 42
+        }
+      }
+    ]
+  }
+}
