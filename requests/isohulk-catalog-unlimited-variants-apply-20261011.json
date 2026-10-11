@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-catalog-unlimited-variants-apply-20261011",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 71,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "972328c8d027dc0e65f2c03e39911195912f8b40d4bb1695bb2728448aa5a0a0"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 72,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "affbc8be8f61f22f173889382c8854768f205c97d7a6557aaef934b0e92ee2c1"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 73,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "bb350c7035f767cd9a070bc930b1d60ff54cf8885c5e35577bfda59d3d1163be"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 74,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "83b9080f80b3fd6d9db419d8455a511a290b1873bc9e301f96a27fe191319064"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 75,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "0b97dd936893be10796ccd15f962ddc7629c6a214e6bf0766b3022bcec63f47b"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 76,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "b37df9615a35f9543cc14a426c64af8e376902c1ab05adf30e578e70104a7510"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 77,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "049a84b70f62483f857dffcfae2d7d47f94d73455bf949746acb1127c5f71f5f"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 78,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "04b9e041cc84ecc8bfe2059b36d4af5909c2630616757a7e6b21c8c48cf5ccdd"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 79,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "2fbcd9fe4f4c0792a85dd8ce4b8bf60e3bd6db92af7fde6e1d43890ff1c647f7"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 80,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "14f9af445c6d2c5d5db9956c45c80518cbd4f28ef2cd3fb813a878c14b8cd66e"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 81,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "6568813eb19ac9ec005382f6eff1131bb8d90e5f1e62f3440b427e40f107a739"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 82,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "7d97c633a0c675b21f945b83e7dab2e913427fe935d63de9513fc0d5eaf94001"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 83,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "764356631448b8de5e86fb2fa0e9d367e4d387ac9ac9a253b64cbdff7d9513ce"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 84,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "a2899d7de0551f43fbcf046115203e6b2dcbd05e0b399380fa83f74e0140fcd2"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 85,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "07940d2f27f56f3eba1702f180b77f540c45fea24c9dc5e5a138dbd89e80fafb"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 86,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "9af130f34d098af3c5c01c70ae325d6d39cb662727379a8e88ebf3abe0525404"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 87,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "31823c8fad003aa060d123e15c715bc54547b2f1352d76a42a1a85432c63f0cd"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 88,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "e736c7b64b203feb1bf042149aef63b6d105c236df4372fe937c688684aba3c3"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 89,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "22e0120c47feb06ac8c43ac70ab03ab3d7645e74c85564bb00f2e722dcf18ed1"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 90,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "d19d1681f4895a74514c281d155cef5efb7a63bb9978d64a00fe51846d29dfb6"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 91,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "76663754f9cec43e40977670e1fee43bcde266b2ef9dab9379c56c511fceb3ce"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 92,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "d9038d30dc6a533c3d95495d1f86199392652d74a07dee71643d141a8ae0cd11"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 93,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "76d8c24f2c4a6c697b2a16526e27c7b538e84c276eeabfbdf60c425ba79df15a"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 94,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "fddc8149c40095bad07702adc96c465087b3cf48829b6f6cbaf729bdcb927f18"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 95,
+          "stock_status": "instock",
+          "manage_stock": false
+        },
+        "expected_fingerprint": "59d89ccb829c7174035b6c57b937acbfeae72e0b1d36cce45d9cbbb4ebc372b6"
+      }
+    ]
+  }
+}
