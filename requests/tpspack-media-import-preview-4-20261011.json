@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "tpspack-media-import-preview-4-20261011",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-43.jpg",
+          "title": "Pure Aluminium Foil",
+          "alt": "Pure Aluminium Foil – product photo",
+          "parent": 43
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-44.jpg",
+          "title": "Scrim-Reinforced Aluminium Foil",
+          "alt": "Scrim-Reinforced Aluminium Foil – product photo",
+          "parent": 44
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-45.jpg",
+          "title": "Diamond-Reinforced Aluminium Foil",
+          "alt": "Diamond-Reinforced Aluminium Foil – product photo",
+          "parent": 45
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-46.jpg",
+          "title": "Fibreglass Cloth Foil – 430/m²",
+          "alt": "Fibreglass Cloth Foil – 430/m² – product photo",
+          "parent": 46
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-47.jpg",
+          "title": "Premium Weatherproof Thermal Jacketing Film",
+          "alt": "Premium Weatherproof Thermal Jacketing Film – product photo",
+          "parent": 47
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-48.jpg",
+          "title": "PLUS Hand Stretch Film – 500 mm × 300 m × 20 µm",
+          "alt": "PLUS Hand Stretch Film – 500 mm × 300 m × 20 µm – product photo",
+          "parent": 48
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-49.jpg",
+          "title": "PLUS Hand Stretch Film – 500 mm × 300 m × 17 µm",
+          "alt": "PLUS Hand Stretch Film – 500 mm × 300 m × 17 µm – product photo",
+          "parent": 49
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-50.jpg",
+          "title": "PLUS Hand Stretch Film – 500 mm × 300 m × 23 µm",
+          "alt": "PLUS Hand Stretch Film – 500 mm × 300 m × 23 µm – product photo",
+          "parent": 50
+        }
+      }
+    ]
+  }
+}
