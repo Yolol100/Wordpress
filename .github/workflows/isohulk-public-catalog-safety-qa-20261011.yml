@@ -1,0 +1,48 @@
+name: ISOHULK public catalog safety QA
+on:
+  push:
+    branches:
+      - runtime/isohulk-public-catalog-safety-qa-20261011
+permissions:
+  contents: read
+jobs:
+  public-catalog-safety:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Probe WooCommerce public purchase endpoints without credentials
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,urllib.request,urllib.error,urllib.parse
+          base='https://isohulk.conceptwebactueel-6.nl'
+          results=[]
+          requests=[
+            ('GET store endpoint','GET','/wp-json/wc/store/v1/cart',None),
+            ('POST add to cart disabled','POST','/wp-json/wc/store/v1/cart/add-item',{'id':19,'quantity':1}),
+            ('POST checkout disabled','POST','/wp-json/wc/store/v1/checkout',{}),
+          ]
+          for name,method,path,data in requests:
+              url=base+path
+              raw=None if data is None else json.dumps(data).encode('utf-8')
+              headers={'Accept':'application/json','User-Agent':'ISOHULK-Catalog-QA/1.0'}
+              if raw is not None:headers['Content-Type']='application/json'
+              req=urllib.request.Request(url,data=raw,headers=headers,method=method)
+              try:
+                  with urllib.request.urlopen(req,timeout=25) as response:
+                      status=response.status;body=response.read(12000).decode('utf-8','replace')
+                      ctype=response.headers.get('content-type','')
+              except urllib.error.HTTPError as ex:
+                  status=ex.code;body=ex.read(12000).decode('utf-8','replace');ctype=ex.headers.get('content-type','')
+              except Exception as ex:
+                  results.append({'name':name,'error':type(ex).__name__+':'+str(ex)[:120],'verified':False})
+                  continue
+              code=''
+              try:code=json.loads(body).get('code','')
+              except Exception:pass
+              blocked=method=='POST' and status==403 and code=='isohulk_catalog_only'
+              results.append({'name':name,'status':status,'response_content_type':ctype[:60],'plugin_error_code':code,'verified':blocked if method=='POST' else status in (200,201)})
+          print(json.dumps(results,indent=2))
+          if any(not x['verified'] for x in results):
+              raise SystemExit('Not all public WooCommerce purchase-block checks passed')
+          PY
