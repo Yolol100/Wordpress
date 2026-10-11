@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-extra-images-trash-preview-20261011",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 195
+        },
+        "expected_fingerprint": "56404672c216401fe01fc32f56c5d8515a9c3ce2bde4c4881209eda7961641f3"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 196
+        },
+        "expected_fingerprint": "957962bd79f8fa591ae0e57ff8f5706ed55b912498fde57cd757c41ce642b874"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 197
+        },
+        "expected_fingerprint": "52a4146cd935b131844af7615313ce67b40499023715a7f74ab1283be0c513b3"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 198
+        },
+        "expected_fingerprint": "07dd7b2232faaf3c0a2fed6391e24a0c670befdcc254556872b73d15a90586b7"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 199
+        },
+        "expected_fingerprint": "694f9bb37fc1785f0b39962932f978247b2af9ecb49611323808ec195054188d"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 200
+        },
+        "expected_fingerprint": "61b8d02fbc15ea669616ee46897f0e0e513a617f12adc5110e4f1c49ecbf2241"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 201
+        },
+        "expected_fingerprint": "e0e9bd4a4871ca28d4b118a7e8358d5c604d64af43a65fdd1f9f0eda78554858"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 202
+        },
+        "expected_fingerprint": "23f2484b48935534caca6add5251c51483821465127d2cb589b6651c501c7de0"
+      }
+    ]
+  }
+}
