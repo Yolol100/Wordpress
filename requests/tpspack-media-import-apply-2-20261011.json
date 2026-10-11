@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "tpspack-media-import-apply-2-20261011",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-27.jpg",
+          "title": "Machine Stretch Film Power 300% – 500 mm × 1800 m × 20 µm",
+          "alt": "Machine Stretch Film Power 300% – 500 mm × 1800 m × 20 µm – product photo",
+          "parent": 27
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-28.jpg",
+          "title": "Machine Stretch Film Power 300% – 500 mm × 1500 m × 23 µm",
+          "alt": "Machine Stretch Film Power 300% – 500 mm × 1500 m × 23 µm – product photo",
+          "parent": 28
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-29.jpg",
+          "title": "Cardboard Edge Protectors – Pack of 50",
+          "alt": "Cardboard Edge Protectors – Pack of 50 – product photo",
+          "parent": 29
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-30.jpg",
+          "title": "ISOHULK Aluminium FSK Tape IMO",
+          "alt": "ISOHULK Aluminium FSK Tape IMO – product photo",
+          "parent": 30
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-31.jpg",
+          "title": "High-Temperature Aluminium Tape – 300°C",
+          "alt": "High-Temperature Aluminium Tape – 300°C – product photo",
+          "parent": 31
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-32.jpg",
+          "title": "Reinforced Aluminium Tape",
+          "alt": "Reinforced Aluminium Tape – product photo",
+          "parent": 32
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-33.jpg",
+          "title": "Elastomeric Arma Foam Insulation Tape",
+          "alt": "Elastomeric Arma Foam Insulation Tape – product photo",
+          "parent": 33
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-34.jpg",
+          "title": "Glass Cloth Marine Tape GM3",
+          "alt": "Glass Cloth Marine Tape GM3 – product photo",
+          "parent": 34
+        }
+      }
+    ]
+  }
+}
