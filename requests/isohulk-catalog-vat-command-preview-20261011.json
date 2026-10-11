@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-catalog-vat-command-preview-20261011",
+  "action": "plugin.install_package",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "source_path": "plugin-packages/isohulk-catalog-only-0.1.2.zip",
+    "sha256": "52e02fc6f2d0287b456239cbf0c48035fea5ffdd7517320ddbe61166956482b9",
+    "expected_plugin": "isohulk-catalog-only/isohulk-catalog-only.php",
+    "overwrite": true,
+    "activate": true,
+    "network_wide": false
+  }
+}
