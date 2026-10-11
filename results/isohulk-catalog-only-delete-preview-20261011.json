@@ -1,0 +1,1 @@
+{"version":1,"ok":true,"request_id":"isohulk-catalog-only-delete-preview-20261011","action":"plugin.delete","dry_run":true,"completed_at_gmt":"2026-10-11T19:51:13+00:00","data":{"would_delete":"isohulk-catalog-only\/isohulk-catalog-only.php","current_state_token":"[redacted]"},"meta":{"request_fingerprint":"dedf8d16945a7c857065f3d522470a8bc31f3ccd83f4b89d38767021ac771814"}}
