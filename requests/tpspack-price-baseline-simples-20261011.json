@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "tpspack-price-baseline-simples-20261011",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 26
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 27
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 28
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 29
+        }
+      }
+    ]
+  }
+}
