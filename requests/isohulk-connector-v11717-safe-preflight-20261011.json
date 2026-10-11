@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-connector-v11717-safe-preflight-20261011",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "plugin.list",
+        "payload": {}
+      },
+      {
+        "action": "connector.update.check",
+        "payload": {}
+      },
+      {
+        "action": "woocommerce.product.list",
+        "payload": {
+          "per_page": 50
+        }
+      },
+      {
+        "action": "woocommerce.tax_rate.list",
+        "payload": {
+          "per_page": 30
+        }
+      }
+    ]
+  }
+}
