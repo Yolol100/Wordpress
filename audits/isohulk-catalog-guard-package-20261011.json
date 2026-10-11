@@ -1,0 +1,7 @@
+{
+  "plugin_file": "isohulk-catalog-only/isohulk-catalog-only.php",
+  "sha256": "ed16fa62c9be6b3546b9ed184780be0263e6e94b8420bed7dc2a8467d8a99d55",
+  "size": 3199,
+  "source_sha256": "ea909f93211b1bc2740f30d842820f27db40712a3f58a056b299471c38841a1f",
+  "tests": "PHP syntax; 7 catalog and VAT contract checks"
+}
