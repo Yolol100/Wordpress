@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "tpspack-media-import-apply-5-20261011",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-51.jpg",
+          "title": "Machine Stretch Film – 500 mm × 1500 m × 23 µm (350%)",
+          "alt": "Machine Stretch Film – 500 mm × 1500 m × 23 µm (350%) – product photo",
+          "parent": 51
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-52.jpg",
+          "title": "Three-Layer Bubble Wrap – 100 µm",
+          "alt": "Three-Layer Bubble Wrap – 100 µm – product photo",
+          "parent": 52
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-53.jpg",
+          "title": "Pallet Top Sheets",
+          "alt": "Pallet Top Sheets – product photo",
+          "parent": 53
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-54.jpg",
+          "title": "PP Strapping Band",
+          "alt": "PP Strapping Band – product photo",
+          "parent": 54
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-55.jpg",
+          "title": "Paper Strapping Band",
+          "alt": "Paper Strapping Band – product photo",
+          "parent": 55
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-56.jpg",
+          "title": "Polyester Strapping Band",
+          "alt": "Polyester Strapping Band – product photo",
+          "parent": 56
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-57.jpg",
+          "title": "PET Strapping Band",
+          "alt": "PET Strapping Band – product photo",
+          "parent": 57
+        }
+      },
+      {
+        "action": "media.import",
+        "payload": {
+          "source_path": "tpspack/product-58.jpg",
+          "title": "Spray Adhesive – 500 ml",
+          "alt": "Spray Adhesive – 500 ml – product photo",
+          "parent": 58
+        }
+      }
+    ]
+  }
+}
