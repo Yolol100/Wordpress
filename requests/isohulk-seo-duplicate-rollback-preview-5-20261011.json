@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-seo-duplicate-rollback-preview-5-20261011",
+  "action": "connector.rollback",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "request_id": "isohulk-seo-filename-apply-5-20261011"
+  }
+}
