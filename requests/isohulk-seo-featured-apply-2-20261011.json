@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-seo-featured-apply-2-20261011",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 27,
+          "image_id": 163
+        },
+        "expected_fingerprint": "ccdb51afedf3c5b0ac77330bac6f01cc9376afe5be0d0126b5f2f914c6e1c3e9"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 28,
+          "image_id": 164
+        },
+        "expected_fingerprint": "694879dd9d7c9d7ae9d0fef27deb31c6ccce01979ae668acac3839e17a94ce9b"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 29,
+          "image_id": 165
+        },
+        "expected_fingerprint": "04bfcd05979415d05ede53912feb0966e37de3cc64f0112930da20ca1e6ba831"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 30,
+          "image_id": 166
+        },
+        "expected_fingerprint": "80cda7c26edcaffa758efef9565cc22e82f6037a3797d6ab792d2ff36ca51968"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 31,
+          "image_id": 167
+        },
+        "expected_fingerprint": "423c75a66ae761ea758d75555dcdc837d27195c4d0cdfd209885a109356b73be"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 32,
+          "image_id": 168
+        },
+        "expected_fingerprint": "2b48a06a80da764b9f1616b52453b11a28299ed8850110603a253415fc9e1c78"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 33,
+          "image_id": 169
+        },
+        "expected_fingerprint": "d4b132039da5cf86d7130650d79721b630a7e0287630ec0881a9787122af48db"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 34,
+          "image_id": 170
+        },
+        "expected_fingerprint": "b27d8e2e2f0f8c6d8069d496b70e020240d8f8aa407381817915d53b91973677"
+      }
+    ]
+  }
+}
