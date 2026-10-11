@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-seo-media-preflight-2-20261011",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 135
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 136
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 137
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 138
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 139
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 140
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 141
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 142
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 143
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 144
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 145
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 146
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 147
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 148
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 149
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 150
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 151
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 152
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 153
+        }
+      },
+      {
+        "action": "media.get",
+        "payload": {
+          "id": 154
+        }
+      }
+    ]
+  }
+}
