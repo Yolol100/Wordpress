@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-english-variation-guard-apply-20261011",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "term.update",
+        "payload": {
+          "taxonomy": "product_cat",
+          "id": 15,
+          "name": "Uncategorized"
+        },
+        "expected_fingerprint": "2b1b614409888c4673f252b479fb17853a8fb1b221e302344ba356d98ff2dbd7"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 19,
+          "attributes": [
+            {
+              "id": 0,
+              "name": "Size and pack",
+              "options": [
+                "50 mm × 45 m (24 rolls)",
+                "50 mm × 50 m (24 rolls)",
+                "75 mm × 50 m (16 rolls)",
+                "100 mm × 50 m (16 rolls)"
+              ],
+              "position": 0,
+              "visible": true,
+              "variation": true
+            }
+          ]
+        },
+        "expected_fingerprint": "e21dfd04b7a38558b62ffc252921d9428dfc0b818856cae4c1284da9b9d8ef3e"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 71,
+          "attributes": {
+            "size-and-pack": "50 mm × 45 m (24 rolls)"
+          },
+          "description": "Size and pack: 50 mm × 45 m (24 rolls). Current prices and availability must be confirmed before publication."
+        },
+        "expected_fingerprint": "b6ba6b647057dfba0ed66cd8fd5e9368c50d48e15a196809ab31ba1e6f0a7fb1"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 72,
+          "attributes": {
+            "size-and-pack": "50 mm × 50 m (24 rolls)"
+          },
+          "description": "Size and pack: 50 mm × 50 m (24 rolls). Current prices and availability must be confirmed before publication."
+        },
+        "expected_fingerprint": "228b3ddde0e50991af14cf5948f527c5fe2c2285921f629e398a5570d6b913b0"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 73,
+          "attributes": {
+            "size-and-pack": "75 mm × 50 m (16 rolls)"
+          },
+          "description": "Size and pack: 75 mm × 50 m (16 rolls). Current prices and availability must be confirmed before publication."
+        },
+        "expected_fingerprint": "3fe0611c08e6a1c53f4b2efb4fc4be7804ad191527800bd9ed1b9ab3129cbca7"
+      },
+      {
+        "action": "woocommerce.variation.update",
+        "payload": {
+          "id": 74,
+          "attributes": {
+            "size-and-pack": "100 mm × 50 m (16 rolls)"
+          },
+          "description": "Size and pack: 100 mm × 50 m (16 rolls). Current prices and availability must be confirmed before publication."
+        },
+        "expected_fingerprint": "ece791602d4866136c5828abfe43b14d68ea9fc0bd327d4f2f9cd220f0389a64"
+      }
+    ]
+  }
+}
