@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-unlimited-stock-baseline-products-a-20261011",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 19
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 20
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 21
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 22
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 23
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 24
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 25
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 26
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 27
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 28
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 29
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 30
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 31
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 32
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 33
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 34
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 35
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 36
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 37
+        }
+      },
+      {
+        "action": "woocommerce.product.get",
+        "payload": {
+          "id": 38
+        }
+      }
+    ]
+  }
+}
