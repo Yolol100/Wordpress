@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "tpspack-images-assignment-apply-1-20261011",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 19,
+          "image_id": 115
+        },
+        "expected_fingerprint": "d782ca8cc89cd071af39930c3ffe14fe495c8cd212b23eebced39b99bfd7b6fb"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 20,
+          "image_id": 116
+        },
+        "expected_fingerprint": "ca86a1609fbaeb8cedefd59fa0393660ed3d276e798bc1bfb80ffadc4b8b8451"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 21,
+          "image_id": 117
+        },
+        "expected_fingerprint": "9a1d11ae3febb281d10a50cd76dc83349478f92ac4f7fba8db52f22b807c468d"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 22,
+          "image_id": 118
+        },
+        "expected_fingerprint": "022f45195ba5db11be1b3e16879eec1d66abd7d0ed0b9b7ddd7c869a3465ff78"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 23,
+          "image_id": 119
+        },
+        "expected_fingerprint": "08ecfc121760105a2b660d94253111b391007d320f865b7ccfb9391eb608abc8"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 24,
+          "image_id": 120
+        },
+        "expected_fingerprint": "86242746413ca6a7cf838515c4803892fbc37d9114bcfa55eae7d5935f11a290"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 25,
+          "image_id": 121
+        },
+        "expected_fingerprint": "b8e49dfa24c7c65e053978ed593c4cbf00974853f8ff243732e0808354bc7e64"
+      },
+      {
+        "action": "woocommerce.product.update",
+        "payload": {
+          "id": 26,
+          "image_id": 122
+        },
+        "expected_fingerprint": "1e9e8e0300acaea40af94bbb1c6e64692e523e7260f21292e760874a806be1d2"
+      }
+    ]
+  }
+}
