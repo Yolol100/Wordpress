@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-theme-preflight-20261012-c1",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "theme.list",
+        "payload": {}
+      },
+      {
+        "action": "filesystem.inspect",
+        "payload": {}
+      },
+      {
+        "action": "filesystem.list",
+        "payload": {
+          "path": "wp-content/themes"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "stylesheet"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "template"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blog_public"
+        }
+      },
+      {
+        "action": "yoast.templates.inspect",
+        "payload": {}
+      }
+    ]
+  }
+}
