@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-wplang-preview-20261012-c2",
+  "action": "option.update",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "name": "WPLANG",
+    "value": "en_GB"
+  }
+}
