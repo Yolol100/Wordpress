@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-quote-footer-style-owner-20261012-c6",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/tps-pack-wordpress-theme/template-parts/pages/aanvraag.php"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/tps-pack-wordpress-theme/template-parts/pages/index.php"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/tps-pack-wordpress-theme/template-parts/pages/status.php"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/tps-pack-wordpress-theme/assets/site.css"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/tps-pack-wordpress-theme/assets/home.css"
+        }
+      }
+    ]
+  }
+}
