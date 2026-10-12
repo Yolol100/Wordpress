@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-final-settings-readback-20261012-c1",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "WPLANG"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blogdescription"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "timezone_string"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "tps_pack_english_content_version"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blog_public"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "show_on_front"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "page_on_front"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wp_page_for_privacy_policy"
+        }
+      },
+      {
+        "action": "gtranslate.settings.inspect",
+        "payload": {}
+      },
+      {
+        "action": "yoast.site_representation.inspect",
+        "payload": {}
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 13
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 14
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 15
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 16
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 17
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 264
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 252
+        }
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "joinchat"
+        }
+      },
+      {
+        "action": "code_snippets.catalog_only.inspect",
+        "payload": {}
+      },
+      {
+        "action": "woocommerce.operations.list",
+        "payload": {
+          "area": "payment_gateways"
+        }
+      },
+      {
+        "action": "menu.list",
+        "payload": {}
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "page",
+          "status": "publish",
+          "per_page": 100,
+          "page": 1
+        }
+      },
+      {
+        "action": "theme.list",
+        "payload": {}
+      },
+      {
+        "action": "woocommerce.settings.inspect",
+        "payload": {
+          "group": "products",
+          "limit": 50,
+          "offset": 0
+        }
+      },
+      {
+        "action": "woocommerce.settings.inspect",
+        "payload": {
+          "group": "account",
+          "limit": 50,
+          "offset": 0
+        }
+      }
+    ]
+  }
+}
