@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-woocommerce-settings-overview-20261012-a1",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.settings.catalog",
+        "payload": {}
+      },
+      {
+        "action": "woocommerce.tax_rate.list",
+        "payload": {
+          "per_page": 50,
+          "page": 1
+        }
+      },
+      {
+        "action": "code_snippets.catalog_only.inspect",
+        "payload": {}
+      }
+    ]
+  }
+}
