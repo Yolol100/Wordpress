@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-catalog-preview-20261012-a1",
+  "action": "code_snippets.catalog_only.ensure",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {}
+}
