@@ -1,0 +1,201 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-menu-core-apply-20261012-a1",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "menu.update",
+        "payload": {
+          "id": 23,
+          "name": "ISOHULK | Main Navigation"
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "item_id": 96,
+          "title": "Home",
+          "type": "post_type",
+          "object": "page",
+          "object_id": 13,
+          "parent": 0,
+          "status": "publish",
+          "position": 1
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "item_id": 99,
+          "title": "Categories",
+          "type": "post_type",
+          "object": "page",
+          "object_id": 264,
+          "parent": 0,
+          "status": "publish",
+          "position": 2
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "item_id": 97,
+          "title": "Products",
+          "type": "post_type",
+          "object": "page",
+          "object_id": 14,
+          "parent": 0,
+          "status": "publish",
+          "position": 3
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "item_id": 98,
+          "title": "Custom Solutions",
+          "type": "post_type",
+          "object": "page",
+          "object_id": 15,
+          "parent": 0,
+          "status": "publish",
+          "position": 4
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "item_id": 100,
+          "title": "About Us",
+          "type": "post_type",
+          "object": "page",
+          "object_id": 16,
+          "parent": 0,
+          "status": "publish",
+          "position": 5
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "item_id": 101,
+          "title": "Contact",
+          "type": "post_type",
+          "object": "page",
+          "object_id": 17,
+          "parent": 0,
+          "status": "publish",
+          "position": 6
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "item_id": 102,
+          "title": "Aluminium Tapes",
+          "type": "taxonomy",
+          "object": "product_cat",
+          "object_id": 16,
+          "parent": 99,
+          "status": "publish",
+          "position": 7
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "item_id": 103,
+          "title": "Construction Tapes",
+          "type": "taxonomy",
+          "object": "product_cat",
+          "object_id": 17,
+          "parent": 99,
+          "status": "publish",
+          "position": 8
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "item_id": 104,
+          "title": "Foils & Jacketing",
+          "type": "taxonomy",
+          "object": "product_cat",
+          "object_id": 18,
+          "parent": 99,
+          "status": "publish",
+          "position": 9
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "item_id": 105,
+          "title": "Stretch & Wrapping Film",
+          "type": "taxonomy",
+          "object": "product_cat",
+          "object_id": 19,
+          "parent": 99,
+          "status": "publish",
+          "position": 10
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "item_id": 106,
+          "title": "Strapping Bands",
+          "type": "taxonomy",
+          "object": "product_cat",
+          "object_id": 20,
+          "parent": 99,
+          "status": "publish",
+          "position": 11
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "item_id": 107,
+          "title": "Cardboard Edge Protectors",
+          "type": "taxonomy",
+          "object": "product_cat",
+          "object_id": 21,
+          "parent": 99,
+          "status": "publish",
+          "position": 12
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "item_id": 108,
+          "title": "Spray Adhesive",
+          "type": "taxonomy",
+          "object": "product_cat",
+          "object_id": 22,
+          "parent": 99,
+          "status": "publish",
+          "position": 13
+        }
+      }
+    ]
+  }
+}
