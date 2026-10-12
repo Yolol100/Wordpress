@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-gtranslate-settings-20261012-a1",
+  "action": "gtranslate.settings.inspect",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {}
+}
