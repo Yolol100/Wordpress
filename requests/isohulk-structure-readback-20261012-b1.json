@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-structure-readback-20261012-b1",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "menu.get",
+        "payload": {
+          "id": 23
+        }
+      },
+      {
+        "action": "menu.list",
+        "payload": {}
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "page",
+          "status": "publish",
+          "per_page": 100,
+          "page": 1
+        }
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "page",
+          "status": "trash",
+          "per_page": 100,
+          "page": 1
+        }
+      },
+      {
+        "action": "woocommerce.product.list",
+        "payload": {
+          "per_page": 100,
+          "page": 1
+        }
+      },
+      {
+        "action": "term.list",
+        "payload": {
+          "taxonomy": "product_cat",
+          "hide_empty": false,
+          "per_page": 200
+        }
+      },
+      {
+        "action": "code_snippets.catalog_only.inspect",
+        "payload": {}
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_shop_page_id"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_cart_page_id"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_checkout_page_id"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_myaccount_page_id"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wp_page_for_privacy_policy"
+        }
+      }
+    ]
+  }
+}
