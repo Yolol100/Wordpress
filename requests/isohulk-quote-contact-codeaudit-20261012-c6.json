@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-quote-contact-codeaudit-20261012-c6",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 17
+        }
+      },
+      {
+        "action": "post.get",
+        "payload": {
+          "id": 252
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/tps-pack-wordpress-theme/inc/forms.php"
+        }
+      },
+      {
+        "action": "filesystem.list",
+        "payload": {
+          "path": "wp-content/themes/tps-pack-wordpress-theme"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/tps-pack-wordpress-theme/page.php"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/tps-pack-wordpress-theme/inc/content.php"
+        }
+      }
+    ]
+  }
+}
