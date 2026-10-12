@@ -1,0 +1,1 @@
+{"version":1,"ok":true,"request_id":"isohulk-wplang-apply-20261012-c2","action":"option.update","dry_run":false,"completed_at_gmt":"2026-10-12T12:50:57+00:00","data":{"name":"WPLANG","value":"nl_NL","rollback_request_id":"isohulk-wplang-apply-20261012-c2"},"meta":{"request_fingerprint":"8e62fa3886eab85c2d964bbbf1238fbba8013465b2640398fef56bc274eeb5c7"}}
