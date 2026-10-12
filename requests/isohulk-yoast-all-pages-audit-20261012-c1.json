@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-yoast-all-pages-audit-20261012-c1",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 3
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 12
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 14
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 15
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 16
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 17
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 251
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 252
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 253
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 254
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 256
+        }
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 264
+        }
+      }
+    ]
+  }
+}
