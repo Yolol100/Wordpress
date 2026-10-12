@@ -1,0 +1,272 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-product-links-first20-preview-20261012-b1",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Aluminium Butyl Waterproof Repair Tape",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 22,
+          "parent": 97,
+          "status": "publish",
+          "position": 14
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Aluminium Tape – Cold Weather",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 19,
+          "parent": 97,
+          "status": "publish",
+          "position": 15
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Black Aluminium Tape AW",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 24,
+          "parent": 97,
+          "status": "publish",
+          "position": 16
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Blue Marine Masking Tape – 14-Day UV",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 36,
+          "parent": 97,
+          "status": "publish",
+          "position": 17
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Cardboard Edge Protectors – Pack of 50",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 29,
+          "parent": 97,
+          "status": "publish",
+          "position": 18
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Diamond-Reinforced Aluminium Foil",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 45,
+          "parent": 97,
+          "status": "publish",
+          "position": 19
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Double-Sided Adhesive Tape",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 37,
+          "parent": 97,
+          "status": "publish",
+          "position": 20
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Double-Sided Foam Tape",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 35,
+          "parent": 97,
+          "status": "publish",
+          "position": 21
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Elastomeric Arma Foam Insulation Tape",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 33,
+          "parent": 97,
+          "status": "publish",
+          "position": 22
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Fibreglass Cloth Foil – 430/m²",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 46,
+          "parent": 97,
+          "status": "publish",
+          "position": 23
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Glass Cloth Marine Tape GM3",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 34,
+          "parent": 97,
+          "status": "publish",
+          "position": 24
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Glossy Non-Adhesive PVC Pipe Wrapping Tape",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 42,
+          "parent": 97,
+          "status": "publish",
+          "position": 25
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "High-Temperature Aluminium Tape – 300°C",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 31,
+          "parent": 97,
+          "status": "publish",
+          "position": 26
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "ISOHULK Aluminium FSK Tape IMO",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 30,
+          "parent": 97,
+          "status": "publish",
+          "position": 27
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "ISOHULK Aluminium Tape AW IMO",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 20,
+          "parent": 97,
+          "status": "publish",
+          "position": 28
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "ISOHULK Aluminium Tracing Tape IMO",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 21,
+          "parent": 97,
+          "status": "publish",
+          "position": 29
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Length-Reinforced Filament Tape",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 25,
+          "parent": 97,
+          "status": "publish",
+          "position": 30
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Machine Stretch Film – 500 mm × 1500 m × 23 µm (350%)",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 51,
+          "parent": 97,
+          "status": "publish",
+          "position": 31
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Machine Stretch Film Power 250% – 500 mm × 2000 m × 17 µm",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 26,
+          "parent": 97,
+          "status": "publish",
+          "position": 32
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Machine Stretch Film Power 300% – 500 mm × 1500 m × 23 µm",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 28,
+          "parent": 97,
+          "status": "publish",
+          "position": 33
+        }
+      }
+    ]
+  }
+}
