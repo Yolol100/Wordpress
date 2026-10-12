@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-settings-audit-core-20261012-a1",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "plugin.list",
+        "payload": {}
+      },
+      {
+        "action": "plugin.settings.catalog",
+        "payload": {}
+      },
+      {
+        "action": "theme.list",
+        "payload": {}
+      },
+      {
+        "action": "menu.list",
+        "payload": {}
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "WPLANG"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blogname"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blogdescription"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "timezone_string"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "gmt_offset"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "date_format"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "time_format"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "start_of_week"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blog_public"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "show_on_front"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "page_on_front"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "page_for_posts"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "posts_per_page"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "permalink_structure"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "default_comment_status"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "default_ping_status"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "comment_registration"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "users_can_register"
+        }
+      }
+    ]
+  }
+}
