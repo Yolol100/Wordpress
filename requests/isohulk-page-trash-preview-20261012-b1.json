@@ -1,0 +1,156 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-page-trash-preview-20261012-b1",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 260
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 259
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 258
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 257
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 255
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 250
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 249
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 248
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 247
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 246
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 245
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 244
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 243
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 242
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 241
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 240
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 239
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 238
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 237
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 18
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 11
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 10
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 9
+        }
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 8
+        }
+      }
+    ]
+  }
+}
