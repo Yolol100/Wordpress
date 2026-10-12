@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-safe-settings-apply-20261012-c2",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "WPLANG",
+          "value": "en_GB"
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "blogdescription",
+          "value": "Adhesive tapes and packaging materials"
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "timezone_string",
+          "value": "Europe/Amsterdam"
+        }
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 13,
+          "fields": {
+            "title": "Industrial Tapes & Packaging | Tape Solutions",
+            "description": "Explore professional aluminium and construction tapes, films and packaging materials at Tape Solutions. Browse products or request a quotation.",
+            "focus_keyphrase": "industrial tapes and packaging materials"
+          }
+        },
+        "expected_fingerprint": "36b820fefa8374377bbbc5eb3b178815469bc6dedb81688d07522b6aaeb7e62a"
+      },
+      {
+        "action": "yoast.site_representation.update",
+        "payload": {
+          "fields": {
+            "org_description": "Specialist in adhesive tapes and packaging materials for industrial, food packaging and construction applications."
+          }
+        },
+        "expected_fingerprint": "62da3dcfc23a4a071df5fee5a8a09f68ea7da3b19f1bd786bc74d82a0eb697a2"
+      },
+      {
+        "action": "plugin.settings.update",
+        "payload": {
+          "plugin": "joinchat",
+          "fields": {
+            "button_tip": "Ask us for advice",
+            "message_text": "Hello! How can we help you?",
+            "message_send": "Hello Tape Solutions, I have a question about your products.",
+            "message_start": "Open chat"
+          }
+        },
+        "expected_fingerprint": "93d5c08095d6c80b4ed616dce596e48eabb803ed09573dbabcbaeca6b82d9e19"
+      }
+    ]
+  }
+}
