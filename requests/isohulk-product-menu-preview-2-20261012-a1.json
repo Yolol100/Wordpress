@@ -1,0 +1,272 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-product-menu-preview-2-20261012-a1",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Machine Stretch Film Power 300% – 500 mm × 1800 m × 20 µm",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 27,
+          "parent": 97,
+          "status": "publish",
+          "position": 34
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Pallet Top Sheets",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 53,
+          "parent": 97,
+          "status": "publish",
+          "position": 35
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Paper Strapping Band",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 55,
+          "parent": 97,
+          "status": "publish",
+          "position": 36
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "PET Strapping Band",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 57,
+          "parent": 97,
+          "status": "publish",
+          "position": 37
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "PLUS Hand Stretch Film – 500 mm × 300 m × 17 µm",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 49,
+          "parent": 97,
+          "status": "publish",
+          "position": 38
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "PLUS Hand Stretch Film – 500 mm × 300 m × 20 µm",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 48,
+          "parent": 97,
+          "status": "publish",
+          "position": 39
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "PLUS Hand Stretch Film – 500 mm × 300 m × 23 µm",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 50,
+          "parent": 97,
+          "status": "publish",
+          "position": 40
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Polyester Strapping Band",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 56,
+          "parent": 97,
+          "status": "publish",
+          "position": 41
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "PP Strapping Band",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 54,
+          "parent": 97,
+          "status": "publish",
+          "position": 42
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "PP-Coated Aluminium Tape",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 23,
+          "parent": 97,
+          "status": "publish",
+          "position": 43
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Premium Weatherproof Thermal Jacketing Film",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 47,
+          "parent": 97,
+          "status": "publish",
+          "position": 44
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Pure Aluminium Foil",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 43,
+          "parent": 97,
+          "status": "publish",
+          "position": 45
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Reinforced Aluminium Tape",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 32,
+          "parent": 97,
+          "status": "publish",
+          "position": 46
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Scrim-Reinforced Aluminium Foil",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 44,
+          "parent": 97,
+          "status": "publish",
+          "position": 47
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Spray Adhesive – 500 ml",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 58,
+          "parent": 97,
+          "status": "publish",
+          "position": 48
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Three-Layer Bubble Wrap – 100 µm",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 52,
+          "parent": 97,
+          "status": "publish",
+          "position": 49
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Washi Masking Tape – Gold + Foil",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 39,
+          "parent": 97,
+          "status": "publish",
+          "position": 50
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Washi Masking Tape – Gold, 3-Month UV",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 40,
+          "parent": 97,
+          "status": "publish",
+          "position": 51
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Washi Masking Tape – Lilac Low Tack",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 41,
+          "parent": 97,
+          "status": "publish",
+          "position": 52
+        }
+      },
+      {
+        "action": "menu.item_upsert",
+        "payload": {
+          "menu_id": 23,
+          "title": "Waterproof Duct Tape",
+          "type": "post_type",
+          "object": "product",
+          "object_id": 38,
+          "parent": 97,
+          "status": "publish",
+          "position": 53
+        }
+      }
+    ]
+  }
+}
