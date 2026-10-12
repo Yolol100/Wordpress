@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-woo-safe-disable-preview-20261012-c5",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.settings.update",
+        "payload": {
+          "group": "products",
+          "id": "woocommerce_manage_stock",
+          "value": "no"
+        }
+      },
+      {
+        "action": "woocommerce.settings.update",
+        "payload": {
+          "group": "account",
+          "id": "woocommerce_enable_guest_checkout",
+          "value": "no"
+        }
+      }
+    ]
+  }
+}
