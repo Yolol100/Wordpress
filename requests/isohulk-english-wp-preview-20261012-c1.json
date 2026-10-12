@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-english-wp-preview-20261012-c1",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "blogdescription",
+          "value": "Professional adhesive tapes and packaging materials"
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "timezone_string",
+          "value": "Europe/Amsterdam"
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "WPLANG",
+          "value": "en_GB"
+        }
+      }
+    ]
+  }
+}
