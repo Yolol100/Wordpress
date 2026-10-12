@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-wpc-11719-preinstall-20261012",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "plugin.list",
+        "payload": {}
+      },
+      {
+        "action": "connector.update.check",
+        "payload": {}
+      }
+    ]
+  }
+}
