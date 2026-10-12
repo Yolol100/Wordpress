@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-woo-system-options-preview-20261012-a1",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "page_for_posts",
+          "value": 0
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_shop_page_id",
+          "value": 14
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_cart_page_id",
+          "value": 0
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_checkout_page_id",
+          "value": 0
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "woocommerce_myaccount_page_id",
+          "value": 0
+        }
+      }
+    ]
+  }
+}
