@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-enus-preview-20261012-c3",
+  "action": "option.update",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "name": "WPLANG",
+    "value": ""
+  }
+}
