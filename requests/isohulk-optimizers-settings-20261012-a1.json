@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-optimizers-settings-20261012-a1",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "wp_rocket"
+        }
+      },
+      {
+        "action": "optimizer.settings.inspect",
+        "payload": {
+          "provider": "ewww"
+        }
+      },
+      {
+        "action": "optimizer.settings.inspect",
+        "payload": {
+          "provider": "asset_cleanup"
+        }
+      },
+      {
+        "action": "auto_image_attributes.inspect",
+        "payload": {}
+      }
+    ]
+  }
+}
