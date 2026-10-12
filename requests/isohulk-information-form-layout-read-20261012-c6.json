@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-information-form-layout-read-20261012-c6",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/tps-pack-wordpress-theme/template-parts/pages/information.php"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/tps-pack-wordpress-theme/content/en.json"
+        }
+      },
+      {
+        "action": "filesystem.read_text",
+        "payload": {
+          "path": "wp-content/themes/tps-pack-wordpress-theme/functions.php"
+        }
+      }
+    ]
+  }
+}
