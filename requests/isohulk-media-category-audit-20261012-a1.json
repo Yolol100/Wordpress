@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-media-category-audit-20261012-a1",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "media.list",
+        "payload": {
+          "per_page": 100,
+          "page": 1
+        }
+      },
+      {
+        "action": "term.list",
+        "payload": {
+          "taxonomy": "product_cat",
+          "hide_empty": false,
+          "per_page": 200
+        }
+      },
+      {
+        "action": "woocommerce.product.list",
+        "payload": {
+          "per_page": 100,
+          "page": 1
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 19
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 20
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 21
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 22
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 23
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 24
+        }
+      },
+      {
+        "action": "woocommerce.variation.list",
+        "payload": {
+          "product_id": 25
+        }
+      }
+    ]
+  }
+}
