@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-ia-inventory-20261012-a1",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "plugin.list",
+        "payload": {}
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "page",
+          "status": "any",
+          "per_page": 100,
+          "page": 1
+        }
+      },
+      {
+        "action": "term.list",
+        "payload": {
+          "taxonomy": "product_cat",
+          "hide_empty": false,
+          "per_page": 200
+        }
+      },
+      {
+        "action": "menu.list",
+        "payload": {}
+      },
+      {
+        "action": "woocommerce.product.list",
+        "payload": {
+          "per_page": 100,
+          "page": 1
+        }
+      },
+      {
+        "action": "code_snippets.catalog_only.inspect",
+        "payload": {}
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "show_on_front"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "page_on_front"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "page_for_posts"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_shop_page_id"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_cart_page_id"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_checkout_page_id"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "woocommerce_myaccount_page_id"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "wp_page_for_privacy_policy"
+        }
+      }
+    ]
+  }
+}
