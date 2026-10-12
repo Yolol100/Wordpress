@@ -1,0 +1,1 @@
+{"version":1,"ok":true,"request_id":"isohulk-enus-apply-20261012-c3","action":"option.update","dry_run":false,"completed_at_gmt":"2026-10-12T12:53:40+00:00","data":{"name":"WPLANG","value":"","rollback_request_id":"isohulk-enus-apply-20261012-c3"},"meta":{"request_fingerprint":"8c6a029af528689074dade6eb4cb04a72ccf1df75f1a65335a2a337b621fade6"}}
