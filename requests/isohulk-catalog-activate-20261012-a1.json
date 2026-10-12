@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-catalog-activate-20261012-a1",
+  "action": "code_snippets.catalog_only.ensure",
+  "dry_run": false,
+  "confirm": true,
+  "expected_fingerprint": "9a2f830d47d4e9a38417d8c14ca2a36b4dd3f69c76f6428f94a31563b2b8bbf5",
+  "payload": {}
+}
