@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-phase2-english-preflight-20261012",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "WPLANG"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blogdescription"
+        }
+      },
+      {
+        "action": "yoast.site_representation.inspect",
+        "payload": {}
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "joinchat"
+        }
+      },
+      {
+        "action": "gtranslate.settings.inspect",
+        "payload": {}
+      },
+      {
+        "action": "media.list",
+        "payload": {
+          "per_page": 100,
+          "page": 1
+        }
+      },
+      {
+        "action": "woocommerce.product.list",
+        "payload": {
+          "per_page": 100,
+          "page": 1
+        }
+      }
+    ]
+  }
+}
