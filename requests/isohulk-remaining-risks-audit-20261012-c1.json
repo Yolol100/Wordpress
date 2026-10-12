@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-remaining-risks-audit-20261012-c1",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "woocommerce.operations.list",
+        "payload": {
+          "area": "payment_gateways"
+        }
+      },
+      {
+        "action": "filesystem.list",
+        "payload": {
+          "path": "wp-content/themes/tps-pack-wordpress-theme"
+        }
+      },
+      {
+        "action": "system.doctor",
+        "payload": {}
+      }
+    ]
+  }
+}
