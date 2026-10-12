@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-core-update-policy-20261012-a1",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "core.check_updates",
+        "payload": {}
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "auto_update_plugins"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "auto_update_themes"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "auto_update_core_major"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "auto_update_core_minor"
+        }
+      }
+    ]
+  }
+}
