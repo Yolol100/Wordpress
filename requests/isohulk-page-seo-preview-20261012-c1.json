@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-page-seo-preview-20261012-c1",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 14,
+          "fields": {
+            "title": "Adhesive Tapes & Packaging Products | Tape Solutions",
+            "description": "Browse professional aluminium tapes, construction tapes, films, strapping bands and packaging materials. Find products and request a quotation.",
+            "focus_keyphrase": "industrial tapes and packaging materials"
+          }
+        },
+        "expected_fingerprint": "971ea531d4162a35bc2168f8ff7a9e388d20e06834db4035f048eeed7471877f"
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 15,
+          "fields": {
+            "title": "Custom Tapes & Private Label Solutions | Tape Solutions",
+            "description": "Need custom tape sizes, private-label options or packaging materials? Share your specifications with Tape Solutions and request a quotation.",
+            "focus_keyphrase": "custom adhesive tapes"
+          }
+        },
+        "expected_fingerprint": "26cc973092dff86bfd591c03b0b4a23b34bdf9968b8055513e264725e177623f"
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 16,
+          "fields": {
+            "title": "About Tape Solutions | Tapes & Packaging",
+            "description": "Learn about Tape Solutions and our adhesive tape and packaging material range for industrial, construction and packaging applications."
+          }
+        },
+        "expected_fingerprint": "6a84398eb9a1dd774b53e5c36ac9803e2ebe69eda3deb4cbf8a96edd32a8d8d7"
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 17,
+          "fields": {
+            "title": "Contact Tape Solutions | Product Advice & Quotes",
+            "description": "Contact Tape Solutions for product advice, adhesive tape specifications, packaging materials and quotation requests."
+          }
+        },
+        "expected_fingerprint": "35512a2f7dd906293ff44ab7c3e8c927f5eefa66832b903985f3e35726f75d0f"
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 264,
+          "fields": {
+            "title": "Product Categories | Tape Solutions",
+            "description": "Browse aluminium tapes, construction tapes, films, strapping bands and packaging materials by category. Find the right product for your needs.",
+            "focus_keyphrase": "adhesive tape categories"
+          }
+        },
+        "expected_fingerprint": "135b1486dace2e87e95759ecd76cff80fe74eb961e7db28ef353a4b6aaa52dfd"
+      },
+      {
+        "action": "yoast.update",
+        "payload": {
+          "id": 252,
+          "fields": {
+            "title": "Request a Quotation | Tape Solutions",
+            "description": "Request a quotation for adhesive tapes, packaging materials or custom solutions. Tell us the products, dimensions and quantities you need.",
+            "focus_keyphrase": "tape quotation"
+          }
+        },
+        "expected_fingerprint": "135b1486dace2e87e95759ecd76cff80fe74eb961e7db28ef353a4b6aaa52dfd"
+      }
+    ]
+  }
+}
