@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-quote-page-preview-20261012-d1",
+  "action": "filesystem.write_text",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "path": "wp-content/themes/tps-pack-wordpress-theme/page.php",
+    "content": "<?php\nif ( ! defined('ABSPATH') ) exit;\nget_header();\n$slug = get_post_field('post_name', get_queried_object_id());\n\n// The English quote page is a retained WordPress page. Use the existing\n// guarded enquiry form, without duplicating the page's editor content or H1.\nif ($slug === 'request-a-quote' && !post_password_required()) {\n  echo '<main id=\"main\" tabindex=\"-1\">';\n  echo '<section class=\"section wrap\">';\n  while (have_posts()) { the_post(); the_content(); }\n  echo '</section>';\n  get_template_part('template-parts/forms/enquiry', null, array('kind' => 'aanvraag'));\n  echo '</main>';\n  get_footer();\n  return;\n}\n$allowed = tps_pack_page_slugs();\nif (in_array($slug, $allowed, true)) {\n  if (is_array(tps_pack_info_copy($slug))) {\n    if (post_password_required()) {\n      echo '<main id=\"main\" class=\"wrap section\" tabindex=\"-1\">';\n      echo get_the_password_form(); // WordPress core renders its own protected-content form.\n      echo '</main>';\n    } else {\n      // The template renders preserved WP editor content inside its main landmark.\n      get_template_part('template-parts/pages/information', null, array('slug'=>$slug, 'include_editor_content'=>true));\n    }\n    get_footer();\n    return;\n  }\n  if (post_password_required()) {\n    echo '<main id=\"main\" class=\"wrap section\" tabindex=\"-1\">';\n    echo get_the_password_form(); // Preserve native WordPress protected-page behavior.\n    echo '</main>';\n  } else {\n    get_template_part('template-parts/pages/' . $slug);\n  }\n} else {\n  echo '<main id=\"main\" class=\"wrap section\" tabindex=\"-1\">';\n  if (post_password_required()) {\n    echo get_the_password_form();\n  } else while (have_posts()) { the_post(); echo '<h1>' . esc_html(get_the_title()) . '</h1>'; the_content(); }\n  echo '</main>';\n}\nget_footer();\n",
+    "expected_sha256": "91a52d2b0e4a2bace729588f51a45f7d3d61676401bfb86dea44626a69b39e82"
+  }
+}
