@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-catalog-independent-readback-20261012-a1",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "plugin.list",
+        "payload": {}
+      },
+      {
+        "action": "code_snippets.catalog_only.inspect",
+        "payload": {}
+      },
+      {
+        "action": "woocommerce.product.list",
+        "payload": {
+          "per_page": 50
+        }
+      }
+    ]
+  }
+}
