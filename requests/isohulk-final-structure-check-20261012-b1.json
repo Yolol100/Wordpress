@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-final-structure-check-20261012-b1",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "menu.list",
+        "payload": {}
+      },
+      {
+        "action": "menu.get",
+        "payload": {
+          "id": 23
+        }
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "page",
+          "status": "publish",
+          "per_page": 100,
+          "page": 1
+        }
+      },
+      {
+        "action": "post.list",
+        "payload": {
+          "post_type": "page",
+          "status": "trash",
+          "per_page": 100,
+          "page": 1
+        }
+      },
+      {
+        "action": "woocommerce.product.list",
+        "payload": {
+          "per_page": 100,
+          "page": 1
+        }
+      },
+      {
+        "action": "term.list",
+        "payload": {
+          "taxonomy": "product_cat",
+          "hide_empty": false,
+          "per_page": 100
+        }
+      },
+      {
+        "action": "code_snippets.catalog_only.inspect",
+        "payload": {}
+      }
+    ]
+  }
+}
