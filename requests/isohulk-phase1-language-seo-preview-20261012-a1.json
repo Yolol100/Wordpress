@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-phase1-language-seo-preview-20261012-a1",
+  "action": "connector.batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "WPLANG",
+          "value": "en_GB"
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "blogdescription",
+          "value": "Specialist in self-adhesive tapes and packaging materials"
+        }
+      },
+      {
+        "action": "option.update",
+        "payload": {
+          "name": "timezone_string",
+          "value": "Europe/Amsterdam"
+        }
+      },
+      {
+        "action": "yoast.site_representation.update",
+        "payload": {
+          "fields": {
+            "org_description": "Specialist in self-adhesive tapes and packaging materials for industry, food, packaging and construction."
+          }
+        }
+      },
+      {
+        "action": "plugin.settings.update",
+        "payload": {
+          "plugin": "joinchat",
+          "fields": {
+            "button_tip": "Ask us for advice"
+          }
+        }
+      }
+    ]
+  }
+}
