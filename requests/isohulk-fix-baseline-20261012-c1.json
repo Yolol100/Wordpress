@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-fix-baseline-20261012-c1",
+  "action": "connector.read_batch",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "operations": [
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "WPLANG"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blogdescription"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "timezone_string"
+        }
+      },
+      {
+        "action": "option.get",
+        "payload": {
+          "name": "blog_public"
+        }
+      },
+      {
+        "action": "gtranslate.settings.inspect",
+        "payload": {}
+      },
+      {
+        "action": "yoast.site_representation.inspect",
+        "payload": {}
+      },
+      {
+        "action": "yoast.inspect",
+        "payload": {
+          "id": 13
+        }
+      },
+      {
+        "action": "plugin.settings.inspect",
+        "payload": {
+          "plugin": "joinchat"
+        }
+      },
+      {
+        "action": "woocommerce.settings.inspect",
+        "payload": {
+          "group": "products",
+          "offset": 0,
+          "limit": 50
+        }
+      },
+      {
+        "action": "woocommerce.settings.inspect",
+        "payload": {
+          "group": "account",
+          "offset": 0,
+          "limit": 50
+        }
+      },
+      {
+        "action": "code_snippets.catalog_only.inspect",
+        "payload": {}
+      }
+    ]
+  }
+}
