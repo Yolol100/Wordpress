@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-phase2-products-read-20261012-a2",
+  "action": "woocommerce.settings.inspect",
+  "dry_run": true,
+  "confirm": false,
+  "payload": {
+    "group": "products",
+    "offset": 0,
+    "limit": 50
+  }
+}
