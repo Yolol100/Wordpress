@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-pages-to-trash-20261012-b1",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 260
+        },
+        "expected_fingerprint": "8b84ced61d656a50c025b2ec6268e0c96cfc93e25dc9ac1a3d21745ad201ea27"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 259
+        },
+        "expected_fingerprint": "01f580c6962f305cb5a704aeddcd68e7a734d150e0ef5c14b58e774a77f4b8dc"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 258
+        },
+        "expected_fingerprint": "bcbbfb3eabe95e0ac8aba597183f3d93b97c56a3329458978530ff8ea128fbd8"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 257
+        },
+        "expected_fingerprint": "bd338f5f498a8f0e4150cc454fc21a3e6f964089d6b38b279f4626d8afbd0110"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 255
+        },
+        "expected_fingerprint": "4d7e8042462e818c2b534b5371f5bea3cb997f07258cd8138fed214e29b19840"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 250
+        },
+        "expected_fingerprint": "e68b72c6ddc1c3d4dcc9f3cf12d014a0be9ff768af710f2a4d236f594ebc0be9"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 249
+        },
+        "expected_fingerprint": "73814a75272460ccae456c0439df79a7822a1ae460218f6a476c96c4b97e42e2"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 248
+        },
+        "expected_fingerprint": "b73db76debd1381921311c20af7946a18fa5722f545185318bf4a7e82fc21b1b"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 247
+        },
+        "expected_fingerprint": "84c02173a4ea141573d8e2cecfcb00b5b6dfac15de291547400f2a6eec66506a"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 246
+        },
+        "expected_fingerprint": "3a0320f9bbf7ecbd89969aff7bb8b32a70f8093fc422d72c6a511f4dd555d694"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 245
+        },
+        "expected_fingerprint": "259d15292eb33cd55ebbb438bdc7acd02e0e8f341d2e039a48504d00fe729f94"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 244
+        },
+        "expected_fingerprint": "47d55feb96c4895d9549bf0ae4b553899625263bfafc0cf8c30a3affa109125a"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 243
+        },
+        "expected_fingerprint": "5c212d1434d49d734f7ad06132d0db44035159783aa44fb1704e5aab1cd6cbe6"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 242
+        },
+        "expected_fingerprint": "23707640c790637298ef5060e08983cfc88a08e1de58c7279fd00775b54bc145"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 241
+        },
+        "expected_fingerprint": "45136397ab0c85c98dc9dae480b0ef8e823c6c7dd668c0902ff50fb195651581"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 240
+        },
+        "expected_fingerprint": "f8a62fca0ecac64c2656643f34a1106592f3c9c571d5c9a7bc98b5d7d1730a0e"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 239
+        },
+        "expected_fingerprint": "3ab9226bc41801ff03fe9ffd82a4cd7519c0cedace059aad582978c0a95fbc2e"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 238
+        },
+        "expected_fingerprint": "80276583df5bc4ad9aa4fea377ec87fd48d9ad24b6af20bb0c493120aab65848"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 237
+        },
+        "expected_fingerprint": "54951eb949bcc81571d5759f36aa12e1b403cb2fef820bd678e5011162f6c830"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 18
+        },
+        "expected_fingerprint": "0d7ffb93595425b7916ae2222cddd0e8a8a8d5176d369f3906dc131123d1ee74"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 11
+        },
+        "expected_fingerprint": "aa7dd85c30a95f7562270594d60415957184d1e46b4264ed59abc97c3f87b2f8"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 10
+        },
+        "expected_fingerprint": "6167be61d0a8bd60f0b4b741bff9296db366cd568937f972d8f45541091e9e35"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 9
+        },
+        "expected_fingerprint": "7fda05ee796bb3f0d7a137be5d29e70241d7c24a390148f66c2b13d95b56edfe"
+      },
+      {
+        "action": "post.trash",
+        "payload": {
+          "id": 8
+        },
+        "expected_fingerprint": "55b8fd6a18909694748e8dcd4dbff4f52d60f33207bc208185ff6c6595386cf7"
+      }
+    ]
+  }
+}
