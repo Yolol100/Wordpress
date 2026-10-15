@@ -4,6 +4,18 @@ Modern Image Manager is a WordPress admin plugin for managing image metadata, im
 
 The repository contains the plugin source and built runtime files. The WordPress.org-style `readme.txt` remains the canonical distribution metadata; this `README.md` provides the GitHub project overview.
 
+## Why this project matters
+
+WordPress media libraries can require repetitive edits across image metadata, export files and content-usage reports. Modern Image Manager brings these jobs into a single WordPress admin workflow so changes can be inspected before they are applied.
+
+**Engineering work:** an admin interface for image metadata, CSV import/export, image-usage scanning and bounded media ZIP exports, with permission checks and validation for privileged operations.
+
+**Technical decisions:** preview imports before writing, process larger libraries in bounded batches, and treat generated media/CSV exports as potentially client-sensitive data. These measures reduce risks; they do not replace staging checks or backups.
+
+**Review the implementation:** [plugin bootstrap](modern-image-manager.php) · [source code](src/) · [WordPress distribution metadata](readme.txt)
+
+**Developer:** [Andrew Baeten — WordPress Developer & Web Designer](https://github.com/Yolol100) · [Website portfolio](https://andrewbaeten.nl/category/cases)
+
 ## What it does
 
 Modern Image Manager helps administrators and media managers work with WordPress image attachments without having to inspect or edit records one by one.
