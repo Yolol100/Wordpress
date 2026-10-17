@@ -14,7 +14,7 @@ WordPress media libraries can require repetitive edits across image metadata, ex
 
 **Review the implementation:** [plugin bootstrap](modern-image-manager.php) · [source code](src/) · [WordPress distribution metadata](readme.txt)
 
-**Developer:** [Andrew Baeten — WordPress Developer & Web Designer](https://github.com/Yolol100) · [Website portfolio](https://andrewbaeten.nl/category/cases)
+**Developer:** [Andrew Baeten — WordPress Developer & Web Designer](https://github.com/Yolol100) · [GitHub project index](https://github.com/Yolol100?tab=repositories)
 
 ## What it does
 
