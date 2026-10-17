@@ -35,6 +35,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
+          # The public protocol has no trusted request allowlist or receipt
+          # sanitizer on main. Prevent site access and OIDC issuance entirely.
+          if [[ "${{ github.event.repository.private }}" != 'true' ]]; then
+            echo '::error::Public WordPressConnector OIDC execution is disabled; see issue #937 for the secure private transport migration.' >&2
+            exit 1
+          fi
+
           [[ "$PR_NUMBER" =~ ^[1-9][0-9]*$ ]]
           [[ "$EXPECTED_HEAD_SHA" =~ ^[a-f0-9]{40}$ ]]
           root="$RUNNER_TEMP/wpconnector"
