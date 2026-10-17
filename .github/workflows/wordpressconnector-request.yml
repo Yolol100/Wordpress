@@ -35,6 +35,14 @@ jobs:
         run: |
           set -euo pipefail
 
+          # This transport previously ran with private-mode protections.
+          # Public request execution requires separately reviewed validators
+          # and a sanitized-receipt contract that are not present on main.
+          if [[ "${{ github.event.repository.private }}" != 'true' ]]; then
+            echo '::error::Public WordPressConnector request transport is disabled until private migration or verified public-safety controls; see issue #937.' >&2
+            exit 1
+          fi
+
           if [[ "${{ github.event.pull_request.head.repo.full_name }}" != "${GITHUB_REPOSITORY}" ]]; then
             echo 'Fork PRs are not allowed to submit WordPress runtime requests.' >&2
             exit 1
