@@ -76,6 +76,17 @@ Media metadata can contain personal or client-specific information. Site owners 
 - `languages/` — translation files.
 - `readme.txt` — WordPress distribution documentation and changelog.
 
+
+## Safe bulk image SEO imports
+
+Before importing CSV metadata at scale, read [the metadata-only import guardrails](docs/SAFE-MEDIA-SEO-IMPORT.md). An attachment has one global default alt text even when used on many local landing pages; page-specific Elementor \`alt\` values need separate checks. Never infer visual content from a filename or grey thumbnail placeholder. In metadata-only batches leave \`new_filename\` blank, keep media IDs, URLs, paths and slugs unchanged, and run the read-only preflight:
+
+\`\`\`sh
+python scripts/preflight_media_metadata_csv.py --reference before.csv --candidate proposed.csv
+\`\`\`
+
+The preflight does not replace a database/uploads backup, a staging import, or live page readback.
+
 ## License
 
 GPL-2.0-or-later, as declared in the plugin metadata and `readme.txt`.
