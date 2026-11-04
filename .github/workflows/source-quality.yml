@@ -55,9 +55,17 @@ jobs:
         run: node --check build/admin/index.js
 
   wordpress:
-    name: WordPress runtime, REST and permissions
+    name: WordPress ${{ matrix.wordpress }} / PHP ${{ matrix.php }} runtime
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - wordpress: '6.8'
+            php: '8.1'
+          - wordpress: '7.0'
+            php: '8.3'
     services:
       mysql:
         image: mysql:8.0
@@ -79,7 +87,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
         with:
-          php-version: '8.3'
+          php-version: ${{ matrix.php }}
           coverage: none
           extensions: mysqli
       - name: Install verified WP-CLI 2.12.0
@@ -95,7 +103,7 @@ jobs:
           set -euo pipefail
           runtime="$RUNNER_TEMP/modern-image-manager-runtime"
           plugin_dir="$runtime/wp-content/plugins/modern-image-manager"
-          php /tmp/wp-cli.phar core download --path="$runtime" --version=6.8 --locale=en_US
+          php /tmp/wp-cli.phar core download --path="$runtime" --version='${{ matrix.wordpress }}' --locale=en_US
           php /tmp/wp-cli.phar config create --path="$runtime" --dbname=wordpress --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306
           php /tmp/wp-cli.phar config set WP_DEBUG true --raw --path="$runtime"
           php /tmp/wp-cli.phar config set WP_DEBUG_LOG true --raw --path="$runtime"
