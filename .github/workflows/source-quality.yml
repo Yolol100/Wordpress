@@ -91,7 +91,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
-          extensions: mysqli
+          extensions: mysqli, zip
       - name: Install verified WP-CLI 2.12.0
         shell: bash
         run: |
@@ -114,6 +114,21 @@ jobs:
           rsync -a --exclude='.git/' "$GITHUB_WORKSPACE/" "$plugin_dir/"
           php /tmp/wp-cli.phar plugin activate modern-image-manager --path="$runtime"
           php /tmp/wp-cli.phar eval-file "$plugin_dir/tests/runtime-smoke.php" --path="$runtime"
+          export MIM_ZIP="$RUNNER_TEMP/modern-image-manager-test.zip"
+          php /tmp/wp-cli.phar eval-file "$plugin_dir/tests/runtime-zip-export.php" --path="$runtime" > "$MIM_ZIP"
+          python3 - <<'PY'
+          import base64
+          import os
+          import zipfile
+
+          data = base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC")
+          with zipfile.ZipFile(os.environ["MIM_ZIP"]) as archive:
+              names = archive.namelist()
+              assert len(names) == 1, f"Expected one image in media ZIP, got {names}"
+              assert names[0].startswith("Plaatjes/") and names[0].endswith("-mim-ci-zip-fixture.png")
+              assert archive.read(names[0]) == data, "ZIP payload differs from media attachment"
+          print("WordPress media ZIP roundtrip: OK")
+          PY
           if test -f "$runtime/wp-content/debug.log"; then
             if grep -Eqi 'PHP (Fatal error|Parse error|Warning|Deprecated|Notice)' "$runtime/wp-content/debug.log"; then
               cat "$runtime/wp-content/debug.log"
