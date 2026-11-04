@@ -18,7 +18,8 @@ $cases = [
     'empty JSON array' => [array_replace($fixture, ['payload' => []]), false],
     'nonempty JSON array' => [array_replace($fixture, ['payload' => ['one']]), false],
     'scalar payload' => [array_replace($fixture, ['payload' => 'wrong']), false],
-    'array root' => [['version' => 1, 'payload' => []], false],
+    'array root' => [[$fixture], false],
+    'empty array root' => [[], false],
     'insecure site URL' => [array_replace($fixture, ['site_url' => 'http://example.org']), false],
 ];
 
