@@ -49,7 +49,7 @@ final class ZipService
             wp_die(esc_html__('Kon tijdelijk exportbestand niet aanmaken.', 'modern-image-manager'));
         }
         $zip = new ZipArchive();
-        if ($zip->open($zipFilePath, ZipArchive::CREATE) !== true) {
+        if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
             if (is_file($zipFilePath)) {
                 unlink($zipFilePath);
             }
@@ -85,7 +85,12 @@ final class ZipService
             $page++;
         } while ($page <= (int) $query->max_num_pages);
 
-        $zip->close();
+        if (! $zip->close()) {
+            if (is_file($zipFilePath)) {
+                unlink($zipFilePath);
+            }
+            wp_die(esc_html__('Het ZIP-bestand kon niet worden opgeslagen.', 'modern-image-manager'));
+        }
 
         if (! is_file($zipFilePath) || $found === 0) {
             if (is_file($zipFilePath)) {
