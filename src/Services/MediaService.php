@@ -37,6 +37,9 @@ final class MediaService
         if ($filter !== 'all') {
             [$total, $pagedIds] = $this->filteredIds($filter, $search, $page, $perPage);
             $pages = max(1, (int) ceil($total / $perPage));
+            if ($total > 0 && $page > $pages) {
+                [, $pagedIds] = $this->filteredIds($filter, $search, $pages, $perPage);
+            }
         } else {
             $queryArgs = [
                 'post_type' => 'attachment',
@@ -55,6 +58,11 @@ final class MediaService
             $pagedIds = array_map('intval', (array) $query->posts);
             $total = (int) $query->found_posts;
             $pages = max(1, (int) $query->max_num_pages);
+            if ($total > 0 && $page > $pages) {
+                $queryArgs['paged'] = $pages;
+                $lastPageQuery = $this->attachments->queryImageIds($queryArgs);
+                $pagedIds = array_map('intval', (array) $lastPageQuery->posts);
+            }
         }
 
         $items = [];
