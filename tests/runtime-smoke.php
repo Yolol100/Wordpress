@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 /**
  * Isolated WordPress runtime contract. Called via wp eval-file after plugin activation.
