@@ -62,6 +62,25 @@ if (is_wp_error($fixtureId) || (int) $fixtureId < 1) {
 
 try {
     foreach (['all', 'unlinked'] as $filter) {
+        $firstPage = new WP_REST_Request('GET', '/modern-image-manager/v1/media');
+        $firstPage->set_param('filter', $filter);
+        $firstPage->set_param('page', 1);
+        $firstResponse = rest_do_request($firstPage);
+        $firstData = $firstResponse->get_data();
+        $firstIds = array_map('intval', array_column((array) ($firstData['items'] ?? []), 'id'));
+        if (!in_array((int) $fixtureId, $firstIds, true)) {
+            throw new RuntimeException(
+                "Pagination fixture missing from first page ({$filter}): "
+                . wp_json_encode([
+                    'fixture_id' => (int) $fixtureId,
+                    'status' => get_post_status($fixtureId),
+                    'mime' => get_post_mime_type($fixtureId),
+                    'total' => $firstData['total'] ?? null,
+                    'pages' => $firstData['pages'] ?? null,
+                ])
+            );
+        }
+
         $request = new WP_REST_Request('GET', '/modern-image-manager/v1/media');
         $request->set_param('filter', $filter);
         $request->set_param('page', 999);
