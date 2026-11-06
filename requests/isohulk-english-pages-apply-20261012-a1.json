@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "site_url": "https://isohulk.conceptwebactueel-6.nl",
+  "request_id": "isohulk-english-pages-apply-20261012-a1",
+  "action": "connector.batch",
+  "dry_run": false,
+  "confirm": true,
+  "payload": {
+    "operations": [
+      {
+        "action": "post.create",
+        "payload": {
+          "type": "page",
+          "status": "publish",
+          "title": "Categories",
+          "slug": "categories",
+          "content": "<h1>Product Categories</h1><p>Explore our professional range by product category. Choose a category to find suitable tapes, films and packaging materials.</p>[product_categories number=\"0\" parent=\"0\" hide_empty=\"1\" columns=\"3\"]"
+        }
+      },
+      {
+        "action": "post.update",
+        "payload": {
+          "id": 13,
+          "title": "Home",
+          "slug": "home",
+          "content": "<h1>Professional Tapes & Packaging Materials</h1><p>Tape Solutions supplies specialist adhesive tapes, films and packaging materials for industrial, construction and packaging applications.</p><p>Explore our product catalogue, browse by category or contact us for advice, bespoke sizes and private-label solutions.</p><p><a href=\"/products/\">Explore Products</a> · <a href=\"/categories/\">Browse Categories</a> · <a href=\"/request-a-quote/\">Request a Quote</a></p>"
+        },
+        "expected_fingerprint": "f39ad319210098612257362de742e820fcd563a14a39f7ec2d133300ff73089e"
+      },
+      {
+        "action": "post.update",
+        "payload": {
+          "id": 14,
+          "title": "Products",
+          "slug": "products",
+          "content": "<h1>All Products</h1><p>Browse our professional product range. Prices are displayed where confirmed; online purchasing is disabled. Contact us for a quotation, larger quantities or custom sizes.</p><p><a href=\"/categories/\">Browse by Category</a> · <a href=\"/request-a-quote/\">Request a Quote</a></p>[products limit=\"40\" columns=\"4\" paginate=\"true\" orderby=\"title\" order=\"ASC\"]"
+        },
+        "expected_fingerprint": "df9e0e4870175187f43bf6425c47a8e9fa6ec368e7d0c7abeee835567db042ba"
+      },
+      {
+        "action": "post.update",
+        "payload": {
+          "id": 15,
+          "title": "Custom Solutions",
+          "slug": "custom-solutions",
+          "content": "<h1>Custom Solutions & Private Label</h1><p>Need a specialist size, bespoke material or private-label packaging? Tape Solutions supports product converting, custom specifications and packaging solutions for professional customers.</p><p>Tell us which product you need, the dimensions, quantities and intended application.</p><p><a href=\"/request-a-quote/\">Request a Quote</a></p>"
+        },
+        "expected_fingerprint": "af26757c680ab814d1742cc863133ed66312ba6131aec6e37010e1f81f9a1710"
+      },
+      {
+        "action": "post.update",
+        "payload": {
+          "id": 16,
+          "title": "About Us",
+          "slug": "about-us",
+          "content": "<h1>About Tape Solutions</h1><p>Tape Solutions specialises in adhesive tapes and packaging materials for industry, food and packaging, DIY and construction. We help professional customers source suitable products, packaging and custom solutions.</p><p>We value practical advice, clear communication and long-term customer relationships.</p><p><a href=\"/contact/\">Contact Us</a></p>"
+        },
+        "expected_fingerprint": "b3521895a8e711218cbeb2ef9868b9aebc7a922da031cf22a859115ad1d77a7a"
+      },
+      {
+        "action": "post.update",
+        "payload": {
+          "id": 17,
+          "title": "Contact",
+          "slug": "contact",
+          "content": "<h1>Contact Tape Solutions</h1><p>Contact us for product information, custom requirements or quotations.</p><p><strong>Tape Solutions</strong><br>Hoofdweg 310<br>2908 LC Capelle aan den IJssel<br>The Netherlands</p><p>Chamber of Commerce: 65070186<br>VAT number: NL002196471B46</p><p><a href=\"/request-a-quote/\">Request a Quote</a></p>"
+        },
+        "expected_fingerprint": "9323ce334877bbe1fbb21da194ce928f00543080070918c1ee1f1673b7d598f3"
+      },
+      {
+        "action": "post.update",
+        "payload": {
+          "id": 12,
+          "title": "Refund & Returns Policy",
+          "slug": "refund-returns-policy",
+          "content": "<h1>Refunds & Returns</h1><p>We do not accept direct orders or payments through this online catalogue.</p><p>For a return or refund relating to an existing order, please contact us and include the order reference, product details and reason for your enquiry. Any agreed terms and applicable legal rights remain in effect.</p><p>Return periods and refund arrangements are not confirmed on this page. Please request the applicable conditions before ordering.</p><p><a href=\"/contact/\">Contact Us</a></p>"
+        },
+        "expected_fingerprint": "16748df2ad3613ed853a5e2d4bf0b739316152a247eae1f2d144f4beb68bd9ad"
+      },
+      {
+        "action": "post.update",
+        "payload": {
+          "id": 251,
+          "title": "Terms & Conditions",
+          "slug": "terms-and-conditions",
+          "content": "<h1>Terms & Conditions</h1><p>This website provides product information and quotations; it does not accept online orders or payments.</p><p>Please contact us for the terms applicable to your quotation or order. The final terms should be confirmed in writing before an order is placed. This notice does not replace any agreed terms or applicable legal rights.</p><p><a href=\"/contact/\">Contact Us</a></p>"
+        },
+        "expected_fingerprint": "089064a41f6f4274170c88d57c3384c5cfc794fe4668f481bfb771dcb314aac4"
+      },
+      {
+        "action": "post.update",
+        "payload": {
+          "id": 252,
+          "title": "Request a Quotation",
+          "slug": "request-a-quote",
+          "content": "<h1>Request a Quotation</h1><p>Need a price, bulk quantity, bespoke tape or private-label solution? Please tell us the product name, dimensions, quantity and delivery location. Our team can advise on availability and the next steps.</p><p><a href=\"/contact/\">Contact Tape Solutions</a></p>"
+        },
+        "expected_fingerprint": "e5c1f7738a21481ce7425a41b345d41d5bb63de13e5c8d6542a49c8a8b395b5f"
+      },
+      {
+        "action": "post.update",
+        "payload": {
+          "id": 253,
+          "title": "Thank You for Your Message",
+          "slug": "thank-you-message",
+          "content": "<h1>Thank You for Your Message</h1><p>Thank you for getting in touch with Tape Solutions.</p><p><a href=\"/products/\">Browse Products</a> · <a href=\"/\">Back to Home</a></p>"
+        },
+        "expected_fingerprint": "a31a8ca3814cb7ab85f2411eaa98001e412369cfac5b6d18c2c80377b343c9f6"
+      },
+      {
+        "action": "post.update",
+        "payload": {
+          "id": 254,
+          "title": "Thank You for Your Quotation Request",
+          "slug": "thank-you-quotation",
+          "content": "<h1>Thank You for Your Quotation Request</h1><p>Thank you for your interest in our professional products and custom solutions.</p><p><a href=\"/products/\">Browse Products</a> · <a href=\"/\">Back to Home</a></p>"
+        },
+        "expected_fingerprint": "b09a8209345dd5381354e788e85c9b9cfd3495223de8d033bf8538ef51ea4a1d"
+      },
+      {
+        "action": "post.update",
+        "payload": {
+          "id": 256,
+          "title": "Sitemap",
+          "slug": "sitemap",
+          "content": "<h1>Sitemap</h1><ul><li><a href=\"/\">Home</a></li><li><a href=\"/categories/\">Categories</a></li><li><a href=\"/products/\">Products</a></li><li><a href=\"/custom-solutions/\">Custom Solutions</a></li><li><a href=\"/about-us/\">About Us</a></li><li><a href=\"/contact/\">Contact</a></li><li><a href=\"/request-a-quote/\">Request a Quotation</a></li><li><a href=\"/privacy-policy/\">Privacy Policy</a></li><li><a href=\"/terms-and-conditions/\">Terms &amp; Conditions</a></li><li><a href=\"/refund-returns-policy/\">Refunds &amp; Returns</a></li></ul>"
+        },
+        "expected_fingerprint": "e3c56713fb9d53cc9808dd000e325db4c7beae2bd926241e9a7c58a3d23177d1"
+      }
+    ]
+  }
+}
