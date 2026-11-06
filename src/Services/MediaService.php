@@ -37,6 +37,9 @@ final class MediaService
         if ($filter !== 'all') {
             [$total, $pagedIds] = $this->filteredIds($filter, $search, $page, $perPage);
             $pages = max(1, (int) ceil($total / $perPage));
+            if ($total > 0 && $page > $pages) {
+                [, $pagedIds] = $this->filteredIds($filter, $search, $pages, $perPage);
+            }
         } else {
             $queryArgs = [
                 'post_type' => 'attachment',
@@ -52,9 +55,23 @@ final class MediaService
             }
 
             $query = $this->attachments->queryImageIds($queryArgs);
+            $countQuery = $query;
+            if ($page > 1 && $query->posts === []) {
+                // WordPress skips found_posts for an empty page: check page 1 for the count.
+                $queryArgs['paged'] = 1;
+                $countQuery = $this->attachments->queryImageIds($queryArgs);
+            }
+            $total = (int) $countQuery->found_posts;
+            $pages = max(1, (int) $countQuery->max_num_pages);
+            if ($total > 0 && $page > $pages) {
+                if ($pages === 1) {
+                    $query = $countQuery;
+                } else {
+                    $queryArgs['paged'] = $pages;
+                    $query = $this->attachments->queryImageIds($queryArgs);
+                }
+            }
             $pagedIds = array_map('intval', (array) $query->posts);
-            $total = (int) $query->found_posts;
-            $pages = max(1, (int) $query->max_num_pages);
         }
 
         $items = [];
