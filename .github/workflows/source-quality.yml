@@ -96,9 +96,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl --fail --location --silent --show-error --output /tmp/wp-cli.phar \
-            https://github.com/wp-cli/wp-cli/releases/download/v2.12.0/wp-cli-2.12.0.phar
+          # Official release binary is occasionally unavailable through GitHub's
+          # release-asset CDN (HTTP 504). Both official sources are pinned to
+          # the same reviewed WP-CLI 2.12.0 SHA-256; never run an unverified Phar.
+          if ! curl --fail --location --silent --show-error --retry 2 --retry-all-errors --retry-delay 2 --connect-timeout 10 --max-time 90 --output /tmp/wp-cli.phar \
+            https://github.com/wp-cli/wp-cli/releases/download/v2.12.0/wp-cli-2.12.0.phar; then
+            curl --fail --location --silent --show-error --retry 2 --retry-all-errors --retry-delay 2 --connect-timeout 10 --max-time 90 --output /tmp/wp-cli.phar \
+              https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          fi
           echo 'ce34ddd838f7351d6759068d09793f26755463b4a4610a5a5c0a97b68220d85c  /tmp/wp-cli.phar' | sha256sum --check --strict
+          php /tmp/wp-cli.phar --info
+          test "$(php /tmp/wp-cli.phar cli version --skip-wordpress)" = 'WP-CLI 2.12.0'
       - name: Activate plugin in isolated WordPress
         shell: bash
         run: |
